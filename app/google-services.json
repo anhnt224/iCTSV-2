@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "507493146407",
+    "firebase_url": "https://ictsv-c5b76.firebaseio.com",
+    "project_id": "ictsv-c5b76",
+    "storage_bucket": "ictsv-c5b76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507493146407:android:d0cc6d36585438c6575302",
+        "android_client_info": {
+          "package_name": "com.bk.ctsv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507493146407-q3ttmi1a27jqpvue60ib1503rcb2f3n4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD_2Gex-T9iY6tmG98XDwRZdfcWSZp3Ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507493146407-q3ttmi1a27jqpvue60ib1503rcb2f3n4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "507493146407-058lr0irjpbfl5il3dsri6425l1ldc6c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dhbk.emglab.bktouch",
+                "app_store_id": "1360609709"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

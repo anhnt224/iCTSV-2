@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_teacher"
+        app:startDestination="@id/THome2Fragment">
+
+    <fragment
+            android:id="@+id/THomeFragment"
+            android:name="com.bk.ctsv.teacher.fragment.THomeFragment"
+            android:label=" ">
+        <action
+                android:id="@+id/action_THomeFragment_to_TListFormFragment"
+                app:destination="@id/TListFormFragment" />
+        <action
+                android:id="@+id/action_THomeFragment_to_TListActivitiesFragment2"
+                app:destination="@id/TListActivitiesFragment" />
+        <action
+                android:id="@+id/action_THomeFragment_to_TListScholarShipsFragment"
+                app:destination="@id/TListScholarShipsFragment" />
+        <action
+                android:id="@+id/action_THomeFragment_to_TListJobsFragment"
+                app:destination="@id/TListJobsFragment" />
+        <action
+                android:id="@+id/action_THomeFragment_to_listStudentFragment"
+                app:destination="@id/listStudentFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TListFormFragment"
+            android:name="com.bk.ctsv.teacher.fragment.form.TListFormFragment"
+            android:label="Danh sách biểu mẫu"
+            tools:layout="@layout/t_list_form_fragment">
+        <action
+                android:id="@+id/action_TListFormFragment_to_TFormDetailFragment"
+                app:destination="@id/TFormDetailFragment" />
+        <action
+                android:id="@+id/action_TListFormFragment_to_TListFormRegisteredFragment"
+                app:destination="@id/TListFormRegisteredFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TFormDetailFragment"
+            android:name="com.bk.ctsv.teacher.fragment.form.TFormDetailFragment"
+            android:label="Chi tiết biểu mẫu"
+            tools:layout="@layout/t_form_detail_fragment">
+        <action
+                android:id="@+id/action_TFormDetailFragment_to_TRegisterFormFragment"
+                app:destination="@id/TRegisterFormFragment" />
+        <argument
+                android:name="form"
+                app:argType="com.bk.ctsv.models.entity.Form" />
+    </fragment>
+    <fragment
+            android:id="@+id/TListFormRegisteredFragment"
+            android:name="com.bk.ctsv.teacher.fragment.form.TListFormRegisteredFragment"
+            android:label="Biểu mẫu đã đăng kí"
+            tools:layout="@layout/t_list_form_registered_fragment">
+        <action
+                android:id="@+id/action_TListFormRegisteredFragment_to_TFormRegisteredFragment"
+                app:destination="@id/TFormRegisteredFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TFormRegisteredFragment"
+            android:name="com.bk.ctsv.teacher.fragment.form.TFormRegisteredFragment"
+            android:label="Chi tiết"
+            tools:layout="@layout/t_form_registered_fragment">
+        <argument
+                android:name="form"
+                app:argType="com.bk.ctsv.models.entity.Form" />
+        <action
+                android:id="@+id/action_TFormRegisteredFragment_to_TEditFormFragment"
+                app:destination="@id/TEditFormFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TRegisterFormFragment"
+            android:name="com.bk.ctsv.teacher.fragment.form.TRegisterFormFragment"
+            android:label="Đăng kí "
+            tools:layout="@layout/t_register_form_fragment">
+        <argument
+                android:name="form"
+                app:argType="com.bk.ctsv.models.entity.Form" />
+    </fragment>
+    <fragment
+            android:id="@+id/TEditFormFragment"
+            android:name="com.bk.ctsv.teacher.fragment.form.TEditFormFragment"
+            android:label="Chỉnh sửa biểu mẫu"
+            tools:layout="@layout/t_edit_form_fragment">
+        <argument
+                android:name="form"
+                app:argType="com.bk.ctsv.models.entity.Form" />
+        <argument
+                android:name="questions"
+                app:argType="com.bk.ctsv.models.entity.Question[]" />
+    </fragment>
+    <fragment
+            android:id="@+id/TListActivitiesFragment"
+            android:name="com.bk.ctsv.teacher.fragment.activity.TListActivitiesFragment"
+            android:label="Danh sách hoạt động" >
+        <action
+                android:id="@+id/action_TListActivitiesFragment_to_TActivityInfoFragment"
+                app:destination="@id/TActivityInfoFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TActivityInfoFragment"
+            android:name="com.bk.ctsv.teacher.fragment.activity.TActivityInfoFragment"
+            android:label="Chi tiết hoạt động"
+            tools:layout="@layout/t_activity_info_fragment">
+        <argument
+                android:name="AId"
+                app:argType="integer" />
+    </fragment>
+    <fragment
+            android:id="@+id/TListScholarShipsFragment"
+            android:name="com.bk.ctsv.teacher.fragment.scholarShip.TListScholarShipsFragment"
+            android:label="Danh sách học bổng">
+        <action
+                android:id="@+id/action_TListScholarShipsFragment_to_TScholarShipDetailFragment"
+                app:destination="@id/TScholarShipDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TScholarShipDetailFragment"
+            android:name="com.bk.ctsv.teacher.fragment.scholarShip.TScholarShipDetailFragment"
+            android:label="Chi tiết học bổng"
+            tools:layout="@layout/t_scholar_ship_detail_fragment">
+        <argument
+                android:name="scholarShip"
+                app:argType="com.bk.ctsv.models.entity.ScholarShip" />
+    </fragment>
+    <fragment
+            android:id="@+id/TListJobsFragment"
+            android:name="com.bk.ctsv.teacher.fragment.job.TListJobsFragment"
+            android:label="Danh sách việc làm"
+            tools:layout="@layout/t_list_jobs_fragment">
+        <action
+                android:id="@+id/action_TListJobsFragment_to_TJobDetailFragment"
+                app:destination="@id/TJobDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TJobDetailFragment"
+            android:name="com.bk.ctsv.teacher.fragment.job.TJobDetailFragment"
+            android:label="Chi tiết việc làm"
+            tools:layout="@layout/t_job_detail_fragment">
+        <argument
+                android:name="job"
+                app:argType="com.bk.ctsv.models.entity.Job" />
+    </fragment>
+    <fragment
+            android:id="@+id/TListNotificationsFragment"
+            android:name="com.bk.ctsv.teacher.fragment.TListNotificationsFragment"
+            android:label="TListNotificationsFragment" />
+    <fragment
+            android:id="@+id/TAccountFragment"
+            android:name="com.bk.ctsv.teacher.fragment.account.TAccountFragment"
+            android:label=" ">
+        <action
+                android:id="@+id/action_TAccountFragment_to_TChangePasswordFragment"
+                app:destination="@id/TChangePasswordFragment" />
+        <action
+                android:id="@+id/action_TAccountFragment_to_teacherInfoFragment"
+                app:destination="@id/teacherInfoFragment" />
+        <action
+                android:id="@+id/action_TAccountFragment_to_runDashboardFragment2"
+                app:destination="@id/runDashboardFragment2" />
+    </fragment>
+    <fragment
+            android:id="@+id/TChangePasswordFragment"
+            android:name="com.bk.ctsv.teacher.fragment.account.TChangePasswordFragment"
+            android:label="Đổi mật khẩu" />
+    <fragment
+            android:id="@+id/teacherInfoFragment"
+            android:name="com.bk.ctsv.teacher.fragment.account.TeacherInfoFragment"
+            android:label="Thông tin tài khoản"
+            tools:layout="@layout/teacher_info_fragment" />
+    <fragment
+            android:id="@+id/listStudentFragment"
+            android:name="com.bk.ctsv.teacher.fragment.student.ListStudentFragment"
+            android:label="Danh sách sinh viên"
+            tools:layout="@layout/list_student_fragment" >
+        <action
+                android:id="@+id/action_listStudentFragment_to_listActivitiesOfStudentFragment"
+                app:destination="@id/listActivitiesOfStudentFragment" />
+        <action
+                android:id="@+id/action_listStudentFragment_to_teacherMarkFragment"
+                app:destination="@id/teacherMarkFragment" />
+        <action
+                android:id="@+id/action_listStudentFragment_to_studentInfoFragment"
+                app:destination="@id/studentInfoFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/listActivitiesOfStudentFragment"
+            android:name="com.bk.ctsv.teacher.fragment.student.ListActivitiesOfStudentFragment"
+            android:label="Hoạt động tham gia" >
+        <argument
+                android:name="student"
+                app:argType="com.bk.ctsv.models.entity.Student" />
+    </fragment>
+    <fragment
+            android:id="@+id/teacherMarkFragment"
+            android:name="com.bk.ctsv.teacher.fragment.student.TeacherMarkFragment"
+            android:label="Chấm điểm rèn luyện"
+            tools:layout="@layout/teacher_mark_fragment">
+        <argument
+                android:name="studentId"
+                app:argType="string" />
+        <argument
+                android:name="studentName"
+                app:argType="string" />
+        <argument
+                android:name="semester"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/studentInfoFragment"
+            android:name="com.bk.ctsv.teacher.fragment.student.StudentInfoFragment"
+            android:label="Thông tin sinh viên">
+        <argument
+                android:name="studentId"
+                app:argType="string" />
+        <action
+                android:id="@+id/action_studentInfoFragment_to_TStudentNoteFragment"
+                app:destination="@id/TStudentNoteFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TStudentNoteFragment"
+            android:name="com.bk.ctsv.teacher.fragment.student.TStudentNoteFragment"
+            android:label="Ghi chú" >
+        <argument
+                android:name="studentID"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/runDashboardFragment2"
+            android:name="com.bk.ctsv.ui.fragments.running.RunDashboardFragment"
+            android:label="Chạy bộ">
+        <action
+                android:id="@+id/action_runDashboardFragment2_to_runFragment2"
+                app:destination="@id/runFragment2" />
+        <argument
+                android:name="isTeacher"
+                app:argType="boolean"
+                android:defaultValue="false" />
+    </fragment>
+    <fragment
+            android:id="@+id/runFragment2"
+            android:name="com.bk.ctsv.ui.fragments.running.RunFragment"
+            android:label="Chạy bộ" />
+    <fragment
+            android:id="@+id/THome2Fragment"
+            android:name="com.bk.ctsv.teacher.fragment.THome2Fragment"
+            android:label="THome2Fragment" >
+        <action
+                android:id="@+id/action_THome2Fragment_to_TListFormFragment"
+                app:destination="@id/TListFormFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TListActivitiesFragment"
+                app:destination="@id/TListActivitiesFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TListScholarShipsFragment"
+                app:destination="@id/TListScholarShipsFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TListJobsFragment"
+                app:destination="@id/TListJobsFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_listStudentFragment"
+                app:destination="@id/listStudentFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_runDashboardFragment2"
+                app:destination="@id/runDashboardFragment2" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TGiftGivenFragment"
+                app:destination="@id/TGiftGivenFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TGiftFragment"
+                app:destination="@id/TGiftFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TGiftGivenFragment"
+            android:name="com.bk.ctsv.teacher.fragment.gift.TGiftGivenFragment"
+            android:label="Danh sách quà tặng"
+            tools:layout="@layout/t_gift_given_fragment">
+        <action
+                android:id="@+id/action_TGiftGivenFragment_to_TListRegisterFragment"
+                app:destination="@id/TListRegisterFragment" />
+        <action
+                android:id="@+id/action_TGiftGivenFragment_to_TCreateGiftFragment"
+                app:destination="@id/TCreateGiftFragment" />
+        <argument
+                android:name="reloadData"
+                app:argType="boolean" />
+    </fragment>
+    <fragment
+            android:id="@+id/TListRegisterFragment"
+            android:name="com.bk.ctsv.teacher.fragment.gift.TListRegisterFragment"
+            android:label="Danh sách đăng kí"
+            tools:layout="@layout/t_list_register_fragment">
+        <argument
+                android:name="gift"
+                app:argType="com.bk.ctsv.models.entity.gift.Gift" />
+    </fragment>
+    <fragment
+            android:id="@+id/TCreateGiftFragment"
+            android:name="com.bk.ctsv.teacher.fragment.gift.TCreateGiftFragment"
+            android:label="Danh sách đăng kí"
+            tools:layout="@layout/t_create_gift_fragment">
+        <action
+                android:id="@+id/action_TCreateGiftFragment_to_TGiftGivenFragment"
+                app:destination="@id/TGiftGivenFragment"
+                app:popUpTo="@id/TGiftGivenFragment"
+                app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/TGiftFragment"
+            android:name="com.bk.ctsv.teacher.fragment.gift.TGiftFragment"
+            android:label="TGiftFragment" >
+        <action
+                android:id="@+id/action_TGiftFragment_to_TGiftInfoFragment"
+                app:destination="@id/TGiftInfoFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TGiftInfoFragment"
+            android:name="com.bk.ctsv.teacher.fragment.gift.TGiftInfoFragment"
+            android:label="Thông tin quà tặng">
+        <action
+                android:id="@+id/action_TGiftInfoFragment_to_TGiftFragment"
+                app:destination="@id/TGiftFragment"
+                app:popUpTo="@id/TGiftFragment"
+                app:popUpToInclusive="true" />
+        <argument
+                android:name="gift"
+                app:argType="com.bk.ctsv.models.entity.gift.Gift" />
+    </fragment>
+</navigation>

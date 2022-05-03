@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    //Account
+    <entry>
+        <key>book</key>
+        <value>http://ctsv.hust.edu.vn/pdf-viewer/STSV-BK2019.pdf</value>
+    </entry>
+    <entry>
+        <key>feedback</key>
+        <value>https://forms.gle/J54Sangzsz33ME4Y7</value>
+    </entry>
+    <entry>
+        <key>error</key>
+        <value>https://forms.gle/1CWNGyJYsSztmyCX6</value>
+    </entry>
+    <entry>
+        <key>aboutCTSV</key>
+        <value>http://ctsv.hust.edu.vn/#/</value>
+    </entry>
+
+    <entry>
+        <key>firstWeek</key>
+        <value>2020-09-07 00:00:00</value>
+    </entry>
+
+    <entry>
+        <key>form_delivery_note</key>
+        <value>Sinh viên tự chi trả chi phí giao nhận giấy tờ. Thông tin chi tiết sẽ được gửi lại khi thầy cô tiếp nhận, xử lý hồ sơ và liên hệ với đơn vị giao nhận của bưu điện</value>
+    </entry>
+
+    <entry>
+        <key>receive_at_home</key>
+        <value>Nhận tại nhà</value>
+    </entry>
+
+    <entry>
+        <key>receive_at_school</key>
+        <value>Nhận tại trường</value>
+    </entry>
+
+    <entry>
+        <key>receive_scan_file</key>
+        <value>Nhận bản scan</value>
+    </entry>
+
+    <entry>
+        <key>running_title</key>
+        <value>Giải chạy 10000 bước</value>
+    </entry>
+
+    <entry>
+        <key>running_target</key>
+        <value>Mục tiêu: 3km</value>
+    </entry>
+
+    <entry>
+        <key>note_link</key>
+        <value>https://sv-ctt.hust.edu.vn/#/so-tay-sv</value>
+    </entry>
+
+    <entry>
+        <key>titleWelcome2</key>
+        <value>Chúc bạn một ngày tốt lành</value>
+    </entry>
+
+</defaultsMap>

@@ -1,0 +1,46 @@
+package com.bk.ctsv.models.entity
+
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
+class Student (
+    @SerializedName("StudentId")
+    var id: String = "",
+    @SerializedName("StudentName")
+    var name: String = "",
+    @SerializedName("Email")
+    var email: String = "",
+    @SerializedName("TC_All")
+    var tcAll: String = "",
+    @SerializedName("TC_Due")
+    var tcDue: String = "",
+    @SerializedName("LevelWarning")
+    var warningLevel: String = "",
+    @SerializedName("CPA")
+    var cpa: String = "",
+    @SerializedName("Point")
+    var score: Int = 0,
+    @SerializedName("TPoint")
+    var tScore: Int = 0
+): Serializable{
+    fun getStudentScore(): String{
+        return "SV chấm: $score"
+    }
+
+    fun getTScore(): String{
+        return "GV chấm: $tScore"
+    }
+
+    fun getFirstCharInName(): String{
+
+        val arr = name.trim().split(" ")
+        if(arr.isNotEmpty()){
+            if(arr.last().isNotEmpty()){
+                return arr.last().first().toString()
+            }
+
+            return ""
+        }
+        return ""
+    }
+}

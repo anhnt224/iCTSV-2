@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.2657407407407407" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_clock.xml" value="0.3861111111111111" />
+        <entry key="app/src/main/res/drawable/border_view.xml" value="0.2490740740740741" />
+        <entry key="app/src/main/res/drawable/circle_progress_bar.xml" value="0.20462962962962963" />
+        <entry key="app/src/main/res/drawable/dialog_bg.xml" value="0.1648148148148148" />
+        <entry key="app/src/main/res/drawable/dialog_cancel_button_bg.xml" value="0.1648148148148148" />
+        <entry key="app/src/main/res/drawable/dialog_done_button_bg.xml" value="0.1648148148148148" />
+        <entry key="app/src/main/res/drawable/dialog_notification_bg.xml" value="0.38333333333333336" />
+        <entry key="app/src/main/res/drawable/ic_calendar_black_24dp.xml" value="0.3861111111111111" />
+        <entry key="app/src/main/res/drawable/list_item_gift_bg.xml" value="0.38981481481481484" />
+        <entry key="app/src/main/res/drawable/take_picture_bg.xml" value="0.3861111111111111" />
+        <entry key="app/src/main/res/drawable/uc_complete_round.xml" value="0.38333333333333336" />
+        <entry key="app/src/main/res/layout/account_fragment.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14356884057971014" />
+        <entry key="app/src/main/res/layout/activity_teacher.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/add_new_address_fragment.xml" value="0.12259371833839919" />
+        <entry key="app/src/main/res/layout/alert_dialog.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/approve_gift_code.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/choose_delivery_type_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/choose_reciver_address_fragment.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.14130434782608695" />
+        <entry key="app/src/main/res/layout/create_gift_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/criteria_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/dialog_notification.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_event.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.12259371833839919" />
+        <entry key="app/src/main/res/layout/gift_fragment.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/gift_given_fragment.xml" value="0.3890625" />
+        <entry key="app/src/main/res/layout/gift_info_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/home2_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_loading.xml" value="0.1408308004052685" />
+        <entry key="app/src/main/res/layout/list_activities_of_student_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/list_activity_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/list_item_address.xml" value="0.3890625" />
+        <entry key="app/src/main/res/layout/list_item_address_picker.xml" value="0.293213828425096" />
+        <entry key="app/src/main/res/layout/list_item_event.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/list_item_form.xml" value="0.12259371833839919" />
+        <entry key="app/src/main/res/layout/list_item_form_question.xml" value="0.12259371833839919" />
+        <entry key="app/src/main/res/layout/list_item_form_registered.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/list_item_gift.xml" value="0.5214384508990318" />
+        <entry key="app/src/main/res/layout/list_item_gift_created.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/list_item_gift_register.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_item_gift_type.xml" value="0.3890625" />
+        <entry key="app/src/main/res/layout/list_item_received_gift.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/list_item_run_resublt.xml" value="0.22282608695652173" />
+        <entry key="app/src/main/res/layout/list_item_run_result.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_item_running_data.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_register_fragment.xml" value="0.3890625" />
+        <entry key="app/src/main/res/layout/loading_action_state.xml" value="0.1408308004052685" />
+        <entry key="app/src/main/res/layout/loading_state.xml" value="0.12284701114488349" />
+        <entry key="app/src/main/res/layout/pick_location_fragment.xml" value="0.12259371833839919" />
+        <entry key="app/src/main/res/layout/privacy_dialog.xml" value="0.38722826086956524" />
+        <entry key="app/src/main/res/layout/receiver_address_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/regist_form_fragment.xml" value="0.12259371833839919" />
+        <entry key="app/src/main/res/layout/regist_gift_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/request_bg_location_permission.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/request_permission_dialog.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/run_dashboard_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/run_fragment.xml" value="0.16717325227963525" />
+        <entry key="app/src/main/res/layout/running_data_fragment.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/running_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/t_account_fragment.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/t_create_gift_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/t_gift_fragment.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/t_gift_given_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/t_gift_info_fragment.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/t_home2_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/t_list_register_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/menu/delete_gift_image.xml" value="0.3890625" />
+        <entry key="app/src/main/res/menu/gift_menu.xml" value="0.3890625" />
+        <entry key="app/src/main/res/menu/menu_list_address.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/menu/menu_nav_teacher.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.2526041666666667" />
+        <entry key="app/src/main/res/menu/menu_new_sv_group.xml" value="0.26944444444444443" />
+        <entry key="app/src/main/res/menu/menu_running.xml" value="0.26944444444444443" />
+        <entry key="app/src/main/res/menu/take_picture_gift.xml" value="0.3890625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

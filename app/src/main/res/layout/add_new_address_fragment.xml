@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+                name="address"
+                type="com.bk.ctsv.models.entity.UserAddress" />
+        <variable
+                name="resource"
+                type="com.bk.ctsv.common.Resource" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.fragments.user.AddNewAddressFragment">
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textPhone"
+                        android:layout_width="match_parent"
+                        android:hint="Số điện thoại"
+                        app:boxBackgroundColor="@color/colorWhite"
+                        android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{address.contact}"
+                            android:inputType="phone"
+                            android:singleLine="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/emailTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:hint="Email"
+                        app:placeholderText="Nhập email khác email trường cấp cho bạn"
+                        app:boxBackgroundColor="@color/colorWhite"
+                        android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{address.email}"
+                            android:inputType="textEmailAddress"
+                            android:singleLine="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="1"
+                            android:id="@+id/textType"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="match_parent"
+                            android:hint="Loại nơi ở"
+                            app:boxBackgroundColor="@color/colorWhite"
+                            android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:focusable="false"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{address.type}"
+                                android:singleLine="true"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginLeft="4dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="match_parent"
+                            android:hint="Tỉnh/TP"
+                            android:id="@+id/textCity"
+                            app:boxBackgroundColor="@color/colorWhite"
+                            android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:text="@{address.city}"
+                                android:singleLine="true"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:weightSum="2"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:layout_weight="1"
+                            android:layout_marginRight="4dp"
+                            android:id="@+id/textDistrict"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="match_parent"
+                            android:hint="Quận/Huyện"
+                            app:boxBackgroundColor="@color/colorWhite"
+                            android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{address.district}"
+                                android:focusable="false"
+                                android:singleLine="true"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textWard"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="match_parent"
+                            android:hint="Phường/Xã"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="4dp"
+                            app:boxBackgroundColor="@color/colorWhite"
+                            android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{address.ward}"
+                                android:focusable="false"
+                                android:singleLine="true"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textLocation"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:hint="Tọa độ"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_location_on_blue_24dp"
+                        app:boxBackgroundColor="@color/colorWhite"
+                        android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:text="@{address.getLocation()}"
+                            android:singleLine="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textAddress"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:hint="Địa chỉ"
+                        app:boxBackgroundColor="@color/colorWhite"
+                        android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{address.address}"
+                            android:singleLine="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonSave"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lưu"/>
+            </LinearLayout>
+        </ScrollView>
+        <include
+            layout="@layout/loading_action_state"
+                app:resource="@{resource}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

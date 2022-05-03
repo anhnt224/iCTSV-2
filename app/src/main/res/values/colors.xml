@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#b72027</color>
+    <color name="colorPrimaryDark">#800000</color>
+    <color name="colorPrimaryLight">#f05750</color>
+    <color name="colorAccent">#f05750</color>
+    <color name="colorPrimary20">#33B72027</color>
+    <color name="colorPrimary10">#1AB72027</color>
+
+    <color name="textColorPrimary">#000000</color>
+    <color name="textColorPrimaryLight">#99000000</color>
+    <color name="lightGrayTextColor">#D1D1D1</color>
+    <color name="mainBackground">#F8F8FB</color>
+
+    <color name="lightGray">#DFDFDF</color>
+    <color name="back25">#40000000</color>
+    <color name="back50">#80000000</color>
+    <color name="back75">#BF000000</color>
+    <color name="home_title_color">#BF000000</color>
+    <color name="dark_gray_text">#B3000000</color>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite25">#40FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBlack25">#8A000000</color>
+    <color name="half_black">#535353</color>
+    <color name="colorBlue"> #3498db</color>
+    <color name="colorGreen">#569127</color>
+
+    <color name="colorBlueDeep">#216EF3</color>
+    <color name="colorBlue2">#1c36f5</color>
+    <color name="iron">#DFDCDC</color>
+    <color name="colorRed">#ee4035</color>
+
+    <color name="pending">#FFB300</color>
+    <color name="done">#43A047</color>
+    <color name="cancel">#F4511E</color>
+    <color name="titlGreen">#43A047</color>
+
+    <color name="pending_bg">#33FFB300</color>
+    <color name="done_bg">#3343A047</color>
+    <color name="cancel_bg">#33F4511E</color>
+
+    <color name="green5">#D1F8D3</color>
+
+    <color name="transparent">#00FFFFFF</color>
+
+
+</resources>

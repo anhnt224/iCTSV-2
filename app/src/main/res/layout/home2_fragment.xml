@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="com.bk.ctsv.common.Status"/>
+        <variable
+                name="getActivityStatus"
+                type="Status" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.fragments.user.AccountFragment">
+
+        <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal" />
+
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:cardCornerRadius="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toTopOf="parent">
+            <ScrollView
+                    android:background="@color/mainBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp">
+
+                        <LinearLayout
+                                android:id="@+id/linearLayout15"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginLeft="12dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                    android:id="@+id/titleTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textSize="18sp" />
+
+                            <TextView
+                                    android:id="@+id/titleWelcome"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginEnd="12dp"
+                                android:layout_marginRight="12dp"
+                                android:src="@drawable/ic_student"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@color/colorPrimary10"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        <ProgressBar
+                                android:layout_margin="32dp"
+                                android:id="@+id/progressBar2"
+                                goneUnless="@{getActivityStatus == Status.LOADING}"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+                                app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+
+                        <LinearLayout
+                                goneUnless="@{getActivityStatus == Status.ERROR}"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                android:padding="32dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+                            <TextView
+                                    android:gravity="center"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rất tiếc, không lấy được thông tin hoạt động"
+                                    tools:ignore="HardcodedText" />
+                            <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/retryButton"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAllCaps="false"
+                                    android:text="Thử lại"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@color/colorPrimary10"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:text="Tiện ích"
+                            android:textSize="16sp"
+                            android:textColor="@color/textColorPrimary"
+                            tools:ignore="HardcodedText" />
+
+                    <LinearLayout
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:weightSum="3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <LinearLayout
+                                android:id="@+id/markLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_mark"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Chấm điểm rèn luyện"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/criteriaLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_score"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Kết quả rèn luyện"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/activityLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_activity"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Hoạt động ngoại khoá"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:weightSum="3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <LinearLayout
+                                android:id="@+id/serviceLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_service"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Dịch vụ công"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/jobLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_job"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Hướng nghiệp"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/scholarShipLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_scholarship"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Học bổng"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:weightSum="3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <LinearLayout
+                                android:id="@+id/gift_layout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_home_gift"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Quà tặng"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/send_gift_layout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_home_send_gift"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Cho/tặng quà"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/noteLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_notebook"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Sổ tay"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:weightSum="3"
+                            android:layout_marginBottom="48dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <LinearLayout
+                                android:id="@+id/runLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_running"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="10,000 bước"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/addressLayout"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                            <ImageView
+                                    android:src="@drawable/ic_home_location"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"/>
+                            <TextView
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="14sp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/home_title_color"
+                                    android:text="Sổ địa chỉ"
+                                    tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:padding="12dp"
+                                android:layout_height="wrap_content">
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
