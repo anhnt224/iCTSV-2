@@ -373,6 +373,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_home2Fragment_to_activityDetailByUserUnitFragment2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_home2Fragment_to_criteriaFragment">
                               <value>
                                 <LayoutPositions />
@@ -438,8 +443,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-401" />
-                            <option name="y" value="-652" />
+                            <option name="x" value="-2121" />
+                            <option name="y" value="-982" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -777,6 +782,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_registGiftFragment_to_receiverAddressFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -893,6 +903,18 @@
                           <Point>
                             <option name="x" value="1219" />
                             <option name="y" value="-1109" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="searchMotelFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="538" />
+                            <option name="y" value="2963" />
                           </Point>
                         </option>
                       </LayoutPositions>

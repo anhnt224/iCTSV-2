@@ -423,6 +423,9 @@
         <action
                 android:id="@+id/action_home2Fragment_to_activityDetailByUserUnitFragment2"
                 app:destination="@id/activityDetailByUserUnitFragment" />
+        <action
+                android:id="@+id/action_home2Fragment_to_searchMotelFragment"
+                app:destination="@id/searchMotelFragment" />
     </fragment>
     <fragment
             android:id="@+id/giftFragment"
@@ -504,4 +507,9 @@
             android:id="@+id/receiverAddressFragment"
             android:name="com.bk.ctsv.ui.fragments.gift.ReceiverAddressFragment"
             android:label="Chọn địa chỉ nhận quà" />
+    <fragment
+            android:id="@+id/searchMotelFragment"
+            android:name="com.bk.ctsv.ui.fragments.motel.SearchMotelFragment"
+            android:label="search_motel_fragment"
+            tools:layout="@layout/search_motel_fragment" />
 </navigation>

@@ -29,6 +29,7 @@ import com.bk.ctsv.ui.fragments.job.ApplyJobFragment
 import com.bk.ctsv.ui.fragments.job.JobDetailFragment
 import com.bk.ctsv.ui.fragments.job.ListJobApplyFragment
 import com.bk.ctsv.ui.fragments.job.ListJobsFragment
+import com.bk.ctsv.ui.fragments.motel.SearchMotelFragment
 import com.bk.ctsv.ui.fragments.running.RunDashboardFragment
 import com.bk.ctsv.ui.fragments.running.RunFragment
 import com.bk.ctsv.ui.fragments.running.RunningDataFragment
@@ -179,4 +180,7 @@ abstract class MainListFragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeReceiverAddressFragment(): ReceiverAddressFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSearchMotelFragment(): SearchMotelFragment
 }

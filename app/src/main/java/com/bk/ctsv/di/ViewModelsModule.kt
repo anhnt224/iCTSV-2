@@ -33,6 +33,7 @@ import com.bk.ctsv.ui.viewmodels.gift.*
 import com.bk.ctsv.ui.viewmodels.job.ApplyJobViewModel
 import com.bk.ctsv.ui.viewmodels.job.JobDetailViewModel
 import com.bk.ctsv.ui.viewmodels.job.ListJobsViewModel
+import com.bk.ctsv.ui.viewmodels.motel.SearchMotelViewModel
 import com.bk.ctsv.ui.viewmodels.running.RunningDataViewModel
 import com.bk.ctsv.ui.viewmodels.running.RunningViewModel
 import com.bk.ctsv.ui.viewmodels.scholarShip.ListScholarShipAppliedViewModel
@@ -416,4 +417,9 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(TGiftInfoViewModel::class)
     abstract fun contributeTGiftInfoViewModel(viewModel: TGiftInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchMotelViewModel::class)
+    abstract fun contributeSearchMotelViewModel(viewModel: SearchMotelViewModel): ViewModel
 }
