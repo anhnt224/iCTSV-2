@@ -33,12 +33,14 @@
                 <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Tất cả" />
+                        android:text="Tất cả"
+                        tools:ignore="HardcodedText" />
 
                 <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Đã đăng kí" />
+                        android:text="Đã đăng kí"
+                        tools:ignore="HardcodedText" />
             </com.google.android.material.tabs.TabLayout>
         </androidx.cardview.widget.CardView>
 

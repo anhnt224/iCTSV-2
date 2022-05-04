@@ -4,8 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        tools:context=".ui.fragments.activity.ActivityDetailFragment">
+        android:background="@color/colorWhite">
 
 
     <androidx.core.widget.NestedScrollView
@@ -23,7 +22,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:background="@color/colorBlack" />
+                    android:background="@color/colorBlack"
+                    tools:ignore="ContentDescription" />
 
             <RelativeLayout
                     android:id="@+id/relativeMain"
@@ -37,7 +37,8 @@
                         android:id="@+id/lineDay"
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        tools:ignore="RtlHardcoded">
 
                 </LinearLayout>
 
@@ -50,7 +51,8 @@
                         android:layout_marginLeft="60dp"
                         android:layout_marginRight="12dp"
                         android:textColor="@color/colorBlack"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText,RtlHardcoded" />
                 <TextView
                         android:textColor="@color/half_black"
                         android:text="10:15 - 12:15"
@@ -59,7 +61,8 @@
                         android:layout_marginLeft="60dp"
                         android:textSize="12sp"
                         android:id="@+id/txtUnitPrice"
-                        android:layout_below="@+id/txtNameProduct" />
+                        android:layout_below="@+id/txtNameProduct"
+                        tools:ignore="HardcodedText,RtlHardcoded" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -69,14 +72,16 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    tools:ignore="ObsoleteLayoutParam">
                 <ImageView
 
                         android:src="@mipmap/ic_even_grey"
                         android:layout_centerVertical="true"
                         android:id="@+id/imgEven"
                         android:layout_width="32dp"
-                        android:layout_height="32dp" />
+                        android:layout_height="32dp"
+                        tools:ignore="ContentDescription" />
                 <TextView
                         android:text="@string/organizer"
                         android:paddingLeft="4dp"

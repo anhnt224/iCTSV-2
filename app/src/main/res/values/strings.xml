@@ -16,7 +16,6 @@
 
 
     <string name="type_language">vn</string>
-    <string name="save">Lưu</string>
     <string name="fill_title">Nhập tiêu đề</string>
     <string name="sv_group_by_id_title">Thông tin nhóm</string>
     <string name="event">Sự kiện</string>
@@ -62,4 +61,30 @@
     <string name="delete_button">Xoá</string>
     <string name="update_info_button">Cập nhật thông tin</string>
     <string name="cancel_button_default">Huỷ</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="email">Email</string>
+    <string name="live_place">Loại nơi ở</string>
+    <string name="province_city">Tỉnh/TP</string>
+    <string name="qu_n_huy_n">Quận/Huyện</string>
+    <string name="ph_ng_x">Phường/Xã</string>
+    <string name="t_a">Tọa độ</string>
+    <string name="address">Địa chỉ</string>
+    <string name="save">Lưu</string>
+    <string name="gi_i_thi_u_ng_n_g_n">Giới thiệu ngắn gọn</string>
+    <string name="x_c_nh_n_t_ng_qu">Xác nhận tặng quà</string>
+    <string name="ti_u_ch_ng_v_i_ho_t_ng">Tiêu chí ứng với hoạt động</string>
+    <string name="th_ng_tin_sinh_vi_n">Thông tin sinh viên</string>
+    <string name="h_v_t_n">Họ và tên</string>
+    <string name="aaa">aaa</string>
+    <string name="m_s_sinh_vi_n">Mã số sinh viên</string>
+    <string name="h_nh_th_c_nh_n_gi_y_t">Hình thức nhận giấy tờ</string>
+    <string name="a_ch">Địa chỉ</string>
+    <string name="ho_n_t_t_ng_k">Hoàn tất đăng kí</string>
+    <string name="giao_n_a_ch_n_y">Giao đến địa chỉ này</string>
+    <string name="l_u_13_i_m">Lưu, 13 điểm</string>
+    <string name="ho_t_ng_minh_ch_ng">Hoạt động minh chứng</string>
+    <string name="ghi_ch">Ghi chú</string>
+    <string name="ho_n_th_nh">Hoàn thành</string>
+    <string name="hu">Huỷ</string>
+    <string name="_0_0">0/0</string>
 </resources>

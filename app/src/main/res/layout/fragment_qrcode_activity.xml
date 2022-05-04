@@ -12,7 +12,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:auto_focus="true"
-            app:use_flash="false" />
+            app:use_flash="false"
+            tools:ignore="FragmentTagUsage" />
     <info.androidhive.barcode.ScannerOverlay
             android:layout_width="match_parent"
             android:layout_height="match_parent"

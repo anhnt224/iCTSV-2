@@ -5,8 +5,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:background="@color/colorWhite"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".ui.fragments.activity.NewActivityFragment">
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -37,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-            />
+                    tools:ignore="HardcodedText,RtlHardcoded,TextFields" />
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -75,7 +74,8 @@
                         android:layout_centerVertical="true"
                         android:id="@+id/imgLocation"
                         android:layout_width="32dp"
-                        android:layout_height="32dp" />
+                        android:layout_height="32dp"
+                        tools:ignore="ContentDescription" />
                 <EditText
                         android:textSize="16sp"
                         android:id="@+id/edtAPlace"

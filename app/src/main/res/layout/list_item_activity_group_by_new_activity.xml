@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:paddingRight="32dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="RtlHardcoded,UnusedAttribute">
 
     <RadioButton
             android:paddingLeft="16dp"
@@ -16,7 +17,8 @@
             android:layout_toLeftOf="@+id/txtCGPoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            tools:ignore="HardcodedText,UnknownIdInLayout" />
 
 
 </RelativeLayout>

@@ -30,6 +30,7 @@
             android:id="@+id/rbtnActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            tools:ignore="RtlHardcoded,UnusedAttribute" />
 
 </layout>

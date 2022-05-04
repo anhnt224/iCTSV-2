@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
                 name="gift"
@@ -46,7 +46,8 @@
                             android:id="@+id/imageView"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:src="@drawable/logo_bkt" />
+                            android:src="@drawable/logo_bkt"
+                            tools:ignore="ContentDescription" />
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout

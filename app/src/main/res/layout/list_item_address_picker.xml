@@ -36,7 +36,8 @@
                     android:layout_height="wrap_content"
                     android:text="aa"
                     android:textColor="@color/textColorPrimary"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    tools:ignore="HardcodedText" />
 
             <TextView
                     android:id="@+id/studentContactTextView"
@@ -45,7 +46,8 @@
                     android:layout_marginTop="2dp"
                     android:text="aa"
                     android:textColor="@color/textColorPrimaryLight"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="HardcodedText" />
 
             <TextView
                     android:id="@+id/studentAddressTextView"
@@ -53,7 +55,8 @@
                     android:layout_height="wrap_content"
                     android:text="aa"
                     android:textColor="@color/textColorPrimaryLight"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="HardcodedText" />
 
         </LinearLayout>
 

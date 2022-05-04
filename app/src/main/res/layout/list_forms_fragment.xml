@@ -29,17 +29,20 @@
                 <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hành chính" />
+                        android:text="Hành chính"
+                        tools:ignore="HardcodedText" />
 
                 <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tư vấn" />
+                        android:text="Tư vấn"
+                        tools:ignore="HardcodedText" />
 
                 <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tiện ích" />
+                        android:text="Tiện ích"
+                        tools:ignore="HardcodedText" />
             </com.google.android.material.tabs.TabLayout>
         </androidx.cardview.widget.CardView>
 

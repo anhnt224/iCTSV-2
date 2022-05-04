@@ -94,7 +94,8 @@
                                     android:layout_height="wrap_content"
                                     android:adjustViewBounds="true"
                                     android:background="@color/colorBlack"
-                                    android:visibility="gone" />
+                                    android:visibility="gone"
+                                    tools:ignore="ContentDescription" />
 
                             <RelativeLayout
                                     android:id="@+id/relativeMain"
@@ -111,7 +112,8 @@
                                         android:textColor="@color/colorBlack"
                                         android:textSize="20sp"
                                         android:gravity="center"
-                                        tools:text="Nghiên cứu khoa học" />
+                                        tools:text="Nghiên cứu khoa học"
+                                        tools:ignore="RtlHardcoded" />
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -119,13 +121,15 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/relative1"
                                     android:layout_marginTop="8dp"
-                                    android:paddingRight="16dp">
+                                    android:paddingRight="16dp"
+                                    tools:ignore="ObsoleteLayoutParam,RtlHardcoded">
 
                                 <TextView
                                         android:id="@+id/imgTime"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Thời gian: "/>
+                                        android:text="Thời gian: "
+                                        tools:ignore="HardcodedText" />
 
                                 <TextView
                                         android:id="@+id/txtTime"
@@ -146,14 +150,16 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/relative1"
-                                    android:paddingRight="16dp">
+                                    android:paddingRight="16dp"
+                                    tools:ignore="ObsoleteLayoutParam,RtlHardcoded">
 
                                 <TextView
                                         android:text="Địa điểm: "
                                         android:id="@+id/imgPlace"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:src="@mipmap/ic_location" />
+                                        android:src="@mipmap/ic_location"
+                                        tools:ignore="HardcodedText" />
 
                                 <TextView
                                         android:id="@+id/txtAPlace"

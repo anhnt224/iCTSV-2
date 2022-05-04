@@ -61,7 +61,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:text='@{"Ghi chú: " + form.note}'
+                    android:text="@{`Ghi chú: ` + form.note}"
                     android:textSize="16sp" />
 
         </LinearLayout>

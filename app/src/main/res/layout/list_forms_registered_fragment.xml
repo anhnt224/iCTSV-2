@@ -68,13 +68,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Đánh giá cấp giấy tờ"
-                                android:textAlignment="center" />
+                                android:textAlignment="center"
+                                tools:ignore="HardcodedText" />
                         <ImageView
                                 android:layout_marginTop="8dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="80dp"
                                 android:layout_height="64dp"
-                                android:src="@drawable/paper"/>
+                                android:src="@drawable/paper"
+                                tools:ignore="ContentDescription" />
                         <TextView
                                 android:id="@+id/textTitle"
                                 android:layout_width="match_parent"

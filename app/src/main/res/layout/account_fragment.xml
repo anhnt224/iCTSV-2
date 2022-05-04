@@ -58,7 +58,8 @@
                                     android:id="@+id/imageStudent"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/winner" />
+                                    android:src="@drawable/winner"
+                                    tools:ignore="ContentDescription" />
                         </androidx.cardview.widget.CardView>
 
                         <LinearLayout

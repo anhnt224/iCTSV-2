@@ -21,10 +21,9 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:text="Thuc tap doanh nghie"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                android:textColor="@color/titlGreen"
+                android:textColor="@color/titleGreen"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +36,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:text="Cong ty"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +51,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:hint="Số điện thoại"
+                android:hint="@string/phone_number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textCompany">
@@ -75,7 +73,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:hint="Giới thiệu ngắn gọn"
+                android:hint="@string/gi_i_thi_u_ng_n_g_n"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPhone">
@@ -101,7 +99,6 @@
                     android:id="@+id/buttonApply"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="Ứng tuyển"
                     android:textAllCaps="false"
                     />
         </LinearLayout>
@@ -110,6 +107,6 @@
                 layout="@layout/loading_action_state"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:resource='@{resource}' />
+                app:resource="@{resource}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

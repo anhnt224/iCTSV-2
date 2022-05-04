@@ -2,14 +2,14 @@
 <RelativeLayout
 
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:background="@color/colorWhite"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="UnusedAttribute">
     <RelativeLayout
             android:layout_marginTop="8dp"
             android:id="@+id/relativeMain"
@@ -23,13 +23,15 @@
                 android:id="@+id/imgGName"
                 android:layout_gravity="center_vertical"
                 android:layout_width="45dp"
-                android:layout_height="45dp"/>
+                android:layout_height="45dp"
+                tools:ignore="ContentDescription,RtlHardcoded" />
 
         <RelativeLayout
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="75dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="RtlHardcoded">
 
             <TextView
                     android:id="@+id/txtGName"
@@ -38,7 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="12dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
 
 
             <TextView
@@ -60,7 +63,8 @@
             android:id="@+id/view4"
             android:background="@color/iron"
             android:layout_width="match_parent"
-            android:layout_height="1dp">
+            android:layout_height="1dp"
+            tools:ignore="RtlHardcoded">
     </View>
 
 </RelativeLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
 
         <import type="com.bk.ctsv.common.Status" />
@@ -27,7 +27,6 @@
 
     <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -61,7 +60,8 @@
                             android:background="?android:selectableItemBackground"
                             android:clickable="true"
                             android:orientation="vertical"
-                            android:focusable="true">
+                            android:focusable="true"
+                            tools:ignore="RtlHardcoded,UselessParent">
 
 
 
@@ -74,7 +74,8 @@
                                 android:layout_centerVertical="true"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle" />
+                                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+                                tools:ignore="HardcodedText" />
 
 
                         <TextView
@@ -88,7 +89,8 @@
                                 android:layout_gravity="center"
                                 android:id="@+id/txtWeekNumber"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                tools:ignore="RelativeOverlap" />
 
                     </RelativeLayout>
 
@@ -110,7 +112,8 @@
                 android:layout_centerInParent="true"
                 android:text="Chưa cập nhật lịch học"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="HardcodedText">
         </TextView>
 
 

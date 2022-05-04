@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
                 name="job"
@@ -19,7 +19,8 @@
                 android:layout_marginTop="8dp"
                 android:src="@drawable/graduation"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         <LinearLayout
                 android:id="@+id/linearLayout4"
@@ -61,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text='@{job.salary}'
-                    android:textColor="@color/titlGreen"
+                    android:textColor="@color/titleGreen"
                     android:textSize="14sp" />
 
             <TextView

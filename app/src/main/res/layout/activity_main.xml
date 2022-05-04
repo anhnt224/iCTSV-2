@@ -23,7 +23,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:defaultNavHost="true"
-                    app:navGraph="@navigation/nav_graph" />
+                    app:navGraph="@navigation/nav_graph"
+                    tools:ignore="FragmentTagUsage" />
 
 
         </RelativeLayout>
@@ -65,7 +66,8 @@
                         app:elevation="0.05dp"
                         app:labelVisibilityMode="labeled"
                         android:background="@color/transparent"
-                        app:menu="@menu/menu_navigation" >
+                        app:menu="@menu/menu_navigation"
+                        tools:ignore="UnusedAttribute">
 
                 </com.google.android.material.bottomnavigation.BottomNavigationView>
             </com.google.android.material.bottomappbar.BottomAppBar>
@@ -79,7 +81,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    app:layout_anchor="@id/bottom_bar"/>
+                    app:layout_anchor="@id/bottom_bar"
+                    tools:ignore="ContentDescription" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

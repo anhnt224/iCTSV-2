@@ -2,6 +2,7 @@
 
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <TextView
@@ -12,7 +13,8 @@
             android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
             android:textColor="@android:color/black"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="10dp"
+            tools:ignore="RtlHardcoded" />
 
     <TextView
             android:text="20đ"
@@ -23,5 +25,6 @@
             android:layout_marginRight="16dp"
             android:textColor="@android:color/black"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="10dp"
+            tools:ignore="HardcodedText,RtlHardcoded" />
 </RelativeLayout>

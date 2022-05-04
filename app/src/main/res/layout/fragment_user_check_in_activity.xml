@@ -48,7 +48,8 @@
                     android:layout_below="@+id/appbar"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    tools:ignore="UnknownIdInLayout">
 <!--                <androidx.cardview.widget.CardView-->
 <!--                        android:id="@+id/people_card"-->
 <!--                        android:layout_width="match_parent"-->
@@ -155,7 +156,8 @@
                                     android:layout_weight="1"
                                     android:id="@+id/imgActivity"
                                     android:layout_width="0dp"
-                                    android:layout_height="160dp"/>
+                                    android:layout_height="160dp"
+                                    tools:ignore="ContentDescription" />
 
                             <LinearLayout
                                     android:padding="16dp"
@@ -165,7 +167,8 @@
                                     android:id="@+id/relativeMain"
                                     android:layout_width="0dp"
                                     android:gravity="center"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    tools:ignore="ObsoleteLayoutParam,RtlHardcoded">
 
                                 <com.google.android.material.button.MaterialButton
                                         android:paddingLeft="8dp"
@@ -175,7 +178,8 @@
                                         android:id="@+id/btnTakePhoto"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/colorWhite"/>
+                                        android:textColor="@color/colorWhite"
+                                        tools:ignore="HardcodedText" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -189,7 +193,7 @@
 
                         <TextView
                                 android:text="@{aName}"
-                                android:textSize="16dp"
+                                android:textSize="16sp"
                                 android:layout_marginTop="8dp"
                                 tools:text="Giải phóng, Hà Nội, Việt Nam"
                                 android:id="@+id/txtClassId"
@@ -281,11 +285,12 @@
                                 app:goneUnless="@{userCheckInActivityResource.status == Status.SUCCESS_NETWORK}"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                tools:ignore="HardcodedText" />
 
                         <TextView
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="18dp"
+                                android:textSize="18sp"
                                 android:id="@+id/textView2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -294,7 +299,8 @@
                                 android:text="CheckIn hoạt động"
                                 app:layout_constraintBottom_toTopOf="@+id/listUserCheckInActivityRecycler"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="HardcodedText" />
 
                         <com.google.android.material.button.MaterialButton
                                 android:id="@+id/buttonView"

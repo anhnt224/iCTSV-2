@@ -10,12 +10,12 @@
         tools:context=".MainActivity">
 
     <fragment
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/home_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             app:navGraph="@navigation/nav_graph"
-            app:defaultNavHost="true"/>
+            app:defaultNavHost="true"
+            tools:ignore="FragmentTagUsage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

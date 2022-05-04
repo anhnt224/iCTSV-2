@@ -35,7 +35,7 @@
     <color name="pending">#FFB300</color>
     <color name="done">#43A047</color>
     <color name="cancel">#F4511E</color>
-    <color name="titlGreen">#43A047</color>
+    <color name="titleGreen">#43A047</color>
 
     <color name="pending_bg">#33FFB300</color>
     <color name="done_bg">#3343A047</color>

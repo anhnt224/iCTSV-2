@@ -27,7 +27,8 @@
                 android:minHeight="100dp"
                 android:src="@drawable/gift_banner"
                 app:layout_constraintDimensionRatio="w,128:414"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"

@@ -68,14 +68,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Địa điểm:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.workAddress}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -88,14 +89,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Mức lương:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16dp"
+                                    tools:ignore="HardcodedText,RtlHardcoded,SpUsage" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@{job.salary}"
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -108,14 +110,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Hạn đăng kí:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.getDeadline()}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -141,7 +144,8 @@
                                 android:gravity="left"
                                 android:text="Thông tin chung"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
 
                         <LinearLayout
                                 android:layout_width="match_parent"
@@ -153,14 +157,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Kinh nghiệm:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.workExperience}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -173,14 +178,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Bằng cấp:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@{job.degreeRequire}"
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -193,14 +199,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Giới tính:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.sexRequire}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -213,14 +220,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Số lượng:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.getQuantity()}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -233,14 +241,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Công việc:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.workType}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -253,14 +262,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Vị trí:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.workPosition}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -286,7 +296,8 @@
                                 android:gravity="left"
                                 android:text="Mô tả công việc"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
 
                         <TextView
                                 android:layout_width="match_parent"
@@ -318,7 +329,8 @@
                                 android:gravity="left"
                                 android:text="Quyền lợi được hưởng"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
 
                         <TextView
                                 android:layout_width="match_parent"
@@ -350,7 +362,8 @@
                                 android:gravity="left"
                                 android:text="Yêu cầu công việc"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
 
                         <TextView
                                 android:layout_width="match_parent"
@@ -382,7 +395,8 @@
                                 android:gravity="left"
                                 android:text="Liên hệ"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
 
                         <LinearLayout
                                 android:layout_width="match_parent"
@@ -394,14 +408,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Liên hệ:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.contactName}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -414,14 +429,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Điện thoại:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@{job.contactPhone}"
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -434,14 +450,15 @@
                                     android:layout_marginRight="4dp"
                                     android:gravity="top|left"
                                     android:text="Email:"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText,RtlHardcoded" />
 
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text='@{job.contactEmail}'
                                     android:textColor="@color/textColorPrimary"
-                                    android:textSize="16dp" />
+                                    android:textSize="16sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -466,7 +483,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Ứng tuyển ngay"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    tools:ignore="HardcodedText" />
         </LinearLayout>
 
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
                 name="activity"
                 type="com.bk.ctsv.models.entity.Activity" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp">
@@ -38,7 +38,8 @@
                         android:id="@+id/imageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@mipmap/ic_even_grey"/>
+                        android:src="@mipmap/ic_even_grey"
+                        tools:ignore="ContentDescription" />
 
                 <LinearLayout
                         android:orientation="vertical"

@@ -35,7 +35,7 @@
                     android:height="56dp"
                     app:cornerRadius="8dp"
                     android:textAllCaps="false"
-                    android:text="Giao đến địa chỉ này"/>
+                    android:text="@string/giao_n_a_ch_n_y"/>
         </androidx.cardview.widget.CardView>
 
         <include

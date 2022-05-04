@@ -23,14 +23,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColorPrimary"
-                    android:text="Thông tin sinh viên"
+                    android:text="@string/th_ng_tin_sinh_vi_n"
                     android:textSize="16sp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/studentNameTil"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:hint="Họ và tên"
+                    android:hint="@string/h_v_t_n"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:text="aaa"
+                        android:text="@string/aaa"
                         android:focusable="false"
                         android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -49,7 +49,7 @@
                     android:layout_marginTop="8dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:hint="Mã số sinh viên"
+                    android:hint="@string/m_s_sinh_vi_n"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -66,14 +66,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColorPrimary"
-                    android:text="Hình thức nhận giấy tờ"
+                    android:text="@string/h_nh_th_c_nh_n_gi_y_t"
                     android:textSize="16sp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/deliveryTypeTil"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:hint="Hình thức nhận giấy tờ"
+                    android:hint="@string/h_nh_th_c_nh_n_gi_y_t"
                     android:layout_marginTop="4dp"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp"
@@ -94,7 +94,7 @@
                     android:layout_marginTop="8dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:hint="Địa chỉ"
+                    android:hint="@string/a_ch"
                     app:boxCornerRadiusTopStart="8dp"
                     app:boxCornerRadiusBottomEnd="8dp"
                     app:boxCornerRadiusBottomStart="8dp"
@@ -121,7 +121,7 @@
                     android:id="@+id/doneButton"
                     app:cornerRadius="8dp"
                     android:layout_width="match_parent"
-                    android:text="Hoàn tất đăng kí"
+                    android:text="@string/ho_n_t_t_ng_k"
                     android:textAllCaps="false"
                     android:layout_height="56dp"/>
         </LinearLayout>

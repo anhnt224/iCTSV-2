@@ -37,7 +37,8 @@
                             android:layout_marginLeft="8dp"
                             android:weightSum="3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            tools:ignore="RtlHardcoded">
                         <com.google.android.material.button.MaterialButton
                                 android:id="@+id/buttonSemester"
                                 android:text=""
@@ -106,7 +107,7 @@
                             <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text='@{criteriaType.name}'
+                                    android:text="@{criteriaType.name}"
                                     android:textAlignment="center"
                                     android:textSize="18sp"
                                     android:textColor="@color/colorGreen"/>
@@ -119,14 +120,14 @@
                                         android:id="@+id/textCriteriaTypePoint"
                                         android:textColor="@color/pending"
                                         android:layout_weight="1"
-                                        android:text='@{"SV: " + criteriaType.getStudentPoint() + "/" + criteriaType.maxPoint}'
+                                        android:text="@{`SV: ` + criteriaType.getStudentPoint() + `/` + criteriaType.maxPoint}"
                                         android:textAlignment="center"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"/>
                                 <TextView
                                         android:textColor="@color/done"
                                         android:layout_weight="1"
-                                        android:text='@{"GV: " + criteriaType.tPoint + "/" + criteriaType.maxPoint}'
+                                        android:text="@{`GV: ` + criteriaType.tPoint + `/` + criteriaType.maxPoint}"
                                         android:textAlignment="center"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"/>
@@ -153,7 +154,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:textAllCaps="false"
-                    android:text="Lưu, 13 điểm"
+                    android:text="@string/l_u_13_i_m"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -202,7 +203,7 @@
                                     android:id="@+id/textView8"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Hoạt động minh chứng"
+                                    android:text="@string/ho_t_ng_minh_ch_ng"
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="18sp"
                                     app:layout_constraintBottom_toBottomOf="parent"

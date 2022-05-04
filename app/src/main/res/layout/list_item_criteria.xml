@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:paddingTop="16dp"
         android:clickable="true"
@@ -9,7 +7,8 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:background="@color/colorWhite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="UnusedAttribute">
     <RelativeLayout
             android:id="@+id/relative1"
             android:layout_width="match_parent"
@@ -23,7 +22,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="12dp"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
         <TextView
                 android:layout_toRightOf="@+id/txtCCode"
                 android:id="@+id/txtCName"
@@ -33,7 +33,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="12dp"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded" />
 
     </RelativeLayout>
 
@@ -55,7 +56,8 @@
                 android:id="@+id/btnNextToActivity"
                 android:text="@string/proof"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"/>
+                android:layout_height="35dp"
+                tools:ignore="RtlHardcoded" />
 
         <LinearLayout
                 android:layout_toLeftOf="@+id/linePoint"
@@ -65,13 +67,15 @@
                 android:layout_toRightOf="@+id/btnNextToActivity"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="RtlHardcoded">
 
             <TextView
                     android:textColor="@color/colorBlack"
                     android:text="Điểm"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText" />
             <TextView
                     android:id="@+id/UCPoint"
                     android:textStyle="bold"
@@ -89,14 +93,16 @@
                 android:layout_marginRight="16dp"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="RtlHardcoded">
 
             <TextView
                     android:layout_gravity="center"
                     android:textColor="@color/colorBlack"
                     android:text="Điểm max"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText" />
             <TextView
                     android:id="@+id/CMaxPoint"
                     android:layout_gravity="center"

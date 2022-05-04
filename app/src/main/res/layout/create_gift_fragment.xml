@@ -147,7 +147,8 @@
                                 <ImageView
                                         android:id="@+id/image1"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"/>
+                                        android:layout_height="match_parent"
+                                        tools:ignore="ContentDescription" />
 
                                 <com.google.android.material.button.MaterialButton
                                         android:id="@+id/deleteImage1"
@@ -189,7 +190,8 @@
                                 <ImageView
                                         android:id="@+id/image2"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"/>
+                                        android:layout_height="match_parent"
+                                        tools:ignore="ContentDescription" />
 
                                 <com.google.android.material.button.MaterialButton
                                         android:id="@+id/deleteImage2"
@@ -231,7 +233,8 @@
                                 <ImageView
                                         android:id="@+id/image3"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"/>
+                                        android:layout_height="match_parent"
+                                        tools:ignore="ContentDescription" />
 
                                 <com.google.android.material.button.MaterialButton
                                         android:id="@+id/deleteImage3"
@@ -283,7 +286,8 @@
                                         app:tint="@color/textColorPrimaryLight"
                                         android:src="@drawable/ic_round_add"
                                         android:layout_width="24dp"
-                                        android:layout_height="24dp"/>
+                                        android:layout_height="24dp"
+                                        tools:ignore="ContentDescription" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
