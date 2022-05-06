@@ -93,11 +93,19 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener {
             sendGiftLayout.setOnClickListener {
                 navigateGivenGift()
             }
+            searchMotelLayout.setOnClickListener {
+                navigateToSearchMotel()
+            }
         }
         viewModel.getListSemester()
         setUpRecyclerView(binding)
         subscribeUi()
         return binding.root
+    }
+
+    private fun navigateToSearchMotel() {
+        val action = Home2FragmentDirections.actionHome2FragmentToSearchMotelFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     private fun setUpViewModel(){

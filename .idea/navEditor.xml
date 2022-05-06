@@ -423,6 +423,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_home2Fragment_to_searchMotelFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_home2Fragment_to_timeTableFragment">
                               <value>
                                 <LayoutPositions />
@@ -718,6 +723,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="motelInfoFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-274" />
+                            <option name="y" value="934" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="notesFragment">
                     <value>
                       <LayoutPositions>
@@ -913,9 +930,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="538" />
-                            <option name="y" value="2963" />
+                            <option name="x" value="-676" />
+                            <option name="y" value="832" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_searchMotelFragment_to_motelInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

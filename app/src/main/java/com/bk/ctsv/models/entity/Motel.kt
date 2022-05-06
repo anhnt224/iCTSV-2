@@ -1,6 +1,8 @@
 package com.bk.ctsv.models.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 
 class Motel(
     @SerializedName("MotelID")
@@ -27,4 +29,4 @@ class Motel(
     var distance: Double = 0.0,
     @SerializedName("Status")
     var status: Int = 0
-)
+): Serializable

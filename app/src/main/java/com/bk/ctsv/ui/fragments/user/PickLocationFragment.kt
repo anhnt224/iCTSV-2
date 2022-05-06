@@ -3,6 +3,7 @@ package com.bk.ctsv.ui.fragments.user
 import android.annotation.SuppressLint
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.bk.ctsv.R
 import com.bk.ctsv.databinding.PickLocationFragmentBinding
 import com.bk.ctsv.ui.viewmodels.user.PickLocationViewModel
 import com.bk.ctsv.utilities.DEFAULT_LATLNG
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -32,10 +34,12 @@ class PickLocationFragment : Fragment(), OnMapReadyCallback {
     private lateinit var viewModel: PickLocationViewModel
     private lateinit var binding: PickLocationFragmentBinding
     private lateinit var mMap: GoogleMap
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel = ViewModelProviders.of(this).get(PickLocationViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.pick_location_fragment, container, false)
         binding.mapView.getMapAsync(this)
@@ -69,7 +73,6 @@ class PickLocationFragment : Fragment(), OnMapReadyCallback {
 
         mMap.setOnMapClickListener {latLng ->
             mMap.clear()
-
             AddNewAddressFragment.newLatLng = latLng
             fillLocationInfo(latLng)
             mMap.addMarker(MarkerOptions().position(latLng))
@@ -101,7 +104,6 @@ class PickLocationFragment : Fragment(), OnMapReadyCallback {
 
         val addresses: List<Address>
         val geocoder: Geocoder = Geocoder(requireContext(), Locale.getDefault())
-
         try {
             addresses = geocoder.getFromLocation(
                 latLng.latitude,

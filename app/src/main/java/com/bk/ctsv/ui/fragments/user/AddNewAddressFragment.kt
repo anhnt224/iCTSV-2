@@ -52,7 +52,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setUpViewModel()
         binding = DataBindingUtil.inflate(inflater, R.layout.add_new_address_fragment, container, false)
         binding.address = mAddress
