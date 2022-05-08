@@ -8,7 +8,6 @@ import com.bk.ctsv.models.entity.Criteria
 @Dao
 interface CriteriaDAO {
 
-
     @Query("SELECT * FROM Criteria where CGroupId = :CGId ORDER BY CCode ASC")
     fun getCriteriaByCGId(CGId : Int): LiveData<List<Criteria>>
 

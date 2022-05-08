@@ -26,6 +26,7 @@ import okhttp3.MultipartBody
 
 import retrofit2.Call
 import retrofit2.http.*
+import java.sql.Struct
 
 interface WebService {
 
@@ -488,7 +489,7 @@ interface WebService {
     @POST("User/UpdateStudentContact")
     fun updateUserAddress(
         @Body updateUserAddressReq: UpdateUserAddressReq
-    ): LiveData<ApiResponse<MyCTSVCap>>
+    ): LiveData<ApiResponse<UpdateStudentContactResp>>
 
     @FormUrlEncoded
     @POST("User/GetStudentContact")
@@ -689,4 +690,36 @@ interface WebService {
         @Field("TokenCode") tokenCode: String,
         @Field("GiftID") giftId: Int
     ):  LiveData<ApiResponse<MyCTSVCap>>
+
+    //MOTEL
+//    @Multipart
+//    @POST("CTSV/UploadImageMotel")
+//    fun uploadImageMotel(
+//        @Query("UserCode") userCode: String,
+//        @Query("MotelID") motelID: String,
+//        @Query("TypeImg") typeImg: Int,
+//        @Query("TokenCode") TokenCode: String,
+//        @Part image: MultipartBody.Part
+//    ): LiveData<ApiResponse<CTSVAssignUserActivityRes>>
+
+    @Multipart
+    @POST("UploadFile/CTSV/UploadImageMotel")
+    fun uploadImageMotel(
+        @Query("UserCode") userCode: String,
+        @Query("MotelID") motelID: Int,
+        @Query("TypeImg") typeImg: Int,
+        @Query("TokenCode") tokenCode: String,
+        @Part image: MultipartBody.Part
+    ): Call<CTSVAssignUserActivityRes>
+
+    @FormUrlEncoded
+    @POST("CTSV/CTSVDelImageMotelReq")
+    fun delImageMotel(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") tokenCode: String,
+        @Field("MotelID") id: Int,
+        @Field("TypeImage") type: Int
+    ): LiveData<ApiResponse<MyCTSVCap>>
+
+
 }

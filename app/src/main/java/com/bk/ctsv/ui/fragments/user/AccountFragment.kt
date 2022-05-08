@@ -1,11 +1,8 @@
 package com.bk.ctsv.ui.fragments.user
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -13,9 +10,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.bk.ctsv.BuildConfig
@@ -26,7 +20,6 @@ import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.extension.logoutClick
 import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
-import com.bk.ctsv.ui.fragments.activity.UserCheckInActivityInfoFragment
 import com.bk.ctsv.ui.viewmodels.user.AccountViewModel
 import com.bk.ctsv.utilities.runOnIoThread
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -97,6 +90,7 @@ class AccountFragment : Fragment(), Injectable {
             }
             viewAddress.setOnClickListener {
                 Navigation.findNavController(requireView()).navigate(AccountFragmentDirections.actionAccountFragmentToListAddressFragment())
+                //Navigation.findNavController(requireView()).navigate(AccountFragmentDirections.actionAccountFragmentToImageMotelFragment(2))
             }
             viewNotes.setOnClickListener {
                 Navigation.findNavController(requireView()).navigate(AccountFragmentDirections.actionAccountFragmentToNotesFragment())

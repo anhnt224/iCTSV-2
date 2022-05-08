@@ -17,6 +17,7 @@ import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkLocationPermission
 import com.bk.ctsv.extension.checkResource
+import com.bk.ctsv.extension.showDialogMotel
 import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.UserAddress
@@ -35,6 +36,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
         fun newInstance() = AddNewAddressFragment()
         var newLatLng: LatLng? = null
         var address: String = ""
+        var mAddress = UserAddress()
     }
     @Inject
     lateinit var sharedPrefsHelper: SharedPrefsHelper
@@ -43,7 +45,6 @@ class AddNewAddressFragment : Fragment(), Injectable {
 
     private lateinit var viewModel: AddNewAddressViewModel
     private lateinit var binding: AddNewAddressFragmentBinding
-    private var mAddress = UserAddress()
     private var cities: List<String> = listOf()
     private var districts: List<String> = listOf()
     private var wards: List<String> = listOf()
@@ -52,7 +53,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setUpViewModel()
         binding = DataBindingUtil.inflate(inflater, R.layout.add_new_address_fragment, container, false)
         binding.address = mAddress
@@ -134,8 +135,8 @@ class AddNewAddressFragment : Fragment(), Injectable {
             updateUserAddress.observe(viewLifecycleOwner){
                 binding.resource = it
                 if(checkResource(it)){
-                    showToast("Thêm địa chỉ thành công")
-                    Navigation.findNavController(requireView()).navigateUp()
+                   showToast("Thêm địa chỉ thành công")
+                   Navigation.findNavController(requireView()).navigateUp()
                 }
             }
         }
@@ -158,7 +159,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
         viewModel.setAddress(mAddress)
     }
 
-    private fun saveAddress(){
+    private fun saveAddress() {
         mAddress.studentID = sharedPrefsHelper.getUserName()
         mAddress.studentName = sharedPrefsHelper.getFullName()
         mAddress.contact = binding.textPhone.editText?.text.toString()
@@ -168,23 +169,48 @@ class AddNewAddressFragment : Fragment(), Injectable {
         mAddress.ward = binding.textWard.editText?.text.toString()
         mAddress.address = binding.textAddress.editText?.text.toString()
         mAddress.email = binding.emailTextInputLayout.editText?.text.toString()
-        if(newLatLng != null){
+        if (newLatLng != null) {
             mAddress.latitude = newLatLng!!.latitude
             mAddress.longtitude = newLatLng!!.longitude
         }
 
-        if(mAddress.city.isEmpty() || mAddress.district.isEmpty() || mAddress.ward.isEmpty() || mAddress.contact.isEmpty()
-            || mAddress.type.isEmpty() || mAddress.longtitude == 0.0 || mAddress.latitude == 0.0 || mAddress.address.isEmpty() || mAddress.email.isEmpty()){
+        if (mAddress.city.isEmpty() || mAddress.district.isEmpty() || mAddress.ward.isEmpty() || mAddress.contact.isEmpty()
+            || mAddress.type.isEmpty() || mAddress.longtitude == 0.0 || mAddress.latitude == 0.0 || mAddress.address.isEmpty() || mAddress.email.isEmpty()
+        ) {
             showToast("Vui lòng nhập đầy đủ thông tin")
-        }else{
-            if(mAddress.isValidEmail()){
-                viewModel.updateUserAddress(mAddress)
-            }else{
+        } else {
+            if (mAddress.isValidEmail()) {
+                if (mAddress.type == "Nhà trọ") {
+                    showDialogMotel("Chia sẻ đánh giá về nhà trọ",
+                        "Bạn có sẵn sàng chia sẻ những thông tin, đánh giá về nhà trọ bạn đang ở cho iCTSV. Chúng tôi sử dụng thông tin này để .... ",
+                        R.drawable.ic_share_motel,
+                        "Thêm thông tin",
+                        { navigateToAddMotelFragment() },
+                        "Bỏ qua",
+                        { viewModel.updateUserAddress(mAddress) })
+                }
+                if (mAddress.type == "KTX Bách Khoa" || mAddress.type == "KTX Pháp Vân") {
+                    showDialogMotel("Chia sẻ đánh giá về ktx",
+                        "Bạn có sẵn sàng chia sẻ những thông tin, đánh giá về ktx bạn đang ở cho iCTSV. Chúng tôi sử dụng thông tin này để .... ",
+                        R.drawable.ic_share_motel,
+                        "Thêm thông tin",
+                        { navigateToAddMotelFragment() },
+                        "Bỏ qua",
+                        { viewModel.updateUserAddress(mAddress) })
+                }
+                if (mAddress.type == "Nhà riêng"){
+                    viewModel.updateUserAddress(mAddress)
+                }
+            }else {
                 showToast("Địa chỉ email không hợp lệ")
             }
         }
     }
 
+    private fun navigateToAddMotelFragment(){
+        Navigation.findNavController(requireView()).
+        navigate(AddNewAddressFragmentDirections.actionAddNewAddressFragmentToAddMotelInfoFragment())
+    }
     private fun showAlertPickCity(){
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chọn Tỉnh/Thành phố")
@@ -225,7 +251,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
 
     private fun showAlertPickType(){
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Chọn Quận/Huyện")
+            .setTitle("Chọn loại nơi ở")
             .setItems(types.toTypedArray()){_: DialogInterface?, which: Int ->
                 textType.editText?.setText(types[which])
                 when(which){

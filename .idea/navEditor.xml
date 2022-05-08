@@ -80,6 +80,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="addMotelInfoFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="802" />
+                            <option name="y" value="-3484" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="addNewAddressFragment">
                     <value>
                       <LayoutPositions>
@@ -91,6 +103,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_addNewAddressFragment_to_addMotelInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_addNewAddressFragment_to_pickLocationFragment">
                               <value>
                                 <LayoutPositions />
@@ -423,6 +440,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_home2Fragment_to_searchMotelFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_home2Fragment_to_timeTableFragment">
                               <value>
                                 <LayoutPositions />
@@ -495,6 +517,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="imageMotelFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1038" />
+                            <option name="y" value="-3492" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

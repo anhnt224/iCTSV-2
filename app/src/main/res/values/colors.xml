@@ -27,6 +27,8 @@
     <color name="colorBlue"> #3498db</color>
     <color name="colorGreen">#569127</color>
 
+    <color name="blue_light">#48307FE2</color>
+    <color name="blue">#307FE2</color>
     <color name="colorBlueDeep">#216EF3</color>
     <color name="colorBlue2">#1c36f5</color>
     <color name="iron">#DFDCDC</color>
@@ -42,6 +44,7 @@
     <color name="cancel_bg">#33F4511E</color>
 
     <color name="green5">#D1F8D3</color>
+    <color name="green_light">#241D974A</color>
 
     <color name="transparent">#00FFFFFF</color>
 

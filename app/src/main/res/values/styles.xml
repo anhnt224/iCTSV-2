@@ -74,6 +74,13 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="MainButtonGreen" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">8dp</item>
+        <item name="backgroundTint">#DDF0E4</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
     <!--    Main TextInputLayout-->
     <style name="MainTextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusTopStart">8dp</item>
