@@ -42,7 +42,7 @@ class UserRepository @Inject constructor(
     private var citiesLiveData = MediatorLiveData<List<String>>()
     private var districtsLiveData = MediatorLiveData<List<String>>()
     private var wardsLiveData = MediatorLiveData<List<String>>()
-    private var updateUserAddressLiveData = MediatorLiveData<MyCTSVCap>()
+    private var updateUserAddressLiveData = MediatorLiveData<UpdateStudentContactResp>()
     private var getListUserAddress = MediatorLiveData<List<UserAddress>>()
     private var deleteAddress = MediatorLiveData<MyCTSVCap>()
 
@@ -55,7 +55,7 @@ class UserRepository @Inject constructor(
         citiesLiveData.value = listOf()
         districtsLiveData.value = listOf()
         wardsLiveData.value = listOf()
-        updateUserAddressLiveData.value = MyCTSVCap()
+        updateUserAddressLiveData.value = UpdateStudentContactResp()
         getListUserAddress.value = listOf()
         deleteAddress.value = MyCTSVCap()
     }
@@ -482,22 +482,22 @@ class UserRepository @Inject constructor(
         }.asLiveData()
     }
 
-    fun updateUserAddress(userAddress: UserAddress, shouldFetch: Boolean = true): LiveData<Resource<MyCTSVCap>>{
-        return object: NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors){
-            override fun saveCallResult(item: MyCTSVCap) {
+    fun updateUserAddress(userAddress: UserAddress, motelInfo: Motel?, shouldFetch: Boolean = true): LiveData<Resource<UpdateStudentContactResp>>{
+        return object: NetworkBoundResource<UpdateStudentContactResp, UpdateStudentContactResp>(appExecutors){
+            override fun saveCallResult(item: UpdateStudentContactResp) {
                 Thread(Runnable { updateUserAddressLiveData.postValue(item) })
             }
 
-            override fun shouldFetch(data: MyCTSVCap?): Boolean {
+            override fun shouldFetch(data: UpdateStudentContactResp?): Boolean {
                 return data == null || shouldFetch
             }
 
-            override fun loadFromDb(): LiveData<MyCTSVCap> {
+            override fun loadFromDb(): LiveData<UpdateStudentContactResp> {
                 return updateUserAddressLiveData
             }
 
-            override fun createCall(): LiveData<ApiResponse<MyCTSVCap>> {
-                val updateUserAddressReq = UpdateUserAddressReq(userName = sharedPrefsHelper.getUserName(), token = sharedPrefsHelper.getToken(), userAddress = userAddress)
+            override fun createCall(): LiveData<ApiResponse<UpdateStudentContactResp>> {
+                val updateUserAddressReq = UpdateUserAddressReq(userName = sharedPrefsHelper.getUserName(), token = sharedPrefsHelper.getToken(), userAddress = userAddress, motelInfo = motelInfo )
                 return webservice.updateUserAddress(updateUserAddressReq)
             }
 

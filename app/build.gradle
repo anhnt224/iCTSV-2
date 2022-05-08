@@ -158,7 +158,4 @@ dependencies {
     //Banner
     implementation 'io.github.youth5201314:banner:2.2.2'
 
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
 }

@@ -198,5 +198,10 @@ class AppModule() {
     fun provideSharedPreferences(context: Context): SharedPreferences
             = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
 
+    @Provides
+    @Singleton
+    fun provideImageMotelDao(db: AppDatabase): ImageMotelDao {
+        return db.imageMotelDao()
+    }
 
 }

@@ -29,7 +29,8 @@ import com.bk.ctsv.utilities.VERSION_DB
     CountSteps::class,
     Subject::class,
     RunningLocation::class,
-    RunningWay::class
+    RunningWay::class,
+    ImageMotel::class
                      ], version = VERSION_DB, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -50,6 +51,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun timetableDAO(): TimetableDAO
     abstract fun runningWayDao(): RunningWayDao
     abstract fun runningLocationDao(): RunningLocationDao
+    abstract fun imageMotelDao(): ImageMotelDao
 
     companion object {
 

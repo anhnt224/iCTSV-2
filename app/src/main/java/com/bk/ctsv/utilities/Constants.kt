@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.LatLng
 const val DATABASE_NAME = "ictsv_database_version10"
 const val SHARED_PREFERENCES_NAME = "shared_preferences_ctsv_version10"
 const val AUTO = "auto"
-const val VERSION_DB = 26
+const val VERSION_DB = 29
 const val API_SERVICE_BASE_URL = "https://ctsv.hust.edu.vn/api-t/"
 const val API_SERVICE_FORM_BASE_URL = "https://ctsv.hust.edu.vn/api-q/"
 const val API_TIMETABLE = "https://ctsv.hust.edu.vn/api-t/UploadFile/CTSV/"

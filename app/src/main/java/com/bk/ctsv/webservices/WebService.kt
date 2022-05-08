@@ -22,7 +22,6 @@ import com.bk.ctsv.models.res.timetable.GetTimeTableResp
 import com.bk.ctsv.models.res.user.*
 import com.google.android.gms.common.api.Api
 import com.google.gson.JsonObject
-import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 
 import retrofit2.Call
@@ -690,24 +689,4 @@ interface WebService {
         @Field("TokenCode") tokenCode: String,
         @Field("GiftID") giftId: Int
     ):  LiveData<ApiResponse<MyCTSVCap>>
-
-
-    @FormUrlEncoded
-    @POST("StudentMotel/SearchStudentMotel")
-    fun searchStudentMotel(
-        @Field("UserName") userName: String,
-        @Field("TokenCode") tokenCode: String,
-        @Field("Latitude") latitude: Double,
-        @Field("Longitude") longitude: Double,
-        @Field("Distance") distance: Int
-    ): LiveData<ApiResponse<CTSVSearchStudentMotelRes>>
-
-    @FormUrlEncoded
-    @POST("UploadFile/CTSV/GetMotelFiles")
-    fun getImageMotel(
-        @Field("UserName") userName: String,
-        @Field("Token") token: String,
-        @Field("MotelID") motelID: Int
-    ): LiveData<ApiResponse<CTSVMotelImageRes>>
-
 }

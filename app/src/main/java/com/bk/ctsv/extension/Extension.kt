@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -267,6 +268,51 @@ fun ImageView.loadFromURL(url: String){
         .into(this)
 }
 
+
+fun Fragment.showDialogMotel(
+    title: String = "",
+    message: String = "",
+    icon: Int = R.drawable.ic_share_motel,
+    positiveButtonTitle: String = "Xác nhận",
+    handlePositiveButtonTap: (() -> Unit)? = null,
+    negativeButtonTitle: String = "Huỷ",
+    handleNegativeButtonTap: (() -> Unit)? = null
+){
+    val dialog = Dialog(requireContext())
+    dialog.setContentView(R.layout.dialog_motel)
+    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    dialog.window?.setLayout(
+        ViewGroup.LayoutParams.WRAP_CONTENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
+    dialog.setCancelable(false)
+
+    val titleTextView = dialog.findViewById<TextView>(R.id.tittleTxt)
+    titleTextView.text = title
+
+    val messageTextView = dialog.findViewById<TextView>(R.id.messengerTxt)
+    messageTextView.text = message
+
+    val positiveButton: Button = dialog.findViewById(R.id.agreeButton)
+    positiveButton.text = positiveButtonTitle
+    positiveButton.setOnClickListener {
+        handlePositiveButtonTap?.invoke()
+        dialog.dismiss()
+    }
+
+    val negativeButton: Button = dialog.findViewById(R.id.skipButton)
+    negativeButton.text = negativeButtonTitle
+    negativeButton.setOnClickListener {
+        handleNegativeButtonTap?.invoke()
+        dialog.dismiss()
+    }
+
+    val imageView = dialog.findViewById<ImageView>(R.id.imageDialog)
+    imageView.setImageResource(icon)
+
+    dialog.show()
+}
+
 fun Fragment.showActionDialog(
     title: String = "",
     message: String = "",
@@ -309,6 +355,53 @@ fun Fragment.showActionDialog(
     imageView.setImageResource(icon)
 
     dialog.show()
+}
+
+
+fun Fragment.showDialogClickImage(handleSeeButton: (() -> Unit)? = null,
+                                  handleDeleteButton: (() -> Unit)? = null){
+    val dialog = Dialog(requireContext())
+    dialog.setContentView(R.layout.dialog_image_motel)
+    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    dialog.window?.setLayout(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
+
+    //  dialog.setCancelable(false)
+
+    val seeButton: Button = dialog.findViewById(R.id.seePhoto)
+    seeButton.setOnClickListener {
+        handleSeeButton?.invoke()
+        dialog.dismiss()
+    }
+
+    val deleteButton: Button = dialog.findViewById(R.id.deletePhoto)
+    deleteButton.setOnClickListener {
+        handleDeleteButton?.invoke()
+        dialog.dismiss()
+    }
+
+    val close: TextView = dialog.findViewById(R.id.closeButton)
+    close.setOnClickListener {
+        dialog.dismiss()
+    }
+
+    dialog.show()
+
+}
+
+fun Fragment.initLoadingDialog(): Dialog{
+    val dialog = Dialog(requireContext())
+    dialog.setContentView(R.layout.dialog_loading_image)
+    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    dialog.window?.setLayout(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
+    dialog.setCancelable(false)
+
+    return dialog
 }
 
 fun Fragment.showNotificationDialog(
