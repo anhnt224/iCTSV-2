@@ -16,6 +16,7 @@
 
         <ImageView
                 android:id="@+id/imageDialog"
+                android:layout_marginTop="16dp"
                 android:src="@drawable/ic_share_motel"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"/>
