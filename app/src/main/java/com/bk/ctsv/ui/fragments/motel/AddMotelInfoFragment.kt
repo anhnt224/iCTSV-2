@@ -1,14 +1,20 @@
 package com.bk.ctsv.ui.fragments.motel
 
 import android.content.DialogInterface
-import androidx.lifecycle.ViewModelProvider
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.SeekBar
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import com.bk.ctsv.R
@@ -26,6 +32,7 @@ import com.bk.ctsv.ui.viewmodels.motel.AddMotelInfoViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_add_motel_info.*
 import javax.inject.Inject
+
 
 class AddMotelInfoFragment : Fragment(), Injectable {
 
@@ -64,6 +71,7 @@ class AddMotelInfoFragment : Fragment(), Injectable {
                     showAlertPickType()
                 }
             }
+
             seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                     if (i<20){
@@ -74,12 +82,15 @@ class AddMotelInfoFragment : Fragment(), Injectable {
                     }
                     if ((i >= 40) && (i < 60) ){
                         seekBar.thumb = resources.getDrawable(R.drawable.thumb_three)
+//                        seekBar.thumb = resources.getDrawable(R.drawable.thumb_three)
                     }
                     if ((i >= 60) && (i < 80) ){
                         seekBar.thumb = resources.getDrawable(R.drawable.thumb_four)
+//                        seekBar.thumb = resources.getDrawable(R.drawable.thumb_four)
                     }
                     if (i >= 80){
                         seekBar.thumb = resources.getDrawable(R.drawable.thumb_five)
+//                        seekBar.thumb = resources.getDrawable(R.drawable.thumb_five)
                     }
                 }
 
@@ -96,6 +107,26 @@ class AddMotelInfoFragment : Fragment(), Injectable {
 
         subscribeUI()
         return binding.root
+    }
+
+    private fun setThumbSize(drawable: Int){
+        binding.apply {
+            val vto = seekBar.getViewTreeObserver()
+            vto.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    val res: Resources = resources
+                    val thumb: Drawable = res.getDrawable(drawable)
+                    val h: Int = (seekBar.getMeasuredHeight() * 0.8).toInt() // 8 * 1.5 = 12
+                    val bmpOrg = (thumb as BitmapDrawable).bitmap
+                    val bmpScaled = Bitmap.createScaledBitmap(bmpOrg, h, h, true)
+                    val newThumb: Drawable = BitmapDrawable(res, bmpScaled)
+                    newThumb.setBounds(0, 0, newThumb.intrinsicWidth, newThumb.intrinsicHeight)
+                    seekBar.setThumb(newThumb)
+                    seekBar.getViewTreeObserver().removeOnPreDrawListener(this)
+                    return true
+                }
+            })
+        }
     }
 
     private fun showAlertPickType(){

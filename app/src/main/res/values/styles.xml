@@ -81,6 +81,11 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="CustomSeekbar" parent="Widget.AppCompat.SeekBar">
+        <item name="colorAccent">#1D5368</item>
+        <item name="android:width">10dp</item>
+        <item name="android:height">10dp</item>
+    </style>
     <!--    Main TextInputLayout-->
     <style name="MainTextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusTopStart">8dp</item>
