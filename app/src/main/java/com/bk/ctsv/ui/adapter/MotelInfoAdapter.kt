@@ -10,14 +10,14 @@ import com.bk.ctsv.models.entity.Motel
 
 class MotelInfoAdapter(
     var listMotel: List<Motel>,
-    val onItemMotelInfoClickListener: OnItemMotelInfoClickListener
+    private val onItemMotelInfoClickListener: OnItemMotelInfoClickListener
     ): RecyclerView.Adapter<MotelInfoAdapter.ViewHolder>() {
     class ViewHolder(
             val binding: ListItemMotelInfoBinding,
             val onItemMotelInfoClickListener: OnItemMotelInfoClickListener
         ): RecyclerView.ViewHolder(binding.root){
         fun bindView(motel: Motel){
-
+            binding.motel = motel
         }
     }
 

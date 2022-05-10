@@ -7,5 +7,5 @@ class CTSVSearchStudentMotelRes(
     override val respText: String?,
     override val respCode: Int?,
     @SerializedName("StudentMotelLst")
-    val studentMotelList: List<Motel>
+    val studentMotelList: List<Motel>?
 ): CTSVCap()

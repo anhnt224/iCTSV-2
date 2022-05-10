@@ -92,10 +92,11 @@
                             android:src="@drawable/ic_baseline_motel_24"
                             tools:ignore="ContentDescription" />
                     <TextView
+                            android:id="@+id/textViewNumberOfListMotel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Có 99 nhà trọ gần bạn"
+                            android:text="Có 0 nhà trọ gần bạn"
                             android:textSize="16sp"
                             android:textColor="@color/colorWhite"/>
 
@@ -155,10 +156,11 @@
                     android:src="@drawable/ic_baseline_motel_24"
                     tools:ignore="ContentDescription" />
             <TextView
+                    android:id="@+id/textViewSizeOfListMotel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Có 99 nhà trọ gần bạn"
+                    android:text="Có 0 nhà trọ gần bạn"
                     android:textSize="16sp"
                     android:textColor="@color/colorWhite"/>
 

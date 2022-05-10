@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <import type="com.bk.ctsv.models.entity.Motel"/>
+        <variable
+                name="motel"
+                type="Motel"/>
+    </data>
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -16,7 +22,7 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Số 1 Đại Cồ Việt"
+                    android:text="@{motel.address}"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText"
@@ -42,7 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội"
+                        android:text="@{motel.address}"
                         tools:ignore="HardcodedText,RtlHardcoded,UseCompatTextViewDrawableXml"/>
             </LinearLayout>
 
@@ -62,7 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Nguyen Van A - 09xx.xxx.xxx"
+                        android:text='@{motel.managerName + "-" + motel.managerContact}'
                         tools:ignore="HardcodedText,RtlHardcoded,UseCompatTextViewDrawableXml"/>
             </LinearLayout>
 
@@ -83,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/Widget.AppCompat.RatingBar.Small"
-                        android:rating="4"
+                        android:rating="@{motel.rate}"
                         android:progressBackgroundTint="@color/colorWhite"
                         android:progressTint="@color/pending"
                         />
@@ -93,8 +99,8 @@
                     android:layout_marginStart="38dp"
                     android:layout_marginEnd="12dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Phòng sạch đẹp, chủ nhà dễ tính, điện nước đầy đủ..."/>
+                    android:layout_height="17dp"
+                    android:text="@{motel.description}"/>
 
         </LinearLayout>
 

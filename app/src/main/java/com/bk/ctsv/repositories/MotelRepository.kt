@@ -1,5 +1,6 @@
 package com.bk.ctsv.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bk.ctsv.common.AppExecutors
@@ -12,6 +13,7 @@ import com.bk.ctsv.webservices.ApiResponse
 import com.bk.ctsv.webservices.WebService
 import javax.inject.Inject
 
+@Suppress("UNREACHABLE_CODE")
 class MotelRepository @Inject constructor(
     private val webservice: WebService,
     private val appExecutors: AppExecutors,
@@ -23,6 +25,7 @@ class MotelRepository @Inject constructor(
         motelList.value = listOf()
     }
 
+    //Bug in here
     fun getListMotel(
         latitude: Double,
         longitude: Double,
@@ -31,9 +34,10 @@ class MotelRepository @Inject constructor(
     ): LiveData<Resource<List<Motel>>>{
         return object : NetworkBoundResource<List<Motel>, CTSVSearchStudentMotelRes>(appExecutors){
             override fun saveCallResult(item: CTSVSearchStudentMotelRes) {
-                Thread{
-                    motelList.postValue(item.studentMotelList)
-                }
+                Thread{ Runnable { motelList.postValue(item.studentMotelList) }
+                    Log.v("_MotelRepository", "Motel List: ${motelList.value}")}.start()
+
+                Log.v("_MotelRepository", "Item Motel: ${item.studentMotelList}")
             }
 
             override fun shouldFetch(data: List<Motel>?): Boolean {
@@ -53,7 +57,6 @@ class MotelRepository @Inject constructor(
                     distance = distance
                 )
             }
-
         }.asLiveData()
 
 

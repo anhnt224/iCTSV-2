@@ -1,12 +1,12 @@
 package com.bk.ctsv.ui.fragments.motel
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,13 +47,14 @@ class SearchMotelFragment : Fragment(),
     lateinit var factory: ViewModelFactory
 
     private lateinit var binding: SearchMotelFragmentBinding
-    private var listMotel = arrayListOf<Motel>()
+    private var listMotel = listOf<Motel>()
     private lateinit var motelInfoAdapter: MotelInfoAdapter
     private lateinit var googleMap: GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var loadingDialog: Dialog
+    private val LOG = "_SearchMotelFragment"
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,6 +65,7 @@ class SearchMotelFragment : Fragment(),
             container,
             false)
 
+
         binding.map.getMapAsync(this)
         binding.apply {
             map.onCreate(savedInstanceState)
@@ -71,6 +73,9 @@ class SearchMotelFragment : Fragment(),
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity().baseContext)
+
+        subscribeUI()
+        setUpRecyclerViewMotelInfo()
 
         binding.apply {
             constraintMotelInfoShow.visibility = View.GONE
@@ -88,8 +93,6 @@ class SearchMotelFragment : Fragment(),
             }
         }
 
-
-        setUpRecyclerViewMotelInfo()
 
         return binding.root
     }
@@ -111,6 +114,7 @@ class SearchMotelFragment : Fragment(),
         TODO("Not yet implemented")
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onMapReady(p0: GoogleMap?) {
         googleMap = p0!!
         googleMap.uiSettings.isZoomControlsEnabled = true
@@ -122,14 +126,14 @@ class SearchMotelFragment : Fragment(),
             fillLocationInfo(latLng)
             drawCircle(latLng)
             googleMap.addMarker(MarkerOptions().position(latLng))
-            subscribeUI()
+            viewModel.getListMotel(latLng.latitude, latLng.longitude, 1000)
         }
 
         if (
             binding.map.findViewById<View>("1".toInt()) != null
         ) {
             // Get the button view
-            val locationButton = (binding.map.findViewById<View>("1".toInt())
+            /*val locationButton = (binding.map.findViewById<View>("1".toInt())
                 .parent as View).findViewById<View>("2".toInt())
             // and next place it, on bottom right (as Google Maps app)
             val layoutParams =
@@ -137,7 +141,7 @@ class SearchMotelFragment : Fragment(),
             // position on right bottom
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
-            layoutParams.setMargins(0, 0, 30, 30)
+            layoutParams.setMargins(0, 0, 30, 30)*/
         }
     }
 
@@ -204,15 +208,19 @@ class SearchMotelFragment : Fragment(),
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("SetTextI18n")
     fun subscribeUI(){
         with(viewModel){
             motelList.observe(viewLifecycleOwner){
+                Log.v(LOG, "${it.data}")
                 if (checkResource(it) && it.data != null){
                     motelInfoAdapter.listMotel = it.data
-                    motelInfoAdapter.notifyDataSetChanged()
-                    setUpRecyclerViewMotelInfo()
+                    binding.apply {
+                        textViewSizeOfListMotel.text = "Có ${it.data.size} nhà trọ ở gần bạn"
+                        textViewNumberOfListMotel.text = "Có ${it.data.size} nhà trọ ở gần bạn"
+                    }
                 }
+
             }
         }
     }

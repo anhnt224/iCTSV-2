@@ -1,5 +1,6 @@
 package com.bk.ctsv.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bk.ctsv.common.AppExecutors
@@ -30,6 +31,7 @@ class JobRepository @Inject constructor(
         return object: NetworkBoundResource<List<Job>, GetListJobsResp>(appExecutors){
             override fun saveCallResult(item: GetListJobsResp) {
                 Thread(Runnable { liveDataGetListJobs.postValue(item.jobs) }).start()
+                Log.v("_JobRepository", "${item.jobs}")
             }
 
             override fun shouldFetch(data: List<Job>?): Boolean {
