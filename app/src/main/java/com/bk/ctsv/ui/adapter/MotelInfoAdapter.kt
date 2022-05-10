@@ -9,7 +9,7 @@ import com.bk.ctsv.databinding.ListItemMotelInfoBinding
 import com.bk.ctsv.models.entity.Motel
 
 class MotelInfoAdapter(
-    private val listMotel: ArrayList<Motel>,
+    var listMotel: List<Motel>,
     val onItemMotelInfoClickListener: OnItemMotelInfoClickListener
     ): RecyclerView.Adapter<MotelInfoAdapter.ViewHolder>() {
     class ViewHolder(

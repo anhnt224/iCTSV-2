@@ -1,25 +1,29 @@
 package com.bk.ctsv.ui.fragments.motel
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bk.ctsv.R
 import com.bk.ctsv.databinding.SearchMotelFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
+import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.ui.adapter.MotelInfoAdapter
-import com.bk.ctsv.ui.fragments.user.AddNewAddressFragment
 import com.bk.ctsv.ui.viewmodels.motel.SearchMotelViewModel
 import com.bk.ctsv.utilities.DEFAULT_LATLNG
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -27,9 +31,9 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import java.lang.Exception
 import java.util.*
 import javax.inject.Inject
 
@@ -48,6 +52,7 @@ class SearchMotelFragment : Fragment(),
     private lateinit var googleMap: GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var loadingDialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,8 +77,12 @@ class SearchMotelFragment : Fragment(),
             viewShowMotelInfo.setOnClickListener {
                 constraintMotelInfoShow.visibility = View.VISIBLE
                 viewShowMotelInfo.visibility = View.GONE
+                val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.bottom_to_top)
+                binding.viewListMotelInfo.startAnimation(anim)
             }
             constraintMotelInfoShow.setOnClickListener {
+                val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.top_to_bottom)
+                binding.viewListMotelInfo.startAnimation(anim)
                 constraintMotelInfoShow.visibility = View.GONE
                 viewShowMotelInfo.visibility = View.VISIBLE
             }
@@ -109,9 +118,11 @@ class SearchMotelFragment : Fragment(),
 
         googleMap.setOnMapClickListener {latLng ->
             googleMap.clear()
-            AddNewAddressFragment.newLatLng = latLng
+            //AddNewAddressFragment.newLatLng = latLng
             fillLocationInfo(latLng)
+            drawCircle(latLng)
             googleMap.addMarker(MarkerOptions().position(latLng))
+            subscribeUI()
         }
 
         if (
@@ -130,32 +141,47 @@ class SearchMotelFragment : Fragment(),
         }
     }
 
+    private fun drawCircle(latLng: LatLng) {
+
+        googleMap.addCircle(
+            CircleOptions()
+                .center(latLng)
+                .radius(1000.0)
+                .strokeWidth(2f)
+                .strokeColor(Color.argb(100, 183, 32, 39))
+                .fillColor(Color.argb(15, 183, 32, 39))
+        )
+    }
+
     private fun setUpMap(){
         googleMap.isMyLocationEnabled = true
         fusedLocationClient.lastLocation.addOnSuccessListener{
             if (it != null){
                 lastLocation = it
                 val currentLatLong = LatLng(it.latitude, it.longitude)
-                placeMarkerOnMap(currentLatLong)
+                //placeMarkerOnMap(currentLatLong)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
             }
         }
     }
 
-    private fun placeMarkerOnMap(currentLatLong: LatLng) {
+   /* private fun placeMarkerOnMap(currentLatLong: LatLng) {
         val markerOptions = MarkerOptions().position(currentLatLong)
         markerOptions.title("$currentLatLong")
         googleMap.addMarker(markerOptions)
-    }
+    }*/
 
     @SuppressLint("SetTextI18n")
     private fun fillLocationInfo(latLng: LatLng){
         if(latLng == DEFAULT_LATLNG){
             return
         }
+
         binding.apply {
             binding.textViewAddress.isEnabled = false
-            binding.textViewAddress.setText("* Toạ độ: %.4f°B - %.4f°Đ\", latLng.latitude, latLng.longitude")
+            binding.textViewAddress
+                .setText(String.
+                format("* Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude))
             //locationText.text = String.format("* Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude)
         }
 
@@ -175,6 +201,19 @@ class SearchMotelFragment : Fragment(),
             }
         }catch (e: Exception){
 
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun subscribeUI(){
+        with(viewModel){
+            motelList.observe(viewLifecycleOwner){
+                if (checkResource(it) && it.data != null){
+                    motelInfoAdapter.listMotel = it.data
+                    motelInfoAdapter.notifyDataSetChanged()
+                    setUpRecyclerViewMotelInfo()
+                }
+            }
         }
     }
 

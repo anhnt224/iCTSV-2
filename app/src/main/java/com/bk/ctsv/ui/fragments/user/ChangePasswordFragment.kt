@@ -1,6 +1,7 @@
 package com.bk.ctsv.ui.fragments.user
 
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -100,6 +101,7 @@ class ChangePasswordFragment : androidx.fragment.app.Fragment(), Injectable {
 
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {

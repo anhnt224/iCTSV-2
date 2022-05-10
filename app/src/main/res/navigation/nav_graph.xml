@@ -510,22 +510,15 @@
     <fragment
             android:id="@+id/searchMotelFragment"
             android:name="com.bk.ctsv.ui.fragments.motel.SearchMotelFragment"
-            android:label="search_motel_fragment"
+            android:label="Tìm trọ"
             tools:layout="@layout/search_motel_fragment" >
         <action
                 android:id="@+id/action_searchMotelFragment_to_motelInfoFragment"
                 app:destination="@id/motelInfoFragment" />
-        <argument
-                android:name="motel"
-                app:argType="com.bk.ctsv.models.entity.Motel" />
     </fragment>
     <fragment
             android:id="@+id/motelInfoFragment"
             android:name="com.bk.ctsv.ui.fragments.motel.MotelInfoFragment"
-            android:label="motel_info_fragment"
-            tools:layout="@layout/motel_info_fragment" >
-        <argument
-                android:name="motel"
-                app:argType="com.bk.ctsv.models.entity.Motel" />
-    </fragment>
+            android:label="Thông tin nhà trọ"
+            tools:layout="@layout/motel_info_fragment" />
 </navigation>

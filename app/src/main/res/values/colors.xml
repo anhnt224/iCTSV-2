@@ -38,6 +38,8 @@
     <color name="titleGreen">#43A047</color>
 
     <color name="green">#027600</color>
+    <color name="circleMapColor">#1AB72027</color>
+    <color name="grey">#C2C2C2</color>
 
     <color name="pending_bg">#33FFB300</color>
     <color name="done_bg">#3343A047</color>

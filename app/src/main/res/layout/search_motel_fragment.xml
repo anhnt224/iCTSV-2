@@ -41,14 +41,15 @@
                     app:boxCornerRadiusTopStart="8dp"
                     android:hint="Vị trí của bạn"
                     app:endIconMode="custom"
-                    app:endIconDrawable="@drawable/ic_arrow_down"
                     tools:ignore="HardcodedText"
+                    android:clipChildren="true"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/textViewAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="số 1, Đại Cồ Việt"
+
                         tools:ignore="HardcodedText,RtlHardcoded" />
             </com.google.android.material.textfield.TextInputLayout>
 
