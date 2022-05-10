@@ -8,5 +8,5 @@ class UpdateStudentContactResp  (
     @SerializedName("RespText")
     override var respText: String = "",
     @SerializedName("MotelID")
-    var motelID: Int = 0
+    var motelID: Int? = null
 ): CTSVCap()

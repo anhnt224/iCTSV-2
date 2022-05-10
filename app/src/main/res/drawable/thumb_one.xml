@@ -10,6 +10,7 @@
             <solid android:color="@android:color/transparent" />
         </shape>
     </item>
+
     <item android:drawable="@drawable/image_motel_one"/>
 
 </layer-list>

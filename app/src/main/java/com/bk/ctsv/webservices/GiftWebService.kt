@@ -1,12 +1,10 @@
 package com.bk.ctsv.webservices
 
+import androidx.lifecycle.LiveData
 import com.bk.ctsv.models.res.MyCTSVCap
 import okhttp3.MultipartBody
 import retrofit2.Call
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface GiftWebService {
     @Multipart
@@ -18,4 +16,14 @@ interface GiftWebService {
         @Query("TypeImage") typeImage: Int,
         @Part image: MultipartBody.Part
     ): Call<MyCTSVCap>
+
+    @FormUrlEncoded
+    @POST("CTSV/DelImageMotel")
+    fun delImageMotel(
+        @Field("UserName") userName: String,
+        @Field("Token") tokenCode: String,
+        @Field("MotelID") id: Int,
+        @Field("TypeImg") type: Int
+    ): LiveData<ApiResponse<MyCTSVCap>>
+
 }

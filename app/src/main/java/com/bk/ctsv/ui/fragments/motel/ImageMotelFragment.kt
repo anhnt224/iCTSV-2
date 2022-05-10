@@ -1,23 +1,27 @@
 package com.bk.ctsv.ui.fragments.motel
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bk.ctsv.R
 import com.bk.ctsv.databinding.FragmentImageMotelBinding
@@ -38,11 +42,10 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import java.io.File
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
+
 
 class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Injectable {
 
@@ -75,17 +78,27 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
     private var imageSaveType : ArrayList<ImageMotel> = ArrayList()
 
 
+    @SuppressLint("FragmentBackPressedCallback")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         setupViewModel()
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_image_motel, container, false)
+        binding = DataBindingUtil.inflate(inflater, com.bk.ctsv.R.layout.fragment_image_motel, container, false)
         motelID = ImageMotelFragmentArgs.fromBundle(requireArguments()).motelID
+        Log.d("_IMAGEINSERT", "show status: ${motelID}")
         takePhotoHelper = TakePhotoHelper(requireContext())
         loadingDialog = initLoadingDialog()
         setupRecyclerView()
         binding.apply {
+
+            val callback: OnBackPressedCallback =
+                object : OnBackPressedCallback(true /* enabled by default */) {
+                    override fun handleOnBackPressed() {
+                        handleBack()
+                    }
+                }
+            requireActivity().onBackPressedDispatcher.addCallback(this@ImageMotelFragment, callback)
             if (AddNewAddressFragment.mAddress.type == "Nhà trọ"){
                 addImageButton.text = "Thêm ảnh nhà trọ"
             }else{
@@ -93,36 +106,32 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
             }
 
             addImageButton.setOnClickListener {
-                if (viewModel.checkAddImage.value == false){
-                    showToast("Đã tải lên số lượng ảnh tối đa")
-                }else{
-                    if(checkCameraPermission()){
-                        this@ImageMotelFragment.context?.showListDialog("Chọn cách lấy ảnh",null,
-                            arrayListOf("Chụp ảnh","Lấy từ thư viện")){
-                            if (it == 0){
-                                dispatchTakePictureIntent(REQUEST_TAKE_PHOTO_PLACE)
-                            }
-                            if (it == 1){
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                                    if (ContextCompat.checkSelfPermission(
-                                            this@ImageMotelFragment.requireContext(),
-                                            Manifest.permission.READ_EXTERNAL_STORAGE
-                                        ) ==
-                                        PackageManager.PERMISSION_DENIED){
-                                        //permission denied
-                                        val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-                                        //show popup to request runtime permission
-                                        requestPermissions(permissions, PERMISSION_CODE)
-                                    }
-                                    else{
-                                        //permission already granted
-                                        pickImageFromGallery();
-                                    }
+                if(checkCameraPermission()){
+                    this@ImageMotelFragment.context?.showListDialog("Chọn cách lấy ảnh",null,
+                        arrayListOf("Chụp ảnh","Lấy từ thư viện")){
+                        if (it == 0){
+                            dispatchTakePictureIntent(REQUEST_TAKE_PHOTO_PLACE)
+                        }
+                        if (it == 1){
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                if (ContextCompat.checkSelfPermission(
+                                        this@ImageMotelFragment.requireContext(),
+                                        Manifest.permission.READ_EXTERNAL_STORAGE
+                                    ) ==
+                                    PackageManager.PERMISSION_DENIED){
+                                    //permission denied
+                                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                                    //show popup to request runtime permission
+                                    requestPermissions(permissions, PERMISSION_CODE)
                                 }
                                 else{
-                                    //system OS is < Marshmallow
+                                    //permission already granted
                                     pickImageFromGallery();
                                 }
+                            }
+                            else{
+                                //system OS is < Marshmallow
+                                pickImageFromGallery();
                             }
                         }
                     }
@@ -134,6 +143,23 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
 
         subscribeUI()
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        return if (id == com.bk.ctsv.R.id.home) {
+            handleBack()
+            true
+        } else super.onOptionsItemSelected(item)
+    }
+    private fun handleBack(){
+        if (imageAdapter.images.isEmpty()){
+            requireActivity().onBackPressed()
+        }else{
+            Navigation.findNavController(requireView())
+                .navigate(ImageMotelFragmentDirections.actionImageMotelFragmentToListAddressFragment())
+        }
     }
 
     private fun setupRecyclerView(){
@@ -189,10 +215,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                     imageSaveType = ArrayList(it.filter { imageFilter ->
                         imageFilter.status == 2
                     })
-                    imageLst.forEach{
-                        Log.d("_IMAGEINSERT", "show status: ${it.status}")
-                    }
-                    checkAddImage.value = imageLst.size < 5
+                    binding.addImageButton.isEnabled = imageLst.size < 5
                     imageAdapter.images = imageLst
                     imageAdapter.notifyDataSetChanged()
                 }
@@ -338,7 +361,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
             imageMotel = image
            viewModel.deleteImage(sharedPrefsHelper.getUserName(),
                sharedPrefsHelper.getToken(),
-               image.idMotel,
+               motelID,
                image.type!!)
         })
     }

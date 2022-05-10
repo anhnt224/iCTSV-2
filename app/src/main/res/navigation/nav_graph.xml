@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/home2Fragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph"
+        android:label="Thêm thô"
+        app:startDestination="@id/home2Fragment">
 
     <fragment
             android:id="@+id/activityDetailByUserUnitFragment"
@@ -22,11 +24,11 @@
     <fragment
             android:id="@+id/userInfoFragment"
             android:name="com.bk.ctsv.ui.fragments.user.UserInfoFragment"
-            android:label="Thông tin tài khoản"/>
+            android:label="Thông tin tài khoản" />
     <fragment
             android:id="@+id/changePasswordFragment"
             android:name="com.bk.ctsv.ui.fragments.user.ChangePasswordFragment"
-            android:label="Đổi mật khẩu" >
+            android:label="Đổi mật khẩu">
         <action
                 android:id="@+id/action_changePasswordFragment_to_scheduleFragment"
                 app:destination="@id/scheduleFragment" />
@@ -51,7 +53,7 @@
     <fragment
             android:id="@+id/messageListFragment"
             android:name="com.bk.ctsv.ui.fragments.user.MessageListFragment"
-            android:label="Thông báo" >
+            android:label="Thông báo">
         <action
                 android:id="@+id/action_messageListFragment_to_activityDetailByUserUnitFragment"
                 app:destination="@id/activityDetailByUserUnitFragment" />
@@ -97,7 +99,7 @@
             android:id="@+id/helpFragment"
             android:name="com.bk.ctsv.ui.fragments.help.HelpFragment"
             android:label="Hỗ trợ "
-            tools:layout="@layout/help_fragment" >
+            tools:layout="@layout/help_fragment">
         <action
                 android:id="@+id/action_helpFragment_to_activityDetailByUserUnitFragment"
                 app:destination="@id/activityDetailByUserUnitFragment" />
@@ -128,6 +130,9 @@
         <action
                 android:id="@+id/action_accountFragment_to_runDashboardFragment"
                 app:destination="@id/runDashboardFragment" />
+        <action
+                android:id="@+id/action_accountFragment_to_imageMotelFragment"
+                app:destination="@id/imageMotelFragment" />
     </fragment>
     <fragment
             android:id="@+id/listActivityFragment"
@@ -141,7 +146,7 @@
     <fragment
             android:id="@+id/listScholarShipsFragment"
             android:name="com.bk.ctsv.ui.fragments.scholarShip.ListScholarShipsFragment"
-            android:label="Danh sách học bổng" >
+            android:label="Danh sách học bổng">
         <action
                 android:id="@+id/action_listScholarShipsFragment_to_listScholarShipAppliedFragment"
                 app:destination="@id/listScholarShipAppliedFragment" />
@@ -157,7 +162,7 @@
     <fragment
             android:id="@+id/scholarShipDetailFragment"
             android:name="com.bk.ctsv.ui.fragments.scholarShip.ScholarShipDetailFragment"
-            android:label="Thông tin học bổng" >
+            android:label="Thông tin học bổng">
         <argument
                 android:name="scholarShip"
                 app:argType="com.bk.ctsv.models.entity.ScholarShip" />
@@ -165,7 +170,7 @@
     <fragment
             android:id="@+id/listJobsFragment"
             android:name="com.bk.ctsv.ui.fragments.job.ListJobsFragment"
-            android:label="Danh sách việc làm" >
+            android:label="Danh sách việc làm">
         <action
                 android:id="@+id/action_listJobsFragment_to_jobDetailFragment"
                 app:destination="@id/jobDetailFragment" />
@@ -220,10 +225,13 @@
             android:id="@+id/addNewAddressFragment"
             android:name="com.bk.ctsv.ui.fragments.user.AddNewAddressFragment"
             android:label="Thêm thông tin nơi ở"
-            tools:layout="@layout/add_new_address_fragment" >
+            tools:layout="@layout/add_new_address_fragment">
         <action
                 android:id="@+id/action_addNewAddressFragment_to_pickLocationFragment"
                 app:destination="@id/pickLocationFragment" />
+        <action
+                android:id="@+id/action_addNewAddressFragment_to_addMotelInfoFragment"
+                app:destination="@id/addMotelInfoFragment" />
     </fragment>
     <fragment
             android:id="@+id/pickLocationFragment"
@@ -288,7 +296,7 @@
             android:id="@+id/trainingPointFragment"
             android:name="com.bk.ctsv.ui.fragments.criteria.TrainingPointFragment"
             android:label="Điểm rèn luyện"
-            tools:layout="@layout/training_point_fragment" >
+            tools:layout="@layout/training_point_fragment">
         <action
                 android:id="@+id/action_trainingPointFragment_to_criteriaFragment"
                 app:destination="@id/criteriaFragment" />
@@ -297,7 +305,7 @@
             android:id="@+id/criteriaFragment"
             android:name="com.bk.ctsv.ui.fragments.criteria.CriteriaFragment"
             android:label="Điểm rèn luyện"
-            tools:layout="@layout/criteria_fragment" >
+            tools:layout="@layout/criteria_fragment">
         <argument
                 android:name="semester"
                 app:argType="com.bk.ctsv.models.entity.Semester" />
@@ -309,7 +317,7 @@
             android:id="@+id/editFormFragment"
             android:name="com.bk.ctsv.ui.fragments.form.EditFormFragment"
             android:label="Chỉnh sửa giấy tờ"
-            tools:layout="@layout/edit_form_fragment" >
+            tools:layout="@layout/edit_form_fragment">
         <argument
                 android:name="questions"
                 app:argType="com.bk.ctsv.models.entity.Question[]" />
@@ -355,7 +363,7 @@
             android:id="@+id/runningFragment"
             android:name="com.bk.ctsv.ui.fragments.running.RunningFragment"
             android:label="Chạy bộ"
-            tools:layout="@layout/running_fragment" >
+            tools:layout="@layout/running_fragment">
         <action
                 android:id="@+id/action_runningFragment_to_runningDataFragment"
                 app:destination="@id/runningDataFragment" />
@@ -383,7 +391,7 @@
     <fragment
             android:id="@+id/home2Fragment"
             android:name="com.bk.ctsv.ui.fragments.Home2Fragment"
-            android:label="Home2Fragment" >
+            android:label="Home2Fragment">
         <action
                 android:id="@+id/action_home2Fragment_to_listActivityFragment"
                 app:destination="@id/listActivityFragment" />
@@ -488,7 +496,7 @@
     <fragment
             android:id="@+id/createGiftFragment"
             android:name="com.bk.ctsv.ui.fragments.gift.CreateGiftFragment"
-            android:label="Tạo quà tặng" >
+            android:label="Tạo quà tặng">
         <action
                 android:id="@+id/action_createGiftFragment_to_giftGivenFragment"
                 app:destination="@id/giftGivenFragment"
@@ -512,4 +520,26 @@
             android:name="com.bk.ctsv.ui.fragments.motel.SearchMotelFragment"
             android:label="search_motel_fragment"
             tools:layout="@layout/search_motel_fragment" />
+    <fragment
+            android:id="@+id/addMotelInfoFragment"
+            android:name="com.bk.ctsv.ui.fragments.motel.AddMotelInfoFragment"
+            android:label="Thêm thông tin nhà trọ">
+        <action
+                android:id="@+id/action_addMotelInfoFragment_to_imageMotelFragment"
+                app:destination="@id/imageMotelFragment" />
+        <action
+                android:id="@+id/action_addMotelInfoFragment_to_listAddressFragment"
+                app:destination="@id/listAddressFragment"
+                app:popUpTo="@id/listAddressFragment"
+                app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/imageMotelFragment"
+            android:name="com.bk.ctsv.ui.fragments.motel.ImageMotelFragment"
+            android:label="Ảnh nhà trọ"
+            tools:layout="@layout/fragment_image_motel" >
+        <argument
+                android:name="motelID"
+                app:argType="integer" />
+    </fragment>
 </navigation>

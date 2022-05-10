@@ -21,12 +21,12 @@ class AddNewAddressViewModel @Inject constructor(
     val mediatorLiveGetListCities = MediatorLiveData<Resource<List<String>>>()
     val mediatorLiveGetListDistricts = MediatorLiveData<Resource<List<String>>>()
     val mediatorLiveGetListWards = MediatorLiveData<Resource<List<String>>>()
-    val updateUserAddress = MediatorLiveData<Resource<UpdateStudentContactResp>>()
+    val updateUserAddress = MediatorLiveData<Resource<Int>>()
 
     private lateinit var liveDataGetListCities: LiveData<Resource<List<String>>>
     private lateinit var liveDataGetListDistricts: LiveData<Resource<List<String>>>
     private lateinit var liveDataGetListWards: LiveData<Resource<List<String>>>
-    private lateinit var liveDaraUpdateUserAddress: LiveData<Resource<UpdateStudentContactResp>>
+    private lateinit var liveDaraUpdateUserAddress: LiveData<Resource<Int>>
 
     init {
         address.value = UserAddress()
