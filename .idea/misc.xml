@@ -161,7 +161,8 @@
         <entry key="app/src/main/res/layout/gift_fragment.xml" value="0.5" />
         <entry key="app/src/main/res/layout/gift_given_fragment.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/gift_info_fragment.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/home2_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/home2_fragment.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_loading.xml" value="0.1408308004052685" />
         <entry key="app/src/main/res/layout/list_activities_of_student_fragment.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/list_activity_fragment.xml" value="0.4036458333333333" />
@@ -175,6 +176,7 @@
         <entry key="app/src/main/res/layout/list_item_gift_created.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/list_item_gift_register.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item_gift_type.xml" value="0.3890625" />
+        <entry key="app/src/main/res/layout/list_item_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_image_motel.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/list_item_received_gift.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/list_item_run_resublt.xml" value="0.22282608695652173" />

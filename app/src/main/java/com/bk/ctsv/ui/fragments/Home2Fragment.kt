@@ -17,7 +17,6 @@ import com.bk.ctsv.R
 import com.bk.ctsv.databinding.Home2FragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
-import com.bk.ctsv.extension.checkLocationPermission
 import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
@@ -94,21 +93,11 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener {
             sendGiftLayout.setOnClickListener {
                 navigateGivenGift()
             }
-            searchMotelLayout.setOnClickListener {
-                if(checkLocationPermission()){
-                    navigateToSearchMotel()
-                }
-            }
         }
         viewModel.getListSemester()
         setUpRecyclerView(binding)
         subscribeUi()
         return binding.root
-    }
-
-    private fun navigateToSearchMotel() {
-        val action = Home2FragmentDirections.actionHome2FragmentToSearchMotelFragment()
-        Navigation.findNavController(requireView()).navigate(action)
     }
 
     private fun setUpViewModel(){
