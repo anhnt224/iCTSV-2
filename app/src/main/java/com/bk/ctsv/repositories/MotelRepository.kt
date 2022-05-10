@@ -11,11 +11,13 @@ import com.bk.ctsv.models.entity.ImageMotel
 import com.bk.ctsv.models.res.MyCTSVCap
 import com.bk.ctsv.utilities.runOnIoThread
 import com.bk.ctsv.webservices.ApiResponse
+import com.bk.ctsv.webservices.GiftWebService
 import com.bk.ctsv.webservices.WebService
 import javax.inject.Inject
 
 class MotelRepository @Inject constructor(
     private val webservice: WebService,
+    private val giftWebService: GiftWebService,
     private val appExecutors: AppExecutors,
     private val sharedPrefsHelper: SharedPrefsHelper,
     private val imageMotelDao: ImageMotelDao
@@ -61,7 +63,7 @@ class MotelRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<MyCTSVCap>> {
-                return webservice.delImageMotel(userName, token, motelID, type)
+                return giftWebService.delImageMotel(userName, token, motelID, type)
             }
 
         }.asLiveData()

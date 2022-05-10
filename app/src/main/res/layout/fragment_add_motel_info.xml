@@ -107,6 +107,8 @@
                         android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/motelDescriptionTxt"
+                            android:maxLines="3"
+                            android:scrollbars="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -156,6 +158,11 @@
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonSave"
+                    style="@style/MainButton"
+                    android:insetBottom="0dp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"

@@ -45,13 +45,17 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:minHeight="30dp"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/agreeButton"
                 android:text="Thêm thông tin"
+                android:insetRight="0dp"
+                style="@style/MainButton"
+                android:insetTop="0dp"
+                android:insetLeft="0dp"
+                android:insetBottom="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="30dp"
                 android:layout_marginEnd="16dp"

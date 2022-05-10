@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -161,14 +162,13 @@ class AddMotelInfoFragment : Fragment(), Injectable {
                 if(checkResource(it) && addMotel){
                     if (it.data != null){
                         addMotel = false
-                        val motelID = it.data?.motelID
-                        showToast("Thêm địa chỉ thành công")
+                        Log.d("_ADDRESS", "${it.data}")
                         if (mAddress.type == "KTX Pháp Vân" || mAddress.type == "KTX Bách Khoa"){
                             showDialogMotel("Thêm ảnh chụp KTX",
                                 "Để có đánh giá khách quan hơn về thông tin ktx bạn cung cấp, iCTSV cần thêm ảnh chụp ktx này. Bạn có sẵn sàng thêm ảnh ktx?",
                                 R.drawable.ic_add_image_motel,
                                 "Thêm ảnh",
-                                {navigateToImageFragment(motelID)},
+                                {navigateToImageFragment(it.data)},
                                 "Bỏ qua",
                                 {   showToast("Thêm địa chỉ thành công")
                                     navigateListAddressFragment()}
@@ -178,7 +178,7 @@ class AddMotelInfoFragment : Fragment(), Injectable {
                                 "Để có đánh giá khách quan hơn về thông tin nhà trọ bạn cung cấp, iCTSV cần thêm ảnh chụp nhà trọ này. Bạn có sẵn sàng thêm ảnh phòng trọ?",
                                 R.drawable.ic_add_image_motel,
                                 "Thêm ảnh",
-                                {navigateToImageFragment(motelID)},
+                                {navigateToImageFragment(it.data)},
                                 "Bỏ qua",
                                 {   showToast("Thêm địa chỉ thành công")
                                     navigateListAddressFragment()}
