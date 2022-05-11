@@ -393,7 +393,14 @@ class UserCheckInActivityInfoFragment : FragmentLocationBase(), OnMapReadyCallba
         val db = FirebaseDatabase.getInstance()
         val ref = db.getReference("fakeGPS").child(userName)
 
-        val fakeGPSInfo = FakeGPSInfo(studentName = fullName, eventName = AName, lat = lat, lng = lng, time = Date().convertDateToStringDateTime(), email = email)
+        val fakeGPSInfo = FakeGPSInfo(
+            studentName = fullName,
+            eventName = AName,
+            lat = lat,
+            lng = lng,
+            time = Date().convertDateToStringDateTime(),
+            email = email
+        )
         ref.push().setValue(fakeGPSInfo)
 
     }
