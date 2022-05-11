@@ -180,7 +180,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
             showToast("Vui lòng nhập đầy đủ thông tin")
         } else {
             if (mAddress.isValidEmail()) {
-                if (mAddress.type == "Nhà trọ") {
+                if (mAddress.type == types[2]) {
                     showDialogMotel("Chia sẻ đánh giá về nhà trọ",
                         "Bạn có sẵn sàng chia sẻ những thông tin, đánh giá về nhà trọ bạn đang ở cho iCTSV. Chúng tôi sử dụng thông tin này để .... ",
                         R.drawable.ic_share_motel,
@@ -189,7 +189,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
                         "Bỏ qua",
                         { viewModel.updateUserAddress(mAddress) })
                 }
-                if (mAddress.type == "KTX Bách Khoa" || mAddress.type == "KTX Pháp Vân") {
+                if (mAddress.type == types[0] || mAddress.type == types[1]) {
                     showDialogMotel("Chia sẻ đánh giá về ktx",
                         "Bạn có sẵn sàng chia sẻ những thông tin, đánh giá về ktx bạn đang ở cho iCTSV. Chúng tôi sử dụng thông tin này để .... ",
                         R.drawable.ic_share_motel,
@@ -198,7 +198,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
                         "Bỏ qua",
                         { viewModel.updateUserAddress(mAddress) })
                 }
-                if (mAddress.type == "Nhà riêng"){
+                if (mAddress.type == types[3]){
                     viewModel.updateUserAddress(mAddress)
                 }
             }else {
