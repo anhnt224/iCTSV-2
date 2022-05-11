@@ -63,4 +63,9 @@
         <value>Chúc bạn một ngày tốt lành</value>
     </entry>
 
+    <entry>
+        <key>type_motel</key>
+        <value>Nhà chung chủ, Nhà không chung chủ, Chung cư mini, Chung cư, Khác</value>
+    </entry>
+
 </defaultsMap>

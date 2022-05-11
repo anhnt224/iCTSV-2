@@ -1,19 +1,13 @@
 package com.bk.ctsv.ui.fragments.motel
 
 import android.content.DialogInterface
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.SeekBar
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +26,11 @@ import com.bk.ctsv.models.entity.UserAddress
 import com.bk.ctsv.ui.fragments.user.AddNewAddressFragment
 import com.bk.ctsv.ui.viewmodels.motel.AddMotelInfoViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_add_motel_info.*
 import javax.inject.Inject
 
@@ -46,8 +45,10 @@ class AddMotelInfoFragment : Fragment(), Injectable {
     private lateinit var binding: FragmentAddMotelInfoBinding
     private var mAddress = UserAddress()
     private var motelInfo = Motel()
-    private var typeMotel: List<String> = listOf("Nhà chung chủ", "Nhà không chung chủ", "Khác")
+    private val remoteConfig = Firebase.remoteConfig
+    private var typeMotel: List<String> = listOf()
     private var addMotel = false
+    private var types: List<String> = listOf("KTX Bách Khoa", "KTX Pháp Vân", "Nhà trọ", "Nhà riêng")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,16 +57,18 @@ class AddMotelInfoFragment : Fragment(), Injectable {
         setupViewModel()
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_motel_info, container, false)
         mAddress = AddNewAddressFragment.mAddress
+        typeMotel = remoteConfig.getString("type_motel").split(",")
+
         binding.apply {
             buttonSave.setOnClickListener {
                 saveAddress()
             }
-            if (mAddress.type == "KTX Bách Khoa" ||  mAddress.type == "KTX Pháp Vân"){
+            if (mAddress.type == types[0] ||  mAddress.type == types[1]){
                 motelTypeTxt.setText(mAddress.type)
             }
             motelAddressTxt.setText(mAddress.address)
             binding.motelTypeLayout.editText?.setOnClickListener {
-                if (mAddress.type == "Nhà trọ"){
+                if (mAddress.type == types[2]){
                     showAlertPickType()
                 }
             }
@@ -137,7 +140,7 @@ class AddMotelInfoFragment : Fragment(), Injectable {
                     if (it.data != null){
                         addMotel = false
                         Log.d("_ADDRESS", "${it.data}")
-                        if (mAddress.type == "KTX Pháp Vân" || mAddress.type == "KTX Bách Khoa"){
+                        if (mAddress.type == types[0] || mAddress.type == types[1]){
                             showDialogMotel("Thêm ảnh chụp KTX",
                                 "Để có đánh giá khách quan hơn về thông tin ktx bạn cung cấp, iCTSV cần thêm ảnh chụp ktx này. Bạn có sẵn sàng thêm ảnh ktx?",
                                 R.drawable.ic_add_image_motel,
