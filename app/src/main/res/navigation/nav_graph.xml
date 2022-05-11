@@ -546,5 +546,8 @@
                 app:destination="@id/listAddressFragment"
                 app:popUpTo="@id/listAddressFragment"
                 app:popUpToInclusive="true" />
+        <action
+                android:id="@+id/action_imageMotelFragment_to_addMotelInfoFragment"
+                app:destination="@id/addMotelInfoFragment" />
     </fragment>
 </navigation>

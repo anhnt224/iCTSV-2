@@ -15,15 +15,8 @@ class ImageMotelViewModel @Inject constructor(
 ) : ViewModel() {
     val deleteImageMotel = MediatorLiveData<Resource<MyCTSVCap>>()
     private lateinit var liveDataDeleteImage: LiveData<Resource<MyCTSVCap>>
-    val checkAddImage = MediatorLiveData<Boolean>()
-    init {
-        checkAddImage.value = true
-    }
-
 
     fun getAllImage(idMotel: Int) = imageMotelRepository.getAllImageMotel(idMotel)
-
-    fun getImageMotelByID(idMotel: Int, type: Int) = imageMotelRepository.getImageMotelByID(idMotel, type)
 
     fun deleteImage(imageMotel: ImageMotel) = imageMotelRepository.deleteImageMotel(imageMotel)
 

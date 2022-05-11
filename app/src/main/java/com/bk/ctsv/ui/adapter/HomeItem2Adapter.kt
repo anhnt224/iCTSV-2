@@ -2,6 +2,7 @@ package com.bk.ctsv.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bk.ctsv.R
@@ -12,7 +13,7 @@ class HomeItem2Adapter (var items: List<HomeItem>, private val onItemClickListen
     class ViewHolder(val binding: ListItemHomeBinding, private val onItemClickListener: OnItemClickListener): RecyclerView.ViewHolder(binding.root){
         fun bindView(item: HomeItem, position: Int) {
             binding.apply {
-                image.setImageDrawable(itemView.resources.getDrawable(item.icon))
+                image.setImageDrawable(AppCompatResources.getDrawable(itemView.context, item.icon))
                 title.text = item.title
                 root.setOnClickListener {
                     onItemClickListener.onClick2(position)

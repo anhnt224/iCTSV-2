@@ -86,7 +86,6 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
         setupViewModel()
         binding = DataBindingUtil.inflate(inflater, com.bk.ctsv.R.layout.fragment_image_motel, container, false)
         motelID = ImageMotelFragmentArgs.fromBundle(requireArguments()).motelID
-        Log.d("_IMAGEINSERT", "show status: ${motelID}")
         takePhotoHelper = TakePhotoHelper(requireContext())
         loadingDialog = initLoadingDialog()
         setupRecyclerView()
@@ -107,7 +106,9 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
 
             addImageButton.setOnClickListener {
                 if(checkCameraPermission()){
-                    this@ImageMotelFragment.context?.showListDialog("Chọn cách lấy ảnh",null,
+                    this@ImageMotelFragment.context?.showListDialog(
+                        "Chọn cách lấy ảnh",
+                        null,
                         arrayListOf("Chụp ảnh","Lấy từ thư viện")){
                         if (it == 0){
                             dispatchTakePictureIntent(REQUEST_TAKE_PHOTO_PLACE)
@@ -137,8 +138,6 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                     }
                 }
             }
-
-
         }
 
         subscribeUI()
@@ -229,7 +228,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
             when (requestCode) {
                 REQUEST_TAKE_PHOTO_PLACE -> {
                     photoPathCompress = context?.let { takePhotoHelper.compressImageBeforeSend(it,mCurrentPhotoPath,fileName) }
-                 insertImageMotel()
+                    insertImageMotel()
                 }
                 IMAGE_PICK_CODE ->{
                     try {
@@ -250,22 +249,46 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
         for (i in 1 ..5){
             if (imageSaveType.isNotEmpty()){
                 val imageDelete = imageSaveType[0]
-                imageMotel= ImageMotel(idMotel = motelID, type =  imageDelete.type , status = 1, image = mCurrentPhotoPath, file = photoPathCompress , time = getTime())
+                imageMotel= ImageMotel(
+                    idMotel = motelID,
+                    type =  imageDelete.type ,
+                    status = 1,
+                    image = mCurrentPhotoPath,
+                    file = photoPathCompress ,
+                    time = getTime())
                 viewModel.deleteImage(imageDelete)
                 imageSaveType.remove(imageDelete)
                 break
             }else{
                 if (imageAdapter.images.size < i ){
-                    imageMotel= ImageMotel(idMotel = motelID, type =  i , image = mCurrentPhotoPath, status = 1, file = photoPathCompress , time = getTime())
+                    imageMotel= ImageMotel(
+                        idMotel = motelID,
+                        type =  i ,
+                        image = mCurrentPhotoPath,
+                        status = 1,
+                        file = photoPathCompress ,
+                        time = getTime())
                     break
                 }
                 if (imageAdapter.images.size == i){
-                    imageMotel= ImageMotel(idMotel = motelID, type =  i +1, image = mCurrentPhotoPath, status = 1,file = photoPathCompress , time = getTime())
+                    imageMotel= ImageMotel(
+                        idMotel = motelID,
+                        type =  i +1,
+                        image = mCurrentPhotoPath,
+                        status = 1,
+                        file = photoPathCompress ,
+                        time = getTime())
                     break
                 }
                 if (imageAdapter.images.size > i){
                     if (imageAdapter.images[i].type == null){
-                        imageMotel= ImageMotel(idMotel = motelID, type =  i , image = mCurrentPhotoPath, status = 1, file = photoPathCompress , time = getTime())
+                        imageMotel= ImageMotel(
+                            idMotel = motelID,
+                            type =  i ,
+                            image = mCurrentPhotoPath,
+                            status = 1,
+                            file = photoPathCompress ,
+                            time = getTime())
                         break
                     }else continue
                 }
@@ -313,9 +336,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                     isImageUploading = false
                     hideLoadingDialog()
                     if (uploadImageResp != null){
-                        if (uploadImageResp.respCode == 0){
-
-                        }else{
+                        if (uploadImageResp.respCode != 0){
                             image.status = 0
                             imageAdapter.notifyDataSetChanged()
                             viewModel.insertImage(image)
@@ -359,10 +380,10 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
         showDialogClickImage( handleSeeButton = {seePictureZoom(image)},
         handleDeleteButton = {
             imageMotel = image
-           viewModel.deleteImage(sharedPrefsHelper.getUserName(),
-               sharedPrefsHelper.getToken(),
-               motelID,
-               image.type!!)
+            viewModel.deleteImage(sharedPrefsHelper.getUserName(),
+                sharedPrefsHelper.getToken(),
+                motelID,
+                image.type!!)
         })
     }
 
