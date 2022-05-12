@@ -128,38 +128,45 @@ class AddMotelInfoFragment : Fragment(), Injectable {
         motelInfo.rate = binding.seekBar.progress
         if (motelInfo.managerName.isEmpty() || motelInfo.managerContact.isEmpty() || motelInfo.description.isEmpty()){
             showToast("Vui lòng nhập đầy đủ thông tin")
-        }else{
-            viewModel.updateUserAddress(mAddress, motelInfo)
+            return
         }
+        if (motelInfo.managerContact.length != 10){
+            showToast("Số điện thoại chưa chính xác")
+            return
+        }
+        viewModel.updateUserAddress(mAddress, motelInfo)
     }
 
     private fun subscribeUI(){
         with(viewModel){
             updateUserAddress.observe(viewLifecycleOwner){
+                binding.status = it.status
                 if(checkResource(it) && addMotel){
                     if (it.data != null){
                         addMotel = false
                         Log.d("_ADDRESS", "${it.data}")
-                        if (mAddress.type == types[0] || mAddress.type == types[1]){
-                            showDialogMotel("Thêm ảnh chụp KTX",
-                                "Để có đánh giá khách quan hơn về thông tin ktx bạn cung cấp, iCTSV cần thêm ảnh chụp ktx này. Bạn có sẵn sàng thêm ảnh ktx?",
-                                R.drawable.ic_add_image_motel,
-                                "Thêm ảnh",
-                                {navigateToImageFragment(it.data)},
-                                "Bỏ qua",
-                                {   showToast("Thêm địa chỉ thành công")
-                                    navigateListAddressFragment()}
-                            )
-                        }else{
-                            showDialogMotel("Thêm ảnh chụp nhà trọ",
-                                "Để có đánh giá khách quan hơn về thông tin nhà trọ bạn cung cấp, iCTSV cần thêm ảnh chụp nhà trọ này. Bạn có sẵn sàng thêm ảnh phòng trọ?",
-                                R.drawable.ic_add_image_motel,
-                                "Thêm ảnh",
-                                {navigateToImageFragment(it.data)},
-                                "Bỏ qua",
-                                {   showToast("Thêm địa chỉ thành công")
-                                    navigateListAddressFragment()}
-                            )
+                        if (it.data.motelID != null && it.data.motelID != 0){
+                            if (mAddress.type == types[0] || mAddress.type == types[1]){
+                                showDialogMotel("Thêm ảnh chụp KTX",
+                                    "Để có đánh giá khách quan hơn về thông tin ktx bạn cung cấp, iCTSV cần thêm ảnh chụp ktx này. Bạn có sẵn sàng thêm ảnh ktx?",
+                                    R.drawable.ic_add_image_motel,
+                                    "Thêm ảnh",
+                                    {navigateToImageFragment(it.data.motelID!!)},
+                                    "Bỏ qua",
+                                    {   showToast("Thêm địa chỉ thành công")
+                                        navigateListAddressFragment()}
+                                )
+                            }else{
+                                showDialogMotel("Thêm ảnh chụp nhà trọ",
+                                    "Để có đánh giá khách quan hơn về thông tin nhà trọ bạn cung cấp, iCTSV cần thêm ảnh chụp nhà trọ này. Bạn có sẵn sàng thêm ảnh phòng trọ?",
+                                    R.drawable.ic_add_image_motel,
+                                    "Thêm ảnh",
+                                    {navigateToImageFragment(it.data.motelID!!)},
+                                    "Bỏ qua",
+                                    {   showToast("Thêm địa chỉ thành công")
+                                        navigateListAddressFragment()}
+                                )
+                            }
                         }
                     }
                 }

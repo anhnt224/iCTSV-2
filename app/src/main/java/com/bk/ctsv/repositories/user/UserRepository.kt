@@ -42,7 +42,7 @@ class UserRepository @Inject constructor(
     private var citiesLiveData = MediatorLiveData<List<String>>()
     private var districtsLiveData = MediatorLiveData<List<String>>()
     private var wardsLiveData = MediatorLiveData<List<String>>()
-    private var updateUserAddressLiveData = MediatorLiveData<Int>()
+    private var updateUserAddressLiveData = MediatorLiveData<UpdateStudentContactResp>()
     private var getListUserAddress = MediatorLiveData<List<UserAddress>>()
     private var deleteAddress = MediatorLiveData<MyCTSVCap>()
 
@@ -55,7 +55,7 @@ class UserRepository @Inject constructor(
         citiesLiveData.value = listOf()
         districtsLiveData.value = listOf()
         wardsLiveData.value = listOf()
-        updateUserAddressLiveData.value = 0
+        updateUserAddressLiveData.value = UpdateStudentContactResp()
         getListUserAddress.value = listOf()
         deleteAddress.value = MyCTSVCap()
     }
@@ -482,13 +482,13 @@ class UserRepository @Inject constructor(
         }.asLiveData()
     }
 
-    fun updateUserAddress(userAddress: UserAddress, motelInfo: Motel?, shouldFetch: Boolean = true): LiveData<Resource<Int>>{
-        return object: NetworkBoundResource<Int, UpdateStudentContactResp>(appExecutors){
-            override fun shouldFetch(data: Int?): Boolean {
+    fun updateUserAddress(userAddress: UserAddress, motelInfo: Motel?, shouldFetch: Boolean = true): LiveData<Resource<UpdateStudentContactResp>>{
+        return object: NetworkBoundResource<UpdateStudentContactResp, UpdateStudentContactResp>(appExecutors){
+            override fun shouldFetch(data: UpdateStudentContactResp?): Boolean {
                 return data == null || shouldFetch
             }
 
-            override fun loadFromDb(): LiveData<Int> {
+            override fun loadFromDb(): LiveData<UpdateStudentContactResp> {
                 return updateUserAddressLiveData
             }
 
@@ -498,7 +498,7 @@ class UserRepository @Inject constructor(
             }
 
             override fun saveCallResult(item: UpdateStudentContactResp) {
-                Thread(Runnable { updateUserAddressLiveData.postValue(item.motelID) }).start()
+                Thread(Runnable { updateUserAddressLiveData.postValue(item) }).start()
             }
 
         }.asLiveData()
