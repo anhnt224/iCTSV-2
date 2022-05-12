@@ -14,8 +14,8 @@ class AddMotelInfoViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    val updateUserAddress = MediatorLiveData<Resource<Int>>()
-    private lateinit var liveDaraUpdateUserAddress: LiveData<Resource<Int>>
+    val updateUserAddress = MediatorLiveData<Resource<UpdateStudentContactResp>>()
+    private lateinit var liveDaraUpdateUserAddress: LiveData<Resource<UpdateStudentContactResp>>
 
     fun updateUserAddress(userAddress: UserAddress, motelInfo: Motel){
         liveDaraUpdateUserAddress = userRepository.updateUserAddress(userAddress, motelInfo)

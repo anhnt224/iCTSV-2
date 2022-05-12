@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.bk.ctsv.common.Resource
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.models.entity.UserAddress
+import com.bk.ctsv.models.req.UpdateUserAddressReq
 import com.bk.ctsv.models.res.MyCTSVCap
 import com.bk.ctsv.models.res.UpdateStudentContactResp
 import com.bk.ctsv.repositories.user.UserRepository
@@ -21,12 +22,12 @@ class AddNewAddressViewModel @Inject constructor(
     val mediatorLiveGetListCities = MediatorLiveData<Resource<List<String>>>()
     val mediatorLiveGetListDistricts = MediatorLiveData<Resource<List<String>>>()
     val mediatorLiveGetListWards = MediatorLiveData<Resource<List<String>>>()
-    val updateUserAddress = MediatorLiveData<Resource<Int>>()
+    val updateUserAddress = MediatorLiveData<Resource<UpdateStudentContactResp>>()
 
     private lateinit var liveDataGetListCities: LiveData<Resource<List<String>>>
     private lateinit var liveDataGetListDistricts: LiveData<Resource<List<String>>>
     private lateinit var liveDataGetListWards: LiveData<Resource<List<String>>>
-    private lateinit var liveDaraUpdateUserAddress: LiveData<Resource<Int>>
+    private lateinit var liveDaraUpdateUserAddress: LiveData<Resource<UpdateStudentContactResp>>
 
     init {
         address.value = UserAddress()

@@ -135,8 +135,10 @@ class AddNewAddressFragment : Fragment(), Injectable {
             updateUserAddress.observe(viewLifecycleOwner){
                 binding.resource = it
                 if(checkResource(it)){
-                   showToast("Thêm địa chỉ thành công")
-                   Navigation.findNavController(requireView()).navigateUp()
+                    if (it.data != null && it.data.respCode == 0){
+                        showToast("Thêm địa chỉ thành công")
+                        Navigation.findNavController(requireView()).navigateUp()
+                    }
                 }
             }
         }
