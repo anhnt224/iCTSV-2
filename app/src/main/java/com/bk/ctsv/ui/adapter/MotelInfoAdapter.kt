@@ -13,11 +13,16 @@ class MotelInfoAdapter(
     private val onItemMotelInfoClickListener: OnItemMotelInfoClickListener
     ): RecyclerView.Adapter<MotelInfoAdapter.ViewHolder>() {
     class ViewHolder(
-            val binding: ListItemMotelInfoBinding,
-            val onItemMotelInfoClickListener: OnItemMotelInfoClickListener
+        val binding: ListItemMotelInfoBinding,
+        private val onItemMotelInfoClickListener: OnItemMotelInfoClickListener
         ): RecyclerView.ViewHolder(binding.root){
         fun bindView(motel: Motel){
             binding.motel = motel
+            binding.apply {
+                cardViewOpenMotelItem.setOnClickListener {
+                    onItemMotelInfoClickListener.navigateToMotelInfoDetailFragment(motel)
+                }
+            }
         }
     }
 
@@ -43,6 +48,6 @@ class MotelInfoAdapter(
     }
 
     interface OnItemMotelInfoClickListener{
-        fun navigateToMotelInfoDetailFragment()
+        fun navigateToMotelInfoDetailFragment(motel: Motel)
     }
 }

@@ -520,5 +520,9 @@
             android:id="@+id/motelInfoFragment"
             android:name="com.bk.ctsv.ui.fragments.motel.MotelInfoFragment"
             android:label="Thông tin nhà trọ"
-            tools:layout="@layout/motel_info_fragment" />
+            tools:layout="@layout/motel_info_fragment">
+        <argument
+                android:name="motel"
+                app:argType="com.bk.ctsv.models.entity.Motel" />
+    </fragment>
 </navigation>

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+    <import type="com.bk.ctsv.common.Status"/>
+    <variable
+            name="getActivityStatus"
+            type="Status" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -77,7 +83,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:background="@drawable/border_view_info_motel">
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
@@ -86,31 +92,46 @@
                         android:orientation="horizontal"
                         android:background="@drawable/border_view_motel_info">
                     <ImageView
+                            android:id="@+id/imageMotel1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:src="@drawable/ic_baseline_motel_24"
-                            tools:ignore="ContentDescription" />
+                            tools:ignore="ContentDescription"/>
                     <TextView
                             android:id="@+id/textViewNumberOfListMotel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imageMotel1"
                             android:text="Có 0 nhà trọ gần bạn"
                             android:textSize="16sp"
+                            android:layout_marginStart="8dp"
                             android:textColor="@color/colorWhite"/>
 
                     <androidx.cardview.widget.CardView
                             android:layout_width="2dp"
                             android:layout_height="48dp"
-                            android:layout_marginStart="91dp"
                             android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
                             android:layout_marginEnd="8dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/lineDistance1"
                             android:backgroundTint="@color/colorWhite" />
                     <LinearLayout
+                            android:id="@+id/lineDistance1"
                             android:layout_width="65dp"
                             android:layout_height="36dp"
                             android:layout_gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             android:orientation="vertical">
                         <TextView
                                 android:layout_width="match_parent"
@@ -120,27 +141,40 @@
                                 android:textColor="@color/colorWhite"
                                 android:textSize="12sp"/>
                         <TextView
+                                android:id="@+id/showSelectDistance1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="3km"
+                                android:text="1km"
                                 android:textSize="16sp"
                                 android:textColor="@color/colorWhite"
                                 android:drawableRight="@drawable/down_key_motel_info"/>
                     </LinearLayout>
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ProgressBar
+                        android:id="@+id/loading_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        goneUnless="@{getActivityStatus == Status.LOADING}"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewMotelInfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="55dp"/>
+                        android:layout_marginTop="58dp"
+                        android:layout_marginBottom="100dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/viewShowMotelInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,31 +184,46 @@
                 android:orientation="horizontal"
                 android:background="@drawable/border_view_motel_info">
             <ImageView
+                    android:id="@+id/imageMotel2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:src="@drawable/ic_baseline_motel_24"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription"/>
             <TextView
                     android:id="@+id/textViewSizeOfListMotel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageMotel2"
                     android:text="Có 0 nhà trọ gần bạn"
                     android:textSize="16sp"
+                    android:layout_marginStart="8dp"
                     android:textColor="@color/colorWhite"/>
 
             <androidx.cardview.widget.CardView
                     android:layout_width="2dp"
                     android:layout_height="48dp"
-                    android:layout_marginStart="91dp"
                     android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/lineDistance2"
                     android:backgroundTint="@color/colorWhite" />
             <LinearLayout
+                    android:id="@+id/lineDistance2"
                     android:layout_width="65dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:orientation="vertical">
                 <TextView
                         android:layout_width="match_parent"
@@ -184,14 +233,15 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="12sp"/>
                 <TextView
+                        android:id="@+id/showSelectDistance2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3km"
+                        android:text="1km"
                         android:textSize="16sp"
                         android:textColor="@color/colorWhite"
                         android:drawableRight="@drawable/down_key_motel_info"/>
             </LinearLayout>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -97,11 +97,14 @@
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_job_apply.xml" value="0.20833333333333334" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_loading.xml" value="0.20833333333333334" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_message.xml" value="0.20833333333333334" />
+        <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_motel_image.xml" value="0.20416666666666666" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_motel_info.xml" value="0.25" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_note.xml" value="0.20833333333333334" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_received_gift.xml" value="0.20833333333333334" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_run_result.xml" value="0.20833333333333334" />
-        <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/motel_info_fragment.xml" value="0.33" />
+        <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/loading_action_state.xml" value="0.36666666666666664" />
+        <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/loading_state.xml" value="0.36666666666666664" />
+        <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/motel_info_fragment.xml" value="0.22" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/pick_location_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/search_motel_fragment.xml" value="0.33" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/menu/menu_list_address.xml" value="0.36666666666666664" />

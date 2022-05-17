@@ -23,6 +23,7 @@ import android.os.Bundle
 
 import com.bk.ctsv.App
 import dagger.android.AndroidInjection
+import dagger.android.ContributesAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 

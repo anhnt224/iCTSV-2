@@ -702,4 +702,12 @@ interface WebService {
         @Field("Distance") distance: Int
     ): LiveData<ApiResponse<CTSVSearchStudentMotelRes>>
 
+    @FormUrlEncoded
+    @POST("UploadFile/CTSV/GetMotelFiles")
+    fun getImageMotel(
+        @Field("UserName") userName: String,
+        @Field("Token") token: String,
+        @Field("MotelID") motelID: Int
+    ): LiveData<ApiResponse<CTSVMotelImageRes>>
+
 }

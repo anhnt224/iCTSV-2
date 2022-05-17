@@ -6,7 +6,7 @@ import java.io.Serializable
 
 class Motel(
     @SerializedName("MotelID")
-    var id: String = "",
+    var id: Int = 0,
     @SerializedName("Type")
     var type: String = "",
     @SerializedName("ManagerPhone")

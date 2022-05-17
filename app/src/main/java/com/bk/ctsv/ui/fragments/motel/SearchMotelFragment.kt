@@ -1,6 +1,8 @@
 package com.bk.ctsv.ui.fragments.motel
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
@@ -10,12 +12,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bk.ctsv.R
 import com.bk.ctsv.databinding.SearchMotelFragmentBinding
@@ -31,6 +35,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -53,6 +58,7 @@ class SearchMotelFragment : Fragment(),
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val LOG = "_SearchMotelFragment"
+    private var radius = 1000.0
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -75,8 +81,15 @@ class SearchMotelFragment : Fragment(),
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity().baseContext)
 
         subscribeUI()
+
         setUpRecyclerViewMotelInfo()
 
+        setAndShowBottomBar()
+
+        return binding.root
+    }
+
+    private fun setAndShowBottomBar() {
         binding.apply {
             constraintMotelInfoShow.visibility = View.GONE
             viewShowMotelInfo.setOnClickListener {
@@ -85,16 +98,93 @@ class SearchMotelFragment : Fragment(),
                 val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.bottom_to_top)
                 binding.viewListMotelInfo.startAnimation(anim)
             }
+
             constraintMotelInfoShow.setOnClickListener {
                 val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.top_to_bottom)
                 binding.viewListMotelInfo.startAnimation(anim)
-                constraintMotelInfoShow.visibility = View.GONE
-                viewShowMotelInfo.visibility = View.VISIBLE
+                anim.setAnimationListener(object : Animation.AnimationListener {
+                    @SuppressLint("ShowToast")
+                    override fun onAnimationStart(animation: Animation?) {
+                        Toast.makeText(requireContext(), "Toast", Toast.LENGTH_SHORT)
+                    }
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        constraintMotelInfoShow.visibility = View.GONE
+                        viewShowMotelInfo.visibility = View.VISIBLE
+                    }
+
+                    @SuppressLint("ShowToast")
+                    override fun onAnimationRepeat(animation: Animation?) {
+                        Toast.makeText(requireContext(), "Toast", Toast.LENGTH_SHORT)
+                    }
+
+                })
+
             }
+
+
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setUpDistanceDialog(requireContext: Context, latLng: LatLng) {
+        val builder = AlertDialog.Builder(requireContext)
+        builder.setTitle("Chọn bán kính")
+
+        val distance = arrayOf("1 km", "2km", "3km", "5km")
+        builder.setItems(distance){ dialog, which ->
+            when (which){
+                0 -> {
+                    radius = 1000.0
+                    binding.showSelectDistance1.text = "1km"
+                    binding.showSelectDistance2.text = "1km"
+                    googleMap.clear()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(latLng))
+                        .setIcon(BitmapDescriptorFactory
+                            .fromResource(R.drawable.icon_my_position))
+                    drawCircle(latLng, radius)
+                }
+                1 -> {
+                    radius = 2000.0
+                    binding.showSelectDistance1.text = "2km"
+                    binding.showSelectDistance2.text = "2km"
+                    googleMap.clear()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(latLng))
+                        .setIcon(BitmapDescriptorFactory
+                            .fromResource(R.drawable.icon_my_position))
+                    drawCircle(latLng, radius)
+                }
+                2 -> {
+                    radius = 3000.0
+                    binding.showSelectDistance1.text = "3km"
+                    binding.showSelectDistance2.text = "3km"
+                    googleMap.clear()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(latLng))
+                        .setIcon(BitmapDescriptorFactory
+                            .fromResource(R.drawable.icon_my_position))
+                    drawCircle(latLng, radius)
+                }
+                3 -> {
+                    radius = 5000.0
+                    binding.showSelectDistance1.text = "5km"
+                    binding.showSelectDistance2.text = "5km"
+                    googleMap.clear()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(latLng))
+                        .setIcon(BitmapDescriptorFactory
+                            .fromResource(R.drawable.icon_my_position))
+                    drawCircle(latLng, radius)
+                }
+            }
+            viewModel.getListMotel(latLng.latitude, latLng.longitude, radius.toInt())
+            subscribeUI()
         }
 
-
-        return binding.root
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun setUpRecyclerViewMotelInfo() {
@@ -110,8 +200,9 @@ class SearchMotelFragment : Fragment(),
         viewModel = ViewModelProvider(this, factory).get(SearchMotelViewModel::class.java)
     }
 
-    override fun navigateToMotelInfoDetailFragment() {
-        TODO("Not yet implemented")
+    override fun navigateToMotelInfoDetailFragment(motel: Motel) {
+        val action = SearchMotelFragmentDirections.actionSearchMotelFragmentToMotelInfoFragment(motel)
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -122,18 +213,30 @@ class SearchMotelFragment : Fragment(),
 
         googleMap.setOnMapClickListener {latLng ->
             googleMap.clear()
-            //AddNewAddressFragment.newLatLng = latLng
             fillLocationInfo(latLng)
-            drawCircle(latLng)
-            googleMap.addMarker(MarkerOptions().position(latLng))
-            viewModel.getListMotel(latLng.latitude, latLng.longitude, 1000)
+            drawCircle(latLng, radius)
+            googleMap.addMarker(MarkerOptions()
+                .position(latLng))
+                .setIcon(BitmapDescriptorFactory
+                    .fromResource(R.drawable.icon_my_position))
+            val rd = radius.toInt()
+            viewModel.getListMotel(latLng.latitude, latLng.longitude, rd)
+            binding.apply {
+                showSelectDistance1.setOnClickListener {
+                    setUpDistanceDialog(requireContext(), latLng)
+                }
+
+                showSelectDistance2.setOnClickListener {
+                    setUpDistanceDialog(requireContext(), latLng)
+                }
+            }
         }
 
-        if (
+        /*if (
             binding.map.findViewById<View>("1".toInt()) != null
         ) {
             // Get the button view
-            /*val locationButton = (binding.map.findViewById<View>("1".toInt())
+            *//*val locationButton = (binding.map.findViewById<View>("1".toInt())
                 .parent as View).findViewById<View>("2".toInt())
             // and next place it, on bottom right (as Google Maps app)
             val layoutParams =
@@ -141,16 +244,25 @@ class SearchMotelFragment : Fragment(),
             // position on right bottom
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
-            layoutParams.setMargins(0, 0, 30, 30)*/
+            layoutParams.setMargins(0, 0, 30, 30)*//*
+        }*/
+    }
+
+    private fun addMotelMarker(motelList: List<Motel>, ggMap: GoogleMap) {
+        for (motel in motelList){
+            val latLng = LatLng(motel.latitude, motel.longitude)
+            ggMap.addMarker(MarkerOptions()
+                .position(latLng))
+                .setIcon(BitmapDescriptorFactory
+                    .fromResource(R.drawable.icon_motel))
         }
     }
 
-    private fun drawCircle(latLng: LatLng) {
-
+    private fun drawCircle(latLng: LatLng, rad: Double) {
         googleMap.addCircle(
             CircleOptions()
                 .center(latLng)
-                .radius(1000.0)
+                .radius(rad)
                 .strokeWidth(2f)
                 .strokeColor(Color.argb(100, 183, 32, 39))
                 .fillColor(Color.argb(15, 183, 32, 39))
@@ -163,17 +275,11 @@ class SearchMotelFragment : Fragment(),
             if (it != null){
                 lastLocation = it
                 val currentLatLong = LatLng(it.latitude, it.longitude)
-                //placeMarkerOnMap(currentLatLong)
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
             }
         }
     }
 
-   /* private fun placeMarkerOnMap(currentLatLong: LatLng) {
-        val markerOptions = MarkerOptions().position(currentLatLong)
-        markerOptions.title("$currentLatLong")
-        googleMap.addMarker(markerOptions)
-    }*/
 
     @SuppressLint("SetTextI18n")
     private fun fillLocationInfo(latLng: LatLng){
@@ -186,7 +292,6 @@ class SearchMotelFragment : Fragment(),
             binding.textViewAddress
                 .setText(String.
                 format("* Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude))
-            //locationText.text = String.format("* Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude)
         }
 
         val addresses: List<Address>
@@ -200,26 +305,27 @@ class SearchMotelFragment : Fragment(),
             if(addresses.isNotEmpty()){
                 val address: String = addresses[0]
                     .getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                /*binding.textViewAddress.isEnabled = false
-                binding.textViewAddress.setText("$address")*/
             }
         }catch (e: Exception){
 
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     fun subscribeUI(){
         with(viewModel){
             motelList.observe(viewLifecycleOwner){
-                Log.v(LOG, "${it.data}")
                 if (checkResource(it) && it.data != null){
+                    binding.getActivityStatus = it.status
                     motelInfoAdapter.listMotel = it.data
+                    addMotelMarker(it.data, googleMap)
                     binding.apply {
                         textViewSizeOfListMotel.text = "Có ${it.data.size} nhà trọ ở gần bạn"
                         textViewNumberOfListMotel.text = "Có ${it.data.size} nhà trọ ở gần bạn"
                     }
+                    motelInfoAdapter.notifyDataSetChanged()
                 }
+                Log.v("_SearchMotelFragment", "${motelInfoAdapter.listMotel}")
 
             }
         }

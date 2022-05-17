@@ -1,13 +1,13 @@
 package com.bk.ctsv.models.res
 
-import com.bk.ctsv.models.entity.Motel
+import com.bk.ctsv.models.entity.ImageMotel
 import com.google.gson.annotations.SerializedName
 
-class CTSVSearchStudentMotelRes(
+class CTSVMotelImageRes(
     @SerializedName("RespText")
     override val respText: String = "",
     @SerializedName("RespCode")
     override val respCode: Int = -1,
-    @SerializedName("StudentMotelLst")
-    val studentMotelList: List<Motel> = listOf()
-): CTSVCap()
+    @SerializedName("ImageLst")
+    val imageList: List<ImageMotel> = listOf()
+    ): CTSVCap()

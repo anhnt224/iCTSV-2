@@ -1,107 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.fragments.motel.MotelInfoFragment">
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".ui.fragments.motel.MotelInfoFragment">
 
-    <TextView
-            android:id="@+id/textViewAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Số 1 Đại Cồ Việt"
-            android:layout_gravity="center"
-            android:textColor="@color/green"
-            android:textSize="20sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            tools:ignore="HardcodedText" />
-    <RatingBar
-            android:id="@+id/RatingMotel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.AppCompat.RatingBar.Indicator"
-            tools:ignore="InvalidId" />
-    <TextView
-            android:id="@+id/textViewHostMotel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quản lí: Nguyễn Văn A"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/colorBlack"
-            tools:ignore="HardcodedText" />
-    <TextView
-            android:id="@+id/textViewContactMotel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quản lí: Nguyễn Văn A"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/colorBlack"
-            tools:ignore="HardcodedText" />
-    <TextView
-            android:id="@+id/textViewAddressDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quản lí: Nguyễn Văn A"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="28dp"
-            android:textSize="16sp"
-            android:textColor="@color/colorBlack"
-            tools:ignore="HardcodedText" />
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mô tả về nhà trọ"
-            android:textStyle="bold"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/colorBlack"
-            tools:ignore="HardcodedText" />
-    <TextView
-            android:id="@+id/textViewDescriptionMotel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quản lí: Nguyễn Văn A"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quản lí: "
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+            <TextView
+                    android:id="@+id/textViewHostMotel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nguyễn Văn A"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    tools:ignore="HardcodedText" />
+        </LinearLayout>
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Đánh giá về nhà trọ"
-            android:textStyle="bold"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/colorBlack"
-            tools:ignore="HardcodedText"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Liên hệ: "
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    tools:ignore="HardcodedText"/>
+            <TextView
+                    android:id="@+id/textViewContactMotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nguyễn Văn A"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    tools:ignore="HardcodedText" />
+        </LinearLayout>
 
-    <TextView
-            android:id="@+id/textViewComment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quản lí: Nguyễn Văn A"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText"/>
-</LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="28dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ: "
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    tools:ignore="HardcodedText"/>
+            <TextView
+                    android:id="@+id/textViewAddressDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nguyễn Văn A"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    tools:ignore="HardcodedText"/>
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mô tả về nhà trọ"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                tools:ignore="HardcodedText" />
+        <TextView
+                android:id="@+id/textViewDescriptionMotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quản lí: Nguyễn Văn A"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đánh giá về nhà trọ"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                tools:ignore="HardcodedText"/>
+
+        <RatingBar
+                android:id="@+id/RatingMotel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:progressBackgroundTint="@color/colorWhite"
+                android:progressTint="@color/pending"
+                tools:ignore="InvalidId,UnusedAttribute" />
+
+        <TextView
+                android:id="@+id/textViewComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quản lí: Nguyễn Văn A"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewListImageMotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="100dp"/>
+    </LinearLayout>
+</layout>
