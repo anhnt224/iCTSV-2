@@ -5,14 +5,15 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.bk.ctsv.common.Resource
 import com.bk.ctsv.models.entity.ImageMotel
+import com.bk.ctsv.models.entity.ImageMotel2
 import com.bk.ctsv.repositories.MotelRepository
 import javax.inject.Inject
 
 class MotelInfoViewModel @Inject constructor(
     private val motelRepository: MotelRepository
 ) : ViewModel() {
-    val motelImageList = MediatorLiveData<Resource<List<ImageMotel>>>()
-    private lateinit var motelImageListLiveData: LiveData<Resource<List<ImageMotel>>>
+    val motelImageList = MediatorLiveData<Resource<List<ImageMotel2>>>()
+    private lateinit var motelImageListLiveData: LiveData<Resource<List<ImageMotel2>>>
 
     fun getListMotel(motelID: Int){
         motelImageListLiveData = motelRepository.getMotelListImage(motelID)

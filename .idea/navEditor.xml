@@ -551,11 +551,6 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_imageMotelFragment_to_addMotelInfoFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_imageMotelFragment_to_listAddressFragment">
                               <value>
                                 <LayoutPositions />
@@ -790,8 +785,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-274" />
-                            <option name="y" value="934" />
+                            <option name="x" value="-331" />
+                            <option name="y" value="836" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -992,7 +987,7 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-676" />
+                            <option name="x" value="-546" />
                             <option name="y" value="832" />
                           </Point>
                         </option>

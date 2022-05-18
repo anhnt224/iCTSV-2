@@ -721,5 +721,22 @@ interface WebService {
         @Field("TypeImage") type: Int
     ): LiveData<ApiResponse<MyCTSVCap>>
 
+    @FormUrlEncoded
+    @POST("StudentMotel/SearchStudentMotel")
+    fun searchStudentMotel(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") tokenCode: String,
+        @Field("Latitude") latitude: Double,
+        @Field("Longitude") longitude: Double,
+        @Field("Distance") distance: Int
+    ): LiveData<ApiResponse<CTSVSearchStudentMotelRes>>
+
+    @FormUrlEncoded
+    @POST("UploadFile/CTSV/GetMotelFiles")
+    fun getImageMotel(
+        @Field("UserName") userName: String,
+        @Field("Token") token: String,
+        @Field("MotelID") motelID: Int
+    ): LiveData<ApiResponse<CTSVMotelImageRes>>
 
 }

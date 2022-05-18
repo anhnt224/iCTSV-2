@@ -20,6 +20,7 @@ import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.models.entity.ImageMotel
+import com.bk.ctsv.models.entity.ImageMotel2
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.ui.adapter.user.MotelImageAdapter
 import com.bk.ctsv.ui.viewmodels.motel.MotelInfoViewModel
@@ -35,7 +36,7 @@ class MotelInfoFragment : Fragment()
     private lateinit var binding: MotelInfoFragmentBinding
     private lateinit var motel: Motel
     private lateinit var motelImageAdapter: MotelImageAdapter
-    private var motelImageList = listOf<ImageMotel>()
+    private var motelImageList = listOf<ImageMotel2>()
     private val snapHelper: SnapHelper = LinearSnapHelper()
 
     companion object {

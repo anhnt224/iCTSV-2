@@ -6,17 +6,17 @@
                 name="motel"
                 type="Motel"/>
     </data>
-    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/cardViewOpenMotelItem"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_marginTop="16dp"
+            android:background="@drawable/border_motel_item"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="12dp"
-            tools:ignore="NamespaceTypo">
+            android:layout_marginEnd="16dp">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -102,12 +102,12 @@
                     android:layout_marginStart="38dp"
                     android:layout_marginEnd="12dp"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:text="@{motel.description}"/>
 
         </LinearLayout>
 
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </layout>

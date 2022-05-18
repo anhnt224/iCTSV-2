@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bk.ctsv.R
 import com.bk.ctsv.databinding.Home2FragmentBinding
@@ -21,7 +22,11 @@ import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.Activity
+import com.bk.ctsv.models.entity.HomeItem
 import com.bk.ctsv.models.entity.Semester
+import com.bk.ctsv.ui.adapter.HomeItem2Adapter
+import com.bk.ctsv.ui.adapter.HomeItem3Adapter
+import com.bk.ctsv.ui.adapter.HomeItemAdapter
 import com.bk.ctsv.ui.adapter.activity.EventAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.ktx.Firebase
@@ -30,7 +35,9 @@ import kotlinx.android.synthetic.main.home2_fragment.*
 import java.lang.Exception
 import javax.inject.Inject
 
-class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener {
+class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
+    HomeItemAdapter.OnItemClickListener, HomeItem2Adapter.OnItemClickListener,
+    HomeItem3Adapter.OnItemClickListener {
 
     private lateinit var viewModel: Home2ViewModel
     @Inject
@@ -41,6 +48,30 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener {
     private lateinit var eventAdapter: EventAdapter
     private val remoteConfig = Firebase.remoteConfig
     private var semesters: List<Semester> = listOf()
+    private lateinit var homeAdapter1: HomeItemAdapter
+    private lateinit var homeAdapter2: HomeItem2Adapter
+    private lateinit var homeAdapter3: HomeItem3Adapter
+    private var homeItems1 = arrayListOf<HomeItem>(
+        HomeItem("Chấm điểm rèn luyện", R.drawable.ic_mark),
+        HomeItem("Kết quả rèn luyện", R.drawable.ic_score),
+        HomeItem("Hoạt động ngoại khóa", R.drawable.ic_activity),
+        HomeItem("Sổ tay", R.drawable.ic_notebook),
+        HomeItem("Dịch vụ công", R.drawable.ic_service),
+        HomeItem("Học bổng", R.drawable.ic_scholarship)
+    )
+    private var homeItems2 = arrayListOf<HomeItem>(
+        HomeItem("Việc làm", R.drawable.ic_job),
+        HomeItem("Việc làm thêm", R.drawable.ic_job)
+    )
+
+    private var homeItems3 = arrayListOf<HomeItem>(
+        HomeItem("10.000 bước", R.drawable.ic_running),
+        HomeItem("Sổ địa chỉ", R.drawable.ic_home_location),
+        HomeItem("Tìm trọ", R.drawable.ic_motel),
+        HomeItem("Quà tặng", R.drawable.ic_gift),
+        HomeItem("Cho/tặng quà", R.drawable.ic_receive_gift)
+    )
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -57,42 +88,42 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener {
         binding.apply {
             titleTextView.text = "Chào ${sharedPrefsHelper.getFullName()}"
             titleWelcome.text = remoteConfig.getString("titleWelcome2")
-            markLayout.setOnClickListener {
-                chooseSemester()
-            }
-            criteriaLayout.setOnClickListener {
-                navigateToCriteriaFragment()
-            }
-            activityLayout.setOnClickListener {
-                navigateToActivityFragment()
-            }
-            serviceLayout.setOnClickListener {
-                navigateToListFormFragment()
-            }
-            jobLayout.setOnClickListener {
-                navigateToListJobsFragment()
-            }
-            scholarShipLayout.setOnClickListener {
-                navigateToListScholarShips()
-            }
-            runLayout.setOnClickListener {
-                navigateToRunDashboard()
-            }
-            addressLayout.setOnClickListener {
-                navigateToListAddressFragment()
-            }
-            noteLayout.setOnClickListener {
-                openLink(remoteConfig.getString("note_link"))
-            }
+//            markLayout.setOnClickListener {
+//                chooseSemester()
+//            }
+//            criteriaLayout.setOnClickListener {
+//                navigateToCriteriaFragment()
+//            }
+//            activityLayout.setOnClickListener {
+//                navigateToActivityFragment()
+//            }
+//            serviceLayout.setOnClickListener {
+//                navigateToListFormFragment()
+//            }
+//            jobLayout.setOnClickListener {
+//                navigateToListJobsFragment()
+//            }
+//            scholarShipLayout.setOnClickListener {
+//                navigateToListScholarShips()
+//            }
+//            runLayout.setOnClickListener {
+//                navigateToRunDashboard()
+//            }
+//            addressLayout.setOnClickListener {
+//                navigateToListAddressFragment()
+//            }
+//            noteLayout.setOnClickListener {
+//                openLink(remoteConfig.getString("note_link"))
+//            }
             retryButton.setOnClickListener {
                 viewModel.getPublicActivities()
             }
-            giftLayout.setOnClickListener {
-                navigateToGift()
-            }
-            sendGiftLayout.setOnClickListener {
-                navigateGivenGift()
-            }
+//            giftLayout.setOnClickListener {
+//                navigateToGift()
+//            }
+//            sendGiftLayout.setOnClickListener {
+//                navigateGivenGift()
+//            }
         }
         viewModel.getListSemester()
         setUpRecyclerView(binding)
@@ -114,6 +145,25 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener {
                 false
             )
         }
+
+        homeAdapter1 = HomeItemAdapter(homeItems1, this)
+        binding.recyclerView1.apply {
+            adapter = homeAdapter1
+            layoutManager = GridLayoutManager(context, 3)
+        }
+
+        homeAdapter2 = HomeItem2Adapter(homeItems2, this)
+        binding.recyclerView2.apply {
+            adapter = homeAdapter2
+            layoutManager = GridLayoutManager(context, 3)
+        }
+
+        homeAdapter3 = HomeItem3Adapter(homeItems3, this)
+        binding.recyclerView3.apply {
+            adapter = homeAdapter3
+            layoutManager = GridLayoutManager(context, 3)
+        }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -155,6 +205,10 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener {
         Navigation.findNavController(requireView()).navigate(action)
     }
 
+    private fun navigateToSearchFragment(){
+        val action = Home2FragmentDirections.actionHome2FragmentToSearchMotelFragment()
+        Navigation.findNavController(requireView()).navigate(action)
+    }
     private fun navigateToCriteriaFragment(){
         val action = Home2FragmentDirections.actionHome2FragmentToTrainingPointFragment()
         Navigation.findNavController(requireView()).navigate(action)
@@ -211,5 +265,32 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener {
     override fun onItemClick(activity: Activity) {
         val action = Home2FragmentDirections.actionHome2FragmentToActivityDetailByUserUnitFragment(activity.id)
         Navigation.findNavController(requireView()).navigate(action)
+    }
+
+    override fun onClick1(position: Int) {
+        when (position){
+            0 -> chooseSemester()
+            1 -> navigateToCriteriaFragment()
+            2 -> navigateToActivityFragment()
+            3 -> openLink(remoteConfig.getString("note_link"))
+            4 -> navigateToListFormFragment()
+            5 -> navigateToListScholarShips()
+        }
+    }
+
+    override fun onClick2(position: Int) {
+        when (position){
+            0 -> navigateToListJobsFragment()
+        }
+    }
+
+    override fun onClick3(position: Int) {
+        when (position){
+            0 -> navigateToRunDashboard()
+            1 -> navigateToListAddressFragment()
+            2 -> navigateToSearchFragment()
+            3 -> navigateToGift()
+            4 -> navigateGivenGift()
+        }
     }
 }

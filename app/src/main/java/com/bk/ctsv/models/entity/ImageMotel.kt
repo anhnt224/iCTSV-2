@@ -1,16 +1,8 @@
 package com.bk.ctsv.models.entity
 
-<<<<<<< HEAD
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class ImageMotel(
-    @SerializedName("UrlImg")
-    val urlImage: String,
-    @SerializedName("TypeImg")
-    val type: Int
-): Serializable
-=======
 import androidx.room.Entity
 
 @Entity(tableName = "ImageMotel",primaryKeys = ["idMotel", "time"])
@@ -31,4 +23,9 @@ class ImageMotel (
 //                }
 //        }
 }
->>>>>>> 09ca11f (new: thêm thông tin nhà trọ, thêm ảnh nhà trọ)
+class ImageMotel2(
+    @SerializedName("UrlImg")
+    val urlImage: String,
+    @SerializedName("TypeImg")
+    val type: Int
+): Serializable

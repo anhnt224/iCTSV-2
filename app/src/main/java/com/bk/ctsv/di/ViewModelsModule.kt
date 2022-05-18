@@ -20,6 +20,7 @@ import com.bk.ctsv.teacher.viewmodel.job.TListJobsViewModel
 import com.bk.ctsv.teacher.viewmodel.scholarShip.TListScholarShipsViewModel
 import com.bk.ctsv.teacher.viewmodel.student.*
 import com.bk.ctsv.ui.fragments.Home2ViewModel
+import com.bk.ctsv.ui.fragments.motel.MotelInfoFragment
 import com.bk.ctsv.ui.viewmodels.gift.ReceiverAddressViewModel
 import com.bk.ctsv.ui.fragments.running.RunViewModel
 import com.bk.ctsv.ui.viewmodels.running.RunDashboardViewModel
@@ -33,6 +34,9 @@ import com.bk.ctsv.ui.viewmodels.gift.*
 import com.bk.ctsv.ui.viewmodels.job.ApplyJobViewModel
 import com.bk.ctsv.ui.viewmodels.job.JobDetailViewModel
 import com.bk.ctsv.ui.viewmodels.job.ListJobsViewModel
+import com.bk.ctsv.ui.viewmodels.motel.AddMotelInfoViewModel
+import com.bk.ctsv.ui.viewmodels.motel.ImageMotelViewModel
+import com.bk.ctsv.ui.viewmodels.motel.MotelInfoViewModel
 import com.bk.ctsv.ui.viewmodels.motel.SearchMotelViewModel
 import com.bk.ctsv.ui.viewmodels.running.RunningDataViewModel
 import com.bk.ctsv.ui.viewmodels.running.RunningViewModel
@@ -422,4 +426,19 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(SearchMotelViewModel::class)
     abstract fun contributeSearchMotelViewModel(viewModel: SearchMotelViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddMotelInfoViewModel::class)
+    abstract fun contributeAddMotelInfoViewModel(viewModel: AddMotelInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ImageMotelViewModel::class)
+    abstract fun contributeImageMotelViewModel(viewModel: ImageMotelViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MotelInfoViewModel::class)
+    abstract fun contributeMotelInfoViewModel(viewModel: MotelInfoViewModel): ViewModel
 }

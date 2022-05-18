@@ -2,13 +2,14 @@
 <layout>
     
     <data>
-        <import type="com.bk.ctsv.models.entity.ImageMotel"/>
+        <import type="com.bk.ctsv.models.entity.ImageMotel2"/>
         <variable
                 name="imageMotel"
-                type="ImageMotel" />
+                type="ImageMotel2" />
     </data>
     
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">

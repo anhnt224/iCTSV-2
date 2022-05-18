@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bk.ctsv.R
 import com.bk.ctsv.databinding.ListItemMotelImageBinding
 import com.bk.ctsv.models.entity.ImageMotel
+import com.bk.ctsv.models.entity.ImageMotel2
 import com.squareup.picasso.Picasso
 
 class MotelImageAdapter(
-    var motelImageList: List<ImageMotel>
+    var motelImageList: List<ImageMotel2>
 ): RecyclerView.Adapter<MotelImageAdapter.ViewHolder>() {
     class ViewHolder(
         private val binding: ListItemMotelImageBinding
         ): RecyclerView.ViewHolder(binding.root){
-        fun bindView(motelImage: ImageMotel) {
+        fun bindView(motelImage: ImageMotel2) {
             binding.apply {
                 imageMotel = motelImage
                 val url = "https://ctsv.hust.edu.vn/api-t/${motelImage.urlImage}"
