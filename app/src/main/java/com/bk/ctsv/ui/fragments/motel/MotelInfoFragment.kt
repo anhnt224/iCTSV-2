@@ -1,7 +1,6 @@
 package com.bk.ctsv.ui.fragments.motel
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -19,12 +18,10 @@ import com.bk.ctsv.databinding.MotelInfoFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
-import com.bk.ctsv.models.entity.ImageMotel
 import com.bk.ctsv.models.entity.ImageMotel2
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.ui.adapter.user.MotelImageAdapter
 import com.bk.ctsv.ui.viewmodels.motel.MotelInfoViewModel
-import com.bumptech.glide.Glide
 import javax.inject.Inject
 
 class MotelInfoFragment : Fragment()

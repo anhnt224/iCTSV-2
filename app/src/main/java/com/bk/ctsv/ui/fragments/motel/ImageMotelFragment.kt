@@ -23,7 +23,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bk.ctsv.R
 import com.bk.ctsv.databinding.FragmentImageMotelBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
@@ -50,9 +49,8 @@ import javax.inject.Inject
 class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Injectable {
 
     companion object {
-        fun newInstance() = ImageMotelFragment()
-        private val IMAGE_PICK_CODE = 1000
-        private val PERMISSION_CODE = 1001
+        private const val IMAGE_PICK_CODE = 1000
+        private const val PERMISSION_CODE = 1001
     }
 
     @Inject
@@ -78,7 +76,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
     private var imageSaveType : ArrayList<ImageMotel> = ArrayList()
 
 
-    @SuppressLint("FragmentBackPressedCallback")
+    @SuppressLint("FragmentBackPressedCallback", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -109,7 +107,8 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                     this@ImageMotelFragment.context?.showListDialog(
                         "Chọn cách lấy ảnh",
                         null,
-                        arrayListOf("Chụp ảnh","Lấy từ thư viện")){
+                        arrayListOf("Chụp ảnh","Lấy từ thư viện")
+                    ){
                         if (it == 0){
                             dispatchTakePictureIntent(REQUEST_TAKE_PHOTO_PLACE)
                         }
@@ -198,6 +197,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun subscribeUI(){
         with(viewModel){
             deleteImageMotel.observe(viewLifecycleOwner){
@@ -238,7 +238,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                     }catch (e: Exception){
                         isImageUploading = false
                         hideLoadingDialog()
-                        showToast("Không lấy được ảnh, ${e}")
+                        showToast("Không lấy được ảnh")
                     }
                 }
             }
@@ -267,7 +267,8 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                         image = mCurrentPhotoPath,
                         status = 1,
                         file = photoPathCompress ,
-                        time = getTime())
+                        time = getTime()
+                    )
                     break
                 }
                 if (imageAdapter.images.size == i){
@@ -277,7 +278,8 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                         image = mCurrentPhotoPath,
                         status = 1,
                         file = photoPathCompress ,
-                        time = getTime())
+                        time = getTime()
+                    )
                     break
                 }
                 if (imageAdapter.images.size > i){
@@ -288,7 +290,8 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                             image = mCurrentPhotoPath,
                             status = 1,
                             file = photoPathCompress ,
-                            time = getTime())
+                            time = getTime()
+                        )
                         break
                     }else continue
                 }
@@ -303,7 +306,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
 
     private fun getRealPathFromURI(contentUri: Uri):String {
         var path:String? = null
-        val proj = arrayOf<String>(MediaStore.MediaColumns.DATA)
+        val proj = arrayOf(MediaStore.MediaColumns.DATA)
         val cursor = requireContext().contentResolver.query(contentUri, proj, null, null, null)
         if(cursor != null){
             if (cursor.moveToFirst())
@@ -319,8 +322,8 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
     private fun uploadFile(image: ImageMotel) {
         showLoadingDialog()
         isImageUploading = true
-        if (image.file!!.isNotEmpty()){
-            val file =  File(image.file)
+        if (!image.file.isNullOrEmpty()){
+            val file =  File(image.file!!)
             val  fileReqBody = RequestBody.create(MediaType.parse("image/*"), file)
             val  multipartBody = MultipartBody.Part.createFormData("file",image.file,fileReqBody)
             viewModel.insertImage(image)
@@ -331,6 +334,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                 tokenCode = sharedPrefsHelper.getToken(),
                 image = multipartBody
             ).enqueue(object :  retrofit2.Callback<CTSVAssignUserActivityRes> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(call: Call<CTSVAssignUserActivityRes>, response: Response<CTSVAssignUserActivityRes>) {
                     val uploadImageResp = response.body()
                     isImageUploading = false
@@ -348,6 +352,7 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                     }
                 }
 
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onFailure(call: Call<CTSVAssignUserActivityRes>, t: Throwable) {
                     showToast("Lỗi kết nối")
                     isImageUploading = false

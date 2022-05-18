@@ -27,10 +27,7 @@ import com.bk.ctsv.ui.fragments.user.AddNewAddressFragment
 import com.bk.ctsv.ui.viewmodels.motel.AddMotelInfoViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_add_motel_info.*
 import javax.inject.Inject
 

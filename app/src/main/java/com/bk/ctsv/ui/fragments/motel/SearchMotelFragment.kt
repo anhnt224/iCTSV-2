@@ -3,12 +3,9 @@ package com.bk.ctsv.ui.fragments.motel
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
-import android.location.Address
-import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -17,8 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -43,7 +39,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import java.util.*
 import javax.inject.Inject
 
 class SearchMotelFragment : Fragment(),
@@ -61,7 +56,6 @@ class SearchMotelFragment : Fragment(),
     private lateinit var googleMap: GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val LOG = "_SearchMotelFragment"
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -98,27 +92,6 @@ class SearchMotelFragment : Fragment(),
         return binding.root
     }
 
-    private fun fetchLocation(){
-        val task = fusedLocationClient.lastLocation
-        if ((ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION))
-            != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED ){
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
-            return
-        }
-        task.addOnSuccessListener {
-            if (it != null){
-                lastLocation = it
-                if (viewModel.latLng.value != null){
-                    viewModel.latLng.value = LatLng(it.latitude, it.longitude)
-                    val currentLatLong = LatLng(it.latitude, it.longitude)
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
-                }
-            }
-        }
-    }
-
     private fun setAndShowBottomBar() {
         binding.apply {
             constraintMotelInfoShow.visibility = View.GONE
@@ -133,21 +106,14 @@ class SearchMotelFragment : Fragment(),
                 val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.top_to_bottom)
                 binding.viewListMotelInfo.startAnimation(anim)
                 anim.setAnimationListener(object : Animation.AnimationListener {
-                    @SuppressLint("ShowToast")
-                    override fun onAnimationStart(animation: Animation?) {
-                        Toast.makeText(requireContext(), "Toast", Toast.LENGTH_SHORT)
-                    }
+                    override fun onAnimationStart(animation: Animation?) {}
 
                     override fun onAnimationEnd(animation: Animation?) {
                         constraintMotelInfoShow.visibility = View.GONE
                         viewShowMotelInfo.visibility = View.VISIBLE
                     }
 
-                    @SuppressLint("ShowToast")
-                    override fun onAnimationRepeat(animation: Animation?) {
-                        Toast.makeText(requireContext(), "Toast", Toast.LENGTH_SHORT)
-                    }
-
+                    override fun onAnimationRepeat(animation: Animation?) {}
                 })
 
             }
@@ -162,7 +128,7 @@ class SearchMotelFragment : Fragment(),
         builder.setTitle("Chọn bán kính")
 
         val distance = arrayOf("1 km", "2km", "3km", "5km")
-        builder.setItems(distance){ dialog, which ->
+        builder.setItems(distance){ _, which ->
             when (which){
                 0 -> {
                     viewModel.setRadius(1000.0)
@@ -199,8 +165,10 @@ class SearchMotelFragment : Fragment(),
 
     private fun pinNowLocation(map: GoogleMap, latLng: LatLng, radius: Double){
         map.clear()
-        val bitmapdraw = resources.getDrawable(R.drawable.ic_pin_location) as BitmapDrawable
-        val b = bitmapdraw.bitmap
+        val bitmapDraw = ContextCompat.getDrawable(
+            requireContext(), R.drawable.ic_pin_location
+        ) as BitmapDrawable
+        val b = bitmapDraw.bitmap
         val smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false)
         googleMap.addMarker(MarkerOptions()
             .position(latLng))
@@ -234,8 +202,11 @@ class SearchMotelFragment : Fragment(),
         setUpMap()
       //  viewModel.latLng.value = LatLng( p0.myLocation.latitude, p0.myLocation.longitude)
 
-        val bitmapdraw = resources.getDrawable(R.drawable.ic_pin_location) as BitmapDrawable
-        val b = bitmapdraw.bitmap
+        val bitmapDraw = ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.ic_pin_location
+        ) as BitmapDrawable
+        val b = bitmapDraw.bitmap
         val smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false)
         googleMap.setOnMapClickListener {latLng ->
             googleMap.clear()
@@ -248,21 +219,6 @@ class SearchMotelFragment : Fragment(),
             val rd = viewModel.getRadius().toInt()
             viewModel.getListMotel(latLng.latitude, latLng.longitude, rd)
         }
-
-        /*if (
-            binding.map.findViewById<View>("1".toInt()) != null
-        ) {
-            // Get the button view
-            *//*val locationButton = (binding.map.findViewById<View>("1".toInt())
-                .parent as View).findViewById<View>("2".toInt())
-            // and next place it, on bottom right (as Google Maps app)
-            val layoutParams =
-                locationButton.layoutParams as RelativeLayout.LayoutParams
-            // position on right bottom
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
-            layoutParams.setMargins(0, 0, 30, 30)*//*
-        }*/
     }
 
     private fun addMotelMarker(motelList: List<Motel>, ggMap: GoogleMap) {
@@ -311,22 +267,6 @@ class SearchMotelFragment : Fragment(),
             binding.textViewAddress
                 .setText(String.
                 format("* Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude))
-        }
-
-        val addresses: List<Address>
-        val geocoder: Geocoder = Geocoder(requireContext(), Locale.getDefault())
-        try {
-            addresses = geocoder.getFromLocation(
-                latLng.latitude,
-                latLng.longitude,
-                1
-            )
-            if(addresses.isNotEmpty()){
-                val address: String = addresses[0]
-                    .getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-            }
-        }catch (e: Exception){
-
         }
     }
 
