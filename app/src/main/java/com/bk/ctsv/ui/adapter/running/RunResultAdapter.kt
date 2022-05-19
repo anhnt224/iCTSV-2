@@ -12,6 +12,9 @@ class RunResultAdapter(var runResults: List<RunResult>): RecyclerView.Adapter<Ru
     inner class ViewHolder(val binding: ListItemRunResultBinding): RecyclerView.ViewHolder(binding.root){
         fun bindView(runResult: RunResult){
             binding.runResult = runResult
+            if (runResult.getPaceToSetResult()){
+
+            }
         }
     }
 

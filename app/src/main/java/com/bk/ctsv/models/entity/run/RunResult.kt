@@ -82,4 +82,12 @@ class RunResult(
         }
     }
 
+    fun getPaceToSetResult(): Boolean{
+        val s = (timeEnd.time - timeStart.time) / 1000
+        val pace = (s / (distance / 1000)).toInt()
+        if (pace in 240..840){
+            return true
+        }
+        return false
+    }
 }
