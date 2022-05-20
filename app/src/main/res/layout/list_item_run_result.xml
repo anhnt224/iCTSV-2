@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
@@ -8,11 +8,12 @@
                 type="com.bk.ctsv.models.entity.run.RunResult" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardViewRunResult"
+                android:id="@+id/viewRunResult"
                 app:cardCornerRadius="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +39,8 @@
                         android:layout_marginTop="8dp"
                         android:src="@drawable/run"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
 
                 <LinearLayout
                         android:id="@+id/linearLayout14"

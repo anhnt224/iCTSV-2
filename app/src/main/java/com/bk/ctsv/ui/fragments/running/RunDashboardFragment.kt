@@ -27,6 +27,7 @@ import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.*
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.run.RunResult
+import com.bk.ctsv.ui.adapter.running.ListRunResultAdapter
 import com.bk.ctsv.ui.adapter.running.RunResultAdapter
 import com.bk.ctsv.ui.viewmodels.running.ChartType
 import com.bk.ctsv.ui.viewmodels.running.RunDashboardViewModel
@@ -55,7 +56,7 @@ class RunDashboardFragment : Fragment(), Injectable {
     lateinit var factory: ViewModelFactory
     @Inject
     lateinit var sharedPrefsHelper: SharedPrefsHelper
-    private lateinit var runResultAdapter: RunResultAdapter
+    private lateinit var runResultAdapter: ListRunResultAdapter
     private var chartType: ChartType = ChartType.BY_WEEK
 
     override fun onCreateView(
@@ -129,7 +130,10 @@ class RunDashboardFragment : Fragment(), Injectable {
 
             recentlyRunResults.observe(viewLifecycleOwner){resource ->
                 if(checkResource(resource)  && resource.data != null){
-                    runResultAdapter.runResults = resource.data
+                    var runResultsMap = resource.data.groupBy {
+                        it.timeStart.toDateStr()
+                    }
+                    runResultAdapter.runResultMap = runResultsMap
                     runResultAdapter.notifyDataSetChanged()
                 }
             }
@@ -141,7 +145,7 @@ class RunDashboardFragment : Fragment(), Injectable {
     }
 
     private fun setUpRecyclerView(){
-        runResultAdapter = RunResultAdapter(listOf())
+        runResultAdapter = ListRunResultAdapter(mapOf())
         binding.recyclerView.apply {
             adapter = runResultAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -618,5 +622,13 @@ class RunDashboardFragment : Fragment(), Injectable {
 
 
     }
+
+    /*private fun convertListRunResultToListListRunResult(): List<List<RunResult>>{
+        var runResults: List<RunResult> = listOf()
+        var runResultsMap = runResults.groupBy {
+            it.timeStart.toDateStr()
+        }
+        return listListRunResult
+    }*/
 
 }
