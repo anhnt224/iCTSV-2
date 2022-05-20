@@ -82,10 +82,6 @@ class ListFormsFragment : Fragment(), Injectable, OnItemClickListener<Form> {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     private fun setUpViewModel(){
         viewModel = ViewModelProvider(this, factory).get(ListFormsViewModel::class.java)
     }

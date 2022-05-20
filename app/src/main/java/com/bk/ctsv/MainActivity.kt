@@ -84,10 +84,6 @@ class MainActivity : AppCompatActivity() , DrawerLocker, HasSupportFragmentInjec
                         showNavigationBar()
                     }
 
-                    R.id.giftFragment -> {
-                        supportActionBar?.hide()
-                        hideNavigationBar()
-                    }
                     else -> {
                         supportActionBar?.show()
                         hideNavigationBar()

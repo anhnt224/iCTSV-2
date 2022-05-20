@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
@@ -35,14 +36,10 @@ class GiftFragment : Fragment(), Injectable, GiftAdapter.OnItemClickListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setHasOptionsMenu(true)
-        (activity as MainActivity).supportActionBar?.show()
         setUpViewModel()
-        binding = GiftFragmentBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        setHasOptionsMenu(true)
+        binding = DataBindingUtil.inflate(inflater, R.layout.gift_fragment, container, false)
+
 
         setUpRecyclerView()
         subscribeUi()
@@ -67,7 +64,7 @@ class GiftFragment : Fragment(), Injectable, GiftAdapter.OnItemClickListener{
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_list_job, menu)
+        inflater.inflate(R.menu.menu_list_form, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -42,8 +42,8 @@
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="8dp">
                 <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_baseline_person_outline_24"
                         android:layout_gravity="center"/>
                 <TextView
@@ -63,13 +63,14 @@
                     android:layout_marginBottom="8dp">
                 <ImageView
                         android:src="@drawable/ic_baseline_star_outline_24"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         tools:ignore="ContentDescription" />
                 <RatingBar
                         android:layout_marginStart="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         style="@style/Widget.AppCompat.RatingBar.Small"
                         android:rating="@{motel.rate}"
                         android:progressBackgroundTint="@color/colorWhite"
