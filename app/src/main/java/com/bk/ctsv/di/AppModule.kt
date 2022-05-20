@@ -7,7 +7,6 @@ import com.bk.ctsv.App
 import com.bk.ctsv.BuildConfig
 import com.bk.ctsv.dao.*
 import com.bk.ctsv.data.AppDatabase
-import com.bk.ctsv.service.RunService
 import com.bk.ctsv.utilities.*
 
 import com.bk.ctsv.utilities.LiveDataCallAdapterFactory
@@ -19,7 +18,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
@@ -202,6 +200,12 @@ class AppModule() {
     @Singleton
     fun provideImageMotelDao(db: AppDatabase): ImageMotelDao {
         return db.imageMotelDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRunResult(db: AppDatabase): RunDataDao {
+        return db.runDataDao()
     }
 
 }

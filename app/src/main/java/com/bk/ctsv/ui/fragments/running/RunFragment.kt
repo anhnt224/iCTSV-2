@@ -2,6 +2,7 @@ package com.bk.ctsv.ui.fragments.running
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -9,6 +10,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -17,7 +19,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -27,6 +31,8 @@ import androidx.lifecycle.observe
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.Navigation
 import com.bk.ctsv.R
+import com.bk.ctsv.common.Status
+import com.bk.ctsv.dao.RunDataDao
 import com.bk.ctsv.dao.RunningLocationDao
 import com.bk.ctsv.dao.RunningWayDao
 import com.bk.ctsv.databinding.RunFragmentBinding
@@ -67,6 +73,8 @@ class RunFragment : Fragment(), Injectable, OnMapReadyCallback {
     lateinit var runningWayDao: RunningWayDao
     @Inject
     lateinit var sharedPrefsHelper: SharedPrefsHelper
+    @Inject
+    lateinit var runDataDao: RunDataDao
     private lateinit var binding: RunFragmentBinding
     private var isRunning = false
     private val TAG = "RUN_SERVICE"
@@ -79,6 +87,8 @@ class RunFragment : Fragment(), Injectable, OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private var lastLocationList: ArrayList<LocationWithTime> = arrayListOf()
     private val minPace = 2 * 60 * 1000 // Min pace: 02:00/km
+    private var runDataList: ArrayList<RunData> = arrayListOf()
+    private var comIdInRoom: String = ""
 
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
@@ -88,6 +98,7 @@ class RunFragment : Fragment(), Injectable, OnMapReadyCallback {
             Log.d(TAG + "_INSERT", "InsertLocation $locationWithTime")
             saveLocation(locationWithTime as LocationWithTime)
             saveTimeUpdated()
+            comIdInRoom = UUID.randomUUID().toString()
 
             if(lastLocationList.size < 5){
                 lastLocationList.add(locationWithTime)
@@ -172,7 +183,6 @@ class RunFragment : Fragment(), Injectable, OnMapReadyCallback {
 
         fetchCompleteRunningWay()
 
-        subScribeUI()
         return binding.root
     }
 
@@ -206,13 +216,36 @@ class RunFragment : Fragment(), Injectable, OnMapReadyCallback {
     private fun subScribeUI(){
         with(viewModel){
             saveRunData.observe(viewLifecycleOwner){
+                if (!it.isLoading()) {
+                    saveRunData.removeObservers(viewLifecycleOwner)
+                }
                 if(checkResource(it)){
                     clearRunData()
                     showToast("Lưu thành công")
                     Navigation.findNavController(requireView()).navigateUp()
+                    removeRunDataUploadSuccess()
+                }else if (it.status != Status.LOADING){
+                    showAlertUploadFail()
                 }
             }
         }
+    }
+
+    private fun showAlertUploadFail(){
+        showActionDialog(
+            title = "Cảnh báo",
+            message = "Lưu kết quả cuộc chạy không thành công",
+            positiveButtonTitle = "Thử lại",
+            handlePositiveButtonTap = {
+                  handleFinish()
+            },
+            negativeButtonTitle = "Để sau",
+            handleNegativeButtonTap = {
+                clearRunData()
+                saveRunDataUploadFail()
+                Navigation.findNavController(requireView()).navigateUp()
+            }
+        )
     }
 
     private fun startService(){
@@ -258,7 +291,7 @@ class RunFragment : Fragment(), Injectable, OnMapReadyCallback {
     private fun handleFinish(){
         // Save run info
         runOnIoThread {
-            val runDataList: ArrayList<RunData> = arrayListOf()
+//            val runDataList: ArrayList<RunData> = arrayListOf()
             val runningWayList = runningWayDao.getAll()
             runningWayList.forEach { runningWay ->
                 val runData = RunData()
@@ -290,6 +323,7 @@ class RunFragment : Fragment(), Injectable, OnMapReadyCallback {
                     Log.d(TAG, "::::::::::: ${it.wayID} - ${it.distance}")
                 }
                 viewModel.saveRunData(runDataList)
+                subScribeUI()
             }
         }
     }
@@ -355,6 +389,25 @@ class RunFragment : Fragment(), Injectable, OnMapReadyCallback {
                 timeUpdated = Date().time
             )
             runningWayDao.insert(runningWay)
+        }
+    }
+
+    private fun saveRunDataUploadFail(){
+        Log.d("_RUN_DATA", "Save run data to room")
+        runDataList.forEach {
+            Log.d("_RUN_DATA", "$it")
+            it.comIdInRoom = comIdInRoom
+            runOnIoThread {
+                runDataDao.insert(it)
+            }
+        }
+    }
+
+    private fun removeRunDataUploadSuccess(){
+        runOnIoThread {
+            runDataList.forEach {
+                runDataDao.delete(it)
+            }
         }
     }
 

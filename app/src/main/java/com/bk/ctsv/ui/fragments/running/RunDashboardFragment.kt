@@ -21,16 +21,19 @@ import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bk.ctsv.R
+import com.bk.ctsv.dao.RunDataDao
 import com.bk.ctsv.databinding.RunDashboardFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.*
 import com.bk.ctsv.helper.SharedPrefsHelper
+import com.bk.ctsv.models.entity.run.RunData
 import com.bk.ctsv.models.entity.run.RunResult
 import com.bk.ctsv.ui.adapter.running.ListRunResultAdapter
 import com.bk.ctsv.ui.adapter.running.RunResultAdapter
 import com.bk.ctsv.ui.viewmodels.running.ChartType
 import com.bk.ctsv.ui.viewmodels.running.RunDashboardViewModel
+import com.bk.ctsv.utilities.runOnIoThread
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -39,6 +42,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.run_dashboard_fragment.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -56,8 +60,12 @@ class RunDashboardFragment : Fragment(), Injectable {
     lateinit var factory: ViewModelFactory
     @Inject
     lateinit var sharedPrefsHelper: SharedPrefsHelper
+    @Inject
+    lateinit var runDataDao: RunDataDao
+
     private lateinit var runResultAdapter: ListRunResultAdapter
     private var chartType: ChartType = ChartType.BY_WEEK
+    private var runDataList: List<RunData> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,6 +94,12 @@ class RunDashboardFragment : Fragment(), Injectable {
                 when(chartType){
                     ChartType.BY_WEEK -> decreaseWeek()
                     ChartType.BY_MONTH -> decreaseMonth()
+                }
+            }
+
+            syncButton.setOnClickListener {
+                if (runDataList.isNotEmpty()){
+                    viewModel.saveRunData(runDataList)
                 }
             }
 
@@ -119,7 +133,7 @@ class RunDashboardFragment : Fragment(), Injectable {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun subscribeUI(){
         with(viewModel){
             runResultList.observe(viewLifecycleOwner) { resource ->
@@ -127,11 +141,39 @@ class RunDashboardFragment : Fragment(), Injectable {
                     statisticRunResult(resource.data)
                 }
             }
+
+            saveRunData.observe(viewLifecycleOwner){
+                if (checkResource(it)){
+                    showToast("Đồng bộ thành công")
+                    clearRunData()
+                }
+            }
+
+            getRunResults().observe(viewLifecycleOwner){
+                Log.d("_RUN_DATE", "$it")
+                if (it.isEmpty()){
+                    syncWarningLayout.visibility = View.GONE
+                }else{
+                    runDataList = it
+                    syncWarningLayout.visibility = View.VISIBLE
+                    val runDataMap = it.groupBy { runData ->
+                        runData.comIdInRoom
+                    }
+                    syncTitle.text = "Bạn có ${runDataMap.keys.size} cuộc chạy chưa được đồng bộ." +
+                            " Bạn cần đồng bộ để tránh mất dữ liệu."
+                }
+            }
         }
     }
 
     private fun setUpViewModel(){
         viewModel = ViewModelProvider(this, factory).get(RunDashboardViewModel::class.java)
+    }
+
+    private fun clearRunData(){
+        runOnIoThread {
+            runDataDao.deleteAll()
+        }
     }
 
     private fun setUpRecyclerView(){

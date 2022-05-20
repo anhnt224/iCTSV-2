@@ -9,6 +9,7 @@ import android.content.Context
 import com.bk.ctsv.Converters
 import com.bk.ctsv.dao.*
 import com.bk.ctsv.models.entity.*
+import com.bk.ctsv.models.entity.run.RunData
 import com.bk.ctsv.models.entity.run.RunningLocation
 import com.bk.ctsv.models.entity.run.RunningWay
 import com.bk.ctsv.utilities.InjectorUtils
@@ -30,7 +31,8 @@ import com.bk.ctsv.utilities.VERSION_DB
     Subject::class,
     RunningLocation::class,
     RunningWay::class,
-    ImageMotel::class
+    ImageMotel::class,
+    RunData::class
                      ], version = VERSION_DB, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -52,6 +54,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun runningWayDao(): RunningWayDao
     abstract fun runningLocationDao(): RunningLocationDao
     abstract fun imageMotelDao(): ImageMotelDao
+    abstract fun runDataDao(): RunDataDao
 
     companion object {
 

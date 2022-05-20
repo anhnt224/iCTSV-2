@@ -1,25 +1,30 @@
 package com.bk.ctsv.models.entity.run
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.bk.ctsv.extension.*
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
+@Entity(tableName = "RunResult")
 class RunResult(
-    @SerializedName("ComID")
+    @SerializedName("ComID") @ColumnInfo(name = "ComID")
     var competitionID: Int = 0,
-    @SerializedName("WayID")
+    @PrimaryKey
+    @SerializedName("WayID") @ColumnInfo(name = "WayID")
     var wayID: String = "",
-    @SerializedName("UserCode")
+    @SerializedName("UserCode") @ColumnInfo(name = "UserCode")
     var userCode: String = "",
-    @SerializedName("TimeStart")
+    @SerializedName("TimeStart") @ColumnInfo(name = "TimeStart")
     var timeStart: Date,
-    @SerializedName("TimeEnd")
+    @SerializedName("TimeEnd") @ColumnInfo(name = "TimeEnd")
     var timeEnd: Date,
-    @SerializedName("Distance")
+    @SerializedName("Distance") @ColumnInfo(name = "Distance")
     var distance: Double = 0.0,
-    @SerializedName("TimeCreate")
+    @SerializedName("TimeCreate") @ColumnInfo(name = "TimeCreate")
     var timeCreate: Date,
-    @SerializedName("RCStatus")
+    @SerializedName("RCStatus") @ColumnInfo(name = "RCStatus")
     var status: Int = 0
 ){
     fun getTime(): String{
