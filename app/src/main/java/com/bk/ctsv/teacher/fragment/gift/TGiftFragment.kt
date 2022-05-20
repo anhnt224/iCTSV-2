@@ -3,10 +3,9 @@ package com.bk.ctsv.teacher.fragment.gift
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
@@ -21,9 +20,6 @@ import com.bk.ctsv.models.entity.gift.Gift
 import com.bk.ctsv.teacher.viewmodel.gift.TGiftViewModel
 import com.bk.ctsv.ui.adapter.gift.GiftAdapter
 import com.bk.ctsv.ui.adapter.gift.GiftRegisteredAdapter
-import com.bk.ctsv.ui.fragments.gift.GiftFragment
-import com.bk.ctsv.ui.fragments.gift.GiftFragmentDirections
-import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
 
 class TGiftFragment : Fragment(),
@@ -46,6 +42,8 @@ class TGiftFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity).supportActionBar?.show()
         setUpViewModel()
         binding = DataBindingUtil.inflate(
             inflater,
@@ -53,23 +51,7 @@ class TGiftFragment : Fragment(),
             container,
             false
         )
-        binding.apply {
-            backButton.setOnClickListener {
-                Navigation.findNavController(requireView()).navigateUp()
-            }
-            tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    when (tab?.position){
-                        0 -> viewModel.setType(GiftFragment.GiftType.ALL)
-                        1 -> viewModel.setType(GiftFragment.GiftType.RECEIVED)
-                    }
-                }
 
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            })
-        }
         setUpRecyclerView()
         subscribeUi()
         return binding.root
@@ -89,30 +71,27 @@ class TGiftFragment : Fragment(),
                     giftAdapter.notifyDataSetChanged()
                 }
             }
-            giftsRegistered.observe(viewLifecycleOwner){
-                binding.loadRegisteredGiftStatus = it.status
-                if (checkResource(it) && it.data != null){
-                    giftRegisteredAdapter.gifts = it.data
-                    giftRegisteredAdapter.notifyDataSetChanged()
-                }
-            }
-            giftType.observe(viewLifecycleOwner){
-                when(it){
-                    GiftFragment.GiftType.ALL -> {
-                        binding.apply {
-                            tabLayout.selectTab(tabLayout.getTabAt(0))
-                        }
-                        showGiftList()
-                    }
-                    GiftFragment.GiftType.RECEIVED -> {
-                        binding.apply {
-                            tabLayout.selectTab(tabLayout.getTabAt(1))
-                        }
-                        showReceivedGiftList()
-                    }
-                }
-            }
         }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_list_job, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.list -> {
+                navigateToGiftReceived()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun  navigateToGiftReceived(){
+        val action = TGiftFragmentDirections.actionTGiftFragmentToTGiftReceivedFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     private fun setUpRecyclerView(){
@@ -135,19 +114,9 @@ class TGiftFragment : Fragment(),
             adapter = giftAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        binding.receivedGiftList.apply {
-            adapter = giftRegisteredAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+
     }
 
-    private fun showGiftList(){
-        binding.giftType = GiftFragment.GiftType.ALL
-    }
-
-    private fun showReceivedGiftList(){
-        binding.giftType = GiftFragment.GiftType.RECEIVED
-    }
 
     override fun onItemClick(gift: Gift) {
         navigateToGiftInfo(gift)

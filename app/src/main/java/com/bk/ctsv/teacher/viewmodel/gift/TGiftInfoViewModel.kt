@@ -1,4 +1,4 @@
-package com.bk.ctsv.teacher.fragment.gift
+package com.bk.ctsv.teacher.viewmodel.gift
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

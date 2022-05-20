@@ -271,6 +271,15 @@
         <action
                 android:id="@+id/action_THome2Fragment_to_TGiftFragment"
                 app:destination="@id/TGiftFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TGiftReceivedFragment"
+                app:destination="@id/TGiftReceivedFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TSearchMotelFragment"
+                app:destination="@id/TSearchMotelFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TMoreJobFragment"
+                app:destination="@id/TMoreJobFragment" />
     </fragment>
     <fragment
             android:id="@+id/TGiftGivenFragment"
@@ -290,7 +299,7 @@
     <fragment
             android:id="@+id/TListRegisterFragment"
             android:name="com.bk.ctsv.teacher.fragment.gift.TListRegisterFragment"
-            android:label="Danh sách đăng kí"
+            android:label="Danh sách người đăng ký"
             tools:layout="@layout/t_list_register_fragment">
         <argument
                 android:name="gift"
@@ -299,7 +308,7 @@
     <fragment
             android:id="@+id/TCreateGiftFragment"
             android:name="com.bk.ctsv.teacher.fragment.gift.TCreateGiftFragment"
-            android:label="Danh sách đăng kí"
+            android:label="Quà đã tặng"
             tools:layout="@layout/t_create_gift_fragment">
         <action
                 android:id="@+id/action_TCreateGiftFragment_to_TGiftGivenFragment"
@@ -310,10 +319,13 @@
     <fragment
             android:id="@+id/TGiftFragment"
             android:name="com.bk.ctsv.teacher.fragment.gift.TGiftFragment"
-            android:label="TGiftFragment" >
+            android:label="Danh sách quà tặng">
         <action
                 android:id="@+id/action_TGiftFragment_to_TGiftInfoFragment"
                 app:destination="@id/TGiftInfoFragment" />
+        <action
+                android:id="@+id/action_TGiftFragment_to_TGiftReceivedFragment"
+                app:destination="@id/TGiftReceivedFragment" />
     </fragment>
     <fragment
             android:id="@+id/TGiftInfoFragment"
@@ -327,5 +339,40 @@
         <argument
                 android:name="gift"
                 app:argType="com.bk.ctsv.models.entity.gift.Gift" />
+    </fragment>
+    <fragment
+            android:id="@+id/TGiftReceivedFragment"
+            android:name="com.bk.ctsv.teacher.fragment.gift.TGiftReceivedFragment"
+            android:label="Quà đã đăng ký">
+        <action
+                android:id="@+id/action_TGiftReceivedFragment_to_TGiftInfoFragment"
+                app:destination="@id/TGiftInfoFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TSearchMotelFragment"
+            android:name="com.bk.ctsv.teacher.fragment.motel.TSearchMotelFragment"
+            android:label="Nhà trọ"
+            tools:layout="@layout/fragment_t_search_motel">
+        <action
+                android:id="@+id/action_TSearchMotelFragment_to_TMotelInfoFragment"
+                app:destination="@id/TMotelInfoFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TMotelInfoFragment"
+            android:name="com.bk.ctsv.teacher.fragment.motel.TMotelInfoFragment"
+            android:label="Thông tin nhà trọ"
+            tools:layout="@layout/fragment_t_motel_info" >
+        <argument
+                android:name="motel"
+                app:argType="com.bk.ctsv.models.entity.Motel" />
+    </fragment>
+    <fragment
+            android:id="@+id/TMoreJobFragment"
+            android:name="com.bk.ctsv.teacher.fragment.job.TMoreJobFragment"
+            android:label="Việc làm thêm"
+            tools:layout="@layout/fragment_t_more_job">
+        <action
+                android:id="@+id/action_TMoreJobFragment_to_TJobDetailFragment"
+                app:destination="@id/TJobDetailFragment" />
     </fragment>
 </navigation>

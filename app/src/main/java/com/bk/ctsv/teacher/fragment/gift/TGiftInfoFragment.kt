@@ -13,7 +13,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import com.bk.ctsv.R
-import com.bk.ctsv.databinding.GiftInfoFragmentBinding
 import com.bk.ctsv.databinding.TGiftInfoFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
@@ -23,9 +22,9 @@ import com.bk.ctsv.extension.showNotificationDialog
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.NotificationDialogType
 import com.bk.ctsv.models.entity.gift.Gift
+import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
 import com.bk.ctsv.ui.fragments.gift.GiftInfoFragmentArgs
 import com.bk.ctsv.ui.fragments.gift.GiftInfoFragmentDirections
-import com.bk.ctsv.ui.viewmodels.gift.GiftInfoViewModel
 import com.bk.ctsv.utilities.API_UPLOAD_SERVICE_BASE_URL
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.Shimmer
@@ -59,22 +58,22 @@ class TGiftInfoFragment : Fragment(), Injectable {
         gift = GiftInfoFragmentArgs.fromBundle(requireArguments()).gift
         fillInfo(gift)
         binding.apply {
-//            registerButton.setOnClickListener {
-//                navigateToRegisterGift(this@TGiftInfoFragment.gift)
-//            }
-//            unRegisterButton.setOnClickListener {
-//                showActionDialog(
-//                    title = "Xác nhận huỷ đăng kí",
-//                    icon = R.drawable.ic_close,
-//                    message = "Bạn có chắc chắn huỷ đăng kí nhận phần quà này?",
-//                    positiveButtonTitle = "Huỷ",
-//                    handlePositiveButtonTap = {
-//                        unRegisterGift()
-//                    },
-//                    negativeButtonTitle = "Bỏ qua"
-//                )
-//
-//            }
+            registerButton.setOnClickListener {
+                navigateToRegisterGift(this@TGiftInfoFragment.gift)
+            }
+            unRegisterButton.setOnClickListener {
+                showActionDialog(
+                    title = "Xác nhận huỷ đăng kí",
+                    icon = R.drawable.ic_close,
+                    message = "Bạn có chắc chắn huỷ đăng kí nhận phần quà này?",
+                    positiveButtonTitle = "Huỷ",
+                    handlePositiveButtonTap = {
+                        unRegisterGift()
+                    },
+                    negativeButtonTitle = "Bỏ qua"
+                )
+
+            }
             banner.setOnClickListener {
 
             }
@@ -158,6 +157,8 @@ class TGiftInfoFragment : Fragment(), Injectable {
             statusText.setTextColor(
                 ContextCompat.getColor(root.context, gift.getUStatus().titleColor)
             )
+            tvQuan.text = gift.quantity.toString()
+            tvQuanRegister.text = gift.registeredQuantity.toString()
         }
     }
 

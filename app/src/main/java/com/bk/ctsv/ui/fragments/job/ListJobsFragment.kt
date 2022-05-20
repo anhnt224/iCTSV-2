@@ -43,7 +43,7 @@ class ListJobsFragment : Fragment(), Injectable, OnItemClickListener<Job> {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_jobs_fragment, container, false)
         setUpViewModel()
         setHasOptionsMenu(true)
@@ -117,7 +117,8 @@ class ListJobsFragment : Fragment(), Injectable, OnItemClickListener<Job> {
     }
 
     private fun openListJobApplied(){
-        Navigation.findNavController(requireView()).navigate(ListJobsFragmentDirections.actionListJobsFragmentToListJobApplyFragment())
+        Navigation.findNavController(requireView())
+            .navigate(ListJobsFragmentDirections.actionListJobsFragmentToListJobApplyFragment())
     }
 
     private fun subscribeUI(){

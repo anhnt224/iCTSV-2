@@ -67,9 +67,6 @@ class TListJobsFragment : Fragment(), Injectable, OnItemClickListener<Job> {
                         2 -> {
                             viewModel.setJobType(JobType.INTERSHIP)
                         }
-                        3 -> {
-                            viewModel.setJobType(JobType.PARTTIME)
-                        }
                     }
 
                 }

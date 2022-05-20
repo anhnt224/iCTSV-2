@@ -3,7 +3,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_graph"
-        android:label="Thêm thô"
         app:startDestination="@id/home2Fragment">
 
     <fragment
@@ -177,6 +176,9 @@
         <action
                 android:id="@+id/action_listJobsFragment_to_listJobApplyFragment"
                 app:destination="@id/listJobApplyFragment" />
+        <action
+                android:id="@+id/action_listJobsFragment_self"
+                app:destination="@id/listJobsFragment" />
     </fragment>
     <fragment
             android:id="@+id/jobDetailFragment"
@@ -434,16 +436,26 @@
         <action
                 android:id="@+id/action_home2Fragment_to_searchMotelFragment"
                 app:destination="@id/searchMotelFragment" />
+        <action
+                android:id="@+id/action_home2Fragment_to_moreJobFragment"
+                app:destination="@id/moreJobFragment" />
     </fragment>
     <fragment
             android:id="@+id/giftFragment"
-            android:name="com.bk.ctsv.ui.fragments.gift.GiftFragment">
+            android:name="com.bk.ctsv.ui.fragments.gift.GiftFragment"
+            android:label="Danh sách quà tặng">
         <action
                 android:id="@+id/action_giftFragment_to_giftInfoFragment"
                 app:destination="@id/giftInfoFragment" />
         <argument
                 android:name="reloadData"
                 app:argType="boolean" />
+        <action
+                android:id="@+id/action_giftFragment_to_giftInfoFragment2"
+                app:destination="@id/giftInfoFragment" />
+        <action
+                android:id="@+id/action_giftFragment_to_giftReceiveFragment"
+                app:destination="@id/giftReceiveFragment" />
     </fragment>
     <fragment
             android:id="@+id/giftInfoFragment"
@@ -541,7 +553,7 @@
             android:id="@+id/imageMotelFragment"
             android:name="com.bk.ctsv.ui.fragments.motel.ImageMotelFragment"
             android:label="Ảnh nhà trọ"
-            tools:layout="@layout/fragment_image_motel" >
+            tools:layout="@layout/fragment_image_motel">
         <argument
                 android:name="motelID"
                 app:argType="integer" />
@@ -558,5 +570,24 @@
         <argument
                 android:name="motel"
                 app:argType="com.bk.ctsv.models.entity.Motel" />
+    </fragment>
+    <fragment
+            android:id="@+id/moreJobFragment"
+            android:name="com.bk.ctsv.ui.fragments.job.MoreJobFragment"
+            android:label="Việc làm thêm">
+        <action
+                android:id="@+id/action_moreJobFragment_to_jobDetailFragment"
+                app:destination="@id/jobDetailFragment" />
+        <action
+                android:id="@+id/action_moreJobFragment_to_listJobApplyFragment"
+                app:destination="@id/listJobApplyFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/giftReceiveFragment"
+            android:name="com.bk.ctsv.ui.fragments.gift.GiftReceiveFragment"
+            android:label="Phần quà đã đăng ký">
+        <action
+                android:id="@+id/action_giftReceiveFragment_to_giftInfoFragment"
+                app:destination="@id/giftInfoFragment" />
     </fragment>
 </navigation>

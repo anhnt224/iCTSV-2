@@ -156,6 +156,8 @@ class GiftInfoFragment : Fragment(), Injectable {
             statusText.setTextColor(
                 ContextCompat.getColor(root.context, gift.getUStatus().titleColor)
             )
+            tvQuan.text = gift.quantity.toString()
+            tvQuanRegister.text = gift.registeredQuantity.toString()
         }
     }
 

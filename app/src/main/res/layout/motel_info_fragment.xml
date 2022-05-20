@@ -48,12 +48,19 @@
                     tools:ignore="HardcodedText"/>
             <TextView
                     android:id="@+id/textViewContactMotel"
-                    android:layout_width="match_parent"
+                    android:textIsSelectable="true"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nguyễn Văn A"
                     android:textSize="16sp"
                     android:textColor="@color/colorBlack"
                     tools:ignore="HardcodedText" />
+            <ImageView
+                    android:id="@+id/copy"
+                    android:src="@drawable/ic_baseline_copy_all_24"
+                    android:layout_width="24dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="24dp"/>
         </LinearLayout>
 
         <LinearLayout

@@ -25,10 +25,7 @@ import com.bk.ctsv.ui.fragments.criteria.CriteriaFragment
 import com.bk.ctsv.ui.fragments.criteria.TrainingPointFragment
 import com.bk.ctsv.ui.fragments.form.*
 import com.bk.ctsv.ui.fragments.gift.*
-import com.bk.ctsv.ui.fragments.job.ApplyJobFragment
-import com.bk.ctsv.ui.fragments.job.JobDetailFragment
-import com.bk.ctsv.ui.fragments.job.ListJobApplyFragment
-import com.bk.ctsv.ui.fragments.job.ListJobsFragment
+import com.bk.ctsv.ui.fragments.job.*
 import com.bk.ctsv.ui.fragments.motel.AddMotelInfoFragment
 import com.bk.ctsv.ui.fragments.motel.ImageMotelFragment
 import com.bk.ctsv.ui.fragments.motel.MotelInfoFragment
@@ -195,4 +192,10 @@ abstract class MainListFragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeImageMotelFragment(): ImageMotelFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMoreJobFragment(): MoreJobFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGiftReceiveFragment(): GiftReceiveFragment
 }

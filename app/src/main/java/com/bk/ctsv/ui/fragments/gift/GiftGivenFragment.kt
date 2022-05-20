@@ -50,6 +50,7 @@ class GiftGivenFragment : Fragment(), Injectable, GiftCreatedAdapter.OnItemClick
             container,
             false
         )
+        binding.number = 1
         setUpRecyclerView()
         val reloadData = GiftGivenFragmentArgs.fromBundle(requireArguments()).reloadData
         if (reloadData){
@@ -69,6 +70,7 @@ class GiftGivenFragment : Fragment(), Injectable, GiftCreatedAdapter.OnItemClick
                 }
             }
         }
+
         subscribeUi()
         return binding.root
     }
@@ -83,6 +85,11 @@ class GiftGivenFragment : Fragment(), Injectable, GiftCreatedAdapter.OnItemClick
             gifts.observe(viewLifecycleOwner){
                 binding.resource = it
                 if (checkResource(it)  && it.data != null){
+                    if (it.data.isEmpty()){
+                        binding.number = 0
+                    }else{
+                        binding.number = 1
+                    }
                     reloadData(it.data)
                 }
             }

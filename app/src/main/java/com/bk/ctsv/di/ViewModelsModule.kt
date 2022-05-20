@@ -2,7 +2,7 @@ package com.bk.ctsv.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.bk.ctsv.teacher.fragment.gift.TGiftInfoViewModel
+import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
 import com.bk.ctsv.teacher.viewmodel.THome2ViewModel
 import com.bk.ctsv.teacher.viewmodel.THomeViewModel
 import com.bk.ctsv.teacher.viewmodel.TListNotificationsViewModel
@@ -12,15 +12,16 @@ import com.bk.ctsv.teacher.viewmodel.account.TeacherInfoViewModel
 import com.bk.ctsv.teacher.viewmodel.activity.TActivityInfoViewModel
 import com.bk.ctsv.teacher.viewmodel.activity.TListActivitiesViewModel
 import com.bk.ctsv.teacher.viewmodel.form.*
-import com.bk.ctsv.teacher.viewmodel.gift.TCreateGiftViewModel
-import com.bk.ctsv.teacher.viewmodel.gift.TGiftGivenViewModel
-import com.bk.ctsv.teacher.viewmodel.gift.TGiftViewModel
-import com.bk.ctsv.teacher.viewmodel.gift.TListRegisterViewModel
+import com.bk.ctsv.teacher.viewmodel.gift.*
 import com.bk.ctsv.teacher.viewmodel.job.TListJobsViewModel
+import com.bk.ctsv.teacher.viewmodel.job.TMoreJobViewModel
+import com.bk.ctsv.teacher.viewmodel.motel.TMotelInfoViewModel
+import com.bk.ctsv.teacher.viewmodel.motel.TSearchMotelViewModel
 import com.bk.ctsv.teacher.viewmodel.scholarShip.TListScholarShipsViewModel
 import com.bk.ctsv.teacher.viewmodel.student.*
 import com.bk.ctsv.ui.fragments.Home2ViewModel
-import com.bk.ctsv.ui.fragments.motel.MotelInfoFragment
+import com.bk.ctsv.ui.viewmodels.gift.GiftReceiveViewModel
+import com.bk.ctsv.ui.viewmodels.job.MoreJobViewModel
 import com.bk.ctsv.ui.viewmodels.gift.ReceiverAddressViewModel
 import com.bk.ctsv.ui.fragments.running.RunViewModel
 import com.bk.ctsv.ui.viewmodels.running.RunDashboardViewModel
@@ -441,4 +442,35 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(MotelInfoViewModel::class)
     abstract fun contributeMotelInfoViewModel(viewModel: MotelInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MoreJobViewModel::class)
+    abstract fun contributeMoreJobViewModel(viewModel: MoreJobViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GiftReceiveViewModel::class)
+    abstract fun contributeGiftReceiveViewModel(viewModel: GiftReceiveViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TGiftReceivedViewModel::class)
+    abstract fun contributeTGiftReceivedViewModel(viewModel: TGiftReceivedViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TMoreJobViewModel::class)
+    abstract fun contributeTMoreJobViewModel(viewModel: TMoreJobViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TSearchMotelViewModel::class)
+    abstract fun contributeTSearchMotelViewModel(viewModel: TSearchMotelViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TMotelInfoViewModel::class)
+    abstract fun contributeTMotelInfoViewModel(viewModel: TMotelInfoViewModel): ViewModel
 }
