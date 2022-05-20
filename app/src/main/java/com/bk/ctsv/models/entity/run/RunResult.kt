@@ -86,7 +86,7 @@ class RunResult(
         val s = (timeEnd.time - timeStart.time) / 1000
         val pace = (s / (distance / 1000)).toInt()
         //pace valid between 4 - 14 min
-        if (pace in (4 * 60)..(140 * 60)) {
+        if (pace in (4 * 60)..(14 * 60)) {
             return true
         }
         return false
