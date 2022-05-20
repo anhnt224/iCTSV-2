@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bk.ctsv.R
+import com.bk.ctsv.databinding.ListItemGift2Binding
 import com.bk.ctsv.databinding.ListItemGiftBinding
 import com.bk.ctsv.models.entity.gift.Gift
 import com.bk.ctsv.utilities.API_UPLOAD_SERVICE_BASE_URL
@@ -21,7 +22,7 @@ class GiftAdapter(
     val token: String
 ) : RecyclerView.Adapter<GiftAdapter.ViewHolder>() {
     inner class ViewHolder(
-        val binding: ListItemGiftBinding,
+        val binding: ListItemGift2Binding,
         val onItemClickListener: OnItemClickListener
     ): RecyclerView.ViewHolder(binding.root){
         fun bindView(gift: Gift){
@@ -30,8 +31,8 @@ class GiftAdapter(
             }
             binding.gift = gift
             binding.apply {
-                register.max = gift.quantity
-                register.progress = gift.registeredQuantity
+                tvQuan.text = gift.quantity.toString()
+                tvQuanRegister.text = gift.registeredQuantity.toString()
             }
             val shimmer = Shimmer.AlphaHighlightBuilder()
                 .setDuration(1800)
@@ -58,9 +59,9 @@ class GiftAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: ListItemGiftBinding = DataBindingUtil.inflate(
+        val binding: ListItemGift2Binding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.list_item_gift,
+            R.layout.list_item_gift_2,
             parent,
             false
         )

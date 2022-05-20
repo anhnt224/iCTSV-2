@@ -1,6 +1,9 @@
 package com.bk.ctsv.ui.fragments.motel
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +21,7 @@ import com.bk.ctsv.databinding.MotelInfoFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
+import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.models.entity.ImageMotel2
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.ui.adapter.user.MotelImageAdapter
@@ -65,9 +69,21 @@ class MotelInfoFragment : Fragment()
             textViewDescriptionMotel.text = motel.description
             RatingMotel.rating = motel.rate.toFloat()
             textViewComment.text = motel.comment
+
+            copy.setOnClickListener {
+                copy()
+            }
         }
 
         return binding.root
+    }
+
+    private fun copy(){
+        val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val textToCopy = binding.textViewContactMotel.text
+        val clip = ClipData.newPlainText("Code Order",textToCopy)
+        showToast("Đã sao chép")
+        clipboard.setPrimaryClip(clip)
     }
 
     private fun setUpRecyclerView() {

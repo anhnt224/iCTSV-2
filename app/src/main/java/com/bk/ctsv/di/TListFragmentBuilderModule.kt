@@ -11,6 +11,9 @@ import com.bk.ctsv.teacher.fragment.activity.TListActivitiesFragment
 import com.bk.ctsv.teacher.fragment.form.*
 import com.bk.ctsv.teacher.fragment.gift.*
 import com.bk.ctsv.teacher.fragment.job.TListJobsFragment
+import com.bk.ctsv.teacher.fragment.job.TMoreJobFragment
+import com.bk.ctsv.teacher.fragment.motel.TMotelInfoFragment
+import com.bk.ctsv.teacher.fragment.motel.TSearchMotelFragment
 import com.bk.ctsv.teacher.fragment.scholarShip.TListScholarShipsFragment
 import com.bk.ctsv.teacher.fragment.student.*
 import com.bk.ctsv.ui.fragments.form.ListFormsFragment
@@ -104,4 +107,17 @@ abstract class TListFragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTGiftInfo(): TGiftInfoFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTGiftReceived(): TGiftReceivedFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTMoreJob(): TMoreJobFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTMotelInfo(): TMotelInfoFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTSearchMotel(): TSearchMotelFragment
+
 }
