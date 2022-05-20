@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bk.ctsv.R
 import com.bk.ctsv.databinding.FragmentGiftReceiveBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
@@ -34,7 +36,7 @@ class GiftReceiveFragment : Fragment(), Injectable, GiftRegisteredAdapter.OnItem
         savedInstanceState: Bundle?
     ): View {
         setupViewModel()
-        binding = FragmentGiftReceiveBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gift_receive, container, false)
         giftReceiverAdapter = GiftRegisteredAdapter(
             listOf(),
             requireActivity(),

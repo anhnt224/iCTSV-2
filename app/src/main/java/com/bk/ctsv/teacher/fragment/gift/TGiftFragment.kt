@@ -43,7 +43,6 @@ class TGiftFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
-        (activity as AppCompatActivity).supportActionBar?.show()
         setUpViewModel()
         binding = DataBindingUtil.inflate(
             inflater,
