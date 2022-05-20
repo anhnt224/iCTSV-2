@@ -122,19 +122,9 @@ class RunDashboardFragment : Fragment(), Injectable {
     @SuppressLint("NotifyDataSetChanged")
     private fun subscribeUI(){
         with(viewModel){
-            runResultList.observe(viewLifecycleOwner){resource ->
-                if (checkResource(resource) && resource.data != null){
+            runResultList.observe(viewLifecycleOwner) { resource ->
+                if (checkResource(resource) && resource.data != null) {
                     statisticRunResult(resource.data)
-                }
-            }
-
-            recentlyRunResults.observe(viewLifecycleOwner){resource ->
-                if(checkResource(resource)  && resource.data != null){
-                    var runResultsMap = resource.data.groupBy {
-                        it.timeStart.toDateStr()
-                    }
-                    runResultAdapter.runResultMap = runResultsMap
-                    runResultAdapter.notifyDataSetChanged()
                 }
             }
         }
@@ -152,13 +142,25 @@ class RunDashboardFragment : Fragment(), Injectable {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun statisticRunResult(runResults: List<RunResult>){
         var totalDistance = 0.0
+        var totalDistanceValid = 0.0
         runResults.forEach {
             totalDistance += it.distance
+            if (it.isValid()){
+                totalDistanceValid += it.distance
+            }
         }
+
         binding.apply {
-            totalDistanceTextView.text = String.format("%.2f", totalDistance / 1000)
+            if (totalDistance > 100){
+                totalDistanceTextView.text = String.format("%.2f/%.2f", totalDistanceValid/1000, totalDistance / 1000)
+                distanceUnitTextView.text = "km"
+            }else{
+                totalDistanceTextView.text = String.format("%.0f/%.0f", totalDistanceValid, totalDistance)
+                distanceUnitTextView.text = "m"
+            }
         }
 
         when(chartType){
@@ -166,7 +168,11 @@ class RunDashboardFragment : Fragment(), Injectable {
             ChartType.BY_WEEK -> showBarChartByWeek(runResults)
         }
 
-
+        val runResultsMap = runResults.groupBy {
+            it.timeStart.toDateStr()
+        }
+        runResultAdapter.runResultMap = runResultsMap
+        runResultAdapter.notifyDataSetChanged()
     }
 
     private fun showBarChartByWeek(runResults: List<RunResult>){
@@ -184,7 +190,9 @@ class RunDashboardFragment : Fragment(), Injectable {
             }else{
                 var totalDistance = 0.0
                 runResultList.forEach {
-                    totalDistance += it.distance / 1000
+                    if (it.isValid()){
+                        totalDistance += it.distance / 1000
+                    }
                 }
                 runResultEntries.add(BarEntry((index + 0.5).toFloat(), totalDistance.toFloat()))
             }
@@ -266,7 +274,9 @@ class RunDashboardFragment : Fragment(), Injectable {
             }else{
                 var totalDistance = 0.0
                 runResultList.forEach {
-                    totalDistance += it.distance / 1000
+                    if (it.isValid()){
+                        totalDistance += it.distance / 1000
+                    }
                 }
                 runResultEntries.add(BarEntry((index).toFloat(), totalDistance.toFloat()))
             }

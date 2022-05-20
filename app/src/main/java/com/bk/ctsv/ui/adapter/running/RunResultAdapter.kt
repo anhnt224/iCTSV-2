@@ -15,7 +15,7 @@ class RunResultAdapter(var runResults: List<RunResult>): RecyclerView.Adapter<Ru
         @SuppressLint("ResourceAsColor")
         fun bindView(runResult: RunResult){
             binding.runResult = runResult
-            if (runResult.getPaceToSetResult()){
+            if (runResult.isValid()){
                 binding.viewRunResult.setCardBackgroundColor(
                     ContextCompat.getColor(binding.root.context, R.color.colorRunDashBoardPass)
                 )

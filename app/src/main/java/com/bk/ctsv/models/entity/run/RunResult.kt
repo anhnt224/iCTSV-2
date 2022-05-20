@@ -82,10 +82,11 @@ class RunResult(
         }
     }
 
-    fun getPaceToSetResult(): Boolean{
+    fun isValid(): Boolean {
         val s = (timeEnd.time - timeStart.time) / 1000
         val pace = (s / (distance / 1000)).toInt()
-        if (pace in 240..840){
+        //pace valid between 4 - 14 min
+        if (pace in (4 * 60)..(140 * 60)) {
             return true
         }
         return false

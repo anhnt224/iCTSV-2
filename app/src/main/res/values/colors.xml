@@ -52,7 +52,7 @@
 
     <color name="transparent">#00FFFFFF</color>
 
-    <color name="colorRunDashBoardPass">#8EE9FE</color>
+    <color name="colorRunDashBoardPass">#D1F8D3</color>
     <color name="colorRunDashBoardFail">#FFD6BA</color>
 
 </resources>

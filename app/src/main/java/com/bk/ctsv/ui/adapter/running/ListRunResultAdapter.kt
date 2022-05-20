@@ -1,5 +1,6 @@
 package com.bk.ctsv.ui.adapter.running
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil.inflate
@@ -18,12 +19,30 @@ class ListRunResultAdapter(
 
         private lateinit var runResultAdapter: RunResultAdapter
 
-        fun bindView(runResultList: List<RunResult>, position: Int){
+        @SuppressLint("SetTextI18n")
+        fun bindView(position: Int){
             val key = runResultMap.keys.toList()[position]
             val runResults: List<RunResult> = runResultMap[key] ?: listOf()
+
+            var totalDistanceValid = 0.0
+            var totalDistance = 0.0
+            runResults.forEach {
+                if (it.isValid()){
+                    totalDistanceValid += it.distance
+                }
+                totalDistance += it.distance
+            }
             runResultAdapter = RunResultAdapter(runResults)
             binding.apply {
-                textViewRunDay.text = key
+
+                if (totalDistanceValid > 100){
+                    textViewRunDay.text = "$key - ${String.format("%.2f", totalDistanceValid/1000)}" +
+                            "/${String.format("%.2f", totalDistance/1000)}km"
+                }else{
+                    textViewRunDay.text = "$key - ${String.format("%.0f", totalDistanceValid)}" +
+                            "/${String.format("%.0f", totalDistance)}m"
+                }
+
                 recyclerViewListRunResult.apply {
                     adapter = runResultAdapter
                     layoutManager = LinearLayoutManager(binding.root.context)
@@ -44,9 +63,7 @@ class ListRunResultAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val key = runResultMap.keys.toList()[position]
-        val runResultListItem = runResultMap[key]?: listOf()
-        return holder.bindView(runResultListItem, position)
+        return holder.bindView(position)
     }
 
     override fun getItemCount(): Int {

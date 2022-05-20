@@ -1,6 +1,5 @@
 package com.bk.ctsv.ui.viewmodels.running
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.bk.ctsv.common.Resource
 import com.bk.ctsv.extension.toTimeQueryStr
@@ -29,26 +28,6 @@ class RunDashboardViewModel @Inject constructor(
 
     val runResultList: LiveData<Resource<List<RunResult>>> = Transformations.switchMap(_parameters){
         runRepository.getRunResultList(timeStart = it.timeStart.toTimeQueryStr(), timeEnd = it.timeEnd.toTimeQueryStr())
-    }
-
-    val recentlyRunResults = MediatorLiveData<Resource<List<RunResult>>>()
-    private lateinit var getRunResultLiveData: LiveData<Resource<List<RunResult>>>
-
-    fun getRecentlyRunResults(){
-        val milliSecondsInWeek = 7 * 24 * 60 * 60 * 1000
-        val sevenDayBefore = Date(Date().time - milliSecondsInWeek)
-        getRunResultLiveData = runRepository.getRecentlyRunResults(
-            timeEnd = Date(Date().time + 7 * 24 * 60 * 60 * 1000).toTimeQueryStr(),
-            timeStart = sevenDayBefore.toTimeQueryStr()
-        )
-        recentlyRunResults.removeSource(getRunResultLiveData)
-        recentlyRunResults.addSource(getRunResultLiveData) {
-            recentlyRunResults.value = it
-        }
-    }
-
-    init {
-        getRecentlyRunResults()
     }
 
     inner class GetRunResultParameters(var timeStart: Date, var timeEnd: Date)
