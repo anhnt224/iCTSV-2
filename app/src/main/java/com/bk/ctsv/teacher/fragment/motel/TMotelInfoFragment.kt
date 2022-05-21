@@ -52,7 +52,7 @@ class TMotelInfoFragment : Fragment(), Injectable, MotelImageAdapter.OnItemClick
         binding.apply {
             textViewHostMotel.text = motel.managerName
             textViewContactMotel.text = motel.managerContact
-            textViewAddressDetail.text = motel.managerContact
+            textViewAddressDetail.text = motel.address
             textViewDescriptionMotel.text = motel.description
             RatingMotel.rating = motel.rate.toFloat()/20
             textViewComment.text = motel.comment
