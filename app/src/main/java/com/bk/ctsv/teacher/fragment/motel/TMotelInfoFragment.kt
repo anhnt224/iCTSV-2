@@ -15,7 +15,6 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
-import com.bk.ctsv.databinding.FragmentTMoreJobBinding
 import com.bk.ctsv.databinding.FragmentTMotelInfoBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
@@ -25,10 +24,9 @@ import com.bk.ctsv.models.entity.ImageMotel2
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.teacher.viewmodel.motel.TMotelInfoViewModel
 import com.bk.ctsv.ui.adapter.user.MotelImageAdapter
-import kotlinx.android.synthetic.main.fragment_t_motel_info.*
 import javax.inject.Inject
 
-class TMotelInfoFragment : Fragment(), Injectable {
+class TMotelInfoFragment : Fragment(), Injectable, MotelImageAdapter.OnItemClickListener {
 
 
     private lateinit var viewModel: TMotelInfoViewModel
@@ -89,7 +87,7 @@ class TMotelInfoFragment : Fragment(), Injectable {
     }
 
     private fun setUpRecyclerView() {
-        motelImageAdapter = MotelImageAdapter(motelImageList)
+        motelImageAdapter = MotelImageAdapter(motelImageList, requireActivity(), this)
         binding.recyclerViewListImageMotel.apply {
             adapter = motelImageAdapter
             layoutManager = LinearLayoutManager(context,
@@ -102,6 +100,10 @@ class TMotelInfoFragment : Fragment(), Injectable {
 
     private fun setupViewModel(){
         viewModel = ViewModelProvider(this, factory).get(TMotelInfoViewModel::class.java)
+    }
+
+    override fun onClickImage(imageMotel2: ImageMotel2) {
+
     }
 
 }

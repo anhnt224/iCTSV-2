@@ -18,6 +18,7 @@ import com.bk.ctsv.R
 import com.bk.ctsv.databinding.THome2FragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
+import com.bk.ctsv.extension.checkLocationPermission
 import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.Activity
@@ -217,7 +218,7 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     }
 
     private fun navigateToGiftFragment(){
-        val action = THome2FragmentDirections.actionTHome2FragmentToTGiftFragment()
+        val action = THome2FragmentDirections.actionTHome2FragmentToTGiftFragment(true)
         Navigation.findNavController(requireView()).navigate(action)
     }
 
@@ -252,7 +253,11 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             0 -> showRunDashboard()
             1 -> navigateToGiftFragment()
             2 -> navigateToGiftGiven()
-            3 -> navigateSearchMotel()
+            3 -> {
+                if (checkLocationPermission()){
+                    navigateSearchMotel()
+                }
+            }
             4 -> navigateToListAddress()
         }
     }

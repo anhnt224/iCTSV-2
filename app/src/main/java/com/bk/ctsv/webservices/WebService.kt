@@ -739,4 +739,14 @@ interface WebService {
         @Field("MotelID") motelID: Int
     ): LiveData<ApiResponse<CTSVMotelImageRes>>
 
+//map
+
+    @GET("Boundary/RevertGeoCoding?")
+    fun getPlaceNameAuto(
+        @Query("x") x: Double,
+        @Query("y") y: Double
+    ):Call<GetPlaceNameAutoByMapRes>
+
+
+
 }

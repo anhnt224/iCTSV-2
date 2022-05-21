@@ -131,4 +131,10 @@ abstract class TListFragmentBuilderModule {
     @ContributesAndroidInjector
     abstract fun contributeTImageMotel(): TImageMotelFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributeTApplyGift(): TApplyGiftFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTAddressGift(): TReceiverAddressFragment
+
 }

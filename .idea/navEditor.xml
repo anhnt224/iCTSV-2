@@ -361,13 +361,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="857" />
-                            <option name="y" value="1426" />
+                            <option name="x" value="873" />
+                            <option name="y" value="1416" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_giftInfoFragment_to_giftFragment">
+                            <entry key="action_giftInfoFragment_to_giftReceiveFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -387,12 +387,17 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="742" />
-                            <option name="y" value="1715" />
+                            <option name="x" value="721" />
+                            <option name="y" value="1726" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_giftReceiveFragment_to_giftFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_giftReceiveFragment_to_giftInfoFragment">
                               <value>
                                 <LayoutPositions />
@@ -900,8 +905,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1433" />
-                            <option name="y" value="1431" />
+                            <option name="x" value="1432" />
+                            <option name="y" value="1472" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -912,13 +917,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1144" />
-                            <option name="y" value="1430" />
+                            <option name="x" value="1216" />
+                            <option name="y" value="1476" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_registGiftFragment_to_giftFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_registGiftFragment_to_giftReceiveFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1303,6 +1313,37 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_TAddNewAddressFragment_to_TPickLocationFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="TApplyGiftFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="731" />
+                            <option name="y" value="-1910" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_TApplyGiftFragment_to_TGiftFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_TApplyGiftFragment_to_TReceiverAddressFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -1452,13 +1493,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="516" />
-                            <option name="y" value="-1918" />
+                            <option name="x" value="479" />
+                            <option name="y" value="-1920" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_TGiftInfoFragment_to_TGiftFragment">
+                            <entry key="action_TGiftInfoFragment_to_TApplyGiftFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_TGiftInfoFragment_to_TGiftReceivedFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1473,12 +1519,17 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="222" />
-                            <option name="y" value="-1545" />
+                            <option name="x" value="240" />
+                            <option name="y" value="-1538" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_TGiftReceivedFragment_to_TGiftFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_TGiftReceivedFragment_to_TGiftInfoFragment">
                               <value>
                                 <LayoutPositions />
@@ -1778,8 +1829,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="300" />
-                            <option name="y" value="1264" />
+                            <option name="x" value="264" />
+                            <option name="y" value="1111" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -1834,6 +1885,18 @@
                           <Point>
                             <option name="x" value="808" />
                             <option name="y" value="3660" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="TReceiverAddressFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="926" />
+                            <option name="y" value="-1913" />
                           </Point>
                         </option>
                       </LayoutPositions>

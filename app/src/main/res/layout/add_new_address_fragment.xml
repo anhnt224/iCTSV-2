@@ -51,30 +51,47 @@
                             android:singleLine="true"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="1"
+                        android:id="@+id/textType"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:hint="@string/live_place"
+                        app:boxBackgroundColor="@color/colorWhite"
+                        android:layout_height="wrap_content"
+                        tools:ignore="HardcodedText,RtlHardcoded">
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:focusable="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{address.type}"
+                            android:singleLine="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textLocation"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:hint="@string/t_a"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_location_on_blue_24dp"
+                        app:boxBackgroundColor="@color/colorWhite"
+                        android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:text="@{address.getLocation()}"
+                            android:singleLine="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <LinearLayout
                         android:orientation="horizontal"
                         android:weightSum="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:ignore="DisableBaselineAlignment">
-                    <com.google.android.material.textfield.TextInputLayout
-                            android:layout_marginRight="4dp"
-                            android:layout_weight="1"
-                            android:id="@+id/textType"
-                            android:layout_marginTop="8dp"
-                            android:layout_width="match_parent"
-                            android:hint="@string/live_place"
-                            app:boxBackgroundColor="@color/colorWhite"
-                            android:layout_height="wrap_content"
-                            tools:ignore="HardcodedText,RtlHardcoded">
-                        <com.google.android.material.textfield.TextInputEditText
-                                android:focusable="false"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@{address.type}"
-                                android:singleLine="true"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <com.google.android.material.textfield.TextInputLayout
                             android:layout_marginLeft="4dp"
                             android:layout_weight="1"
@@ -83,8 +100,7 @@
                             android:hint="@string/province_city"
                             android:id="@+id/textCity"
                             app:boxBackgroundColor="@color/colorWhite"
-                            android:layout_height="wrap_content"
-                            tools:ignore="RtlHardcoded">
+                            android:layout_height="wrap_content">
                         <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -108,8 +124,7 @@
                             android:layout_width="match_parent"
                             android:hint="@string/qu_n_huy_n"
                             app:boxBackgroundColor="@color/colorWhite"
-                            android:layout_height="wrap_content"
-                            tools:ignore="RtlHardcoded">
+                            android:layout_height="wrap_content">
                         <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -126,8 +141,7 @@
                             android:layout_weight="1"
                             android:layout_marginLeft="4dp"
                             app:boxBackgroundColor="@color/colorWhite"
-                            android:layout_height="wrap_content"
-                            tools:ignore="RtlHardcoded">
+                            android:layout_height="wrap_content">
                         <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -136,23 +150,6 @@
                                 android:singleLine="true"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textLocation"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="match_parent"
-                        android:hint="@string/t_a"
-                        app:endIconMode="custom"
-                        app:endIconDrawable="@drawable/ic_location_on_blue_24dp"
-                        app:boxBackgroundColor="@color/colorWhite"
-                        android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:text="@{address.getLocation()}"
-                            android:singleLine="true"/>
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textAddress"

@@ -1,6 +1,7 @@
-package com.bk.ctsv.ui.adapter.user
+package com.bk.ctsv.ui.adapter
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -12,18 +13,21 @@ import com.bumptech.glide.Glide
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 
-class MotelImageAdapter(
+class ImageGiftAdapter(
     var motelImageList: List<ImageMotel2>,
     val activity: Activity,
     private val onItemClickListener: OnItemClickListener
-): RecyclerView.Adapter<MotelImageAdapter.ViewHolder>() {
+): RecyclerView.Adapter<ImageGiftAdapter.ViewHolder>() {
     inner class ViewHolder(
         private val binding: ListItemMotelImageBinding,
         private val onItemClickListener: OnItemClickListener
-        ): RecyclerView.ViewHolder(binding.root){
-        fun bindView(motelImage: ImageMotel2) {
+    ): RecyclerView.ViewHolder(binding.root){
+        fun bindView(imageGift: ImageMotel2) {
             binding.apply {
-                imageMotel = motelImage
+                root.setOnClickListener {
+                    onItemClickListener.onClickImageGift(imageGift)
+                }
+                imageMotel = imageGift
                 val shimmer = Shimmer.AlphaHighlightBuilder()
                     .setDuration(1800)
                     .setBaseAlpha(0.7f) //the alpha of the underlying children
@@ -34,9 +38,9 @@ class MotelImageAdapter(
                 val shimmerDrawable = ShimmerDrawable().apply {
                     setShimmer(shimmer)
                 }
-                val url = "https://ctsv.hust.edu.vn/api-t/${motelImage.urlImage}"
+                Log.d("_IMAGE", "adapter ${imageGift.urlImage}")
                 Glide.with(activity)
-                    .load(url)
+                    .load(imageGift.urlImage)
                     .placeholder(shimmerDrawable)
                     .error(R.drawable.ic_gift_default)
                     .centerCrop()
@@ -69,6 +73,6 @@ class MotelImageAdapter(
     }
 
     interface OnItemClickListener{
-        fun onClickImage(imageMotel2: ImageMotel2)
+        fun onClickImageGift(imageGift: ImageMotel2)
     }
 }

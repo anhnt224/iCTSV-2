@@ -248,6 +248,7 @@ class SearchMotelFragment : Fragment(),
                 lastLocation = it
                 viewModel.latLng.value = LatLng(it.latitude, it.longitude)
                 val currentLatLong = LatLng(it.latitude, it.longitude)
+                drawCircle(LatLng(it.latitude, it.longitude), viewModel.getRadius())
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
                 fillLocationInfo(LatLng(it.latitude, it.longitude))
                 viewModel.getListMotel(it.latitude, it.longitude, viewModel.getRadius().toInt() )

@@ -3,6 +3,7 @@ package com.bk.ctsv.ui.fragments.user
 import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,11 +22,19 @@ import com.bk.ctsv.extension.showDialogMotel
 import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.UserAddress
+import com.bk.ctsv.models.res.GetPlaceNameAutoByMapRes
+import com.bk.ctsv.teacher.fragment.motel.TAddNewAddressFragment
 import com.bk.ctsv.ui.viewmodels.user.AddNewAddressViewModel
 import com.bk.ctsv.utilities.*
+import com.bk.ctsv.webservices.WebService
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.add_new_address_fragment.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class AddNewAddressFragment : Fragment(), Injectable {
@@ -47,6 +56,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
     private var districts: List<String> = listOf()
     private var wards: List<String> = listOf()
     private var types: List<String> = listOf("KTX Bách Khoa", "KTX Pháp Vân", "Nhà trọ", "Nhà riêng")
+    private lateinit var webService : WebService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +65,9 @@ class AddNewAddressFragment : Fragment(), Injectable {
         setUpViewModel()
         binding = DataBindingUtil.inflate(inflater, R.layout.add_new_address_fragment, container, false)
         binding.address = mAddress
+        if (newLatLng != null){
+            autoGetPlaceName(newLatLng!!.longitude, newLatLng!!.latitude)
+        }
         binding.apply {
             textLocation.setEndIconOnClickListener {
                 if(checkLocationPermission()){
@@ -243,6 +256,44 @@ class AddNewAddressFragment : Fragment(), Injectable {
             .setNegativeButton("Hủy"){_, _ ->
             }
             .show()
+    }
+    private fun autoGetPlaceName(long: Double, lat: Double){
+        val retrofit =
+            Retrofit.Builder().baseUrl(API_MAP).addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val service = retrofit.create(WebService::class.java)
+        val request = service.getPlaceNameAuto(long, lat)
+        request.enqueue(object : Callback<GetPlaceNameAutoByMapRes>{
+            override fun onResponse(
+                call: Call<GetPlaceNameAutoByMapRes>,
+                response: Response<GetPlaceNameAutoByMapRes>
+            ) {
+                val getPlaceResponse = response.body()
+                if (getPlaceResponse != null){
+                    if ((getPlaceResponse.data.cityName != null) and
+                        (getPlaceResponse.data.districtName != null) and
+                        ( getPlaceResponse.data.wardName != null)){
+                        binding.apply {
+                            textCity.editText?.setText(getPlaceResponse.data.cityName)
+                            textDistrict.editText?.setText(getPlaceResponse.data.districtName)
+                            textWard.editText?.setText(getPlaceResponse.data.wardName)
+                            getDistrictWard()
+                        }
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<GetPlaceNameAutoByMapRes>, t: Throwable) {
+                Log.d("_MAPPLACENAME", "ERROR MAP ${t.message}")
+            }
+
+        })
+    }
+
+    private fun getDistrictWard(){
+        viewModel.getListDistricts(binding.textCity.editText?.text.toString())
+        viewModel.getListWards(binding.textCity.editText?.text.toString(), binding.textDistrict.editText?.text.toString())
     }
 
     private fun showAlertPickType(){

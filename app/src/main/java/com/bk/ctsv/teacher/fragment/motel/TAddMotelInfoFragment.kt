@@ -137,10 +137,10 @@ class TAddMotelInfoFragment : Fragment(), Injectable {
             updateUserAddress.observe(viewLifecycleOwner){
                 binding.status = it.status
                 if(checkResource(it) && addMotel){
-                    if (it.data != null){
-                        addMotel = false
+                    if (it.data != null ){
                         Log.d("_ADDRESS", "${it.data}")
-                        if (it.data.motelID != null && it.data.motelID != 0){
+                        if ( it.data.motelID != null && it.data.motelID != 0){
+                            addMotel = false
                             if (mAddress.type == types[0] || mAddress.type == types[1]){
                                 showDialogMotel("Thêm ảnh chụp KTX",
                                     "Để có đánh giá khách quan hơn về thông tin ktx bạn cung cấp, iCTSV cần thêm ảnh chụp ktx này. Bạn có sẵn sàng thêm ảnh ktx?",
@@ -152,6 +152,7 @@ class TAddMotelInfoFragment : Fragment(), Injectable {
                                         navigateListAddressFragment()}
                                 )
                             }else{
+                                addMotel = false
                                 showDialogMotel("Thêm ảnh chụp nhà trọ",
                                     "Để có đánh giá khách quan hơn về thông tin nhà trọ bạn cung cấp, iCTSV cần thêm ảnh chụp nhà trọ này. Bạn có sẵn sàng thêm ảnh phòng trọ?",
                                     R.drawable.ic_add_image_motel,
@@ -162,6 +163,9 @@ class TAddMotelInfoFragment : Fragment(), Injectable {
                                         navigateListAddressFragment()}
                                 )
                             }
+                        }else{
+                            addMotel = false
+                            showToast("Thêm thông tin chưa thành công")
                         }
                     }
                 }

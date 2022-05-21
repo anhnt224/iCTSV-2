@@ -30,7 +30,7 @@ const val API_SERVICE_FORM_BASE_URL = "https://ctsv.hust.edu.vn/api-q/"
 const val API_TIMETABLE = "https://ctsv.hust.edu.vn/api-t/UploadFile/CTSV/"
 const val API_SERVICE_RUN_URL = "https://ctsv.hust.edu.vn/api-t/"
 const val API_UPLOAD_SERVICE_BASE_URL = "https://ctsv.hust.edu.vn/api-t/UploadFile/"
-
+const val API_MAP = "https://maps.vnpost.vn/addr-service/api/"
 const val DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss"
 const val DATE_FORMAT_PATTERN_DDMMYYYY = "dd-MM-yyyy"
 const val DATE_FORMAT_PATTERN_ddMMHHmm = "HH:mm dd/MM"

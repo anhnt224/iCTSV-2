@@ -29,7 +29,7 @@ import com.bk.ctsv.ui.viewmodels.motel.MotelInfoViewModel
 import javax.inject.Inject
 
 class MotelInfoFragment : Fragment()
-    , Injectable {
+    , Injectable, MotelImageAdapter.OnItemClickListener {
 
     private lateinit var viewModel: MotelInfoViewModel
     @Inject
@@ -87,7 +87,7 @@ class MotelInfoFragment : Fragment()
     }
 
     private fun setUpRecyclerView() {
-        motelImageAdapter = MotelImageAdapter(motelImageList)
+        motelImageAdapter = MotelImageAdapter(motelImageList, requireActivity(), this)
         binding.recyclerViewListImageMotel.apply {
             adapter = motelImageAdapter
             layoutManager = LinearLayoutManager(context,
@@ -114,5 +114,9 @@ class MotelInfoFragment : Fragment()
                 motelImageAdapter.notifyDataSetChanged()
             }
         }
+    }
+
+    override fun onClickImage(imageMotel2: ImageMotel2) {
+
     }
 }

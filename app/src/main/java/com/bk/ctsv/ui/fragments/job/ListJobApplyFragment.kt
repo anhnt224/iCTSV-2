@@ -39,11 +39,12 @@ class ListJobApplyFragment : Fragment(), Injectable, OnItemClickListener<Job>{
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setUpViewModel()
         binding = DataBindingUtil.inflate(inflater, R.layout.list_job_apply_fragment, container, false)
         jobApplyAdapter = JobApplyAdapter(listOf(), this)
         binding.apply {
+            number = 1
             recyclerview.apply {
                 adapter = jobApplyAdapter
                 layoutManager = LinearLayoutManager(context)
@@ -80,6 +81,11 @@ class ListJobApplyFragment : Fragment(), Injectable, OnItemClickListener<Job>{
                 when(resource.status){
                     Status.SUCCESS_NETWORK -> {
                         if(resource.data != null){
+                            if (resource.data.isEmpty()){
+                                binding.number = 0
+                            }else{
+                                binding.number = 1
+                            }
                             jobApplyAdapter.jobs = resource.data
                             jobApplyAdapter.notifyDataSetChanged()
                         }

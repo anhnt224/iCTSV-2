@@ -116,6 +116,7 @@ class AddMotelInfoFragment : Fragment(), Injectable {
 
     private fun saveAddress(){
         addMotel = true
+        Log.d("_PRESS", " 1")
         motelInfo.managerName = binding.hostNameTxt.text.toString()
         motelInfo.managerContact = binding.hostPhoneTxt.text.toString()
         motelInfo.description = binding.motelDescriptionTxt.text.toString()
@@ -131,6 +132,7 @@ class AddMotelInfoFragment : Fragment(), Injectable {
             showToast("Số điện thoại chưa chính xác")
             return
         }
+        Log.d("_PRESS", "2")
         viewModel.updateUserAddress(mAddress, motelInfo)
     }
 
@@ -140,9 +142,9 @@ class AddMotelInfoFragment : Fragment(), Injectable {
                 binding.status = it.status
                 if(checkResource(it) && addMotel){
                     if (it.data != null){
-                        addMotel = false
                         Log.d("_ADDRESS", "${it.data}")
                         if (it.data.motelID != null && it.data.motelID != 0){
+                            addMotel = false
                             if (mAddress.type == types[0] || mAddress.type == types[1]){
                                 showDialogMotel("Thêm ảnh chụp KTX",
                                     "Để có đánh giá khách quan hơn về thông tin ktx bạn cung cấp, iCTSV cần thêm ảnh chụp ktx này. Bạn có sẵn sàng thêm ảnh ktx?",
@@ -154,6 +156,8 @@ class AddMotelInfoFragment : Fragment(), Injectable {
                                         navigateListAddressFragment()}
                                 )
                             }else{
+                                addMotel = false
+                                Log.d("_PRESS", "4 motel id  null")
                                 showDialogMotel("Thêm ảnh chụp nhà trọ",
                                     "Để có đánh giá khách quan hơn về thông tin nhà trọ bạn cung cấp, iCTSV cần thêm ảnh chụp nhà trọ này. Bạn có sẵn sàng thêm ảnh phòng trọ?",
                                     R.drawable.ic_add_image_motel,
@@ -165,6 +169,9 @@ class AddMotelInfoFragment : Fragment(), Injectable {
                                 )
                             }
                         }
+                    }else{
+                        addMotel = false
+                        showToast("Thêm thông tin chưa thành công")
                     }
                 }
             }

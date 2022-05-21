@@ -18,6 +18,7 @@ import com.bk.ctsv.R
 import com.bk.ctsv.databinding.Home2FragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
+import com.bk.ctsv.extension.checkLocationPermission
 import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
@@ -172,7 +173,7 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToSearchFragment(){
+    private fun navigateToSearchMotelFragment(){
         val action = Home2FragmentDirections.actionHome2FragmentToSearchMotelFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
@@ -261,7 +262,11 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         when (position){
             0 -> navigateToRunDashboard()
             1 -> navigateToListAddressFragment()
-            2 -> navigateToSearchFragment()
+            2 -> {
+                if (checkLocationPermission()){
+                    navigateToSearchMotelFragment()
+                }
+            }
             3 -> navigateToGift()
             4 -> navigateGivenGift()
         }

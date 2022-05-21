@@ -329,19 +329,25 @@
         <action
                 android:id="@+id/action_TGiftFragment_to_TGiftReceivedFragment"
                 app:destination="@id/TGiftReceivedFragment" />
+        <argument
+                android:name="reloadData"
+                app:argType="boolean" />
     </fragment>
     <fragment
             android:id="@+id/TGiftInfoFragment"
             android:name="com.bk.ctsv.teacher.fragment.gift.TGiftInfoFragment"
             android:label="Thông tin quà tặng">
-        <action
-                android:id="@+id/action_TGiftInfoFragment_to_TGiftFragment"
-                app:destination="@id/TGiftFragment"
-                app:popUpTo="@id/TGiftFragment"
-                app:popUpToInclusive="true" />
         <argument
                 android:name="gift"
                 app:argType="com.bk.ctsv.models.entity.gift.Gift" />
+        <action
+                android:id="@+id/action_TGiftInfoFragment_to_TGiftReceivedFragment"
+                app:destination="@id/TGiftReceivedFragment"
+                app:popUpTo="@id/TGiftReceivedFragment"
+                app:popUpToInclusive="true" />
+        <action
+                android:id="@+id/action_TGiftInfoFragment_to_TApplyGiftFragment"
+                app:destination="@id/TApplyGiftFragment" />
     </fragment>
     <fragment
             android:id="@+id/TGiftReceivedFragment"
@@ -350,6 +356,11 @@
         <action
                 android:id="@+id/action_TGiftReceivedFragment_to_TGiftInfoFragment"
                 app:destination="@id/TGiftInfoFragment" />
+        <action
+                android:id="@+id/action_TGiftReceivedFragment_to_TGiftFragment"
+                app:destination="@id/TGiftFragment"
+                app:popUpTo="@id/TGiftFragment"
+                app:popUpToInclusive="true" />
     </fragment>
     <fragment
             android:id="@+id/TSearchMotelFragment"
@@ -431,4 +442,26 @@
             android:name="com.bk.ctsv.teacher.fragment.motel.TPickLocationFragment"
             android:label="Chỉnh sửa tọa độ"
             tools:layout="@layout/fragment_t_pick_location" />
+    <fragment
+            android:id="@+id/TApplyGiftFragment"
+            android:name="com.bk.ctsv.teacher.fragment.gift.TApplyGiftFragment"
+            android:label="Đăng ký nhận quà"
+            tools:layout="@layout/fragment_t_apply_gift">
+        <action
+                android:id="@+id/action_TApplyGiftFragment_to_TGiftFragment"
+                app:destination="@id/TGiftFragment"
+                app:popUpTo="@id/TGiftFragment"
+                app:popUpToInclusive="true" />
+        <argument
+                android:name="gift"
+                app:argType="com.bk.ctsv.models.entity.gift.Gift" />
+        <action
+                android:id="@+id/action_TApplyGiftFragment_to_TReceiverAddressFragment"
+                app:destination="@id/TReceiverAddressFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/TReceiverAddressFragment"
+            android:name="com.bk.ctsv.teacher.fragment.gift.TReceiverAddressFragment"
+            android:label="Chọn địa chỉ nhận quà"
+            tools:layout="@layout/fragment_t_receiver_address" />
 </navigation>

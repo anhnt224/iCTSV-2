@@ -469,9 +469,9 @@
                 android:name="gift"
                 app:argType="com.bk.ctsv.models.entity.gift.Gift" />
         <action
-                android:id="@+id/action_giftInfoFragment_to_giftFragment"
-                app:destination="@id/giftFragment"
-                app:popUpTo="@id/giftFragment"
+                android:id="@+id/action_giftInfoFragment_to_giftReceiveFragment"
+                app:destination="@id/giftReceiveFragment"
+                app:popUpTo="@id/giftReceiveFragment"
                 app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -490,6 +490,9 @@
         <action
                 android:id="@+id/action_registGiftFragment_to_receiverAddressFragment"
                 app:destination="@id/receiverAddressFragment" />
+        <action
+                android:id="@+id/action_registGiftFragment_to_giftReceiveFragment"
+                app:destination="@id/giftReceiveFragment" />
     </fragment>
     <fragment
             android:id="@+id/giftGivenFragment"
@@ -589,5 +592,10 @@
         <action
                 android:id="@+id/action_giftReceiveFragment_to_giftInfoFragment"
                 app:destination="@id/giftInfoFragment" />
+        <action
+                android:id="@+id/action_giftReceiveFragment_to_giftFragment"
+                app:destination="@id/giftFragment"
+                app:popUpTo="@id/giftFragment"
+                app:popUpToInclusive="true" />
     </fragment>
 </navigation>

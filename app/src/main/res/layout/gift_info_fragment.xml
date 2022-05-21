@@ -125,13 +125,11 @@
                             </LinearLayout>
                         </LinearLayout>
 
-                        <com.youth.banner.Banner
+                        <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/banner"
-                                android:layout_marginTop="8dp"
                                 android:layout_width="match_parent"
-                                android:layout_height="200dp"
-                                android:scaleType="centerCrop"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp" />
 
                         <TextView
                                 android:layout_width="match_parent"
@@ -146,7 +144,8 @@
                         <androidx.cardview.widget.CardView
                                 android:layout_width="128dp"
                                 android:layout_height="20dp"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginBottom="6dp"
                                 app:cardCornerRadius="4dp"
                                 app:cardElevation="0dp">
 
@@ -168,6 +167,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
                                 android:orientation="vertical">
                             <TextView
                                     android:layout_width="match_parent"
@@ -332,8 +332,65 @@
                         tools:ignore="HardcodedText" />
             </LinearLayout>
         </ScrollView>
-<!--        <include-->
-<!--                app:status="@{cancelApplyStatus}"-->
-<!--                layout="@layout/loading_action_state"/>-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/imageLayoutZoom"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#DA000000"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:visibility="gone"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:elevation="0dp"
+                    android:background="@color/transparent"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="w,2.5:3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                        android:id="@+id/imageViewZoom"
+                        android:scaleType="fitXY"
+                        android:background="@color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/closeButton"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:backgroundTint="@color/colorWhite"
+                    app:cornerRadius="20dp"
+                    app:icon="@drawable/ic_baseline_close_24"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconTint="#A0000000"
+                    app:layout_constraintBottom_toTopOf="@+id/layout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+                app:status="@{cancelApplyStatus}"
+                layout="@layout/loading_action_state"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

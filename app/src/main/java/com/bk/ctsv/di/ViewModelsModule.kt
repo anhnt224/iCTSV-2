@@ -496,4 +496,15 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(TImageMotelViewModel::class)
     abstract fun contributeTImageMotelViewModel(viewModel: TImageMotelViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TApplyGiftViewModel::class)
+    abstract fun contributeTApplyGiftViewModel(viewModel: TApplyGiftViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TReceiverAddressViewModel::class)
+    abstract fun contributeTReceiveAddressViewModel(viewModel: TReceiverAddressViewModel): ViewModel
 }

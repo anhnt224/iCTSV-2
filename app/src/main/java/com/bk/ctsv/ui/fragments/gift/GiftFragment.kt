@@ -40,7 +40,6 @@ class GiftFragment : Fragment(), Injectable, GiftAdapter.OnItemClickListener{
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.gift_fragment, container, false)
 
-
         setUpRecyclerView()
         subscribeUi()
         return binding.root

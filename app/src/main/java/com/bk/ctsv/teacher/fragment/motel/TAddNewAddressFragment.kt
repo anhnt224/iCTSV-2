@@ -3,6 +3,7 @@ package com.bk.ctsv.teacher.fragment.motel
 import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,12 +21,20 @@ import com.bk.ctsv.extension.showDialogMotel
 import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.UserAddress
+import com.bk.ctsv.models.res.GetPlaceNameAutoByMapRes
 import com.bk.ctsv.teacher.viewmodel.motel.TAddNewAddressViewModel
+import com.bk.ctsv.ui.fragments.user.AddNewAddressFragment
 import com.bk.ctsv.ui.fragments.user.AddNewAddressFragmentDirections
 import com.bk.ctsv.utilities.*
+import com.bk.ctsv.webservices.WebService
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.add_new_address_fragment.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class TAddNewAddressFragment : Fragment(), Injectable {
@@ -52,6 +61,9 @@ class TAddNewAddressFragment : Fragment(), Injectable {
     ): View {
         setupViewModel()
         binding = FragmentTAddNewAddressBinding.inflate(inflater, container, false)
+        if (newLatLng != null){
+            autoGetPlaceName(newLatLng!!.longitude, newLatLng!!.latitude)
+        }
         binding.address = mAddress
         binding.apply {
             textLocation.setEndIconOnClickListener {
@@ -88,6 +100,46 @@ class TAddNewAddressFragment : Fragment(), Injectable {
             .navigate(TAddNewAddressFragmentDirections.actionTAddNewAddressFragmentToTPickLocationFragment())
     }
 
+    private fun autoGetPlaceName(long: Double, lat: Double){
+        val retrofit =
+            Retrofit.Builder().baseUrl(API_MAP).addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val service = retrofit.create(WebService::class.java)
+        val request = service.getPlaceNameAuto(long, lat)
+        Log.d("_MAPPLACENAME", "1")
+        request.enqueue(object : Callback<GetPlaceNameAutoByMapRes> {
+            override fun onResponse(
+                call: Call<GetPlaceNameAutoByMapRes>,
+                response: Response<GetPlaceNameAutoByMapRes>
+            ) {
+                Log.d("_MAPPLACENAME", "2")
+                val getPlaceResponse = response.body()
+                if (getPlaceResponse != null){
+                    if ((getPlaceResponse.data.cityName != null) and
+                        (getPlaceResponse.data.districtName != null) and
+                        ( getPlaceResponse.data.wardName != null)){
+                        binding.apply {
+                            textCity.editText?.setText(getPlaceResponse.data.cityName)
+                            textDistrict.editText?.setText(getPlaceResponse.data.districtName)
+                            textWard.editText?.setText(getPlaceResponse.data.wardName)
+                            getDistrictWard()
+                        }
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<GetPlaceNameAutoByMapRes>, t: Throwable) {
+                Log.d("_MAPPLACENAME", "ERROR MAP ${t.message}")
+            }
+
+        })
+    }
+
+    private fun getDistrictWard(){
+        viewModel.getListDistricts(binding.textCity.editText?.text.toString())
+        viewModel.getListWards(binding.textCity.editText?.text.toString(), binding.textDistrict.editText?.text.toString())
+    }
     private fun subscribeUI(){
         with(viewModel){
             getAddress().observe(viewLifecycleOwner){address ->
@@ -234,7 +286,7 @@ class TAddNewAddressFragment : Fragment(), Injectable {
 
     private fun showAlertPickWard(){
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Chọn Quận/Huyện")
+            .setTitle("Chọn Phường/Xã")
             .setItems(wards.toTypedArray()){ _: DialogInterface?, which: Int ->
                 binding.textWard.editText?.setText(wards[which])
             }
@@ -282,8 +334,8 @@ class TAddNewAddressFragment : Fragment(), Injectable {
                         newLatLng = null
                         binding.apply {
                             textLocation.editText?.setText(mAddress.getLocation())
-                            enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
-                            clearText(textDistrict.editText!!, textWard.editText!!)
+                            //enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                             clearText(textDistrict.editText!!, textWard.editText!!)
                             textAddress.helperText = "VD: Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội"
                         }
                     }

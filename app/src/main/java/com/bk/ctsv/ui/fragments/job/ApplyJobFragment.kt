@@ -35,7 +35,7 @@ class ApplyJobFragment : Fragment(), Injectable {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setUpViewModel()
         binding = DataBindingUtil.inflate(inflater, R.layout.apply_job_fragment, container, false)
         val args = ApplyJobFragmentArgs.fromBundle(requireArguments())

@@ -1,11 +1,13 @@
 package com.bk.ctsv.ui.fragments.gift
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
@@ -31,6 +33,7 @@ class GiftReceiveFragment : Fragment(), Injectable, GiftRegisteredAdapter.OnItem
     private lateinit var binding : FragmentGiftReceiveBinding
     private lateinit var giftReceiverAdapter : GiftRegisteredAdapter
 
+    @SuppressLint("FragmentBackPressedCallback")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,7 +52,14 @@ class GiftReceiveFragment : Fragment(), Injectable, GiftRegisteredAdapter.OnItem
             adapter = giftReceiverAdapter
             layoutManager = LinearLayoutManager(context)
         }
-
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    Navigation.findNavController(requireView())
+                        .navigate(GiftReceiveFragmentDirections.actionGiftReceiveFragmentToGiftFragment(false))
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
 
         subscribeUI()
         return binding.root

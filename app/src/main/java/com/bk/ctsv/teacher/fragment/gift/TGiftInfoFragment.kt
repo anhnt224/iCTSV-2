@@ -1,17 +1,20 @@
 package com.bk.ctsv.teacher.fragment.gift
 
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.bk.ctsv.R
 import com.bk.ctsv.databinding.TGiftInfoFragmentBinding
 import com.bk.ctsv.di.Injectable
@@ -20,22 +23,23 @@ import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.extension.showActionDialog
 import com.bk.ctsv.extension.showNotificationDialog
 import com.bk.ctsv.helper.SharedPrefsHelper
+import com.bk.ctsv.models.entity.ImageMotel2
 import com.bk.ctsv.models.entity.NotificationDialogType
 import com.bk.ctsv.models.entity.gift.Gift
 import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
+import com.bk.ctsv.ui.adapter.ImageGiftAdapter
 import com.bk.ctsv.ui.fragments.gift.GiftInfoFragmentArgs
-import com.bk.ctsv.ui.fragments.gift.GiftInfoFragmentDirections
 import com.bk.ctsv.utilities.API_UPLOAD_SERVICE_BASE_URL
+import com.bk.ctsv.utilities.runOnIoThread
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
-import com.youth.banner.Banner
-import com.youth.banner.adapter.BannerImageAdapter
-import com.youth.banner.holder.BannerImageHolder
-import com.youth.banner.indicator.CircleIndicator
+import java.io.IOException
+import java.net.URL
 import javax.inject.Inject
 
-class TGiftInfoFragment : Fragment(), Injectable {
+
+class TGiftInfoFragment : Fragment(), Injectable, ImageGiftAdapter.OnItemClickListener {
     private lateinit var viewModel: TGiftInfoViewModel
     @Inject
     lateinit var factory: ViewModelFactory
@@ -43,6 +47,9 @@ class TGiftInfoFragment : Fragment(), Injectable {
     @Inject
     lateinit var sharedPrefsHelper: SharedPrefsHelper
     private lateinit var gift: Gift
+    private lateinit var giftImageAdapter: ImageGiftAdapter
+    private val snapHelper: SnapHelper = LinearSnapHelper()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,81 +81,48 @@ class TGiftInfoFragment : Fragment(), Injectable {
                 )
 
             }
-            banner.setOnClickListener {
 
-            }
+
         }
-
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                navigateToGiftFragment()
-            }
-        })
 
         return binding.root
     }
+
 
     private fun setUpViewModel(){
         viewModel = ViewModelProvider(this, factory).get(TGiftInfoViewModel::class.java)
     }
 
     private fun navigateToRegisterGift(gift: Gift){
-        val action = GiftInfoFragmentDirections.actionGiftInfoFragmentToRegistGiftFragment(gift)
+        val action = TGiftInfoFragmentDirections.actionTGiftInfoFragmentToTApplyGiftFragment(gift)
         Navigation.findNavController(requireView()).navigate(action)
     }
 
     private fun fillInfo(gift: Gift){
         binding.gift = gift
         val imageUrls = listOf(
-            "${API_UPLOAD_SERVICE_BASE_URL}ATMGift/DownloadImageGift?" +
+            ImageMotel2("${API_UPLOAD_SERVICE_BASE_URL}ATMGift/DownloadImageGift?" +
                     "UserName=${sharedPrefsHelper.getUserName()}&" +
                     "TokenCode=${sharedPrefsHelper.getToken()}&" +
-                    "GiftID=${gift.id}&TypeImage=1",
-            "${API_UPLOAD_SERVICE_BASE_URL}ATMGift/DownloadImageGift?" +
+                    "GiftID=${gift.id}&TypeImage=1", 1),
+            ImageMotel2("${API_UPLOAD_SERVICE_BASE_URL}ATMGift/DownloadImageGift?" +
                     "UserName=${sharedPrefsHelper.getUserName()}&" +
                     "TokenCode=${sharedPrefsHelper.getToken()}&" +
-                    "GiftID=${gift.id}&TypeImage=2",
-            "${API_UPLOAD_SERVICE_BASE_URL}ATMGift/DownloadImageGift?" +
+                    "GiftID=${gift.id}&TypeImage=2", 2),
+            ImageMotel2("${API_UPLOAD_SERVICE_BASE_URL}ATMGift/DownloadImageGift?" +
                     "UserName=${sharedPrefsHelper.getUserName()}&" +
                     "TokenCode=${sharedPrefsHelper.getToken()}&" +
-                    "GiftID=${gift.id}&TypeImage=3"
+                    "GiftID=${gift.id}&TypeImage=3", 3)
         )
 
-        val banner = binding.banner as Banner<String, BannerImageAdapter<String>>
-        banner.apply {
-            addBannerLifecycleObserver(viewLifecycleOwner)
-            indicator = CircleIndicator(context)
-            setAdapter(object: BannerImageAdapter<String>(imageUrls){
-                override fun onBindView(
-                    holder: BannerImageHolder,
-                    data: String,
-                    position: Int,
-                    size: Int
-                ) {
-                    holder.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
-                    holder.imageView.setBackgroundColor(
-                        ContextCompat.getColor(requireContext(), R.color.mainBackground)
-                    )
-                    val shimmer = Shimmer.AlphaHighlightBuilder()
-                        .setDuration(1800)
-                        .setBaseAlpha(0.7f) //the alpha of the underlying children
-                        .setHighlightAlpha(0.6f) // the shimmer alpha amount
-                        .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
-                        .setAutoStart(true)
-                        .build()
-                    val shimmerDrawable = ShimmerDrawable().apply {
-                        setShimmer(shimmer)
-                    }
-                    Glide.with(requireActivity())
-                        .load(data)
-                        .centerInside()
-                        .placeholder(shimmerDrawable)
-                        .error(R.drawable.ic_gift_default)
-                        .into(holder.imageView)
-                }
-
-            })
+        giftImageAdapter = ImageGiftAdapter(imageUrls, requireActivity(), this)
+        binding.banner.apply {
+            adapter = giftImageAdapter
+            layoutManager = LinearLayoutManager(context,
+                LinearLayoutManager.HORIZONTAL,
+                false)
         }
+        snapHelper.attachToRecyclerView(binding.banner)
 
         binding.apply {
             statusText.setBackgroundColor(
@@ -185,7 +159,36 @@ class TGiftInfoFragment : Fragment(), Injectable {
     }
 
     private fun navigateToGiftFragment(){
-        val action = TGiftInfoFragmentDirections.actionTGiftInfoFragmentToTGiftFragment()
+        val action = TGiftInfoFragmentDirections.actionTGiftInfoFragmentToTGiftReceivedFragment()
         Navigation.findNavController(requireView()).navigate(action)
+    }
+    private fun seePictureZoom(image: ImageMotel2){
+        binding.imageLayoutZoom.visibility = View.VISIBLE
+        val shimmer = Shimmer.AlphaHighlightBuilder()
+            .setDuration(1800)
+            .setBaseAlpha(0.7f) //the alpha of the underlying children
+            .setHighlightAlpha(0.6f) // the shimmer alpha amount
+            .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+            .setAutoStart(true)
+            .build()
+        val shimmerDrawable = ShimmerDrawable().apply {
+            setShimmer(shimmer)
+        }
+        val url = image.urlImage
+        Log.d("_IMAGE", "ok ${url}")
+        Glide.with(requireActivity())
+            .load(url)
+            .placeholder(shimmerDrawable)
+            .error(R.drawable.ic_gift_default)
+            .into(binding.imageViewZoom)
+
+        binding.closeButton.setOnClickListener {
+            binding.imageLayoutZoom.visibility = View.GONE
+        }
+    }
+
+
+    override fun onClickImageGift(imageGift: ImageMotel2) {
+        seePictureZoom(imageGift)
     }
 }
