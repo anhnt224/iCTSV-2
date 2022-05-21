@@ -1,47 +1,41 @@
-package com.bk.ctsv.ui.fragments.user
+package com.bk.ctsv.teacher.fragment.motel
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bk.ctsv.R
 import com.bk.ctsv.common.RetryCallback
-import com.bk.ctsv.databinding.ListAddressFragmentBinding
+import com.bk.ctsv.databinding.FragmentTListAddressBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.extension.showToast
-import com.bk.ctsv.models.entity.User
 import com.bk.ctsv.models.entity.UserAddress
+import com.bk.ctsv.teacher.viewmodel.motel.TListAddressViewModel
 import com.bk.ctsv.ui.adapter.user.AddressAdapter
-import com.bk.ctsv.ui.viewmodels.user.ListAddressViewModel
+import com.bk.ctsv.ui.fragments.user.ListAddressFragmentDirections
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 
-class ListAddressFragment : Fragment(), Injectable, AddressAdapter.OnItemButtonClickListener {
-
-    companion object {
-        fun newInstance() = ListAddressFragment()
-    }
+class TListAddressFragment : Fragment(), Injectable, AddressAdapter.OnItemButtonClickListener {
 
     @Inject
     lateinit var factory: ViewModelFactory
-    private lateinit var viewModel: ListAddressViewModel
-    private lateinit var binding: ListAddressFragmentBinding
+    private lateinit var binding : FragmentTListAddressBinding
+    private lateinit var viewModel: TListAddressViewModel
     private lateinit var addressAdapter: AddressAdapter
     private var addressSelected: UserAddress? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        setUpViewModel()
+    ): View {
+        setupViewModel()
         setHasOptionsMenu(true)
-        binding = DataBindingUtil.inflate(inflater, R.layout.list_address_fragment, container, false)
+        binding = FragmentTListAddressBinding.inflate(inflater, container, false)
         addressAdapter = AddressAdapter(arrayListOf(), this)
         viewModel.getListAddress()
         binding.apply {
@@ -59,8 +53,9 @@ class ListAddressFragment : Fragment(), Injectable, AddressAdapter.OnItemButtonC
         return binding.root
     }
 
-    private fun setUpViewModel(){
-        viewModel = ViewModelProvider(this, factory).get(ListAddressViewModel::class.java)
+
+    private fun setupViewModel(){
+        viewModel = ViewModelProvider(this, factory).get(TListAddressViewModel::class.java)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -71,7 +66,8 @@ class ListAddressFragment : Fragment(), Injectable, AddressAdapter.OnItemButtonC
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.add -> {
-                Navigation.findNavController(requireView()).navigate(ListAddressFragmentDirections.actionListAddressFragmentToAddNewAddressFragment())
+                Navigation.findNavController(requireView())
+                    .navigate(TListAddressFragmentDirections.actionTListAddressFragmentToTAddNewAddressFragment())
                 true
             }
             else -> super.onOptionsItemSelected(item)

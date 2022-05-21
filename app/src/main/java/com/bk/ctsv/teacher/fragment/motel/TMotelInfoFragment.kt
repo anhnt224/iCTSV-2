@@ -56,7 +56,7 @@ class TMotelInfoFragment : Fragment(), Injectable {
             textViewContactMotel.text = motel.managerContact
             textViewAddressDetail.text = motel.managerContact
             textViewDescriptionMotel.text = motel.description
-            RatingMotel.rating = motel.rate.toFloat()
+            RatingMotel.rating = motel.rate.toFloat()/20
             textViewComment.text = motel.comment
             copy.setOnClickListener {
                 copy()

@@ -102,12 +102,10 @@
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_note.xml" value="0.20833333333333334" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_received_gift.xml" value="0.20833333333333334" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_item_run_result.xml" value="0.20833333333333334" />
-        <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/list_run_result_item.xml" value="0.365625" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/loading_action_state.xml" value="0.36666666666666664" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/loading_state.xml" value="0.36666666666666664" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/motel_info_fragment.xml" value="0.22" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/pick_location_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/run_dashboard_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/search_motel_fragment.xml" value="0.33" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/menu/menu_list_address.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/drawable-anydpi/ic_clock.xml" value="0.3861111111111111" />
@@ -145,7 +143,7 @@
         <entry key="app/src/main/res/drawable/uc_complete_round.xml" value="0.38333333333333336" />
         <entry key="app/src/main/res/layout/account_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14356884057971014" />
-        <entry key="app/src/main/res/layout/activity_teacher.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_teacher.xml" value="0.375" />
         <entry key="app/src/main/res/layout/add_new_address_fragment.xml" value="0.12259371833839919" />
         <entry key="app/src/main/res/layout/alert_dialog.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/approve_gift_code.xml" value="0.33" />
@@ -159,15 +157,20 @@
         <entry key="app/src/main/res/layout/dialog_motel.xml" value="0.125" />
         <entry key="app/src/main/res/layout/dialog_notification.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_add_motel_info.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/fragment_add_motel_info2.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/fragment_event.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/fragment_gift_receive.xml" value="0.1421875" />
         <entry key="app/src/main/res/layout/fragment_image_motel.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_more_job.xml" value="0.10285714285714286" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.12259371833839919" />
+        <entry key="app/src/main/res/layout/fragment_t_add_new_address.xml" value="0.16354166666666667" />
         <entry key="app/src/main/res/layout/fragment_t_gift_received.xml" value="0.16822916666666668" />
+        <entry key="app/src/main/res/layout/fragment_t_image_motel.xml" value="0.16757246376811594" />
+        <entry key="app/src/main/res/layout/fragment_t_list_address.xml" value="0.16354166666666667" />
         <entry key="app/src/main/res/layout/fragment_t_more_job.xml" value="0.16822916666666668" />
         <entry key="app/src/main/res/layout/fragment_t_motel_info.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/fragment_t_pick_location.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/fragment_t_search_motel.xml" value="0.19655797101449277" />
         <entry key="app/src/main/res/layout/fragment_user_check_in_activity.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/gift_fragment.xml" value="0.2495697074010327" />
@@ -179,6 +182,7 @@
         <entry key="app/src/main/res/layout/layout_loading.xml" value="0.1408308004052685" />
         <entry key="app/src/main/res/layout/list_activities_of_student_fragment.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/list_activity_fragment.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/list_address_fragment.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/list_item_address.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/list_item_address_picker.xml" value="0.293213828425096" />
         <entry key="app/src/main/res/layout/list_item_event.xml" value="0.4036458333333333" />

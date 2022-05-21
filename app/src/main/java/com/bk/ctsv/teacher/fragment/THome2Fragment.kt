@@ -63,7 +63,8 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         HomeItem("10.000 bước", R.drawable.ic_running),
         HomeItem("Quà tặng", R.drawable.ic_gift),
         HomeItem("Cho/tặng quà", R.drawable.ic_receive_gift),
-        HomeItem("Nhà trọ", R.drawable.ic_motel)
+        HomeItem("Nhà trọ", R.drawable.ic_motel),
+        HomeItem("Sổ địa chỉ", R.drawable.ic_home_location)
     )
 
     @SuppressLint("SetTextI18n")
@@ -220,6 +221,11 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         Navigation.findNavController(requireView()).navigate(action)
     }
 
+    private fun navigateToListAddress(){
+        val action = THome2FragmentDirections.actionTHome2FragmentToTListAddressFragment()
+        Navigation.findNavController(requireView()).navigate(action)
+    }
+
     override fun onItemClick(activity: Activity) {
         //
     }
@@ -247,6 +253,7 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             1 -> navigateToGiftFragment()
             2 -> navigateToGiftGiven()
             3 -> navigateSearchMotel()
+            4 -> navigateToListAddress()
         }
     }
 

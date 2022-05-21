@@ -713,12 +713,12 @@ interface WebService {
     ): Call<CTSVAssignUserActivityRes>
 
     @FormUrlEncoded
-    @POST("CTSV/CTSVDelImageMotelReq")
+    @POST("CTSV/CTSVDelImageMotel")
     fun delImageMotel(
         @Field("UserName") userName: String,
-        @Field("TokenCode") tokenCode: String,
+        @Field("Token") tokenCode: String,
         @Field("MotelID") id: Int,
-        @Field("TypeImage") type: Int
+        @Field("TypeImg") type: Int
     ): LiveData<ApiResponse<MyCTSVCap>>
 
     @FormUrlEncoded

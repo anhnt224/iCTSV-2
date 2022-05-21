@@ -15,8 +15,7 @@ import com.bk.ctsv.teacher.viewmodel.form.*
 import com.bk.ctsv.teacher.viewmodel.gift.*
 import com.bk.ctsv.teacher.viewmodel.job.TListJobsViewModel
 import com.bk.ctsv.teacher.viewmodel.job.TMoreJobViewModel
-import com.bk.ctsv.teacher.viewmodel.motel.TMotelInfoViewModel
-import com.bk.ctsv.teacher.viewmodel.motel.TSearchMotelViewModel
+import com.bk.ctsv.teacher.viewmodel.motel.*
 import com.bk.ctsv.teacher.viewmodel.scholarShip.TListScholarShipsViewModel
 import com.bk.ctsv.teacher.viewmodel.student.*
 import com.bk.ctsv.ui.fragments.Home2ViewModel
@@ -473,4 +472,28 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(TMotelInfoViewModel::class)
     abstract fun contributeTMotelInfoViewModel(viewModel: TMotelInfoViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TAddNewAddressViewModel::class)
+    abstract fun contributeTAddNewAddressViewModel(viewModel: TAddNewAddressViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TListAddressViewModel::class)
+    abstract fun contributeTListAddressViewModel(viewModel: TListAddressViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TAddMotelInfoViewModel::class)
+    abstract fun contributeTAddMotelInfoViewModel(viewModel: TAddMotelInfoViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TImageMotelViewModel::class)
+    abstract fun contributeTImageMotelViewModel(viewModel: TImageMotelViewModel): ViewModel
 }

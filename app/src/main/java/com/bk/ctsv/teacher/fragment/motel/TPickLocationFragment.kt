@@ -1,20 +1,17 @@
-package com.bk.ctsv.ui.fragments.user
+package com.bk.ctsv.teacher.fragment.motel
 
 import android.annotation.SuppressLint
 import android.location.Address
 import android.location.Geocoder
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
-import com.bk.ctsv.R
-import com.bk.ctsv.databinding.PickLocationFragmentBinding
-import com.bk.ctsv.teacher.fragment.motel.TAddNewAddressFragment
-import com.bk.ctsv.ui.viewmodels.user.PickLocationViewModel
+import com.bk.ctsv.databinding.FragmentTPickLocationBinding
+import com.bk.ctsv.teacher.viewmodel.motel.TPickLocationViewModel
 import com.bk.ctsv.utilities.DEFAULT_LATLNG
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,38 +21,36 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.lang.Exception
 import java.util.*
 
-class PickLocationFragment : Fragment(), OnMapReadyCallback {
+class TPickLocationFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var viewModel: PickLocationViewModel
-    private lateinit var binding: PickLocationFragmentBinding
+
+    private lateinit var viewModel: TPickLocationViewModel
     private lateinit var mMap: GoogleMap
-
+    private lateinit var binding: FragmentTPickLocationBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProviders.of(this).get(PickLocationViewModel::class.java)
-        binding = DataBindingUtil.inflate(inflater, R.layout.pick_location_fragment, container, false)
+        viewModel = ViewModelProvider(this).get(TPickLocationViewModel::class.java)
+        binding = FragmentTPickLocationBinding.inflate(inflater, container, false)
         binding.mapView.getMapAsync(this)
         binding.apply {
             mapView.onCreate(savedInstanceState)
             mapView.onResume()
         }
-        if(AddNewAddressFragment.newLatLng != null){
-            fillLocationInfo(AddNewAddressFragment.newLatLng!!)
+        if(TAddNewAddressFragment.newLatLng != null){
+            fillLocationInfo(TAddNewAddressFragment.newLatLng!!)
         }
         return binding.root
     }
-
-
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.isMyLocationEnabled = true
-        if(AddNewAddressFragment.newLatLng != null){
+        if(TAddNewAddressFragment.newLatLng != null){
             mMap.clear()
-            val latLng = AddNewAddressFragment.newLatLng
+            val latLng = TAddNewAddressFragment.newLatLng
             mMap.addMarker(MarkerOptions().position(latLng!!))
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15F))
         }else{
@@ -65,7 +60,7 @@ class PickLocationFragment : Fragment(), OnMapReadyCallback {
 
         mMap.setOnMapClickListener {latLng ->
             mMap.clear()
-            AddNewAddressFragment.newLatLng = latLng
+            TAddNewAddressFragment.newLatLng = latLng
             fillLocationInfo(latLng)
             mMap.addMarker(MarkerOptions().position(latLng))
         }
@@ -112,4 +107,5 @@ class PickLocationFragment : Fragment(), OnMapReadyCallback {
         }
 
     }
+
 }

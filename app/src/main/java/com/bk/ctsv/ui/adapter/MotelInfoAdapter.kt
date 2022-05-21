@@ -18,6 +18,7 @@ class MotelInfoAdapter(
         ): RecyclerView.ViewHolder(binding.root){
         fun bindView(motel: Motel){
             binding.motel = motel
+            binding.ratingBar.rating = motel.rate.toFloat()/20f
             binding.apply {
                 cardViewOpenMotelItem.setOnClickListener {
                     onItemMotelInfoClickListener.navigateToMotelInfoDetailFragment(motel)

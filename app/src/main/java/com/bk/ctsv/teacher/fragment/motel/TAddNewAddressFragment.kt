@@ -1,4 +1,4 @@
-package com.bk.ctsv.ui.fragments.user
+package com.bk.ctsv.teacher.fragment.motel
 
 import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
@@ -8,11 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import com.bk.ctsv.R
-import com.bk.ctsv.databinding.AddNewAddressFragmentBinding
+import com.bk.ctsv.databinding.FragmentTAddNewAddressBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkLocationPermission
@@ -21,17 +20,17 @@ import com.bk.ctsv.extension.showDialogMotel
 import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.UserAddress
-import com.bk.ctsv.ui.viewmodels.user.AddNewAddressViewModel
+import com.bk.ctsv.teacher.viewmodel.motel.TAddNewAddressViewModel
+import com.bk.ctsv.ui.fragments.user.AddNewAddressFragmentDirections
 import com.bk.ctsv.utilities.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.add_new_address_fragment.*
 import javax.inject.Inject
 
-class AddNewAddressFragment : Fragment(), Injectable {
+class TAddNewAddressFragment : Fragment(), Injectable {
 
     companion object {
-        fun newInstance() = AddNewAddressFragment()
         var newLatLng: LatLng? = null
         var address: String = ""
         var mAddress = UserAddress()
@@ -40,9 +39,8 @@ class AddNewAddressFragment : Fragment(), Injectable {
     lateinit var sharedPrefsHelper: SharedPrefsHelper
     @Inject
     lateinit var factory: ViewModelFactory
-
-    private lateinit var viewModel: AddNewAddressViewModel
-    private lateinit var binding: AddNewAddressFragmentBinding
+    private lateinit var viewModel: TAddNewAddressViewModel
+    private lateinit var binding: FragmentTAddNewAddressBinding
     private var cities: List<String> = listOf()
     private var districts: List<String> = listOf()
     private var wards: List<String> = listOf()
@@ -52,8 +50,8 @@ class AddNewAddressFragment : Fragment(), Injectable {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setUpViewModel()
-        binding = DataBindingUtil.inflate(inflater, R.layout.add_new_address_fragment, container, false)
+        setupViewModel()
+        binding = FragmentTAddNewAddressBinding.inflate(inflater, container, false)
         binding.address = mAddress
         binding.apply {
             textLocation.setEndIconOnClickListener {
@@ -81,13 +79,13 @@ class AddNewAddressFragment : Fragment(), Injectable {
         return binding.root
     }
 
-    private fun setUpViewModel(){
-        viewModel = ViewModelProvider(this, factory).get(AddNewAddressViewModel::class.java)
+    private fun setupViewModel(){
+        viewModel = ViewModelProvider(this, factory).get(TAddNewAddressViewModel::class.java)
     }
-
     private fun pickLocation(){
         setAddress()
-        Navigation.findNavController(requireView()).navigate(AddNewAddressFragmentDirections.actionAddNewAddressFragmentToPickLocationFragment())
+        Navigation.findNavController(requireView())
+            .navigate(TAddNewAddressFragmentDirections.actionTAddNewAddressFragmentToTPickLocationFragment())
     }
 
     private fun subscribeUI(){
@@ -95,7 +93,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
             getAddress().observe(viewLifecycleOwner){address ->
                 mAddress = address
                 if(newLatLng != null){
-                    mAddress.latitude = newLatLng!!.latitude
+                    mAddress.latitude =newLatLng!!.latitude
                     mAddress.longtitude = newLatLng!!.longitude
                 }
                 if(mAddress.type == types[0] || mAddress.type == types[1]){
@@ -170,8 +168,8 @@ class AddNewAddressFragment : Fragment(), Injectable {
             mAddress.longtitude = newLatLng!!.longitude
         }
 
-        if (mAddress.city.isEmpty() || mAddress.district.isEmpty() || mAddress.ward.isEmpty() || mAddress.contact.isEmpty()
-            || mAddress.type.isEmpty() || mAddress.longtitude == 0.0 || mAddress.latitude == 0.0 || mAddress.address.isEmpty() || mAddress.email.isEmpty()
+        if (mAddress.city.isEmpty() ||mAddress.district.isEmpty() || mAddress.ward.isEmpty() || mAddress.contact.isEmpty()
+            || mAddress.type.isEmpty() ||mAddress.longtitude == 0.0 || mAddress.latitude == 0.0 ||mAddress.address.isEmpty() || mAddress.email.isEmpty()
         ) {
             showToast("Vui lòng nhập đầy đủ thông tin")
         } else {
@@ -205,12 +203,12 @@ class AddNewAddressFragment : Fragment(), Injectable {
 
     private fun navigateToAddMotelFragment(){
         Navigation.findNavController(requireView()).
-        navigate(AddNewAddressFragmentDirections.actionAddNewAddressFragmentToAddMotelInfoFragment())
+        navigate(TAddNewAddressFragmentDirections.actionTAddNewAddressFragmentToTAddMotelInfoFragment())
     }
     private fun showAlertPickCity(){
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chọn Tỉnh/Thành phố")
-            .setItems(cities.toTypedArray()){_: DialogInterface?, which: Int ->
+            .setItems(cities.toTypedArray()){ _: DialogInterface?, which: Int ->
                 binding.textCity.editText?.setText(cities[which])
                 viewModel.getListDistricts(binding.textCity.editText?.text.toString())
                 binding.textDistrict.editText?.setText("")
@@ -224,7 +222,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
     private fun showAlertPickDistrict(){
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chọn Quận/Huyện")
-            .setItems(districts.toTypedArray()){_: DialogInterface?, which: Int ->
+            .setItems(districts.toTypedArray()){ _: DialogInterface?, which: Int ->
                 binding.textDistrict.editText?.setText(districts[which])
                 viewModel.getListWards(binding.textCity.editText?.text.toString(), binding.textDistrict.editText?.text.toString())
                 binding.textWard.editText?.setText("")
@@ -237,7 +235,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
     private fun showAlertPickWard(){
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chọn Quận/Huyện")
-            .setItems(wards.toTypedArray()){_: DialogInterface?, which: Int ->
+            .setItems(wards.toTypedArray()){ _: DialogInterface?, which: Int ->
                 binding.textWard.editText?.setText(wards[which])
             }
             .setNegativeButton("Hủy"){_, _ ->
@@ -248,7 +246,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
     private fun showAlertPickType(){
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chọn loại nơi ở")
-            .setItems(types.toTypedArray()){_: DialogInterface?, which: Int ->
+            .setItems(types.toTypedArray()){ _: DialogInterface?, which: Int ->
                 textType.editText?.setText(types[which])
                 when(which){
                     0 -> {
@@ -312,4 +310,5 @@ class AddNewAddressFragment : Fragment(), Injectable {
             it.setText("")
         }
     }
+
 }

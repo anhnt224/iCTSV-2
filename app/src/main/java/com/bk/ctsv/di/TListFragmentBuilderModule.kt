@@ -12,8 +12,7 @@ import com.bk.ctsv.teacher.fragment.form.*
 import com.bk.ctsv.teacher.fragment.gift.*
 import com.bk.ctsv.teacher.fragment.job.TListJobsFragment
 import com.bk.ctsv.teacher.fragment.job.TMoreJobFragment
-import com.bk.ctsv.teacher.fragment.motel.TMotelInfoFragment
-import com.bk.ctsv.teacher.fragment.motel.TSearchMotelFragment
+import com.bk.ctsv.teacher.fragment.motel.*
 import com.bk.ctsv.teacher.fragment.scholarShip.TListScholarShipsFragment
 import com.bk.ctsv.teacher.fragment.student.*
 import com.bk.ctsv.ui.fragments.form.ListFormsFragment
@@ -119,5 +118,17 @@ abstract class TListFragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTSearchMotel(): TSearchMotelFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTAddNewAddressMotel(): TAddNewAddressFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTListAddressMotel(): TListAddressFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTAddMotelInfoMotel(): TAddMotelInfoFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTImageMotel(): TImageMotelFragment
 
 }

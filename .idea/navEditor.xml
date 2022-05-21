@@ -116,8 +116,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="518" />
-                            <option name="y" value="-3161" />
+                            <option name="x" value="548" />
+                            <option name="y" value="-3171" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -315,6 +315,16 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_giftFragment_to_giftInfoFragment2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_giftFragment_to_giftReceiveFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -380,6 +390,15 @@
                             <option name="x" value="742" />
                             <option name="y" value="1715" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_giftReceiveFragment_to_giftInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -711,6 +730,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_listJobsFragment_self">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_listJobsFragment_to_jobDetailFragment">
                               <value>
                                 <LayoutPositions />
@@ -781,8 +805,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="285" />
-                            <option name="y" value="-3585" />
+                            <option name="x" value="315" />
+                            <option name="y" value="-3543" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -809,6 +833,11 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_moreJobFragment_to_jobDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_moreJobFragment_to_listJobApplyFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1232,6 +1261,53 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="TAddMotelInfoFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="808" />
+                            <option name="y" value="3228" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_TAddMotelInfoFragment_to_TImageMotelFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_TAddMotelInfoFragment_to_TListAddressFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="TAddNewAddressFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="528" />
+                            <option name="y" value="3239" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_TAddNewAddressFragment_to_TAddMotelInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="TChangePasswordFragment">
                     <value>
                       <LayoutPositions>
@@ -1444,6 +1520,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_THome2Fragment_to_TListAddressFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_THome2Fragment_to_TListFormFragment">
                               <value>
                                 <LayoutPositions />
@@ -1489,8 +1570,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1012" />
-                            <option name="y" value="869" />
+                            <option name="x" value="-1023" />
+                            <option name="y" value="830" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -1525,6 +1606,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="TImageMotelFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1052" />
+                            <option name="y" value="3228" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_TImageMotelFragment_to_TListAddressFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="TJobDetailFragment">
                     <value>
                       <LayoutPositions>
@@ -1549,6 +1651,27 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_TListActivitiesFragment_to_TActivityInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="TListAddressFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="238" />
+                            <option name="y" value="3228" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_TListAddressFragment_to_TAddNewAddressFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1704,6 +1827,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="TPickLocationFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="808" />
+                            <option name="y" value="3660" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="TRegisterFormFragment">
                     <value>
                       <LayoutPositions>
@@ -1804,18 +1939,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="motelInfoFragment2">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="467" />
-                            <option name="y" value="-2388" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="runDashboardFragment2">
                     <value>
                       <LayoutPositions>
@@ -1844,18 +1967,6 @@
                           <Point>
                             <option name="x" value="-386" />
                             <option name="y" value="3080" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="searchMotelFragment2">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="203" />
-                            <option name="y" value="-2385" />
                           </Point>
                         </option>
                       </LayoutPositions>
