@@ -20,12 +20,10 @@ import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.extension.showActionDialog
 import com.bk.ctsv.extension.showToast
-import com.bk.ctsv.generated.callback.RetryCallback
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.gift.Gift
 import com.bk.ctsv.ui.adapter.gift.GiftCreatedAdapter
 import com.bk.ctsv.ui.viewmodels.gift.GiftGivenViewModel
-import kotlinx.android.synthetic.main.item_list_job.*
 import javax.inject.Inject
 
 class GiftGivenFragment : Fragment(), Injectable, GiftCreatedAdapter.OnItemClickListener {

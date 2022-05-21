@@ -4,13 +4,11 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bk.ctsv.MainActivity
 import com.bk.ctsv.R
 import com.bk.ctsv.databinding.GiftFragmentBinding
 import com.bk.ctsv.di.Injectable

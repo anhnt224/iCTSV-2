@@ -17,7 +17,6 @@ import com.bk.ctsv.databinding.ReceiverAddressFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
-import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.models.entity.UserAddress
 import com.bk.ctsv.ui.adapter.OnItemClickListener
 import com.bk.ctsv.ui.adapter.form.AddressPickerAdapter

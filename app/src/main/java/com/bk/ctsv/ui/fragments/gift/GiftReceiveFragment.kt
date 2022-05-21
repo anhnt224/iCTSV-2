@@ -65,6 +65,7 @@ class GiftReceiveFragment : Fragment(), Injectable, GiftRegisteredAdapter.OnItem
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun subscribeUI(){
         with(viewModel){
             giftsRegistered.observe(viewLifecycleOwner){
