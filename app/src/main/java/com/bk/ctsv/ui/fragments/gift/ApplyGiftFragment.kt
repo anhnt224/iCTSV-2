@@ -118,7 +118,7 @@ class ApplyGiftFragment : Fragment(), Injectable {
     }
 
     private fun popToListGifts(){
-        val action = ApplyGiftFragmentDirections.actionRegistGiftFragmentToGiftFragment(true)
+        val action = ApplyGiftFragmentDirections.actionRegistGiftFragmentToGiftReceiveFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 }

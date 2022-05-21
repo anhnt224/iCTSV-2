@@ -31,7 +31,6 @@ import com.youth.banner.Banner
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
-import kotlinx.android.synthetic.main.gift_info_fragment.*
 import javax.inject.Inject
 
 class GiftInfoFragment : Fragment(), Injectable {

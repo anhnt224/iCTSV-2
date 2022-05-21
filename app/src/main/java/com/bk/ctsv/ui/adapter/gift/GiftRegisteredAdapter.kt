@@ -30,12 +30,6 @@ class GiftRegisteredAdapter(
                 root.setOnClickListener {
                     onItemClickListener.onItemClick(gift)
                 }
-//                statusText.setBackgroundColor(
-//                    ContextCompat.getColor(root.context, gift.getUStatus().bgColor)
-//                )
-//                statusText.setTextColor(
-//                    ContextCompat.getColor(root.context, gift.getUStatus().titleColor)
-//                )
             }
 
             val shimmer = Shimmer.AlphaHighlightBuilder()

@@ -490,6 +490,11 @@
         <action
                 android:id="@+id/action_registGiftFragment_to_receiverAddressFragment"
                 app:destination="@id/receiverAddressFragment" />
+        <action
+                android:id="@+id/action_registGiftFragment_to_giftReceiveFragment"
+                app:destination="@id/giftReceiveFragment"
+                app:popUpTo="@id/giftReceiveFragment"
+                app:popUpToInclusive="true" />
     </fragment>
     <fragment
             android:id="@+id/giftGivenFragment"

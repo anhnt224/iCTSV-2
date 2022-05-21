@@ -3,17 +3,13 @@ package com.bk.ctsv
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
@@ -28,7 +24,6 @@ import com.bk.ctsv.ui.fragments.HomeFragmentDirections
 import com.bk.ctsv.ui.fragments.help.HelpFragmentDirections
 import com.bk.ctsv.ui.fragments.user.AccountFragmentDirections
 import com.bk.ctsv.ui.fragments.user.MessageListFragmentDirections
-import com.bk.ctsv.utilities.IOnBackPressed
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
@@ -40,7 +35,6 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import java.lang.Exception
-import java.security.MessageDigest
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() , DrawerLocker, HasSupportFragmentInjector {
@@ -92,7 +86,7 @@ class MainActivity : AppCompatActivity() , DrawerLocker, HasSupportFragmentInjec
             }
         }
 
-        binding.navigation.setOnNavigationItemSelectedListener {menuItem ->
+        binding.navigation.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId){
                 R.id.scanQR -> {
                     startQRcodeActitivity()

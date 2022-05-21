@@ -1,5 +1,6 @@
 package com.bk.ctsv.ui.fragments.gift
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -55,6 +56,7 @@ class GiftReceiveFragment : Fragment(), Injectable, GiftRegisteredAdapter.OnItem
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun subscribeUI(){
         with(viewModel){
             giftsRegistered.observe(viewLifecycleOwner){
