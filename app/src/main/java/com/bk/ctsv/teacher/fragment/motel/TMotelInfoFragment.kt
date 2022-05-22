@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -59,9 +61,24 @@ class TMotelInfoFragment : Fragment(), Injectable, MotelImageAdapter.OnItemClick
             copy.setOnClickListener {
                 copy()
             }
+
+            textViewContactMotel.setOnClickListener {
+                if (textViewContactMotel.text.isNotEmpty()){
+                    telHotline(textViewContactMotel.text.toString())
+                }
+            }
         }
 
         return binding.root
+    }
+
+    private fun telHotline(phone: String){
+        try{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("tel:${phone}"))
+            startActivity(intent)
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
     }
 
     private fun copy(){

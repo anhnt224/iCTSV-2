@@ -26,6 +26,7 @@ import com.bk.ctsv.databinding.SearchMotelFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
+import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.ui.adapter.MotelInfoAdapter
 import com.bk.ctsv.ui.viewmodels.motel.SearchMotelViewModel
@@ -57,7 +58,7 @@ class SearchMotelFragment : Fragment(),
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,7 +68,12 @@ class SearchMotelFragment : Fragment(),
             R.layout.search_motel_fragment,
             container,
             false)
-
+        if (viewModel.getRadius() == null ){
+            viewModel.setRadius(1000.0)
+        }else{
+            binding.showSelectDistance1.text = "${viewModel.getRadius()!!.toInt() /1000} km"
+            binding.showSelectDistance2.text = "${viewModel.getRadius()!!.toInt() /1000} km"
+        }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity().baseContext)
         binding.map.getMapAsync(this)
         binding.apply {
@@ -155,7 +161,8 @@ class SearchMotelFragment : Fragment(),
                     pinNowLocation(googleMap, latLng, 5000.0)
                 }
             }
-            viewModel.getListMotel(latLng.latitude, latLng.longitude, viewModel.getRadius().toInt())
+            viewModel.getRadius()
+                ?.let { viewModel.getListMotel(latLng.latitude, latLng.longitude, it.toInt()) }
             subscribeUI()
         }
 
@@ -199,8 +206,13 @@ class SearchMotelFragment : Fragment(),
     override fun onMapReady(p0: GoogleMap?) {
         googleMap = p0!!
         googleMap.uiSettings.isZoomControlsEnabled = true
+        if (viewModel.getRadius() == null ){
+            viewModel.setRadius(1000.0)
+        }else{
+            binding.showSelectDistance1.text = "${viewModel.getRadius()!!.toInt() /1000} km"
+            binding.showSelectDistance2.text = "${viewModel.getRadius()!!.toInt() /1000} km"
+        }
         setUpMap()
-      //  viewModel.latLng.value = LatLng( p0.myLocation.latitude, p0.myLocation.longitude)
 
         val bitmapDraw = ContextCompat.getDrawable(
             requireContext(),
@@ -212,12 +224,12 @@ class SearchMotelFragment : Fragment(),
             googleMap.clear()
             viewModel.latLng.value = latLng
             fillLocationInfo(latLng)
-            drawCircle(latLng, viewModel.getRadius())
+            viewModel.getRadius()?.let { drawCircle(latLng, it) }
             googleMap.addMarker(MarkerOptions()
                 .position(latLng))
                 .setIcon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-            val rd = viewModel.getRadius().toInt()
-            viewModel.getListMotel(latLng.latitude, latLng.longitude, rd)
+            val rd = viewModel.getRadius()?.toInt()
+            rd?.let { viewModel.getListMotel(latLng.latitude, latLng.longitude, it) }
         }
     }
 
@@ -248,10 +260,12 @@ class SearchMotelFragment : Fragment(),
                 lastLocation = it
                 viewModel.latLng.value = LatLng(it.latitude, it.longitude)
                 val currentLatLong = LatLng(it.latitude, it.longitude)
-                drawCircle(LatLng(it.latitude, it.longitude), viewModel.getRadius())
+                viewModel.getRadius()
+                    ?.let { it1 -> drawCircle(LatLng(it.latitude, it.longitude), it1) }
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
                 fillLocationInfo(LatLng(it.latitude, it.longitude))
-                viewModel.getListMotel(it.latitude, it.longitude, viewModel.getRadius().toInt() )
+                viewModel.getRadius()
+                    ?.let { it1 -> viewModel.getListMotel(it.latitude, it.longitude, it1.toInt() ) }
             }
         }
     }
@@ -267,7 +281,7 @@ class SearchMotelFragment : Fragment(),
             binding.textViewAddress.isEnabled = false
             binding.textViewAddress
                 .setText(String.
-                format("* Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude))
+                format("Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude))
         }
     }
 

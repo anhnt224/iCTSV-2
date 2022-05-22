@@ -19,16 +19,13 @@ class SearchMotelViewModel @Inject constructor(
 
     val latLng = MediatorLiveData<LatLng>()
     val radiusLiveData = MediatorLiveData<Double>()
-    init {
-        radiusLiveData.value = 1000.0
-    }
 
     fun setRadius(rd: Double){
         radiusLiveData.value = rd
     }
 
-    fun getRadius(): Double{
-        return radiusLiveData.value!!
+    fun getRadius(): Double? {
+        return radiusLiveData.value
     }
 
     fun getListMotel(latitude: Double, longitude: Double, distance: Int){
