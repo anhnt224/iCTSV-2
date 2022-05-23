@@ -83,33 +83,6 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         binding.apply {
             titleTextView.text = "Chào ${sharedPrefsHelper.getFullName()}"
             titleWelcome.text = remoteConfig.getString("titleWelcome2")
-//            serviceLayout.setOnClickListener {
-//                showListForm()
-//            }
-//            activityLayout.setOnClickListener {
-//                showListActivities()
-//            }
-//            scholarShipLayout.setOnClickListener {
-//                showListScholarShips()
-//            }
-//            jobLayout.setOnClickListener {
-//                showListJobs()
-//            }
-//            studentManagement.setOnClickListener {
-//                showListStudent()
-//            }
-//            runLayout.setOnClickListener {
-//                showRunDashboard()
-//            }
-//            sendGiftLayout.setOnClickListener {
-//                navigateToGiftGiven()
-//            }
-//            noteLayout.setOnClickListener {
-//                openLink(remoteConfig.getString("note_link"))
-//            }
-//            giftLayout.setOnClickListener {
-//                navigateToGiftFragment()
-//            }
         }
         setUpRecyclerView(binding)
         subscribeUi()

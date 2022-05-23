@@ -17,6 +17,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
+import com.bk.ctsv.R
 import com.bk.ctsv.databinding.FragmentTMotelInfoBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
@@ -26,6 +27,9 @@ import com.bk.ctsv.models.entity.ImageMotel2
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.teacher.viewmodel.motel.TMotelInfoViewModel
 import com.bk.ctsv.ui.adapter.user.MotelImageAdapter
+import com.bumptech.glide.Glide
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerDrawable
 import javax.inject.Inject
 
 class TMotelInfoFragment : Fragment(), Injectable, MotelImageAdapter.OnItemClickListener {
@@ -119,8 +123,31 @@ class TMotelInfoFragment : Fragment(), Injectable, MotelImageAdapter.OnItemClick
         viewModel = ViewModelProvider(this, factory).get(TMotelInfoViewModel::class.java)
     }
 
-    override fun onClickImage(imageMotel2: ImageMotel2) {
+    private fun seePictureZoom(image: ImageMotel2){
+        binding.imageLayoutZoom.visibility = View.VISIBLE
+        val shimmer = Shimmer.AlphaHighlightBuilder()
+            .setDuration(1800)
+            .setBaseAlpha(0.7f) //the alpha of the underlying children
+            .setHighlightAlpha(0.6f) // the shimmer alpha amount
+            .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+            .setAutoStart(true)
+            .build()
+        val shimmerDrawable = ShimmerDrawable().apply {
+            setShimmer(shimmer)
+        }
+        val url = "https://ctsv.hust.edu.vn/api-t/${image.urlImage}"
+        Glide.with(requireActivity())
+            .load(url)
+            .placeholder(shimmerDrawable)
+            .error(R.drawable.ic_gift_default)
+            .into(binding.imageViewZoom)
+        binding.closeButton.setOnClickListener {
+            binding.imageLayoutZoom.visibility = View.GONE
+        }
+    }
 
+    override fun onClickImage(imageMotel2: ImageMotel2) {
+        seePictureZoom(imageMotel2)
     }
 
 }

@@ -23,6 +23,9 @@ class MotelImageAdapter(
         ): RecyclerView.ViewHolder(binding.root){
         fun bindView(motelImage: ImageMotel2) {
             binding.apply {
+                root.setOnClickListener {
+                    onItemClickListener.onClickImage(motelImage)
+                }
                 imageMotel = motelImage
                 val shimmer = Shimmer.AlphaHighlightBuilder()
                     .setDuration(1800)
