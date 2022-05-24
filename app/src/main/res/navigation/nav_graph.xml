@@ -533,7 +533,7 @@
     <fragment
             android:id="@+id/searchMotelFragment"
             android:name="com.bk.ctsv.ui.fragments.motel.SearchMotelFragment"
-            android:label="Tìm trọ"
+            android:label="Nhà trọ"
             tools:layout="@layout/search_motel_fragment">
         <action
                 android:id="@+id/action_searchMotelFragment_to_motelInfoFragment"

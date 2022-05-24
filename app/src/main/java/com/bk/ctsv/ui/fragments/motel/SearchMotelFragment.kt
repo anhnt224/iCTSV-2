@@ -72,7 +72,6 @@ class SearchMotelFragment : Fragment(),
             viewModel.setRadius(1000.0)
         }else{
             binding.showSelectDistance1.text = "${viewModel.getRadius()!!.toInt() /1000} km"
-            binding.showSelectDistance2.text = "${viewModel.getRadius()!!.toInt() /1000} km"
         }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity().baseContext)
         binding.map.getMapAsync(this)
@@ -81,10 +80,6 @@ class SearchMotelFragment : Fragment(),
             map.onResume()
 
             lineDistance1.setOnClickListener {
-                setUpDistanceDialog(requireContext(), viewModel.latLng.value!!)
-            }
-
-            lineDistance2.setOnClickListener {
                 setUpDistanceDialog(requireContext(), viewModel.latLng.value!!)
             }
         }
@@ -101,12 +96,6 @@ class SearchMotelFragment : Fragment(),
     private fun setAndShowBottomBar() {
         binding.apply {
             constraintMotelInfoShow.visibility = View.GONE
-            viewShowMotelInfo.setOnClickListener {
-                constraintMotelInfoShow.visibility = View.VISIBLE
-                viewShowMotelInfo.visibility = View.GONE
-                val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.bottom_to_top)
-                binding.viewListMotelInfo.startAnimation(anim)
-            }
 
             constraintMotelInfoShow.setOnClickListener {
                 val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.top_to_bottom)
@@ -116,13 +105,14 @@ class SearchMotelFragment : Fragment(),
 
                     override fun onAnimationEnd(animation: Animation?) {
                         constraintMotelInfoShow.visibility = View.GONE
-                        viewShowMotelInfo.visibility = View.VISIBLE
                     }
 
                     override fun onAnimationRepeat(animation: Animation?) {}
                 })
 
             }
+
+
 
 
         }
@@ -139,25 +129,21 @@ class SearchMotelFragment : Fragment(),
                 0 -> {
                     viewModel.setRadius(1000.0)
                     binding.showSelectDistance1.text = "1km"
-                    binding.showSelectDistance2.text = "1km"
                     pinNowLocation(googleMap, latLng, 1000.0)
                 }
                 1 -> {
                     viewModel.setRadius(2000.0)
                     binding.showSelectDistance1.text = "2km"
-                    binding.showSelectDistance2.text = "2km"
                     pinNowLocation(googleMap, latLng, 2000.0)
                 }
                 2 -> {
                     viewModel.setRadius(3000.0)
                     binding.showSelectDistance1.text = "3km"
-                    binding.showSelectDistance2.text = "3km"
                     pinNowLocation(googleMap, latLng, 3000.0)
                 }
                 3 -> {
                     viewModel.setRadius(5000.0)
                     binding.showSelectDistance1.text = "5km"
-                    binding.showSelectDistance2.text = "5km"
                     pinNowLocation(googleMap, latLng, 5000.0)
                 }
             }
@@ -202,7 +188,7 @@ class SearchMotelFragment : Fragment(),
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     override fun onMapReady(p0: GoogleMap?) {
         googleMap = p0!!
         googleMap.uiSettings.isZoomControlsEnabled = true
@@ -210,7 +196,6 @@ class SearchMotelFragment : Fragment(),
             viewModel.setRadius(1000.0)
         }else{
             binding.showSelectDistance1.text = "${viewModel.getRadius()!!.toInt() /1000} km"
-            binding.showSelectDistance2.text = "${viewModel.getRadius()!!.toInt() /1000} km"
         }
         setUpMap()
 
@@ -294,11 +279,9 @@ class SearchMotelFragment : Fragment(),
                     motelInfoAdapter.listMotel = it.data
                     if (it.data.isNotEmpty()){
                         binding.constraintMotelInfoShow.visibility = View.VISIBLE
-                        binding.viewShowMotelInfo.visibility = View.GONE
                     }
                     addMotelMarker(it.data, googleMap)
                     binding.apply {
-                        textViewSizeOfListMotel.text = "Có ${it.data.size} nhà trọ ở gần bạn"
                         textViewNumberOfListMotel.text = "Có ${it.data.size} nhà trọ ở gần bạn"
                     }
                     motelInfoAdapter.notifyDataSetChanged()
