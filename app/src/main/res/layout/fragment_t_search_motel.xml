@@ -132,10 +132,10 @@
                             android:layout_marginEnd="8dp"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/lineDistance1"
+                            app:layout_constraintEnd_toStartOf="@id/distanceLayout"
                             android:backgroundTint="@color/colorWhite" />
                     <LinearLayout
-                            android:id="@+id/lineDistance1"
+                            android:id="@+id/distanceLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

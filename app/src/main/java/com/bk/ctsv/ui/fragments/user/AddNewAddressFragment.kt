@@ -318,7 +318,8 @@ class AddNewAddressFragment : Fragment(), Injectable {
                             mAddress.longtitude = newLatLng!!.longitude
                             mAddress.latitude = newLatLng!!.latitude
                             textLocation.editText?.setText(mAddress.getLocation())
-                            disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                            textLocation.isEndIconVisible = false
+                            disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!, textLocation.editText!!)
                         }
                     }
 
@@ -332,7 +333,8 @@ class AddNewAddressFragment : Fragment(), Injectable {
                             mAddress.longtitude = newLatLng!!.longitude
                             mAddress.latitude = newLatLng!!.latitude
                             textLocation.editText?.setText(mAddress.getLocation())
-                            disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                            textLocation.isEndIconVisible = false
+                            disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!, textLocation.editText!!)
                         }
                     }
                     else -> {
@@ -341,9 +343,10 @@ class AddNewAddressFragment : Fragment(), Injectable {
                         newLatLng = null
                         binding.apply {
                             textLocation.editText?.setText(mAddress.getLocation())
-                            enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                            enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!, textLocation.editText!!)
                             clearText(textDistrict.editText!!, textWard.editText!!)
                             textAddress.helperText = "VD: Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội"
+                            textLocation.isEndIconVisible = true
                         }
                     }
                 }

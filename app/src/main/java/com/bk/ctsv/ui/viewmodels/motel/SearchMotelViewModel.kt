@@ -1,12 +1,13 @@
 package com.bk.ctsv.ui.viewmodels.motel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.bk.ctsv.common.Resource
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.repositories.MotelRepository
+import com.bk.ctsv.ui.fragments.motel.SearchMotelDistance
+import com.bk.ctsv.ui.fragments.motel.SearchMotelFooterState
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
 
@@ -17,23 +18,54 @@ class SearchMotelViewModel @Inject constructor(
     val motelList = MediatorLiveData<Resource<List<Motel>>>()
     private lateinit var motelListLiveData: LiveData<Resource<List<Motel>>>
 
-    val latLng = MediatorLiveData<LatLng>()
-    val radiusLiveData = MediatorLiveData<Double>()
+    private var _latLng = MediatorLiveData<LatLng>()
+    val latLng: MediatorLiveData<LatLng>
+        get() = _latLng
 
-    fun setRadius(rd: Double){
-        radiusLiveData.value = rd
+    fun setLatLng(latLng: LatLng){
+        _latLng.value = latLng
     }
 
-    fun getRadius(): Double? {
-        return radiusLiveData.value
+    private val _radius = MediatorLiveData<SearchMotelDistance>()
+    val radius: MediatorLiveData<SearchMotelDistance>
+        get() = _radius
+
+    fun setRadius(searchMotelDistance: SearchMotelDistance){
+        _radius.value = searchMotelDistance
     }
 
-    fun getListMotel(latitude: Double, longitude: Double, distance: Int){
-        motelListLiveData = motelRepository.getListMotel(latitude, longitude, distance)
+    val zoomLevel = MediatorLiveData<Float>()
+    val mapCenter = MediatorLiveData<LatLng>()
+
+    private val _footerState = MediatorLiveData<SearchMotelFooterState>()
+    val footerState: MediatorLiveData<SearchMotelFooterState>
+    get() = _footerState
+
+    fun changeFooterState(){
+        if (footerState.value == SearchMotelFooterState.COLLAPSE){
+            footerState.value = SearchMotelFooterState.EXPAND
+        }else{
+            footerState.value = SearchMotelFooterState.COLLAPSE
+        }
+    }
+
+    init {
+        setRadius(searchMotelDistance = SearchMotelDistance.ONE)
+        zoomLevel.value = 15f
+//        footerState.value = SearchMotelFooterState.COLLAPSE
+    }
+    fun getListMotel(){
+        if (_latLng.value == null || _radius.value == null){
+            return
+        }
+        motelListLiveData = motelRepository.getListMotel(
+            latitude = _latLng.value!!.latitude,
+            longitude = _latLng.value!!.longitude,
+            distance = _radius.value!!.distance.toInt()
+        )
         motelList.removeSource(motelListLiveData)
         motelList.addSource(motelListLiveData){
             motelList.value = it
         }
-        Log.v("_SearchMotelViewModel", "This is: ${motelList.value!!.data}")
     }
 }

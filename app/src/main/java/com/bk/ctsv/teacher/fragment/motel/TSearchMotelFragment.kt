@@ -72,7 +72,7 @@ class TSearchMotelFragment : Fragment(), Injectable, OnMapReadyCallback,
             map.onCreate(savedInstanceState)
             map.onResume()
 
-            lineDistance1.setOnClickListener {
+            distanceLayout.setOnClickListener {
                 setUpDistanceDialog(requireContext(), viewModel.latLng.value!!)
             }
 
