@@ -7,7 +7,7 @@ import java.io.Serializable
 class Motel(
     @SerializedName("MotelID")
     var id: Int = 0,
-    @SerializedName("Type")
+    @SerializedName("MotelType")
     var type: String = "",
     @SerializedName("ManagerPhone")
     var managerContact: String = "",
@@ -29,4 +29,8 @@ class Motel(
     var distance: Double = 0.0,
     @SerializedName("Status")
     var status: Int = 0
-): Serializable
+): Serializable {
+    fun getMotelTypeWithAddress(): String {
+        return "$type - $address"
+    }
+}

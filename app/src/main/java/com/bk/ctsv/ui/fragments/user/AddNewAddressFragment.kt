@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
@@ -69,6 +70,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
             autoGetPlaceName(newLatLng!!.longitude, newLatLng!!.latitude)
         }
         binding.apply {
+         //   disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
             textLocation.setEndIconOnClickListener {
                 if(checkLocationPermission()){
                     pickLocation()
@@ -110,11 +112,14 @@ class AddNewAddressFragment : Fragment(), Injectable {
                 if(newLatLng != null){
                     mAddress.latitude = newLatLng!!.latitude
                     mAddress.longtitude = newLatLng!!.longitude
-                }
-                if(mAddress.type == types[0] || mAddress.type == types[1]){
-                    disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                    if(mAddress.type == types[0] || mAddress.type == types[1]){
+                        disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                    }
+                    else{
+                        enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                    }
                 }else{
-                    enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                    disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
                 }
                 binding.address = mAddress
             }
@@ -277,6 +282,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
                             textCity.editText?.setText(getPlaceResponse.data.cityName)
                             textDistrict.editText?.setText(getPlaceResponse.data.districtName)
                             textWard.editText?.setText(getPlaceResponse.data.wardName)
+                            enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
                             getDistrictWard()
                         }
                     }
@@ -349,6 +355,7 @@ class AddNewAddressFragment : Fragment(), Injectable {
     private fun disableClick(vararg editTexts: EditText){
         editTexts.forEach {
             it.isEnabled = false
+            it.setBackgroundColor(resources.getColor(R.color.iron))
         }
     }
 

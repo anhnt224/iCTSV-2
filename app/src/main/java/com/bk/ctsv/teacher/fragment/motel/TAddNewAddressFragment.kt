@@ -122,6 +122,7 @@ class TAddNewAddressFragment : Fragment(), Injectable {
                             textCity.editText?.setText(getPlaceResponse.data.cityName)
                             textDistrict.editText?.setText(getPlaceResponse.data.districtName)
                             textWard.editText?.setText(getPlaceResponse.data.wardName)
+                            enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
                             getDistrictWard()
                         }
                     }
@@ -145,13 +146,16 @@ class TAddNewAddressFragment : Fragment(), Injectable {
             getAddress().observe(viewLifecycleOwner){address ->
                 mAddress = address
                 if(newLatLng != null){
-                    mAddress.latitude =newLatLng!!.latitude
+                    mAddress.latitude = newLatLng!!.latitude
                     mAddress.longtitude = newLatLng!!.longitude
-                }
-                if(mAddress.type == types[0] || mAddress.type == types[1]){
-                    disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                    if(mAddress.type == types[0] || mAddress.type == types[1]){
+                        disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                    }
+                    else{
+                        enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                    }
                 }else{
-                    enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                    disableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
                 }
                 binding.address = mAddress
             }
@@ -334,8 +338,8 @@ class TAddNewAddressFragment : Fragment(), Injectable {
                         newLatLng = null
                         binding.apply {
                             textLocation.editText?.setText(mAddress.getLocation())
-                            //enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
-                             clearText(textDistrict.editText!!, textWard.editText!!)
+                            enableClick(textCity.editText!!, textDistrict.editText!!, textWard.editText!!)
+                            clearText(textDistrict.editText!!, textWard.editText!!)
                             textAddress.helperText = "VD: Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội"
                         }
                     }
@@ -348,6 +352,7 @@ class TAddNewAddressFragment : Fragment(), Injectable {
     private fun disableClick(vararg editTexts: EditText){
         editTexts.forEach {
             it.isEnabled = false
+            it.setBackgroundColor(resources.getColor(R.color.iron))
         }
     }
 
