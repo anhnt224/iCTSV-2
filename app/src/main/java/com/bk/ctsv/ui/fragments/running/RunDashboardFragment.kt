@@ -7,16 +7,17 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,22 +31,25 @@ import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.run.RunData
 import com.bk.ctsv.models.entity.run.RunResult
 import com.bk.ctsv.ui.adapter.running.ListRunResultAdapter
-import com.bk.ctsv.ui.adapter.running.RunResultAdapter
 import com.bk.ctsv.ui.viewmodels.running.ChartType
 import com.bk.ctsv.ui.viewmodels.running.RunDashboardViewModel
 import com.bk.ctsv.utilities.runOnIoThread
+import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.run_dashboard_fragment.*
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
+
 
 class RunDashboardFragment : Fragment(), Injectable {
 
@@ -66,6 +70,9 @@ class RunDashboardFragment : Fragment(), Injectable {
     private lateinit var runResultAdapter: ListRunResultAdapter
     private var chartType: ChartType = ChartType.BY_WEEK
     private var runDataList: List<RunData> = listOf()
+    private lateinit var labelsWeek : ArrayList<String>
+    private lateinit var labelsMonth : List<String>
+    private lateinit var runDataGroup : Map<String, kotlin.collections.List<RunResult>>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,6 +110,30 @@ class RunDashboardFragment : Fragment(), Injectable {
                 }
             }
 
+            barChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+                override fun onValueSelected(e: Entry?, h: Highlight?) {
+                    e?.let {
+                        var index = e.x.toInt()
+                        val listDate = getDates(viewModel.getTimeStart(), viewModel.getTimeEnd())
+                        val dateSelect = listDate[index]
+                        val listData = runDataGroup[dateSelect.toDateStr()]
+                        if (listData != null && listData.isNotEmpty()){
+                            runResultAdapter.runResultMap = listData.groupBy { it.timeStart.getDateStr() }
+                            runResultAdapter.notifyDataSetChanged()
+                        }else{
+                            runResultAdapter.runResultMap = mapOf()
+                            runResultAdapter.notifyDataSetChanged()
+                        }
+
+                    }
+                }
+
+                override fun onNothingSelected() {
+                    runResultAdapter.runResultMap = runDataGroup
+                    runResultAdapter.notifyDataSetChanged()
+                }
+            })
+
             chartTypeTabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     when(tab.position){
@@ -132,6 +163,7 @@ class RunDashboardFragment : Fragment(), Injectable {
         subscribeUI()
         return binding.root
     }
+
 
     @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun subscribeUI(){
@@ -213,42 +245,72 @@ class RunDashboardFragment : Fragment(), Injectable {
         val runResultsMap = runResults.groupBy {
             it.timeStart.toDateStr()
         }
+        runDataGroup = runResultsMap
         runResultAdapter.runResultMap = runResultsMap
         runResultAdapter.notifyDataSetChanged()
     }
 
+    private fun getDates(date1: Date?, date2: Date?): List<Date> {
+        var dates: ArrayList<Date> = arrayListOf()
+        if (date1 != null && date2 != null){
+            val cal1 = Calendar.getInstance()
+            cal1.time = date1
+            val cal2 = Calendar.getInstance()
+            cal2.time = date2
+            while (!cal1.after(cal2)) {
+                dates.add(cal1.time)
+                cal1.add(Calendar.DATE, 1)
+            }
+        }
+        return dates
+    }
     private fun showBarChartByWeek(runResults: List<RunResult>){
-        val labels: ArrayList<String> = arrayListOf("T2", "T3", "T4", "T5", "T6", "T7", "CN")
-        val runResultEntries: ArrayList<BarEntry> = arrayListOf()
+        labelsWeek = arrayListOf("T2", "T3", "T4", "T5", "T6", "T7", "CN")
+        val runResultEntriesInvalid: ArrayList<BarEntry> = arrayListOf()
+        val runResultEntriesValid: ArrayList<BarEntry> = arrayListOf()
 
         val runResultsMap = runResults.groupBy {
             it.timeStartToDateOfWeek()
         }
 
-        labels.forEachIndexed { index, s ->
+        labelsWeek.forEachIndexed { index, s ->
             val runResultList = runResultsMap[s]
             if(runResultList == null){
-                runResultEntries.add(BarEntry((index + 0.5).toFloat(), 0f))
+                runResultEntriesInvalid.add(BarEntry((index + 0.5).toFloat(), 0f))
+                runResultEntriesValid.add(BarEntry((index + 0.5).toFloat(), 0f))
             }else{
-                var totalDistance = 0.0
+                var totalDistanceInvalid = 0.0
+                var totalDistanceValid = 0.0
                 runResultList.forEach {
                     if (it.isValid()){
-                        totalDistance += it.distance / 1000
+                        totalDistanceValid += it.distance / 1000
+                    }else{
+                        totalDistanceInvalid += it.distance / 1000
                     }
                 }
-                runResultEntries.add(BarEntry((index + 0.5).toFloat(), totalDistance.toFloat()))
+                runResultEntriesInvalid.add(BarEntry((index + 0.5 ).toFloat(), totalDistanceInvalid.toFloat()))
+                runResultEntriesValid.add(BarEntry((index + 0.5).toFloat(), totalDistanceValid.toFloat()+ totalDistanceInvalid.toFloat()))
             }
         }
 
-        val runResultDataSet = BarDataSet(runResultEntries, "")
 
-        val barData = BarData(runResultDataSet)
+        val set1 = BarDataSet(runResultEntriesInvalid, "Không hợp lệ")
+        set1.label = "Không hợp lệ"
+        set1.setColors(ContextCompat.getColor(requireContext(),R.color.colorRunDashBoardFail))
+
+        val set2 = BarDataSet(runResultEntriesValid, "Hợp lệ")
+        set2.label = "Hợp lệ"
+        set2.setColors(ContextCompat.getColor(requireContext(),R.color.colorRunDashBoardPass))
+
+        val data = BarData(listOf(set2,set1))
+        data.setDrawValues(false)
+        binding.barChart.data = data
 
         binding.barChart.apply {
             xAxis.valueFormatter = object: IndexAxisValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
-                    if(0 <= value && value <= labels.size - 1){
-                        return labels[value.toInt()]
+                    if(0 <= value && value <= labelsWeek.size - 1){
+                        return labelsWeek[value.toInt()]
                     }
                     return ""
                 }
@@ -259,33 +321,15 @@ class RunDashboardFragment : Fragment(), Injectable {
             xAxis.setDrawGridLines(false)
             xAxis.axisMinimum = 0f
 
-
             //
             axisRight.isEnabled = false
             setNoDataText("Không có dữ liệu")
 
-            //
-            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-            legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-
-            //
             axisLeft.setDrawGridLines(false)
             axisLeft.axisMinimum = 0f
             description = null
-
-
-            val vf = object: ValueFormatter() {
-                override fun getFormattedValue(value: Float): String {
-                    return if(value == 0.0f){
-                        ""
-                    }else{
-                        String.format("%.2f", value)
-                    }
-                }
-            }
-            barData.setValueFormatter(vf)
-
-            data = barData
+            //getData().isHighlightEnabled = !data.isHighlightEnabled
+            notifyDataSetChanged()
             invalidate()
             animateY(300)
         }
@@ -298,37 +342,56 @@ class RunDashboardFragment : Fragment(), Injectable {
             return
         }
 
-        val labels = (1..(timeEnd.getDayOfMonth())).map {
+        labelsMonth = (1..(timeEnd.getDayOfMonth())).map {
             it.toString()
         }
 
-        Log.d("_BAR_CHART", labels.toString())
+        Log.d("_BAR_CHART", labelsMonth.toString())
 
-        val runResultEntries: ArrayList<BarEntry> = arrayListOf()
+        val runResultEntriesInvalid: ArrayList<BarEntry> = arrayListOf()
+        val runResultEntriesValid: ArrayList<BarEntry> = arrayListOf()
+
         val runResultsMap = runResults.groupBy {
             it.timeStart.getDayOfMonth().toString()
         }
 
-        labels.forEachIndexed { index, s ->
+        labelsMonth.forEachIndexed { index, s ->
             val runResultList = runResultsMap[s]
             if(runResultList == null){
-                runResultEntries.add(BarEntry((index).toFloat(), 0f))
+                runResultEntriesInvalid.add(BarEntry((index).toFloat(), 0f))
+                runResultEntriesValid.add(BarEntry((index).toFloat(), 0f))
             }else{
-                var totalDistance = 0.0
+                var totalDistanceInvalid = 0.0
+                var totalDistanceValid = 0.0
                 runResultList.forEach {
                     if (it.isValid()){
-                        totalDistance += it.distance / 1000
+                        totalDistanceValid += it.distance / 1000
+                    }else{
+                        totalDistanceInvalid += it.distance / 1000
                     }
                 }
-                runResultEntries.add(BarEntry((index).toFloat(), totalDistance.toFloat()))
+
+                runResultEntriesInvalid.add( BarEntry((index).toFloat(), totalDistanceInvalid.toFloat() + totalDistanceValid.toFloat() ))
+                runResultEntriesValid.add( BarEntry((index).toFloat(), totalDistanceValid.toFloat() ))
+
             }
         }
 
-        val runResultDataSet = BarDataSet(runResultEntries, "")
-
-        val barData = BarData(runResultDataSet)
 
         binding.barChart.apply {
+            val set1 = BarDataSet(runResultEntriesInvalid, "Không hợp lệ")
+            set1.label = "Không hợp lệ"
+            set1.setColors(ContextCompat.getColor(requireContext(),R.color.colorRunDashBoardFail))
+
+            val set2 = BarDataSet(runResultEntriesValid, "Hợp lệ")
+            set2.label = "Hợp lệ"
+            set2.setColors(ContextCompat.getColor(requireContext(),R.color.colorRunDashBoardPass))
+
+            val data = BarData(listOf(set1, set2))
+            data.setDrawValues(false)
+
+            binding.barChart.data = data
+
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.setDrawGridLines(false)
             xAxis.mAxisMinimum = 1f
@@ -336,8 +399,8 @@ class RunDashboardFragment : Fragment(), Injectable {
 
             xAxis.valueFormatter = object: IndexAxisValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
-                    if(0 <= value && value <= labels.size - 1){
-                        return labels[value.toInt()]
+                    if(0 <= value && value <= labelsMonth.size - 1){
+                        return labelsMonth[value.toInt()]
                     }
                     return ""
                 }
@@ -346,28 +409,11 @@ class RunDashboardFragment : Fragment(), Injectable {
             //
             axisRight.isEnabled = false
             setNoDataText("Không có dữ liệu")
-
-            //
-            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-            legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-
-            //
             axisLeft.setDrawGridLines(false)
             axisLeft.axisMinimum = 0f
             description = null
-
-            val vf = object: ValueFormatter() {
-                override fun getFormattedValue(value: Float): String {
-                    return if(value == 0.0f){
-                        ""
-                    }else{
-                        String.format("%.2f", value)
-                    }
-                }
-            }
-            barData.setValueFormatter(vf)
-
-            data = barData
+            //getData().isHighlightEnabled = !data.isHighlightEnabled
+            notifyDataSetChanged()
             invalidate()
             animateY(300)
         }
