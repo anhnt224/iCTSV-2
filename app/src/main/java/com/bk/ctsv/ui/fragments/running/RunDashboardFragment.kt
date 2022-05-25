@@ -34,9 +34,6 @@ import com.bk.ctsv.ui.adapter.running.ListRunResultAdapter
 import com.bk.ctsv.ui.viewmodels.running.ChartType
 import com.bk.ctsv.ui.viewmodels.running.RunDashboardViewModel
 import com.bk.ctsv.utilities.runOnIoThread
-import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -111,6 +108,7 @@ class RunDashboardFragment : Fragment(), Injectable {
             }
 
             barChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onValueSelected(e: Entry?, h: Highlight?) {
                     e?.let {
                         var index = e.x.toInt()
@@ -332,6 +330,7 @@ class RunDashboardFragment : Fragment(), Injectable {
             notifyDataSetChanged()
             invalidate()
             animateY(300)
+            barChart.highlightValue(null)
         }
     }
 
@@ -416,6 +415,8 @@ class RunDashboardFragment : Fragment(), Injectable {
             notifyDataSetChanged()
             invalidate()
             animateY(300)
+
+            barChart.highlightValue(null)
         }
     }
 
