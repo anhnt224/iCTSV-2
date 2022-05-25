@@ -1,11 +1,12 @@
 package com.bk.ctsv.ui.fragments.motel
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +27,6 @@ import com.bk.ctsv.databinding.SearchMotelFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
-import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.ui.adapter.MotelInfoAdapter
 import com.bk.ctsv.ui.viewmodels.motel.SearchMotelViewModel
@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.*
 import javax.inject.Inject
 
 class SearchMotelFragment : Fragment(),
@@ -57,8 +58,10 @@ class SearchMotelFragment : Fragment(),
     private lateinit var googleMap: GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val LOG = "_SearchMotelFragment"
+    private var radius = 1000.0
 
-    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,26 +71,15 @@ class SearchMotelFragment : Fragment(),
             R.layout.search_motel_fragment,
             container,
             false)
-        if (viewModel.getRadius() == null ){
-            viewModel.setRadius(1000.0)
-        }else{
-            binding.showSelectDistance1.text = "${viewModel.getRadius()!!.toInt() /1000} km"
-            binding.showSelectDistance2.text = "${viewModel.getRadius()!!.toInt() /1000} km"
-        }
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity().baseContext)
+
+
         binding.map.getMapAsync(this)
         binding.apply {
             map.onCreate(savedInstanceState)
             map.onResume()
-
-            lineDistance1.setOnClickListener {
-                setUpDistanceDialog(requireContext(), viewModel.latLng.value!!)
-            }
-
-            lineDistance2.setOnClickListener {
-                setUpDistanceDialog(requireContext(), viewModel.latLng.value!!)
-            }
         }
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity().baseContext)
 
         subscribeUI()
 
@@ -99,32 +91,25 @@ class SearchMotelFragment : Fragment(),
     }
 
     private fun setAndShowBottomBar() {
+        var state = StateListViewMotel.EXPAND.state
         binding.apply {
-            constraintMotelInfoShow.visibility = View.GONE
-            viewShowMotelInfo.setOnClickListener {
-                constraintMotelInfoShow.visibility = View.VISIBLE
-                viewShowMotelInfo.visibility = View.GONE
-                val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.bottom_to_top)
-                binding.viewListMotelInfo.startAnimation(anim)
-            }
-
-            constraintMotelInfoShow.setOnClickListener {
-                val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.top_to_bottom)
-                binding.viewListMotelInfo.startAnimation(anim)
-                anim.setAnimationListener(object : Animation.AnimationListener {
-                    override fun onAnimationStart(animation: Animation?) {}
-
-                    override fun onAnimationEnd(animation: Animation?) {
-                        constraintMotelInfoShow.visibility = View.GONE
-                        viewShowMotelInfo.visibility = View.VISIBLE
+            viewListMotelInfo.setOnClickListener {
+                if (state == StateListViewMotel.COLLAPSE.state){
+                    ObjectAnimator.ofFloat(viewListMotelInfo, "translationY",
+                        0f).apply {
+                        duration = 300
+                        start()
                     }
-
-                    override fun onAnimationRepeat(animation: Animation?) {}
-                })
-
+                    state = StateListViewMotel.EXPAND.state
+                }else{
+                    ObjectAnimator.ofFloat(viewListMotelInfo, "translationY",
+                        viewListMotelInfo.height.toFloat() - 80).apply {
+                        duration = 300
+                        start()
+                    }
+                    state = StateListViewMotel.COLLAPSE.state
+                }
             }
-
-
         }
     }
 
@@ -134,54 +119,44 @@ class SearchMotelFragment : Fragment(),
         builder.setTitle("Chọn bán kính")
 
         val distance = arrayOf("1 km", "2km", "3km", "5km")
-        builder.setItems(distance){ _, which ->
+        builder.setItems(distance){ dialog, which ->
             when (which){
                 0 -> {
-                    viewModel.setRadius(1000.0)
+                    radius = 1000.0
                     binding.showSelectDistance1.text = "1km"
-                    binding.showSelectDistance2.text = "1km"
-                    pinNowLocation(googleMap, latLng, 1000.0)
+                    googleMap.clear()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(latLng))
                 }
                 1 -> {
-                    viewModel.setRadius(2000.0)
+                    radius = 2000.0
                     binding.showSelectDistance1.text = "2km"
-                    binding.showSelectDistance2.text = "2km"
-                    pinNowLocation(googleMap, latLng, 2000.0)
+                    googleMap.clear()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(latLng))
                 }
                 2 -> {
-                    viewModel.setRadius(3000.0)
+                    radius = 3000.0
                     binding.showSelectDistance1.text = "3km"
-                    binding.showSelectDistance2.text = "3km"
-                    pinNowLocation(googleMap, latLng, 3000.0)
+                    googleMap.clear()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(latLng))
                 }
                 3 -> {
-                    viewModel.setRadius(5000.0)
+                    radius = 5000.0
                     binding.showSelectDistance1.text = "5km"
-                    binding.showSelectDistance2.text = "5km"
-                    pinNowLocation(googleMap, latLng, 5000.0)
+                    googleMap.clear()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(latLng))
+                    drawCircle(latLng, radius)
                 }
             }
-            viewModel.getRadius()
-                ?.let { viewModel.getListMotel(latLng.latitude, latLng.longitude, it.toInt()) }
+            viewModel.getListMotel(latLng.latitude, latLng.longitude, radius.toInt())
             subscribeUI()
         }
 
         val dialog = builder.create()
         dialog.show()
-    }
-
-    private fun pinNowLocation(map: GoogleMap, latLng: LatLng, radius: Double){
-        map.clear()
-        val bitmapDraw = ContextCompat.getDrawable(
-            requireContext(), R.drawable.ic_pin_location
-        ) as BitmapDrawable
-        val b = bitmapDraw.bitmap
-        val smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false)
-        googleMap.addMarker(MarkerOptions()
-            .position(latLng))
-            .setIcon(BitmapDescriptorFactory
-                .fromBitmap(smallMarker))
-        drawCircle(latLng, radius)
     }
 
     private fun setUpRecyclerViewMotelInfo() {
@@ -206,30 +181,22 @@ class SearchMotelFragment : Fragment(),
     override fun onMapReady(p0: GoogleMap?) {
         googleMap = p0!!
         googleMap.uiSettings.isZoomControlsEnabled = true
-        if (viewModel.getRadius() == null ){
-            viewModel.setRadius(1000.0)
-        }else{
-            binding.showSelectDistance1.text = "${viewModel.getRadius()!!.toInt() /1000} km"
-            binding.showSelectDistance2.text = "${viewModel.getRadius()!!.toInt() /1000} km"
-        }
         setUpMap()
 
-        val bitmapDraw = ContextCompat.getDrawable(
-            requireContext(),
-            R.drawable.ic_pin_location
-        ) as BitmapDrawable
-        val b = bitmapDraw.bitmap
-        val smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false)
         googleMap.setOnMapClickListener {latLng ->
             googleMap.clear()
-            viewModel.latLng.value = latLng
             fillLocationInfo(latLng)
-            viewModel.getRadius()?.let { drawCircle(latLng, it) }
+            drawCircle(latLng, radius)
             googleMap.addMarker(MarkerOptions()
                 .position(latLng))
-                .setIcon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-            val rd = viewModel.getRadius()?.toInt()
-            rd?.let { viewModel.getListMotel(latLng.latitude, latLng.longitude, it) }
+            val rd = radius.toInt()
+            viewModel.getListMotel(latLng.latitude, latLng.longitude, rd)
+            binding.apply {
+                showSelectDistance1.setOnClickListener {
+                    setUpDistanceDialog(requireContext(), latLng)
+                }
+
+            }
         }
     }
 
@@ -238,7 +205,6 @@ class SearchMotelFragment : Fragment(),
             val latLng = LatLng(motel.latitude, motel.longitude)
             ggMap.addMarker(MarkerOptions()
                 .position(latLng))
-                .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
         }
     }
 
@@ -258,14 +224,8 @@ class SearchMotelFragment : Fragment(),
         fusedLocationClient.lastLocation.addOnSuccessListener{
             if (it != null){
                 lastLocation = it
-                viewModel.latLng.value = LatLng(it.latitude, it.longitude)
                 val currentLatLong = LatLng(it.latitude, it.longitude)
-                viewModel.getRadius()
-                    ?.let { it1 -> drawCircle(LatLng(it.latitude, it.longitude), it1) }
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
-                fillLocationInfo(LatLng(it.latitude, it.longitude))
-                viewModel.getRadius()
-                    ?.let { it1 -> viewModel.getListMotel(it.latitude, it.longitude, it1.toInt() ) }
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
             }
         }
     }
@@ -281,7 +241,23 @@ class SearchMotelFragment : Fragment(),
             binding.textViewAddress.isEnabled = false
             binding.textViewAddress
                 .setText(String.
-                format("Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude))
+                format("* Toạ độ: %.4f°B - %.4f°Đ", latLng.latitude, latLng.longitude))
+        }
+
+        val addresses: List<Address>
+        val geocoder: Geocoder = Geocoder(requireContext(), Locale.getDefault())
+        try {
+            addresses = geocoder.getFromLocation(
+                latLng.latitude,
+                latLng.longitude,
+                1
+            )
+            if(addresses.isNotEmpty()){
+                val address: String = addresses[0]
+                    .getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            }
+        }catch (e: Exception){
+
         }
     }
 
@@ -292,13 +268,8 @@ class SearchMotelFragment : Fragment(),
                 if (checkResource(it) && it.data != null){
                     binding.getActivityStatus = it.status
                     motelInfoAdapter.listMotel = it.data
-                    if (it.data.isNotEmpty()){
-                        binding.constraintMotelInfoShow.visibility = View.VISIBLE
-                        binding.viewShowMotelInfo.visibility = View.GONE
-                    }
                     addMotelMarker(it.data, googleMap)
                     binding.apply {
-                        textViewSizeOfListMotel.text = "Có ${it.data.size} nhà trọ ở gần bạn"
                         textViewNumberOfListMotel.text = "Có ${it.data.size} nhà trọ ở gần bạn"
                     }
                     motelInfoAdapter.notifyDataSetChanged()
@@ -309,5 +280,9 @@ class SearchMotelFragment : Fragment(),
         }
     }
 
+    enum class StateListViewMotel(val stateName: String ="", val state: Int){
+        EXPAND("Mo rong", 1),
+        COLLAPSE("Thu lai", 0)
+    }
 
 }

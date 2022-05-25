@@ -29,4 +29,8 @@ class Motel(
     var distance: Double = 0.0,
     @SerializedName("Status")
     var status: Int = 0
-): Serializable
+): Serializable {
+    fun getMotelTypeWithAddress(): String {
+        return "$type - $address"
+    }
+}
