@@ -210,6 +210,15 @@ fun String.convertStringToDateDDMMYYYY() : Date {
     return sdf.parse(this)
 }
 
+
+@SuppressLint("SimpleDateFormat")
+fun String.convertStringToDate() : Date {
+    val sdf = SimpleDateFormat(DATE_FORMAT_PATTERN)
+    sdf.timeZone = TimeZone.getTimeZone("UTC")
+    return sdf.parse(this)
+}
+
+
 @SuppressLint("SimpleDateFormat")
 fun String.toDate() : Date? {
     if (this.isEmpty()){

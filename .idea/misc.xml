@@ -220,7 +220,7 @@
         <entry key="app/src/main/res/layout/regist_gift_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/request_bg_location_permission.xml" value="0.21" />
         <entry key="app/src/main/res/layout/request_permission_dialog.xml" value="0.21" />
-        <entry key="app/src/main/res/layout/run_dashboard_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/run_dashboard_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/run_fragment.xml" value="0.16717325227963525" />
         <entry key="app/src/main/res/layout/running_data_fragment.xml" value="0.17" />
         <entry key="app/src/main/res/layout/running_fragment.xml" value="0.33" />
