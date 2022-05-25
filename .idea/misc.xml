@@ -201,15 +201,16 @@
         <entry key="app/src/main/res/layout/list_item_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_image_motel.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/list_item_motel_image.xml" value="0.182518115942029" />
-        <entry key="app/src/main/res/layout/list_item_motel_info.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/list_item_motel_info.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/list_item_received_gift.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_reciever_giftt.xml" value="0.165" />
         <entry key="app/src/main/res/layout/list_item_run_resublt.xml" value="0.22282608695652173" />
-        <entry key="app/src/main/res/layout/list_item_run_result.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_item_run_result.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_running_data.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_job_apply_fragment.xml" value="0.1585144927536232" />
         <entry key="app/src/main/res/layout/list_jobs_fragment.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/list_register_fragment.xml" value="0.3890625" />
+        <entry key="app/src/main/res/layout/list_run_result_item.xml" value="0.10410334346504559" />
         <entry key="app/src/main/res/layout/loading_action_state.xml" value="0.1408308004052685" />
         <entry key="app/src/main/res/layout/loading_state.xml" value="0.12284701114488349" />
         <entry key="app/src/main/res/layout/motel_info_fragment.xml" value="0.19655797101449277" />
@@ -224,7 +225,7 @@
         <entry key="app/src/main/res/layout/run_fragment.xml" value="0.16717325227963525" />
         <entry key="app/src/main/res/layout/running_data_fragment.xml" value="0.17" />
         <entry key="app/src/main/res/layout/running_fragment.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/search_motel_fragment.xml" value="0.5546334716459198" />
+        <entry key="app/src/main/res/layout/search_motel_fragment.xml" value="0.165" />
         <entry key="app/src/main/res/layout/t_account_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/t_create_gift_fragment.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/t_gift_fragment.xml" value="0.182518115942029" />

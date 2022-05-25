@@ -159,7 +159,8 @@ fun Date.toDateQuery() : String{
 fun Date.toDateStr() : String{
     val dateFormat = SimpleDateFormat("dd")
     val dateFormat2 = SimpleDateFormat("MM")
-    return dateFormat.format(time) + " thg " + dateFormat2.format(time)
+    val dateFormat3 = SimpleDateFormat("yyyy")
+    return dateFormat.format(time) + " thg " + dateFormat2.format(time) + ", " + dateFormat3.format(time)
 }
 
 @SuppressLint("SimpleDateFormat")

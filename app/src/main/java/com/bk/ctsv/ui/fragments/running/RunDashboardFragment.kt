@@ -378,6 +378,7 @@ class RunDashboardFragment : Fragment(), Injectable {
 
 
         binding.barChart.apply {
+            highlightValue(null)
             val set1 = BarDataSet(runResultEntriesInvalid, "Không hợp lệ")
             set1.label = "Không hợp lệ"
             set1.setColors(ContextCompat.getColor(requireContext(),R.color.colorRunDashBoardFail))

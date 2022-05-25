@@ -52,7 +52,7 @@ class RunResult(
     }
 
     fun getDateStartStr(): String {
-        return timeStart.toDateStr() + ", " + timeStart.getYearStr()
+        return timeStart.toTimeStr() + " - " + timeStart.toDateStr()
     }
 
     fun getTimeStartStr(): String {

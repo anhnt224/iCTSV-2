@@ -34,12 +34,12 @@ class ListRunResultAdapter(
             }
             runResultAdapter = RunResultAdapter(runResults)
             binding.apply {
-
+                textViewRunDay.text = key
                 if (totalDistanceValid > 100){
-                    textViewRunDay.text = "$key - ${String.format("%.2f", totalDistanceValid/1000)}" +
+                    textViewDistance.text = "${String.format("%.2f", totalDistanceValid/1000)}" +
                             "/${String.format("%.2f", totalDistance/1000)}km"
                 }else{
-                    textViewRunDay.text = "$key - ${String.format("%.0f", totalDistanceValid)}" +
+                    textViewDistance.text = "${String.format("%.0f", totalDistanceValid)}" +
                             "/${String.format("%.0f", totalDistance)}m"
                 }
 

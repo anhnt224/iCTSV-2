@@ -118,7 +118,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:padding="16dp"
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
                 <com.github.mikephil.charting.charts.BarChart
