@@ -5,6 +5,6 @@ import androidx.appcompat.widget.Toolbar
 
 fun AppCompatActivity.setupToolbarWithHomeButton(toolbar: Toolbar){
     this.setSupportActionBar(toolbar)
-    this.getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
-    this.getSupportActionBar()!!.setDisplayShowHomeEnabled(true)
+    this.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    this.supportActionBar!!.setDisplayShowHomeEnabled(true)
 }

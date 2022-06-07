@@ -26,10 +26,6 @@ class ActivityAdapter(
             LayoutInflater.from(parent.context), R.layout.list_item_activity, parent, false)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
-    }
-
     override fun bind(binding: ListItemActivityBinding, item: Activity) {
         binding.activity = item
         binding.textStatus.setTextColor(Color.parseColor(item.getUAStatusColor()))

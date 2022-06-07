@@ -20,7 +20,4 @@ class CTSVUserLoginRes(
     @SerializedName("TokenCode")
     val tokenCode: String? = ""
 
-) : CTSVCap() {
-
-
-}
+) : CTSVCap()

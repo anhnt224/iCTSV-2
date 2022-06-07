@@ -126,12 +126,12 @@ class ImageMotelFragment : Fragment(),ImageMotelAdapter.OnItemClickListener, Inj
                                 }
                                 else{
                                     //permission already granted
-                                    pickImageFromGallery();
+                                    pickImageFromGallery()
                                 }
                             }
                             else{
                                 //system OS is < Marshmallow
-                                pickImageFromGallery();
+                                pickImageFromGallery()
                             }
                         }
                     }

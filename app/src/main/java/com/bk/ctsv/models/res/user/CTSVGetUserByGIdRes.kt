@@ -16,7 +16,4 @@ class CTSVGetUserByGIdRes(
     val numberPage: Int?,
     @SerializedName("UserGroups")
     val userGroups : List<UserGroup>?
-) : CTSVCap() {
-
-
-}
+) : CTSVCap()

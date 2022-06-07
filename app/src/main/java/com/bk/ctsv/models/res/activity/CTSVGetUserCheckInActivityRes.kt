@@ -12,7 +12,4 @@ class CTSVGetUserCheckInActivityRes(
     override val respCode: Int?,
     @SerializedName("UserCheckInActivityLst")
     val userCheckInActivityLst : List<UserCheckInActivity>?
-) : CTSVCap() {
-
-
-}
+) : CTSVCap()

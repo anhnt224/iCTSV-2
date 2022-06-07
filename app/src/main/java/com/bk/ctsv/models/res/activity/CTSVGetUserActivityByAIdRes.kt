@@ -15,7 +15,4 @@ class CTSVGetUserActivityByAIdRes(
     val numberPage: Int?,
     @SerializedName("UserActivityLst")
     val userActivityLst : List<UserActivity>?
-) : CTSVCap() {
-
-
-}
+) : CTSVCap()

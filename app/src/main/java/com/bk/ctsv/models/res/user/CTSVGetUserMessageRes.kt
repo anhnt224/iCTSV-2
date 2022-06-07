@@ -11,7 +11,4 @@ class CTSVGetUserMessageRes(
     override val respCode: Int?,
     @SerializedName("UserMessageLst")
     val userMessageLst : List<Message>?
-) : CTSVCap() {
-
-
-}
+) : CTSVCap()

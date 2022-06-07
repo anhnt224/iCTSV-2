@@ -42,7 +42,7 @@ class CheckOTPLostPasswordFragment : androidx.fragment.app.Fragment(), Injectabl
         subscribeUi()
 
         binding.apply {
-            setLifecycleOwner(this@CheckOTPLostPasswordFragment)
+            lifecycleOwner = this@CheckOTPLostPasswordFragment
 
             btnResetPassword.setOnClickListener {
                 resetPassword()

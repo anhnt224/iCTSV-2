@@ -32,7 +32,7 @@ class UserRoleRepository (
         webservice.getUserRole(userName,token).enqueue(object : Callback<JsonObject> {
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if(response.isSuccessful()){
+                if(response.isSuccessful){
                     val jsonObject = response.body()
                     val userRoles :List<UserRole> = gson.fromJson(jsonObject!!.getAsJsonArray("UserRoles"),collectionType) //as List<Activity>
                     insertAllToRoom(userRoles )

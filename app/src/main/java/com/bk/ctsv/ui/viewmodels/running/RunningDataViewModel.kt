@@ -11,6 +11,4 @@ import javax.inject.Inject
 
 class RunningDataViewModel @Inject constructor(
     private val runRepository: RunRepository
-) : ViewModel() {
-
-}
+) : ViewModel()

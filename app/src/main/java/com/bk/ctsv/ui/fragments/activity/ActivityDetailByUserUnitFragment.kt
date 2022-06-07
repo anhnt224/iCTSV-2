@@ -61,7 +61,7 @@ class ActivityDetailByUserUnitFragment : androidx.fragment.app.Fragment() , Inje
             setupToolbar()
             subscribeUi()
 
-            txtADesc.setMovementMethod(LinkMovementMethod.getInstance())
+            txtADesc.movementMethod = LinkMovementMethod.getInstance()
 
             binding.activityStatic = UserActivity.Companion
 

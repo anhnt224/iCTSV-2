@@ -73,11 +73,6 @@ abstract class AppDatabase : RoomDatabase() {
             return Room.databaseBuilder(context, AppDatabase::class.java, InjectorUtils.NAME_DATABASE)
                 .fallbackToDestructiveMigration()
                 .addCallback(object : RoomDatabase.Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-//                        val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-//                        WorkManager.getInstance().enqueue(request)
-                    }
                 })
                 .build()
         }

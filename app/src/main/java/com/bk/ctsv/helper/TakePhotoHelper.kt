@@ -142,7 +142,7 @@ class TakePhotoHelper(var context: Context) {
     fun dispatchTakePictureIntent() : Intent? {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null)
+        if (takePictureIntent.resolveActivity(context.packageManager) != null)
         {
             // Create the File where the photo should go
             var photoFile: File? = null
@@ -180,7 +180,7 @@ class TakePhotoHelper(var context: Context) {
         )
 
         // Save a file: path for usePromoSaleForInvoiceLine with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath()
+        mCurrentPhotoPath = image.absolutePath
         return image
     }
 

@@ -19,8 +19,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
-        versionCode 108
-        versionName "3.6.3"
+        versionCode 109
+        versionName "3.6.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

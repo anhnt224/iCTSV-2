@@ -67,7 +67,7 @@ class ScheduleFragment : androidx.fragment.app.Fragment(), Injectable {
         sectionedAdapter = SectionedRecyclerViewAdapter()
         setupViewModel()
         binding.apply {
-            setLifecycleOwner(this@ScheduleFragment)
+            lifecycleOwner = this@ScheduleFragment
             subscribeUi()
 
             retryCallback = object : RetryCallback {
@@ -84,8 +84,8 @@ class ScheduleFragment : androidx.fragment.app.Fragment(), Injectable {
 
 
 
-            recyclerview.setLayoutManager(LinearLayoutManager(context))
-            recyclerview.setAdapter(sectionedAdapter)
+            recyclerview.layoutManager = LinearLayoutManager(context)
+            recyclerview.adapter = sectionedAdapter
 
         }
         return binding.root
@@ -108,7 +108,8 @@ class ScheduleFragment : androidx.fragment.app.Fragment(), Injectable {
                     val contactsMap = ScheduleList(resource.data).toMap()
                     for (entry in contactsMap.entries) {
                         if (entry.value.size > 0) {
-                            sectionedAdapter.addSection(SchedulesSection(entry.key!!, entry.value,
+                            sectionedAdapter.addSection(SchedulesSection(
+                                entry.key, entry.value,
                                 {
                                     //   showToast(it.id)
                                 }))
@@ -121,7 +122,7 @@ class ScheduleFragment : androidx.fragment.app.Fragment(), Injectable {
             })
             getWeekNumber().observe(viewLifecycleOwner, Observer {
                 if (it!= null){
-                    binding.txtWeekNumber.setText("Tuần ${it.weekNumber}")
+                    binding.txtWeekNumber.text = "Tuần ${it.weekNumber}"
                 }
 
             })
@@ -129,8 +130,4 @@ class ScheduleFragment : androidx.fragment.app.Fragment(), Injectable {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
 }

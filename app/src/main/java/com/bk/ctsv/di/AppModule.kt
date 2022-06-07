@@ -25,7 +25,7 @@ import javax.inject.Singleton
  * It should initialize objects used across our application, such as Room database, Retrofit, Shared Preference, etc.
  */
 @Module(includes = [ViewModelsModule::class])
-class AppModule() {
+class AppModule {
 
     @Singleton // Annotation informs Dagger compiler that the instance should be created only once in the entire lifecycle of the application.
     @Provides // Annotation informs Dagger compiler that this method is the constructor for the Context return type.

@@ -18,8 +18,7 @@ class Answer (
         parcel.readInt(),
         parcel.readString().toString(),
         parcel.readInt()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(idQuestion)

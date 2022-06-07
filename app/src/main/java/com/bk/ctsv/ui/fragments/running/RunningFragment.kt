@@ -195,9 +195,9 @@ class RunningFragment : Fragment(), Injectable, OnMapReadyCallback {
         }
 
 
-        val hours = runningData.time / 3600;
-        val minutes = (runningData.time % 3600) / 60;
-        val seconds = runningData.time % 60;
+        val hours = runningData.time / 3600
+        val minutes = (runningData.time % 3600) / 60
+        val seconds = runningData.time % 60
         binding.timeStartTextView.text = runningData.timeStart
         binding.timeTextView.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
     }

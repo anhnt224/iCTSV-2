@@ -33,12 +33,12 @@ internal class SchedulesSection(
 
         val schedule = list[position]
 
-        itemHolder.txtClassId.setText("[${schedule.classId}]")
-        itemHolder.txtRoom.setText(schedule.room)
-        itemHolder.txtTower.setText(schedule.tower)
-        itemHolder.txtName.setText(schedule.name)
-        itemHolder.txtStartTime.setText(schedule.getTime())
-        itemHolder.txtType.setText(schedule.typeSubject)
+        itemHolder.txtClassId.text = "[${schedule.classId}]"
+        itemHolder.txtRoom.text = schedule.room
+        itemHolder.txtTower.text = schedule.tower
+        itemHolder.txtName.text = schedule.name
+        itemHolder.txtStartTime.text = schedule.getTime()
+        itemHolder.txtType.text = schedule.typeSubject
 
       //  itemHolder.imgItem.setImageResource(contact.profileImage)
         itemHolder.rootView.setOnClickListener {
@@ -54,7 +54,7 @@ internal class SchedulesSection(
     override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder?) {
         val headerHolder = holder as HeaderViewHolder?
 
-        headerHolder!!.tvTitle.setText(title)
+        headerHolder!!.tvTitle.text = title
     }
 
     internal interface ClickListener {

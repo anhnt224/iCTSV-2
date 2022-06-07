@@ -27,9 +27,9 @@ class RunningDataRequest (
     }
 
     fun getTimeStr(): String {
-        val hours = time / 3600;
-        val minutes = (time % 3600) / 60;
-        val seconds = time % 60;
+        val hours = time / 3600
+        val minutes = (time % 3600) / 60
+        val seconds = time % 60
         return String.format("%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

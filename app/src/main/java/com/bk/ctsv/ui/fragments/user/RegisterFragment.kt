@@ -37,7 +37,7 @@ class RegisterFragment : androidx.fragment.app.Fragment(), Injectable {
         subscribeUi()
 
         binding.apply {
-            setLifecycleOwner(this@RegisterFragment)
+            lifecycleOwner = this@RegisterFragment
 
             btnRegister.setOnClickListener {
                 register()

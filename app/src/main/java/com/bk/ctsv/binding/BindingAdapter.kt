@@ -24,18 +24,18 @@ fun goneUnless(view: View, visible: Boolean) {
 @BindingAdapter("htmlText")
 fun bindHtmlText(view: TextView, html: String?) {
     html?.let {
-        view.setText(HtmlCompat.fromHtml(html, 0))
+        view.text = HtmlCompat.fromHtml(html, 0)
     }
 }
 
 @BindingAdapter("converDateToStringDDMMYYYY")
 fun converDateToStringDDMMYYYY(textView: TextView,date: Date?) {
-    textView.setText(date?.converDateToStringDDMMYYYY())
+    textView.text = date?.converDateToStringDDMMYYYY()
 }
 
 @BindingAdapter("converDateToStringYYYYMMDDHHMMSS")
 fun converDateToStringYYYYMMDDHHMMSS(textView: TextView,date: Date?) {
-    textView.setText(date?.toTimeQueryStr())
+    textView.text = date?.toTimeQueryStr()
 }
 
 @BindingAdapter("isGone")
@@ -50,9 +50,9 @@ fun bindIsGone(view: View, isGone: Boolean) {
 @BindingAdapter("setTextWithAStatus")
 fun setTextWithAStatus(view: TextView, AStatus: Int) {
     when (AStatus){
-        0-> view.setText("Ẩn")
-        1-> view.setText("Duyệt")
-        2-> view.setText("Đóng")
+        0-> view.text = "Ẩn"
+        1-> view.text = "Duyệt"
+        2-> view.text = "Đóng"
         else->{
         }
     }
@@ -61,9 +61,9 @@ fun setTextWithAStatus(view: TextView, AStatus: Int) {
 @BindingAdapter("setTextWithGStatus")
 fun setTextWithGStatus(view: TextView, AStatus: Int) {
     when (AStatus){
-        0-> view.setText("Ẩn")
-        1-> view.setText("Duyệt")
-        2-> view.setText("Đóng")
+        0-> view.text = "Ẩn"
+        1-> view.text = "Duyệt"
+        2-> view.text = "Đóng"
         else->{
         }
     }

@@ -128,12 +128,12 @@ class TImageMotelFragment : Fragment(), Injectable, ImageMotelAdapter.OnItemClic
                                 }
                                 else{
                                     //permission already granted
-                                    pickImageFromGallery();
+                                    pickImageFromGallery()
                                 }
                             }
                             else{
                                 //system OS is < Marshmallow
-                                pickImageFromGallery();
+                                pickImageFromGallery()
                             }
                         }
                     }

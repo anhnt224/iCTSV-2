@@ -85,10 +85,6 @@ class RegisterFormFragment : Fragment(), Injectable {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun setUpViewModel(){
         viewModel = ViewModelProvider(this, factory).get(RegisterFormViewModel::class.java)
     }

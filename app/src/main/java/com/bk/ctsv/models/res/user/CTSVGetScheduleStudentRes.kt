@@ -13,7 +13,4 @@ class CTSVGetScheduleStudentRes(
     val weekNumber: String?,
     @SerializedName("ScheduleStudentLst")
     val scheduleStudentLst : List<ScheduleStudent>?
-) : CTSVCap() {
-
-
-}
+) : CTSVCap()

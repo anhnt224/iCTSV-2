@@ -13,7 +13,4 @@ class CTSVGetUserInfoRes(
     override val respCode: Int?,
     @SerializedName("ClassDetailInfo")
     val userInfo : User?
-) : CTSVCap() {
-
-
-}
+) : CTSVCap()

@@ -61,10 +61,6 @@ class TimeTableFragment : Fragment(), Injectable {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     private fun setUpViewModel(){
         viewModel = ViewModelProvider(this, factory).get(TimeTableViewModel::class.java)
     }

@@ -38,8 +38,7 @@ class FormQuestion (
         parcel.readInt(),
         parcel.readString().toString(),
         parcel.readString().toString()
-    ) {
-    }
+    )
 
     fun getType(): QuestionType {
       return when (typeQuestion) {

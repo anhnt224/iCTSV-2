@@ -40,7 +40,7 @@ class LostPasswordFragment : androidx.fragment.app.Fragment(), Injectable {
         subscribeUi()
 
         binding.apply {
-            setLifecycleOwner(this@LostPasswordFragment)
+            lifecycleOwner = this@LostPasswordFragment
 
             btnSendOTP.setOnClickListener {
                 sendOTP()
