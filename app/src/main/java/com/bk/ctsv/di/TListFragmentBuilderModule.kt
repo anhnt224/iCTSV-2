@@ -3,6 +3,7 @@ package com.bk.ctsv.di
 import com.bk.ctsv.teacher.fragment.THome2Fragment
 import com.bk.ctsv.teacher.fragment.THomeFragment
 import com.bk.ctsv.teacher.fragment.TListNotificationsFragment
+import com.bk.ctsv.teacher.fragment.TTutorFragment
 import com.bk.ctsv.teacher.fragment.account.TAccountFragment
 import com.bk.ctsv.teacher.fragment.account.TChangePasswordFragment
 import com.bk.ctsv.teacher.fragment.account.TeacherInfoFragment
@@ -15,6 +16,7 @@ import com.bk.ctsv.teacher.fragment.job.TMoreJobFragment
 import com.bk.ctsv.teacher.fragment.motel.*
 import com.bk.ctsv.teacher.fragment.scholarShip.TListScholarShipsFragment
 import com.bk.ctsv.teacher.fragment.student.*
+import com.bk.ctsv.ui.fragments.TutorFragment
 import com.bk.ctsv.ui.fragments.form.ListFormsFragment
 import com.bk.ctsv.ui.fragments.running.RunDashboardFragment
 import com.bk.ctsv.ui.fragments.running.RunFragment
@@ -137,4 +139,6 @@ abstract class TListFragmentBuilderModule {
     @ContributesAndroidInjector
     abstract fun contributeTAddressGift(): TReceiverAddressFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributeRTutorFragment(): TTutorFragment
 }

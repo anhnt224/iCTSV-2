@@ -6,6 +6,7 @@ import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
 import com.bk.ctsv.teacher.viewmodel.THome2ViewModel
 import com.bk.ctsv.teacher.viewmodel.THomeViewModel
 import com.bk.ctsv.teacher.viewmodel.TListNotificationsViewModel
+import com.bk.ctsv.teacher.viewmodel.TTutorViewModel
 import com.bk.ctsv.teacher.viewmodel.account.TAccountViewModel
 import com.bk.ctsv.teacher.viewmodel.account.TChangePasswordViewModel
 import com.bk.ctsv.teacher.viewmodel.account.TeacherInfoViewModel
@@ -27,6 +28,7 @@ import com.bk.ctsv.ui.viewmodels.running.RunDashboardViewModel
 import com.bk.ctsv.ui.viewmodels.criteria.TrainingPointViewModel
 import com.bk.ctsv.ui.viewmodels.job.ListJobApplyViewModel
 import com.bk.ctsv.ui.viewmodels.HomeViewModel
+import com.bk.ctsv.ui.viewmodels.TutorViewModel
 import com.bk.ctsv.ui.viewmodels.activity.*
 import com.bk.ctsv.ui.viewmodels.criteria.CriteriaViewModel
 import com.bk.ctsv.ui.viewmodels.form.*
@@ -507,4 +509,14 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(TReceiverAddressViewModel::class)
     abstract fun contributeTReceiveAddressViewModel(viewModel: TReceiverAddressViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TutorViewModel::class)
+    abstract fun contributeTutorViewModel(viewModel: TutorViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TTutorViewModel::class)
+    abstract fun contributeTTutorViewModel(viewModel: TTutorViewModel): ViewModel
 }

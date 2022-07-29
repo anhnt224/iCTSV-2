@@ -109,6 +109,7 @@
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/layout/search_motel_fragment.xml" value="0.33" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/menu/menu_list_address.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/drawable-anydpi/ic_clock.xml" value="0.3861111111111111" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_share_round.xml" value="0.1735" />
         <entry key="app/src/main/res/drawable/border_background_gray.xml" value="0.1115" />
         <entry key="app/src/main/res/drawable/border_background_white.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/border_button_circle.xml" value="0.107" />
@@ -175,6 +176,8 @@
         <entry key="app/src/main/res/layout/fragment_t_pick_location.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/fragment_t_receiver_address.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/fragment_t_search_motel.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/fragment_t_tutor.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/fragment_tutor.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_user_check_in_activity.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/gift_fragment.xml" value="0.2495697074010327" />
         <entry key="app/src/main/res/layout/gift_given_fragment.xml" value="0.3890625" />

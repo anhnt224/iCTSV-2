@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -34,6 +35,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.lang.Exception
 
 
 import java.text.SimpleDateFormat
@@ -454,4 +456,13 @@ fun Fragment.showNotificationDialog(
     }
 
     dialog.show()
+}
+
+fun Fragment.openLink(link: String){
+    try {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(intent)
+    }catch (e: Exception){
+        showToast(e.message.toString())
+    }
 }

@@ -1113,6 +1113,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="tutorFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1704" />
+                            <option name="y" value="-1112" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="userCheckInActivityInfoFragment">
                     <value>
                       <LayoutPositions>
@@ -1954,6 +1966,18 @@
                           <Point>
                             <option name="x" value="890" />
                             <option name="y" value="2174" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="TTutorFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-537" />
+                            <option name="y" value="-866" />
                           </Point>
                         </option>
                       </LayoutPositions>

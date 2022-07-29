@@ -20,7 +20,6 @@ import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkLocationPermission
 import com.bk.ctsv.extension.checkResource
-import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.Activity
 import com.bk.ctsv.models.entity.HomeItem
@@ -32,7 +31,6 @@ import com.bk.ctsv.ui.adapter.activity.EventAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
-import kotlinx.android.synthetic.main.home2_fragment.*
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -52,7 +50,7 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     private lateinit var homeAdapter1: HomeItemAdapter
     private lateinit var homeAdapter2: HomeItem2Adapter
     private lateinit var homeAdapter3: HomeItem3Adapter
-    private var homeItems1 = arrayListOf<HomeItem>(
+    private var homeItems1 = arrayListOf(
         HomeItem("Chấm điểm rèn luyện", R.drawable.ic_mark),
         HomeItem("Kết quả rèn luyện", R.drawable.ic_score),
         HomeItem("Hoạt động ngoại khóa", R.drawable.ic_activity),
@@ -60,12 +58,13 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         HomeItem("Dịch vụ công", R.drawable.ic_service),
         HomeItem("Học bổng", R.drawable.ic_scholarship)
     )
-    private var homeItems2 = arrayListOf<HomeItem>(
+    private var homeItems2 = arrayListOf(
         HomeItem("Việc làm", R.drawable.ic_job),
-        HomeItem("Việc làm thêm", R.drawable.ic_job_more)
+        HomeItem("Việc làm thêm", R.drawable.ic_job_more),
+        HomeItem("Gia sư", R.drawable.ic_tutor)
     )
 
-    private var homeItems3 = arrayListOf<HomeItem>(
+    private var homeItems3 = arrayListOf(
         HomeItem("10.000 bước", R.drawable.ic_running),
         HomeItem("Sổ địa chỉ", R.drawable.ic_home_location),
         HomeItem("Nhà trọ", R.drawable.ic_motel),
@@ -227,6 +226,11 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         Navigation.findNavController(requireView()).navigate(action)
     }
 
+    private fun navigateToTutorFragment(){
+        val action = Home2FragmentDirections.actionHome2FragmentToTutorFragment()
+        Navigation.findNavController(requireView()).navigate(action)
+    }
+
     private fun openLink(link: String){
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
@@ -255,6 +259,7 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         when (position){
             0 -> navigateToListJobsFragment()
             1 -> navigateToPartTime()
+            2 -> navigateToTutorFragment()
         }
     }
 

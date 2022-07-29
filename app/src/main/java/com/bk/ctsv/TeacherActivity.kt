@@ -69,6 +69,11 @@ class TeacherActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         showNavigationBar()
                     }
 
+                    R.id.TTutorFragment -> {
+                        supportActionBar?.hide()
+                        hideNavigationBar()
+                    }
+
                     else -> {
                         supportActionBar?.show()
                         hideNavigationBar()

@@ -48,19 +48,20 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     private lateinit var homeAdapter1: HomeItemAdapter
     private lateinit var homeAdapter2: HomeItem2Adapter
     private lateinit var homeAdapter3: HomeItem3Adapter
-    private var homeItems1 = arrayListOf<HomeItem>(
+    private var homeItems1 = arrayListOf(
         HomeItem("Quản lý sinh viên", R.drawable.ic_score),
         HomeItem("Hoạt động ngoại khóa", R.drawable.ic_activity),
         HomeItem("Học bổng", R.drawable.ic_scholarship),
         HomeItem("Sổ tay", R.drawable.ic_notebook),
         HomeItem("Dịch vụ công", R.drawable.ic_service)
     )
-    private var homeItems2 = arrayListOf<HomeItem>(
+    private var homeItems2 = arrayListOf(
         HomeItem("Việc làm", R.drawable.ic_job),
-        HomeItem("Việc làm thêm", R.drawable.ic_job_more)
+        HomeItem("Việc làm thêm", R.drawable.ic_job_more),
+        HomeItem("Gia sư", R.drawable.ic_tutor)
     )
 
-    private var homeItems3 = arrayListOf<HomeItem>(
+    private var homeItems3 = arrayListOf(
         HomeItem("10.000 bước", R.drawable.ic_running),
         HomeItem("Quà tặng", R.drawable.ic_gift),
         HomeItem("Cho/tặng quà", R.drawable.ic_receive_gift),
@@ -218,6 +219,7 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         when (position){
             0 -> showListJobs()
             1 -> navigateMoreJob()
+            2 -> navigateToTutorFragment()
         }
     }
 
@@ -233,6 +235,11 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             }
             4 -> navigateToListAddress()
         }
+    }
+
+    private fun navigateToTutorFragment(){
+        val action = THome2FragmentDirections.actionTHome2FragmentToTTutorFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
 

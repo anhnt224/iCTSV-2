@@ -283,6 +283,9 @@
         <action
                 android:id="@+id/action_THome2Fragment_to_TListAddressFragment"
                 app:destination="@id/TListAddressFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_TTutorFragment"
+                app:destination="@id/TTutorFragment" />
     </fragment>
     <fragment
             android:id="@+id/TGiftGivenFragment"
@@ -464,4 +467,8 @@
             android:name="com.bk.ctsv.teacher.fragment.gift.TReceiverAddressFragment"
             android:label="Chọn địa chỉ nhận quà"
             tools:layout="@layout/fragment_t_receiver_address" />
+    <fragment
+            android:id="@+id/TTutorFragment"
+            android:name="com.bk.ctsv.teacher.fragment.TTutorFragment"
+            android:label="TTutorFragment" />
 </navigation>

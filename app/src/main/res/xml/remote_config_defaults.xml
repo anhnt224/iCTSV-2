@@ -68,4 +68,19 @@
         <value>Nhà chung chủ, Nhà trọ tự quản lý, Chung cư mini, Chung cư, Nhà trọ homestay</value>
     </entry>
 
+    <entry>
+        <key>tutor_job</key>
+        <value>{
+            "title": "Dự án An sinh",
+            "description": "Theo thống kê, có trên 30% sinh viên Bách khoa đã từng hoặc có nguyện vọng làm gia sư các môn như Toán, LýHóa, tiếng Anh, Tin học, ... Nhằm giảm thiểu các chi phí về thời gian và tiền bạc cho các bên liên quan, Dự án An sinh phát triển một hệ thống CNTT hỗ trợ tìm kiếm sinh viên dạy kèm phù hợp với nhu cầu gia sư của Phụ huynh. \n\nChúng tôi mong nhận được sự hỗ trợ của các Phụ huynh, thông qua việc cung cấp thông tin tìm gia sư theo phiếu gửi yêu cầu dưới đây. Hệ thống sẽ tự động tìm kiếm, gửi danh sách các sinh viên phù hợp với yêu cầu của Phụ huynh theo thông tin quý vị cung cấp",
+            "copyright": "Nhóm ICTSV &amp; EMGLAB",
+            "tutorRegistrationLink": "http://ansinh.emglab.vn/#/gia-su",
+            "tutorRegistrationTitle": "Tìm việc gia sư - dạy kèm",
+            "tutorRegistrationDesc": "Để tìm việc gia sư - dạy kèm, hãy truy cập vào link sau.",
+            "findTutorLink": "http://ansinh.emglab.vn/#/",
+            "findTutorTitle": "Tìm gia sư - dạy kèm",
+            "findTutorDesc": "Để tìm gia sư - dạy kèm, hãy truy cập vào link sau."
+            }</value>
+    </entry>
+
 </defaultsMap>
