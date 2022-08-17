@@ -2,6 +2,7 @@ package com.bk.ctsv.teacher.viewmodel.student
 
 import androidx.lifecycle.*
 import com.bk.ctsv.common.Resource
+import com.bk.ctsv.models.entity.FilterType
 import com.bk.ctsv.models.entity.Student
 import com.bk.ctsv.repositories.TeacherRepository
 import javax.inject.Inject
@@ -10,7 +11,7 @@ class ListStudentViewModel @Inject constructor(
     private val teacherRepository: TeacherRepository
 ) : ViewModel() {
     data class Parameter(val semester: String,val className: String, val search: String)
-
+    private var filterType = MediatorLiveData<FilterType>()
     var classes = MediatorLiveData<Resource<List<String>>>()
     private lateinit var liveDataGetListClass: LiveData<Resource<List<String>>>
     private val _parameter = MutableLiveData<Parameter>()
@@ -25,6 +26,11 @@ class ListStudentViewModel @Inject constructor(
                 teacherRepository.getListStudent(parameter.semester, parameter.className)
             }
         }
+
+    fun getFilterType() = filterType
+    fun setFilterType(type: FilterType){
+        filterType.value = type
+    }
 
     fun setParameter(semester: String, className: String, search: String){
         val update = Parameter(semester, className, search)

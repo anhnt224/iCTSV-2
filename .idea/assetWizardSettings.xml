@@ -362,7 +362,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/copy_all/baseline_copy_all_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../Quang%20Dinh/AppData/Local/Android/Sdk/icons/material/materialicons/filter_alt/baseline_filter_alt_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -372,9 +372,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="1e56d0" />
-                            <entry key="outputName" value="ic_baseline_copy_all_24" />
-                            <entry key="sourceFile" value="/C:\Users\admikn" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_baseline_filter" />
+                            <entry key="sourceFile" value="C:\Users\admikn" />
                           </map>
                         </option>
                       </PersistentState>

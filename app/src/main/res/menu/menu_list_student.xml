@@ -8,4 +8,11 @@
             app:actionViewClass="androidx.appcompat.widget.SearchView"
             android:icon="@drawable/ic_search_white">
     </item>
+
+    <item
+            android:id="@+id/filter"
+            app:showAsAction="always"
+            android:title=""
+            android:icon="@drawable/ic_baseline_filter">
+    </item>
 </menu>

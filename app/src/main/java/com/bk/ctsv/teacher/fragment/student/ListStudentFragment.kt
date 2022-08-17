@@ -1,8 +1,11 @@
 package com.bk.ctsv.teacher.fragment.student
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -17,6 +20,7 @@ import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.extension.showToast
+import com.bk.ctsv.models.entity.FilterType
 import com.bk.ctsv.models.entity.Student
 import com.bk.ctsv.models.entity.StudentInfo
 import com.bk.ctsv.teacher.adapters.OnItemStudentButtonClickLister
@@ -39,11 +43,13 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     private var listClasses: Array<String> = arrayOf()
     private lateinit var searchView: SearchView
     private var students: List<Student> = listOf()
+    private var filterTypes = FilterType.values()
+    private var selectedFilterType = FilterType.ALL
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setUpViewModel()
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.list_student_fragment, container, false)
@@ -78,6 +84,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
         viewModel = ViewModelProvider(this, factory).get(ListStudentViewModel::class.java)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun subscribeUI(){
         with(viewModel){
             students.observe(viewLifecycleOwner){
@@ -100,6 +107,12 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
                         viewModel.setParameter(semesterSelected, classSelected, "")
                     }
                 }
+            }
+
+            getFilterType().observe(viewLifecycleOwner){
+                selectedFilterType = it
+                studentAdapter.students = filterListStudent(this@ListStudentFragment.students, it)
+                studentAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -158,6 +171,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
                 return true
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onQueryTextChange(searchText: String): Boolean {
                 if(classSelected == allClass){
                     return true
@@ -176,4 +190,75 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
         })
 
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.filter ->{
+                showFilterTypeDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showFilterTypeDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Lọc sinh viên")
+        val selection = filterTypes.map {
+            it.itemName
+        }.toTypedArray()
+        builder.setSingleChoiceItems(selection, selectedFilterType.type) { _, which ->
+            when (which) {
+                0 -> {
+                    viewModel.setFilterType(FilterType.ALL)
+                }
+                1 -> {
+                    viewModel.setFilterType(FilterType.SCORED)
+                }
+                2 -> {
+                    viewModel.setFilterType(FilterType.NOT_SCORED_YET)
+                }
+                3 -> {
+                    viewModel.setFilterType(FilterType.DIFFERENCE_SCORED)
+                }
+            }
+        }
+        builder.setPositiveButton("OK"){ dialog, which ->
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Hủy"){ dialog, which ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun filterListStudent(list: List<Student>, typeFilter: FilterType): List<Student>{
+        var listStudentFiltered = listOf<Student>()
+        when(typeFilter){
+            FilterType.ALL ->{
+                listStudentFiltered = list
+            }
+            FilterType.SCORED ->{
+                listStudentFiltered = list.filter {
+                    it.isScored()
+                }
+            }
+            FilterType.NOT_SCORED_YET ->{
+                listStudentFiltered = list.filter {
+                    it.isNotScoredYet()
+                }
+            }
+            FilterType.DIFFERENCE_SCORED ->{
+                listStudentFiltered = list.filter {
+                    it.isDifferenceScored()
+                }
+            }
+        }
+        return listStudentFiltered
+    }
 }
+
+
+
+
