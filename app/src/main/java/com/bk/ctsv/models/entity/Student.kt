@@ -43,4 +43,26 @@ class Student (
         }
         return ""
     }
+
+    fun isScored(): Boolean{
+        if (tScore > 0){
+            return true
+        }
+        return false
+    }
+
+    fun isNotScoredYet(): Boolean{
+        if (tScore == 0){
+            return true
+        }
+        return false
+    }
+
+    fun isDifferenceScored(): Boolean{
+        if (tScore != score){
+            return true
+        }
+        return false
+    }
+
 }
