@@ -27,6 +27,8 @@ import com.bk.ctsv.teacher.adapters.OnItemStudentButtonClickLister
 import com.bk.ctsv.teacher.adapters.StudentAdapter
 import com.bk.ctsv.teacher.viewmodel.student.ListStudentViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import javax.inject.Inject
 
 @SuppressLint("SetTextI18n")
@@ -43,6 +45,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     private var listClasses: Array<String> = arrayOf()
     private lateinit var searchView: SearchView
     private var students: List<Student> = listOf()
+    private val remoteConfig = Firebase.remoteConfig
     private var filterTypes = FilterType.values()
     private var selectedFilterType = FilterType.ALL
 
@@ -53,6 +56,9 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
         setUpViewModel()
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.list_student_fragment, container, false)
+
+        val semesterStr = remoteConfig.getString("semesters")
+        semesters = semesterStr.split(",").toTypedArray()
 
         studentAdapter = StudentAdapter(listOf(), this)
         binding.recyclerView.apply {
