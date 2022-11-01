@@ -442,6 +442,9 @@
         <action
                 android:id="@+id/action_home2Fragment_to_tutorFragment"
                 app:destination="@id/tutorFragment" />
+        <action
+                android:id="@+id/action_home2Fragment_to_motelRegistrationListFragment"
+                app:destination="@id/motelRegistrationListFragment" />
     </fragment>
     <fragment
             android:id="@+id/giftFragment"
@@ -605,4 +608,52 @@
             android:id="@+id/tutorFragment"
             android:name="com.bk.ctsv.ui.fragments.TutorFragment"
             android:label="TutorFragment" />
+    <fragment
+            android:id="@+id/motelRegistrationListFragment"
+            android:name="com.bk.ctsv.modules.searchMotel.fragments.MotelRegistrationListFragment"
+            android:label="@string/fragment_motel_registration_list"
+            tools:layout="@layout/fragment_motel_registration_list">
+        <action
+                android:id="@+id/action_motelRegistrationListFragment_to_motelRegistrationInfoFragment"
+                app:destination="@id/motelRegistrationInfoFragment" />
+        <action
+                android:id="@+id/action_motelRegistrationListFragment_to_motelRegistrationCompleteFragment"
+                app:destination="@id/motelRegistrationCompleteFragment" />
+        <action
+                android:id="@+id/action_motelRegistrationListFragment_to_motelRegistrationProcessingFragment"
+                app:destination="@id/motelRegistrationProcessingFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/motelRegistrationInfoFragment"
+            android:name="com.bk.ctsv.modules.searchMotel.fragments.MotelRegistrationInfoFragment"
+            android:label="@string/fragment_motel_registration_info"
+            tools:layout="@layout/fragment_motel_registration_info">
+        <argument
+                android:name="motelRegistration"
+                app:argType="com.bk.ctsv.modules.searchMotel.model.MotelRegistration" />
+    </fragment>
+    <fragment
+            android:id="@+id/motelRegistrationCompleteFragment"
+            android:name="com.bk.ctsv.modules.searchMotel.fragments.MotelRegistrationCompleteFragment"
+            android:label="fragment_motel_registration_complete"
+            tools:layout="@layout/fragment_motel_registration_complete" >
+        <action
+                android:id="@+id/action_motelRegistrationCompleteFragment_to_motelRegistrationInfoFragment"
+                app:destination="@id/motelRegistrationInfoFragment" />
+        <argument
+                android:name="motelRegistration"
+                app:argType="com.bk.ctsv.modules.searchMotel.model.MotelRegistration" />
+    </fragment>
+    <fragment
+            android:id="@+id/motelRegistrationProcessingFragment"
+            android:name="com.bk.ctsv.modules.searchMotel.fragments.MotelRegistrationProcessingFragment"
+            android:label="fragment_motel_registration_processing"
+            tools:layout="@layout/fragment_motel_registration_processing" >
+        <action
+                android:id="@+id/action_motelRegistrationProcessingFragment_to_motelRegistrationInfoFragment"
+                app:destination="@id/motelRegistrationInfoFragment" />
+        <argument
+                android:name="motelRegistration"
+                app:argType="com.bk.ctsv.modules.searchMotel.model.MotelRegistration" />
+    </fragment>
 </navigation>

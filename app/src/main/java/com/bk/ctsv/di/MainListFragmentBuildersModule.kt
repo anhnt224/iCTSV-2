@@ -17,6 +17,10 @@
 package com.bk.ctsv.di
 
 
+import com.bk.ctsv.modules.searchMotel.fragments.MotelRegistrationCompleteFragment
+import com.bk.ctsv.modules.searchMotel.fragments.MotelRegistrationInfoFragment
+import com.bk.ctsv.modules.searchMotel.fragments.MotelRegistrationListFragment
+import com.bk.ctsv.modules.searchMotel.fragments.MotelRegistrationProcessingFragment
 import com.bk.ctsv.ui.fragments.Home2Fragment
 import com.bk.ctsv.ui.fragments.HomeFragment
 import com.bk.ctsv.ui.fragments.TutorFragment
@@ -201,4 +205,16 @@ abstract class MainListFragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTutorFragment(): TutorFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMotelRegistrationComplete(): MotelRegistrationCompleteFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMotelRegistrationInfo(): MotelRegistrationInfoFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMotelRegistrationList(): MotelRegistrationListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMotelRegistrationProcessing(): MotelRegistrationProcessingFragment
 }

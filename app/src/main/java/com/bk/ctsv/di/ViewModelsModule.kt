@@ -2,6 +2,10 @@ package com.bk.ctsv.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bk.ctsv.modules.searchMotel.viewModels.MotelRegistrationCompleteViewModel
+import com.bk.ctsv.modules.searchMotel.viewModels.MotelRegistrationInfoViewModel
+import com.bk.ctsv.modules.searchMotel.viewModels.MotelRegistrationListViewModel
+import com.bk.ctsv.modules.searchMotel.viewModels.MotelRegistrationProcessingViewModel
 import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
 import com.bk.ctsv.teacher.viewmodel.THome2ViewModel
 import com.bk.ctsv.teacher.viewmodel.THomeViewModel
@@ -145,17 +149,17 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ScholarShipDetailViewModel ::class)
+    @ViewModelKey(ScholarShipDetailViewModel::class)
     abstract fun bindScholarShipDetailViewModel(viewModel: ScholarShipDetailViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(ListJobsViewModel ::class)
+    @ViewModelKey(ListJobsViewModel::class)
     abstract fun bindListJobsViewModel(viewModel: ListJobsViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(JobDetailViewModel ::class)
+    @ViewModelKey(JobDetailViewModel::class)
     abstract fun bindJobDetailViewModel(viewModel: JobDetailViewModel): ViewModel
 
     @Binds
@@ -519,4 +523,27 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(TTutorViewModel::class)
     abstract fun contributeTTutorViewModel(viewModel: TTutorViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MotelRegistrationListViewModel::class)
+    abstract fun contributeMotelRegistrationList(viewModel: MotelRegistrationListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MotelRegistrationInfoViewModel::class)
+    abstract fun contributeMotelRegistrationInfo(viewModel: MotelRegistrationInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MotelRegistrationProcessingViewModel::class)
+    abstract fun contributeMotelRegistrationProcessing(viewModel: MotelRegistrationProcessingViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MotelRegistrationCompleteViewModel::class)
+    abstract fun contributeMotelRegistrationComplete(viewModel: MotelRegistrationCompleteViewModel): ViewModel
+
+
+
 }

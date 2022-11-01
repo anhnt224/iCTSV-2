@@ -55,4 +55,35 @@
     <color name="colorRunDashBoardPass">#D1F8D3</color>
     <color name="colorRunDashBoardFail">#FFD6BA</color>
 
+    <color name="ink500">#22313F</color>
+    <color name="ink450">#B322313F</color>
+    <color name="ink400">#8022313F</color>
+    <color name="ink300">#4D22313F</color>
+    <color name="ink200">#1A22313F</color>
+    <color name="ink100">#0D22313F</color>
+
+    <color name="green500">#00BC3C</color>
+    <color name="green400">#CC00BC3C</color>
+    <color name="green300">#4D00BC3C</color>
+    <color name="green200">#1A00BC3C</color>
+    <color name="green100">#0D00BC3C</color>
+
+    <color name="orange500">#FF821E</color>
+    <color name="orange400">#CCFF821E</color>
+    <color name="orange300">#4DFF821E</color>
+    <color name="orange200">#1AFF821E</color>
+    <color name="orange100">#0DFF821E</color>
+
+    <color name="red500">#E60A32</color>
+    <color name="red400">#CCE60A32</color>
+    <color name="red300">#4DE60A32</color>
+    <color name="red200">#1AE60A32</color>
+    <color name="red100">#0DE60A32</color>
+
+    <color name="blue500">#2F6BFF</color>
+    <color name="blue400">#CC2F6BFF</color>
+    <color name="blue300">#4D2F6BFF</color>
+    <color name="blue200">#1A2F6BFF</color>
+    <color name="blue100">#0D2F6BFF</color>
+
 </resources>

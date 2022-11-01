@@ -24,7 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/hm/ptr4r10s7j136t6r05y_hxxr0000gn/T/round_share_24.xml" />
+                                                <entry key="imagePath" value="/private/var/folders/hm/ptr4r10s7j136t6r05y_hxxr0000gn/T/round_arrow_back_24.xml" />
                                                 <entry key="opacityPercent" value="60" />
                                               </map>
                                             </option>
@@ -36,7 +36,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialiconsround/share/round_share_24.xml" />
+                                                <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialiconsround/arrow_back/round_arrow_back_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -82,7 +82,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="imageAsset" value="$USER_HOME$/Desktop/Icon-1024.png" />
-                                      <entry key="outputName" value="ic_share_round" />
+                                      <entry key="outputName" value="ic_back" />
                                       <entry key="themeColor" value="9d0e0e" />
                                     </map>
                                   </option>

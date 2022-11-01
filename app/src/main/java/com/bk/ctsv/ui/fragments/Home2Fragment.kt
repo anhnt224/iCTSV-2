@@ -69,7 +69,8 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         HomeItem("Sổ địa chỉ", R.drawable.ic_home_location),
         HomeItem("Nhà trọ", R.drawable.ic_motel),
         HomeItem("Quà tặng", R.drawable.ic_gift),
-        HomeItem("Cho/tặng quà", R.drawable.ic_receive_gift)
+        HomeItem("Cho/tặng quà", R.drawable.ic_receive_gift),
+        HomeItem("Đăng kí tìm trọ", R.drawable.ic_motel)
     )
 
 
@@ -231,6 +232,11 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         Navigation.findNavController(requireView()).navigate(action)
     }
 
+    private fun navigateToMotelRegistrationList(){
+        val action = Home2FragmentDirections.actionHome2FragmentToMotelRegistrationListFragment()
+        Navigation.findNavController(requireView()).navigate(action)
+    }
+
     private fun openLink(link: String){
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
@@ -274,6 +280,7 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             }
             3 -> navigateToGift()
             4 -> navigateGivenGift()
+            5 -> navigateToMotelRegistrationList()
         }
     }
 }

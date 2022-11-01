@@ -88,4 +88,8 @@
     <string name="hu">Huỷ</string>
     <string name="_0_0">0/0</string>
     <string name="syns_text">Đồng bộ</string>
+
+<!--    Toolbar title-->
+    <string name="fragment_motel_registration_list">"Đăng kí tìm trọ"</string>
+    <string name="fragment_motel_registration_info">"Thông tin đăng kí"</string>
 </resources>

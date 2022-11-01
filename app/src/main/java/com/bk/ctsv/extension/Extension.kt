@@ -36,6 +36,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
+import java.text.NumberFormat
 
 
 import java.text.SimpleDateFormat
@@ -465,4 +466,14 @@ fun Fragment.openLink(link: String){
     }catch (e: Exception){
         showToast(e.message.toString())
     }
+}
+
+fun Double.toCurrency(): String {
+    val format = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+    return format.format(this)
+}
+
+fun Int.toCurrency(): String {
+    val format = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+    return format.format(this)
 }
