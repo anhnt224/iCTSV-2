@@ -6,7 +6,9 @@ import com.bk.ctsv.common.AppExecutors
 import com.bk.ctsv.common.NetworkBoundResource
 import com.bk.ctsv.common.Resource
 import com.bk.ctsv.helper.SharedPrefsHelper
+import com.bk.ctsv.models.entity.Motel
 import com.bk.ctsv.models.res.MyCTSVCap
+import com.bk.ctsv.modules.searchMotel.model.GetMotelResultsResp
 import com.bk.ctsv.modules.searchMotel.model.MotelRegistration
 import com.bk.ctsv.modules.searchMotel.model.MotelRegistrationListResp
 import com.bk.ctsv.modules.searchMotel.model.RegisterMotelReq
@@ -22,11 +24,13 @@ class MotelRegistrationRepository @Inject constructor(
     private val motelRegistrationList = MutableLiveData<List<MotelRegistration>>()
     private val registerMotelResp = MutableLiveData<MyCTSVCap>()
     private val deleteMotelRegistrationResp = MutableLiveData<MyCTSVCap>()
+    private val motelList = MutableLiveData<List<Motel>>()
 
     init {
         motelRegistrationList.value = listOf()
         registerMotelResp.value = MyCTSVCap()
         deleteMotelRegistrationResp.value = MyCTSVCap()
+        motelList.value = listOf()
     }
 
     fun getMotelRegistrationList(
@@ -116,6 +120,35 @@ class MotelRegistrationRepository @Inject constructor(
                     userName = sharedPrefsHelper.getUserName(),
                     token = sharedPrefsHelper.getToken(),
                     docID = id
+                )
+            }
+
+        }.asLiveData()
+    }
+
+    fun getListMotelResults(
+        registerID: Int, shouldFetch: Boolean = true
+    ): LiveData<Resource<List<Motel>>> {
+        return object : NetworkBoundResource<List<Motel>, GetMotelResultsResp>(appExecutors){
+            override fun saveCallResult(item: GetMotelResultsResp) {
+                Thread{
+                    motelList.postValue(item.motelList)
+                }.start()
+            }
+
+            override fun shouldFetch(data: List<Motel>?): Boolean {
+                return data == null || shouldFetch
+            }
+
+            override fun loadFromDb(): LiveData<List<Motel>> {
+                return motelList
+            }
+
+            override fun createCall(): LiveData<ApiResponse<GetMotelResultsResp>> {
+                return webservice.getListMotelResults(
+                    userName = sharedPrefsHelper.getUserName(),
+                    token = sharedPrefsHelper.getToken(),
+                    registerID = registerID
                 )
             }
 

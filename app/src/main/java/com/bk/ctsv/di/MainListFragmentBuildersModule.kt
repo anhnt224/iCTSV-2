@@ -220,4 +220,7 @@ abstract class MainListFragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributePickMotelLocation(): PickMotelLocationFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeListMotelResult(): ListMotelResultsFragment
 }

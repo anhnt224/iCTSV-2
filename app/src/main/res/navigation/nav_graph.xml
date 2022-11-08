@@ -646,6 +646,9 @@
         <argument
                 android:name="motelRegistration"
                 app:argType="com.bk.ctsv.modules.searchMotel.model.MotelRegistration" />
+        <action
+                android:id="@+id/action_motelRegistrationCompleteFragment_to_listMotelResultsFragment"
+                app:destination="@id/listMotelResultsFragment" />
     </fragment>
     <fragment
             android:id="@+id/motelRegistrationProcessingFragment"
@@ -677,5 +680,17 @@
                 app:destination="@id/registerToFindMotelFragment"
                 app:popUpTo="@id/registerToFindMotelFragment"
                 app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/listMotelResultsFragment"
+            android:name="com.bk.ctsv.modules.searchMotel.fragments.ListMotelResultsFragment"
+            android:label="Phòng trọ"
+            tools:layout="@layout/fragment_list_motel_results">
+        <action
+                android:id="@+id/action_listMotelResultsFragment_to_motelInfoFragment"
+                app:destination="@id/motelInfoFragment" />
+        <argument
+                android:name="motelList"
+                app:argType="com.bk.ctsv.models.entity.Motel[]" />
     </fragment>
 </navigation>

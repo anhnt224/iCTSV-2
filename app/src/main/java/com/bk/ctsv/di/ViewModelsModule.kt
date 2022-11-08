@@ -552,6 +552,8 @@ abstract class ViewModelsModule {
     @ViewModelKey(PickMotelLocationViewModel::class)
     abstract fun contributePickMotelLocation(viewModel: PickMotelLocationViewModel): ViewModel
 
-
-
+    @Binds
+    @IntoMap
+    @ViewModelKey(ListMotelResultsViewModel::class)
+    abstract fun contributeListMotelResultsViewMotel(viewModel: ListMotelResultsViewModel): ViewModel
 }

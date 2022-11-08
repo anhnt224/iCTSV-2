@@ -20,6 +20,7 @@ import com.bk.ctsv.models.res.teacher.GetListStudentResp
 import com.bk.ctsv.models.res.teacher.GetStudentInfoResp
 import com.bk.ctsv.models.res.timetable.GetTimeTableResp
 import com.bk.ctsv.models.res.user.*
+import com.bk.ctsv.modules.searchMotel.model.GetMotelResultsResp
 import com.bk.ctsv.modules.searchMotel.model.MotelRegistrationListResp
 import com.bk.ctsv.modules.searchMotel.model.RegisterMotelReq
 import com.google.android.gms.common.api.Api
@@ -771,5 +772,13 @@ interface WebService {
         @Field("TokenCode") token: String,
         @Field("DocID") docID: Int
     ): LiveData<ApiResponse<MyCTSVCap>>
+
+    @FormUrlEncoded
+    @POST("StudentMotel/GetMotelSuggestByRID")
+    fun getListMotelResults(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") token: String,
+        @Field("RegisterID") registerID: Int
+    ): LiveData<ApiResponse<GetMotelResultsResp>>
 
 }
