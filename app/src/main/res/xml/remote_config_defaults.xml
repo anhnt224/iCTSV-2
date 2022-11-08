@@ -83,4 +83,19 @@
             }</value>
     </entry>
 
+    <entry>
+        <key>motel_types</key>
+        <value>Nhà trọ chung chủ||Nhà trọ không chung chủ||Chung cư mini||Nhà nguyên căn</value>
+    </entry>
+
+    <entry>
+        <key>motel_user_requests</key>
+        <value>Có điều hoà||Có máy giặt||Có chỗ nấu ăn||Có ban công</value>
+    </entry>
+
+    <entry>
+        <key>motel_pending_message</key>
+        <value>Yêu cầu của bạn đã được chấp nhận, chúng tôi đã gửi một thông báo qua email cho bạn. Vui lòng kiểm tra email và làm theo hướng dẫn.</value>
+    </entry>
+
 </defaultsMap>

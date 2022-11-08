@@ -1,11 +1,9 @@
 package com.bk.ctsv.di
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.bk.ctsv.modules.searchMotel.viewModels.MotelRegistrationCompleteViewModel
-import com.bk.ctsv.modules.searchMotel.viewModels.MotelRegistrationInfoViewModel
-import com.bk.ctsv.modules.searchMotel.viewModels.MotelRegistrationListViewModel
-import com.bk.ctsv.modules.searchMotel.viewModels.MotelRegistrationProcessingViewModel
+import com.bk.ctsv.modules.searchMotel.viewModels.*
 import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
 import com.bk.ctsv.teacher.viewmodel.THome2ViewModel
 import com.bk.ctsv.teacher.viewmodel.THomeViewModel
@@ -543,6 +541,16 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(MotelRegistrationCompleteViewModel::class)
     abstract fun contributeMotelRegistrationComplete(viewModel: MotelRegistrationCompleteViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterToFindMotelViewModel::class)
+    abstract fun contributeRegisterToFindMotel(viewMotel: RegisterToFindMotelViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PickMotelLocationViewModel::class)
+    abstract fun contributePickMotelLocation(viewModel: PickMotelLocationViewModel): ViewModel
 
 
 

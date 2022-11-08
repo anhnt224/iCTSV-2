@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.12529431550622266" />
         <entry key="../../../../layout/custom_preview.xml" value="0.2657407407407407" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/drawable-anydpi/ic_arrow_down.xml" value="0.2155" />
         <entry key="..\:/Dev/Android/AndroiStudioProjects/iCTSV-2/app/src/main/res/drawable/border_button_main_white.xml" value="0.2155" />
@@ -112,7 +113,10 @@
         <entry key="..\:/Users/Quang Dinh/AndroidStudioProjects/iCTSV-2/app/src/main/res/layout/list_student_fragment.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Quang Dinh/AndroidStudioProjects/iCTSV-2/app/src/main/res/layout/t_home2_fragment.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Quang Dinh/AndroidStudioProjects/iCTSV-2/app/src/main/res/menu/menu_list_student.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_add_location.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_arrow_down.xml" value="0.2225" />
         <entry key="app/src/main/res/drawable-anydpi/ic_back.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_calendar.xml" value="0.2225" />
         <entry key="app/src/main/res/drawable-anydpi/ic_clock.xml" value="0.3861111111111111" />
         <entry key="app/src/main/res/drawable-anydpi/ic_share_round.xml" value="0.1735" />
         <entry key="app/src/main/res/drawable/border_background_gray.xml" value="0.1115" />
@@ -147,6 +151,7 @@
         <entry key="app/src/main/res/drawable/thumb_three.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/thumb_two.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/uc_complete_round.xml" value="0.38333333333333336" />
+        <entry key="app/src/main/res/layout-v28/fragment_register_to_find_motel.xml" value="0.375" />
         <entry key="app/src/main/res/layout/account_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14356884057971014" />
         <entry key="app/src/main/res/layout/activity_teacher.xml" value="0.375" />
@@ -172,9 +177,12 @@
         <entry key="app/src/main/res/layout/fragment_more_job.xml" value="0.10285714285714286" />
         <entry key="app/src/main/res/layout/fragment_motel_registration_complete.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_motel_registration_info.xml" value="0.37604166666666666" />
-        <entry key="app/src/main/res/layout/fragment_motel_registration_list.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_motel_registration_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_motel_registration_processing.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_pick_motel_location.xml" value="0.3619791666666667" />
+        <entry key="app/src/main/res/layout/fragment_pick_register_motel_location.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.12259371833839919" />
+        <entry key="app/src/main/res/layout/fragment_register_to_find_motel.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_t_add_new_address.xml" value="0.16354166666666667" />
         <entry key="app/src/main/res/layout/fragment_t_apply_gift.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/fragment_t_gift_received.xml" value="0.16822916666666668" />
@@ -255,6 +263,7 @@
         <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/menu/menu_new_sv_group.xml" value="0.26944444444444443" />
         <entry key="app/src/main/res/menu/menu_running.xml" value="0.26944444444444443" />
+        <entry key="app/src/main/res/menu/registration_info_menu.xml" value="0.375" />
         <entry key="app/src/main/res/menu/take_picture_gift.xml" value="0.3890625" />
       </map>
     </option>

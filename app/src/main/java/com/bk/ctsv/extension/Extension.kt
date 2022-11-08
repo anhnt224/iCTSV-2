@@ -141,6 +141,12 @@ fun Date.toTimeQueryStr() : String{
 }
 
 @SuppressLint("SimpleDateFormat")
+fun Date.getTimeQuery() : String{
+    val dateFormat = SimpleDateFormat(DATE_FORMAT_PATTERN)
+    return dateFormat.format(time)
+}
+
+@SuppressLint("SimpleDateFormat")
 fun Date.convertDateToStringDateTime() : String{
     val dateFormat = SimpleDateFormat("HH:mm dd/MM/yyyy")
     return dateFormat.format(time)

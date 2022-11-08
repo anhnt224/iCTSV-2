@@ -622,6 +622,9 @@
         <action
                 android:id="@+id/action_motelRegistrationListFragment_to_motelRegistrationProcessingFragment"
                 app:destination="@id/motelRegistrationProcessingFragment" />
+        <action
+                android:id="@+id/action_motelRegistrationListFragment_to_registerToFindMotelFragment"
+                app:destination="@id/registerToFindMotelFragment" />
     </fragment>
     <fragment
             android:id="@+id/motelRegistrationInfoFragment"
@@ -655,5 +658,24 @@
         <argument
                 android:name="motelRegistration"
                 app:argType="com.bk.ctsv.modules.searchMotel.model.MotelRegistration" />
+    </fragment>
+    <fragment
+            android:id="@+id/registerToFindMotelFragment"
+            android:name="com.bk.ctsv.modules.searchMotel.fragments.RegisterToFindMotelFragment"
+            android:label="Đăng kí tìm trọ">
+        <action
+                android:id="@+id/action_registerToFindMotelFragment_to_pickMotelLocationFragment"
+                app:destination="@id/pickMotelLocationFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/pickMotelLocationFragment"
+            android:name="com.bk.ctsv.modules.searchMotel.fragments.PickMotelLocationFragment"
+            android:label="Chọn vị trí tìm trọ"
+            tools:layout="@layout/fragment_pick_motel_location">
+        <action
+                android:id="@+id/action_pickMotelLocationFragment_to_registerToFindMotelFragment"
+                app:destination="@id/registerToFindMotelFragment"
+                app:popUpTo="@id/registerToFindMotelFragment"
+                app:popUpToInclusive="true" />
     </fragment>
 </navigation>

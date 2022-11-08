@@ -11,25 +11,43 @@ import com.bk.ctsv.R
 import com.bk.ctsv.extension.convertDateToStringDateTime
 import com.bk.ctsv.extension.toCurrency
 import com.bk.ctsv.extension.toDate
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class MotelRegistration(
-    var id: String = "",
+    @SerializedName("RowID")
+    var id: Int = 0,
+    @SerializedName("Latitude")
     var lat: Double = 0.0,
+    @SerializedName("Longitude")
     var lng: Double = 0.0,
+    @SerializedName("Address")
     var locationName: String = "",
+    @SerializedName("Radius")
     var range: Int = 500,
+    @SerializedName("Area")
     var address: String = "",
+    @SerializedName("MotelType")
     var type: String = "",
+    @SerializedName("QuantityP")
     var numberOfPeople: Int = 0,
+    @SerializedName("PriceMax")
     var maxPrice: Int = 0,
+    @SerializedName("PriceMin")
     var minPrice: Int = 0,
+    @SerializedName("Require")
     var userRequests: String = "",
-    var liveWithOther: Boolean = false,
+    @SerializedName("IsGroup")
+    var liveWithOther: Int = 0,
+    @SerializedName("TimeStart")
     var startDate: String = "",
+    @SerializedName("TimeEnd")
     var endDate: String = "",
+    @SerializedName("Status")
     var statusCode: Int = 0,
-    var createdTime: String = "2022-10-31 16:50:00",
+    @SerializedName("TimeCreate")
+    var createdTime: String = "",
+    @SerializedName("Fee")
     var fee: Int = 50000
 ): Serializable{
     fun getStatus(): MotelRegistrationStatus {
@@ -76,33 +94,6 @@ class MotelRegistration(
     }
 
     fun getLiveWithOtherStr(): String {
-        return if (liveWithOther) "Có" else "Không"
-    }
-
-    fun getFeeTitleSpan(context: Context): SpannableStringBuilder{
-        val feeStr = fee.toCurrency()
-        val feeTitle =
-            "Yêu cầu của bạn đã được xác nhận, bạn cần trả một khoản phí là $feeStr để chúng tôi hỗ trợ tìm trọ cho bạn."
-
-        val startIndex = feeTitle.indexOf(feeStr)
-        val length = feeStr.length
-        val spanContent = SpannableStringBuilder(feeTitle)
-
-        val bold = StyleSpan(Typeface.BOLD)
-        val greenText =
-            ForegroundColorSpan(ContextCompat.getColor(context,R.color.green500))
-        spanContent.setSpan(
-            bold,
-            startIndex,
-            startIndex + length,
-            Spannable.SPAN_INCLUSIVE_INCLUSIVE
-        )
-        spanContent.setSpan(
-            greenText,
-            startIndex,
-            startIndex + length,
-            Spannable.SPAN_INCLUSIVE_INCLUSIVE
-        )
-        return spanContent
+        return if (liveWithOther == 1) "Có" else "Không"
     }
 }

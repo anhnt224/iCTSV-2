@@ -883,6 +883,15 @@
                             <option name="y" value="2466" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_motelRegistrationCompleteFragment_to_motelRegistrationInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -919,6 +928,16 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_motelRegistrationListFragment_to_motelRegistrationProcessingFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_motelRegistrationListFragment_to_registerToFindMotelFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -932,6 +951,15 @@
                             <option name="x" value="-232" />
                             <option name="y" value="3192" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_motelRegistrationProcessingFragment_to_motelRegistrationInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -956,6 +984,27 @@
                             <option name="x" value="799" />
                             <option name="y" value="-3149" />
                           </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="pickMotelLocationFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="127" />
+                            <option name="y" value="3683" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_pickMotelLocationFragment_to_registerToFindMotelFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -1027,6 +1076,27 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_registerFormFragment_to_chooseDeliveryTypeFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="registerToFindMotelFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-223" />
+                            <option name="y" value="3690" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_registerToFindMotelFragment_to_pickMotelLocationFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

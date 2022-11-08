@@ -10,6 +10,9 @@
         <variable
                 name="motelRegistrationStatus"
                 type="com.bk.ctsv.modules.searchMotel.model.MotelRegistrationStatus" />
+        <variable
+                name="status"
+                type="com.bk.ctsv.common.Status" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -410,29 +413,13 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:textColor="@color/ink500"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.button.MaterialButton
-                    android:id="@+id/materialButton2"
-                    style="@style/ButtonNoInset"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Xác nhận"
-                    android:textAllCaps="false"
-                    app:cornerRadius="12dp"
+                    android:textColor="@color/green500"
+                    android:text="adssađâsđasa"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/feeTitle" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -442,5 +429,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--        <include-->
+<!--                app:status="@{status}"-->
+<!--                layout="@layout/loading_action_state"/>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
