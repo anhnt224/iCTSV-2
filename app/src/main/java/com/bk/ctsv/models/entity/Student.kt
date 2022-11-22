@@ -27,7 +27,7 @@ class Student (
         return "SV chấm: $score"
     }
 
-    fun getTScore(): String{
+    fun getTScoreStr(): String{
         return "GV chấm: $tScore"
     }
 

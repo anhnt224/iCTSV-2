@@ -1,6 +1,5 @@
 package com.bk.ctsv.teacher.fragment.gift
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,12 +29,9 @@ import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
 import com.bk.ctsv.ui.adapter.ImageGiftAdapter
 import com.bk.ctsv.ui.fragments.gift.GiftInfoFragmentArgs
 import com.bk.ctsv.utilities.API_UPLOAD_SERVICE_BASE_URL
-import com.bk.ctsv.utilities.runOnIoThread
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
-import java.io.IOException
-import java.net.URL
 import javax.inject.Inject
 
 
@@ -126,10 +122,10 @@ class TGiftInfoFragment : Fragment(), Injectable, ImageGiftAdapter.OnItemClickLi
 
         binding.apply {
             statusText.setBackgroundColor(
-                ContextCompat.getColor(root.context, gift.getUStatus().bgColor)
+                ContextCompat.getColor(root.context, gift.getUStatus2().bgColor)
             )
             statusText.setTextColor(
-                ContextCompat.getColor(root.context, gift.getUStatus().titleColor)
+                ContextCompat.getColor(root.context, gift.getUStatus2().titleColor)
             )
             tvQuan.text = gift.quantity.toString()
             tvQuanRegister.text = gift.registeredQuantity.toString()

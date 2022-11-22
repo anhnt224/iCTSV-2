@@ -13,14 +13,14 @@ if (project.hasProperty("distMsalVersion")) {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 32
     defaultConfig {
         applicationId "com.bk.ctsv"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 32
         multiDexEnabled true
-        versionCode 110
-        versionName "3.6.5"
+        versionCode 112
+        versionName "3.7.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -157,5 +157,7 @@ dependencies {
 
     //Banner
     implementation 'io.github.youth5201314:banner:2.2.2'
+
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 
 }

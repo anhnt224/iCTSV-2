@@ -137,9 +137,9 @@ class RegisterToFindMotelFragment : Fragment(), Injectable {
 
     private fun getRemoteConfigValue(){
         val motelTypeStr = remoteConfig.getString("motel_types")
-        types = motelTypeStr.split("||")
+        types = motelTypeStr.split("|")
         val userRequestsStr = remoteConfig.getString("motel_user_requests")
-        userRequests = userRequestsStr.split("||")
+        userRequests = userRequestsStr.split("|")
     }
 
     private fun subscribeUI() {

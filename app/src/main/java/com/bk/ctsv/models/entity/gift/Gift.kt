@@ -1,11 +1,9 @@
 package com.bk.ctsv.models.entity.gift
 
 import com.bk.ctsv.extension.convertDateToStringDateTime
-import com.bk.ctsv.extension.convertStringToDateDDMMYYYY
 import com.bk.ctsv.extension.toDate
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-import java.util.*
 
 class Gift(
     @SerializedName("GiftID")
@@ -69,7 +67,7 @@ class Gift(
         return "Số lượng: $quantity"
     }
 
-    fun getRegisteredQuantity(): String {
+    fun getRegisteredQuantityStr(): String {
         return "Đã đăng kí: $registeredQuantity"
     }
 
@@ -122,7 +120,7 @@ class Gift(
                 && contactPerson.isNotEmpty()
     }
 
-    fun getUStatus(): GiftRegisteredStatus {
+    fun getUStatus2(): GiftRegisteredStatus {
         return when (uStatus){
             GiftRegisteredStatus.APPROVED.value -> GiftRegisteredStatus.APPROVED
             GiftRegisteredStatus.NEW.value -> GiftRegisteredStatus.NEW
@@ -134,10 +132,10 @@ class Gift(
     }
 
     fun isUnRegistered(): Boolean {
-        return getUStatus() == GiftRegisteredStatus.UNREGISTERED
+        return getUStatus2() == GiftRegisteredStatus.UNREGISTERED
     }
 
     fun isRegistered(): Boolean {
-        return getUStatus() == GiftRegisteredStatus.NEW
+        return getUStatus2() == GiftRegisteredStatus.NEW
     }
 }

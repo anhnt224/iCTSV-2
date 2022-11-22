@@ -25,7 +25,6 @@ import com.bk.ctsv.models.entity.ImageMotel2
 import com.bk.ctsv.models.entity.NotificationDialogType
 import com.bk.ctsv.models.entity.gift.Gift
 import com.bk.ctsv.ui.adapter.ImageGiftAdapter
-import com.bk.ctsv.ui.adapter.user.MotelImageAdapter
 import com.bk.ctsv.ui.viewmodels.gift.GiftInfoViewModel
 import com.bk.ctsv.utilities.API_UPLOAD_SERVICE_BASE_URL
 import com.bumptech.glide.Glide
@@ -120,10 +119,10 @@ class GiftInfoFragment : Fragment(), Injectable, ImageGiftAdapter.OnItemClickLis
 
         binding.apply {
             statusText.setBackgroundColor(
-                ContextCompat.getColor(root.context, gift.getUStatus().bgColor)
+                ContextCompat.getColor(root.context, gift.getUStatus2().bgColor)
             )
             statusText.setTextColor(
-                ContextCompat.getColor(root.context, gift.getUStatus().titleColor)
+                ContextCompat.getColor(root.context, gift.getUStatus2().titleColor)
             )
             tvQuan.text = gift.quantity.toString()
             tvQuanRegister.text = gift.registeredQuantity.toString()

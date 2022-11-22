@@ -126,7 +126,7 @@
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{scholarShip.quantity}"
+                                    android:text="@{scholarShip.quantityStr}"
                                     android:textColor="@color/textColorPrimary"
                                     android:textSize="16dp" />
                         </LinearLayout>
