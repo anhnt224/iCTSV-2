@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
@@ -17,10 +17,10 @@ android {
     defaultConfig {
         applicationId "com.bk.ctsv"
         minSdkVersion 16
-        targetSdkVersion 32
+        targetSdkVersion 31
         multiDexEnabled true
-        versionCode 114
-        versionName "3.7.0"
+        versionCode 116
+        versionName "3.7.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -77,7 +77,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "android.arch.navigation:navigation-fragment:$nav_version" // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui:$nav_version"
-    implementation "android.arch.work:work-runtime-ktx:$work_version"
+//    implementation "android.arch.work:work-runtime-ktx:$work_version"
     implementation "androidx.paging:paging-runtime:$paging_version"
 
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'

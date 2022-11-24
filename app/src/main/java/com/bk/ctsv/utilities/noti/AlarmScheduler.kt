@@ -5,6 +5,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.util.Log
 import java.util.*
 
@@ -68,7 +69,12 @@ object AlarmScheduler {
         val intent = Intent(context.applicationContext, AlarmReceiver::class.java).apply {
             type = reminderData.id
         }
-        return PendingIntent.getBroadcast(context, (0..100000).random(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(context, (0..100000).random(), intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getBroadcast(context, (0..100000).random(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
     }
 
 
