@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bk.ctsv.modules.searchMotel.viewModels.*
+import com.bk.ctsv.modules_teacher.contactParent.StudentList2ViewModel
 import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
 import com.bk.ctsv.teacher.viewmodel.THome2ViewModel
 import com.bk.ctsv.teacher.viewmodel.THomeViewModel
@@ -556,4 +557,9 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(ListMotelResultsViewModel::class)
     abstract fun contributeListMotelResultsViewMotel(viewModel: ListMotelResultsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StudentList2ViewModel::class)
+    abstract fun contributeStudentList2ViewModel(viewModel: StudentList2ViewModel): ViewModel
 }

@@ -64,7 +64,7 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     )
     private var homeItems2 = arrayListOf(
         HomeItem("Việc làm", R.drawable.ic_job),
-        HomeItem("Việc làm thêm", R.drawable.ic_job_more),
+        HomeItem("Việc làm thêm", R.drawable.ic_time_end_money),
         HomeItem("Gia sư", R.drawable.ic_tutor)
     )
 

@@ -117,7 +117,9 @@
         <entry key="app/src/main/res/drawable-anydpi/ic_arrow_down.xml" value="0.2225" />
         <entry key="app/src/main/res/drawable-anydpi/ic_back.xml" value="0.2225" />
         <entry key="app/src/main/res/drawable-anydpi/ic_calendar.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_call.xml" value="0.2225" />
         <entry key="app/src/main/res/drawable-anydpi/ic_clock.xml" value="0.3861111111111111" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_send_sms.xml" value="0.2225" />
         <entry key="app/src/main/res/drawable-anydpi/ic_share_round.xml" value="0.1735" />
         <entry key="app/src/main/res/drawable/border_background_gray.xml" value="0.1115" />
         <entry key="app/src/main/res/drawable/border_background_white.xml" value="0.124" />
@@ -184,6 +186,7 @@
         <entry key="app/src/main/res/layout/fragment_pick_register_motel_location.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.12259371833839919" />
         <entry key="app/src/main/res/layout/fragment_register_to_find_motel.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_student_list2.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_t_add_new_address.xml" value="0.16354166666666667" />
         <entry key="app/src/main/res/layout/fragment_t_apply_gift.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/fragment_t_gift_received.xml" value="0.16822916666666668" />
@@ -230,11 +233,13 @@
         <entry key="app/src/main/res/layout/list_item_running_data.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_scholarship_applied.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/list_item_student.xml" value="0.13697916666666668" />
+        <entry key="app/src/main/res/layout/list_item_student2.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_item_user_criteria.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/list_job_apply_fragment.xml" value="0.1585144927536232" />
         <entry key="app/src/main/res/layout/list_jobs_fragment.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/list_register_fragment.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/list_run_result_item.xml" value="0.10410334346504559" />
+        <entry key="app/src/main/res/layout/list_student_fragment.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/loading_action_state.xml" value="0.1408308004052685" />
         <entry key="app/src/main/res/layout/loading_state.xml" value="0.12284701114488349" />
         <entry key="app/src/main/res/layout/motel_info_fragment.xml" value="0.19655797101449277" />

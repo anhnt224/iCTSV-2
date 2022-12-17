@@ -17,6 +17,7 @@ import com.bk.ctsv.models.res.teacher.GetListClassResp
 import com.bk.ctsv.models.res.teacher.GetListStudentResp
 import com.bk.ctsv.models.res.teacher.GetStudentInfoResp
 import com.bk.ctsv.models.res.user.GetStudentNoteResp
+import com.bk.ctsv.modules_teacher.contactParent.GetStudentInfoTokenResp
 import com.bk.ctsv.webservices.ApiResponse
 import com.bk.ctsv.webservices.WebService
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class TeacherRepository @Inject constructor(
     private val webService: WebService,
     private val appExecutors: AppExecutors,
     private val sharedPrefsHelper: SharedPrefsHelper
-){
+) {
     private var liveDataGetListStudents = MutableLiveData<List<Student>>()
     private var liveDataGetListClass = MutableLiveData<List<String>>()
     private var liveDataGetActivityByStudent = MutableLiveData<List<Activity>>()
@@ -36,6 +37,7 @@ class TeacherRepository @Inject constructor(
     private var liveDataSearchStudent = MutableLiveData<List<Student>>()
     private var liveDataAddStudentNote = MutableLiveData<MyCTSVCap>()
     private var liveDataDelStudentNote = MutableLiveData<MyCTSVCap>()
+    private var studentInfoUrlToken = MutableLiveData<String?>()
 
     init {
         liveDataGetListStudents.value = listOf()
@@ -48,10 +50,15 @@ class TeacherRepository @Inject constructor(
         liveDataSearchStudent.value = listOf()
         liveDataAddStudentNote.value = MyCTSVCap()
         liveDataDelStudentNote.value = MyCTSVCap()
+        studentInfoUrlToken.value = null
     }
 
-    fun getListStudent(semester: String, className: String, shouldFetch: Boolean = true): LiveData<Resource<List<Student>>> {
-        return object : NetworkBoundResource<List<Student>, GetListStudentResp>(appExecutors){
+    fun getListStudent(
+        semester: String,
+        className: String,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<List<Student>>> {
+        return object : NetworkBoundResource<List<Student>, GetListStudentResp>(appExecutors) {
             override fun saveCallResult(item: GetListStudentResp) {
                 Thread(Runnable { liveDataGetListStudents.postValue(item.listStudents) }).start()
             }
@@ -65,14 +72,22 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<GetListStudentResp>> {
-                return webService.getListStudents(sharedPrefsHelper.getUserName(), sharedPrefsHelper.getToken(), className, semester)
+                return webService.getListStudents(
+                    sharedPrefsHelper.getUserName(),
+                    sharedPrefsHelper.getToken(),
+                    className,
+                    semester
+                )
             }
 
         }.asLiveData()
     }
 
-    fun searchStudent(search: String, shouldFetch: Boolean = true): LiveData<Resource<List<Student>>> {
-        return object : NetworkBoundResource<List<Student>, GetListStudentResp>(appExecutors){
+    fun searchStudent(
+        search: String,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<List<Student>>> {
+        return object : NetworkBoundResource<List<Student>, GetListStudentResp>(appExecutors) {
             override fun saveCallResult(item: GetListStudentResp) {
                 Thread(Runnable { liveDataSearchStudent.postValue(item.listStudents) }).start()
             }
@@ -86,16 +101,20 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<GetListStudentResp>> {
-                return webService.searchStudents(userName = sharedPrefsHelper.getUserName(), tokenCode = sharedPrefsHelper.getToken(), search = search)
+                return webService.searchStudents(
+                    userName = sharedPrefsHelper.getUserName(),
+                    tokenCode = sharedPrefsHelper.getToken(),
+                    search = search
+                )
             }
 
         }.asLiveData()
     }
 
-    fun getListClass(shouldFetch: Boolean = true): LiveData<Resource<List<String>>>{
-        return object : NetworkBoundResource<List<String>, GetListClassResp>(appExecutors){
+    fun getListClass(shouldFetch: Boolean = true): LiveData<Resource<List<String>>> {
+        return object : NetworkBoundResource<List<String>, GetListClassResp>(appExecutors) {
             override fun saveCallResult(item: GetListClassResp) {
-                Thread(Runnable { liveDataGetListClass.postValue(item.listClass) }).start()
+                Thread { liveDataGetListClass.postValue(item.listClass) }.start()
             }
 
             override fun shouldFetch(data: List<String>?): Boolean {
@@ -107,14 +126,22 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<GetListClassResp>> {
-                return webService.getClasses(sharedPrefsHelper.getUserName(), sharedPrefsHelper.getToken())
+                return webService.getClasses(
+                    sharedPrefsHelper.getUserName(),
+                    sharedPrefsHelper.getToken()
+                )
             }
 
         }.asLiveData()
     }
 
-    fun getActivityByStudent(studentId: String, shouldFetch: Boolean = true, callDelay: Long = 0) :  LiveData<Resource<List<Activity>>> {
-        return object : NetworkBoundResource<List<Activity>, CTSVGetActivityByUserRes>(appExecutors) {
+    fun getActivityByStudent(
+        studentId: String,
+        shouldFetch: Boolean = true,
+        callDelay: Long = 0
+    ): LiveData<Resource<List<Activity>>> {
+        return object :
+            NetworkBoundResource<List<Activity>, CTSVGetActivityByUserRes>(appExecutors) {
 
             override fun saveCallResult(item: CTSVGetActivityByUserRes) {
                 Thread(Runnable {
@@ -135,16 +162,23 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<CTSVGetActivityByUserRes>> =
-                webService.getActivityByUser(sharedPrefsHelper.getUserName(),sharedPrefsHelper.getToken(),
-                    studentId,"","",1000,0)
+                webService.getActivityByUser(
+                    sharedPrefsHelper.getUserName(), sharedPrefsHelper.getToken(),
+                    studentId, "", "", 1000, 0
+                )
 
         }.asLiveData()
     }
 
-    fun getStudentInfo(studentID: String, shouldFetch: Boolean = true): LiveData<Resource<StudentInfo>> {
-        return object : NetworkBoundResource<StudentInfo, GetStudentInfoResp>(appExecutors){
+    fun getStudentInfo(
+        studentID: String,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<StudentInfo>> {
+        studentInfo = MutableLiveData()
+        studentInfo.value = StudentInfo()
+        return object : NetworkBoundResource<StudentInfo, GetStudentInfoResp>(appExecutors) {
             override fun saveCallResult(item: GetStudentInfoResp) {
-                Thread(Runnable { studentInfo.postValue(item.studentInfo) }).start()
+                Thread { studentInfo.postValue(item.studentInfo) }.start()
             }
 
             override fun shouldFetch(data: StudentInfo?): Boolean {
@@ -156,14 +190,23 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<GetStudentInfoResp>> {
-                return webService.getStudentInfoByID(sharedPrefsHelper.getUserName(), sharedPrefsHelper.getToken(), studentID)
+                return webService.getStudentInfoByID(
+                    sharedPrefsHelper.getUserName(),
+                    sharedPrefsHelper.getToken(),
+                    studentID
+                )
             }
 
         }.asLiveData()
     }
 
-    fun getListCriteriaTypes(semester: String, studentId: String, shouldFetch: Boolean = true): LiveData<Resource<List<CriteriaType>>>{
-        return object: NetworkBoundResource<List<CriteriaType>, GetListCriteriaTypesResp>(appExecutors){
+    fun getListCriteriaTypes(
+        semester: String,
+        studentId: String,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<List<CriteriaType>>> {
+        return object :
+            NetworkBoundResource<List<CriteriaType>, GetListCriteriaTypesResp>(appExecutors) {
             override fun saveCallResult(item: GetListCriteriaTypesResp) {
                 Thread(Runnable { criteriaTypes.postValue(item.criteriaTypes) }).start()
             }
@@ -177,14 +220,24 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<GetListCriteriaTypesResp>> {
-                return webService.getListCriteriaTypes(userName = sharedPrefsHelper.getUserName(),tokenCode = sharedPrefsHelper.getToken(),userCode = studentId,semester =  semester)
+                return webService.getListCriteriaTypes(
+                    userName = sharedPrefsHelper.getUserName(),
+                    tokenCode = sharedPrefsHelper.getToken(),
+                    userCode = studentId,
+                    semester = semester
+                )
             }
 
         }.asLiveData()
     }
 
-    fun markCriteriaUser(semester: String, studentId: String, criteriaTypes: List<CriteriaType>, shouldFetch: Boolean = true): LiveData<Resource<MyCTSVCap>>{
-        return object : NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors){
+    fun markCriteriaUser(
+        semester: String,
+        studentId: String,
+        criteriaTypes: List<CriteriaType>,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<MyCTSVCap>> {
+        return object : NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors) {
             override fun saveCallResult(item: MyCTSVCap) {
                 Thread(Runnable { markCriteriaUser.postValue(item) }).start()
             }
@@ -198,7 +251,13 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<MyCTSVCap>> {
-                val markCriteriaUserReq = MarkCriteriaUserReq(sharedPrefsHelper.getUserName(), studentId, sharedPrefsHelper.getToken(), semester, criteriaTypes)
+                val markCriteriaUserReq = MarkCriteriaUserReq(
+                    sharedPrefsHelper.getUserName(),
+                    studentId,
+                    sharedPrefsHelper.getToken(),
+                    semester,
+                    criteriaTypes
+                )
                 return webService.markCriteriaUser(markCriteriaUserReq)
             }
         }.asLiveData()
@@ -207,8 +266,11 @@ class TeacherRepository @Inject constructor(
     /**
      * Get student notes by StudentID
      */
-    fun getStudentNotes(studentID: String, shouldFetch: Boolean = true): LiveData<Resource<List<Note>>>{
-        return object: NetworkBoundResource<List<Note>, GetStudentNoteResp>(appExecutors){
+    fun getStudentNotes(
+        studentID: String,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<List<Note>>> {
+        return object : NetworkBoundResource<List<Note>, GetStudentNoteResp>(appExecutors) {
             override fun saveCallResult(item: GetStudentNoteResp) {
                 Thread(Runnable {
                     notes.postValue(item.notes)
@@ -224,7 +286,11 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<GetStudentNoteResp>> {
-                return webService.getStudentNotes(userName = sharedPrefsHelper.getUserName(), tokenCode = sharedPrefsHelper.getToken(), studentID = studentID)
+                return webService.getStudentNotes(
+                    userName = sharedPrefsHelper.getUserName(),
+                    tokenCode = sharedPrefsHelper.getToken(),
+                    studentID = studentID
+                )
             }
 
         }.asLiveData()
@@ -233,8 +299,12 @@ class TeacherRepository @Inject constructor(
     /**
      *
      */
-    fun addStudentNote(studentID: String, note: String, shouldFetch: Boolean = true): LiveData<Resource<MyCTSVCap>>{
-        return object : NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors){
+    fun addStudentNote(
+        studentID: String,
+        note: String,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<MyCTSVCap>> {
+        return object : NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors) {
             override fun saveCallResult(item: MyCTSVCap) {
                 Thread(Runnable { liveDataAddStudentNote.postValue(item) }).start()
             }
@@ -248,7 +318,12 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<MyCTSVCap>> {
-                return webService.addNote(userName = sharedPrefsHelper.getUserName(), tokenCode = sharedPrefsHelper.getToken(), studentID = studentID, note = note)
+                return webService.addNote(
+                    userName = sharedPrefsHelper.getUserName(),
+                    tokenCode = sharedPrefsHelper.getToken(),
+                    studentID = studentID,
+                    note = note
+                )
             }
 
         }.asLiveData()
@@ -257,8 +332,8 @@ class TeacherRepository @Inject constructor(
     /**
      *
      */
-    fun delStudentNote(id: Int, shouldFetch: Boolean = true): LiveData<Resource<MyCTSVCap>>{
-        return object : NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors){
+    fun delStudentNote(id: Int, shouldFetch: Boolean = true): LiveData<Resource<MyCTSVCap>> {
+        return object : NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors) {
             override fun saveCallResult(item: MyCTSVCap) {
                 Thread(Runnable { liveDataDelStudentNote.postValue(item) }).start()
             }
@@ -272,8 +347,44 @@ class TeacherRepository @Inject constructor(
             }
 
             override fun createCall(): LiveData<ApiResponse<MyCTSVCap>> {
-                return webService.delStudentNote(userName = sharedPrefsHelper.getUserName(), tokenCode = sharedPrefsHelper.getToken(), rowID = id)
+                return webService.delStudentNote(
+                    userName = sharedPrefsHelper.getUserName(),
+                    tokenCode = sharedPrefsHelper.getToken(),
+                    rowID = id
+                )
             }
+
+        }.asLiveData()
+    }
+
+    fun getStudentInfoUrlToken(
+        id: String,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<String?>> {
+        studentInfoUrlToken = MutableLiveData(null)
+        return object : NetworkBoundResource<String?, GetStudentInfoTokenResp>(appExecutors) {
+            override fun saveCallResult(item: GetStudentInfoTokenResp) {
+                Thread {
+                    studentInfoUrlToken.postValue(item.urlToken)
+                }.start()
+            }
+
+            override fun shouldFetch(data: String?): Boolean {
+                return shouldFetch || data == null
+            }
+
+            override fun loadFromDb(): LiveData<String?> {
+                return studentInfoUrlToken
+            }
+
+            override fun createCall(): LiveData<ApiResponse<GetStudentInfoTokenResp>> {
+                return webService.getStudentInfoUrlToken(
+                    userName = sharedPrefsHelper.getUserName(),
+                    token = sharedPrefsHelper.getToken(),
+                    userCode = id
+                )
+            }
+
 
         }.asLiveData()
     }

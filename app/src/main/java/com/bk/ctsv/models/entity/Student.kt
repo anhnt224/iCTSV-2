@@ -21,7 +21,15 @@ class Student (
     @SerializedName("Point")
     var score: Int = 0,
     @SerializedName("TPoint")
-    var tScore: Int = 0
+    var tScore: Int = 0,
+    @SerializedName("FatherName")
+    var fatherName: String = "",
+    @SerializedName("FatherPhone")
+    var fatherPhone: String = "",
+    @SerializedName("MotherName")
+    var motherName: String = "",
+    @SerializedName("MotherPhone")
+    var motherPhone: String = ""
 ): Serializable{
     fun getStudentScore(): String{
         return "SV chấm: $score"

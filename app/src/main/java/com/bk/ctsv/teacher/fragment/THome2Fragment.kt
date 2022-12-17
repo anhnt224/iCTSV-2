@@ -53,7 +53,8 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         HomeItem("Hoạt động ngoại khóa", R.drawable.ic_activity),
         HomeItem("Học bổng", R.drawable.ic_scholarship),
         HomeItem("Sổ tay", R.drawable.ic_notebook),
-        HomeItem("Dịch vụ công", R.drawable.ic_service)
+        HomeItem("Dịch vụ công", R.drawable.ic_service),
+        HomeItem("Liên hệ phụ huynh", R.drawable.ic_coordination)
     )
     private var homeItems2 = arrayListOf(
         HomeItem("Việc làm", R.drawable.ic_job),
@@ -201,6 +202,11 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         Navigation.findNavController(requireView()).navigate(action)
     }
 
+    private fun navigateToContactParent(){
+        val action = THome2FragmentDirections.actionTHome2FragmentToStudentList2Fragment()
+        Navigation.findNavController(requireView()).navigate(action)
+    }
+
     override fun onItemClick(activity: Activity) {
         //
     }
@@ -212,6 +218,7 @@ class THome2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             2 -> showListScholarShips()
             3 -> openLink(remoteConfig.getString("note_link"))
             4 -> showListForm()
+            5 -> navigateToContactParent()
         }
     }
 

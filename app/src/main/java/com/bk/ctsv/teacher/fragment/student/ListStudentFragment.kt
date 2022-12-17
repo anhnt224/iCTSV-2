@@ -2,10 +2,8 @@ package com.bk.ctsv.teacher.fragment.student
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -19,10 +17,8 @@ import com.bk.ctsv.databinding.ListStudentFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkResource
-import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.models.entity.FilterType
 import com.bk.ctsv.models.entity.Student
-import com.bk.ctsv.models.entity.StudentInfo
 import com.bk.ctsv.teacher.adapters.OnItemStudentButtonClickLister
 import com.bk.ctsv.teacher.adapters.StudentAdapter
 import com.bk.ctsv.teacher.viewmodel.student.ListStudentViewModel
@@ -37,7 +33,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     private lateinit var binding: ListStudentFragmentBinding
     private lateinit var studentAdapter: StudentAdapter
     private var semesters: Array<String> = arrayOf("2019-1", "2019-2", "2020-1", "2020-2", "2021-1", "2021-2")
-    private var semesterSelected: String = "2020-2"
+    private var semesterSelected: String = "2022-1"
     private var classSelected: String = ""
     private var allClass = "Tất cả"
     private var listClasses: Array<String> = arrayOf()
@@ -45,6 +41,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     private var students: List<Student> = listOf()
     private var filterTypes = FilterType.values()
     private var selectedFilterType = FilterType.ALL
+    private var isGetStudentsFirst = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,6 +77,11 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isGetStudentsFirst = true
+    }
+
     private fun setUpViewModel(){
         viewModel = ViewModelProvider(this, factory).get(ListStudentViewModel::class.java)
     }
@@ -101,7 +103,8 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
                 if(checkResource(it) && it.data != null){
                     listClasses = it.data.toTypedArray()
                     listClasses = listClasses.plus(allClass)
-                    if(listClasses.isNotEmpty()){
+                    if(listClasses.isNotEmpty() && isGetStudentsFirst){
+                        isGetStudentsFirst = false
                         classSelected = listClasses.first()
                         binding.btClass.text = classSelected
                         viewModel.setParameter(semesterSelected, classSelected, "")
@@ -113,6 +116,11 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
                 selectedFilterType = it
                 studentAdapter.students = filterListStudent(this@ListStudentFragment.students, it)
                 studentAdapter.notifyDataSetChanged()
+            }
+
+            parameter.observe(viewLifecycleOwner){
+                binding.btClass.text = it.className
+                binding.btSemester.text = "Kì ${it.semester}"
             }
         }
     }
@@ -162,7 +170,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_list_student, menu)
 
-        searchView = menu.findItem(R.id.search).actionView as androidx.appcompat.widget.SearchView
+        searchView = menu.findItem(R.id.search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchText: String): Boolean {
                 if(classSelected == allClass){
@@ -223,10 +231,10 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
                 }
             }
         }
-        builder.setPositiveButton("OK"){ dialog, which ->
+        builder.setPositiveButton("OK"){ dialog, _ ->
             dialog.dismiss()
         }
-        builder.setNegativeButton("Hủy"){ dialog, which ->
+        builder.setNegativeButton("Hủy"){ dialog, _ ->
             dialog.dismiss()
         }
         val dialog = builder.create()

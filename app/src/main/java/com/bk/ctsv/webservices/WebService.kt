@@ -23,6 +23,7 @@ import com.bk.ctsv.models.res.user.*
 import com.bk.ctsv.modules.searchMotel.model.GetMotelResultsResp
 import com.bk.ctsv.modules.searchMotel.model.MotelRegistrationListResp
 import com.bk.ctsv.modules.searchMotel.model.RegisterMotelReq
+import com.bk.ctsv.modules_teacher.contactParent.GetStudentInfoTokenResp
 import com.google.android.gms.common.api.Api
 import com.google.gson.JsonObject
 import okhttp3.MultipartBody
@@ -780,5 +781,13 @@ interface WebService {
         @Field("TokenCode") token: String,
         @Field("RegisterID") registerID: Int
     ): LiveData<ApiResponse<GetMotelResultsResp>>
+
+    @FormUrlEncoded
+    @POST("StudentLink/SentSMSStudentLink")
+    fun getStudentInfoUrlToken(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") token: String,
+        @Field("UserCode") userCode: String
+    ): LiveData<ApiResponse<GetStudentInfoTokenResp>>
 
 }

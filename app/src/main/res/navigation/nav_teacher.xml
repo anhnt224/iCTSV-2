@@ -286,6 +286,9 @@
         <action
                 android:id="@+id/action_THome2Fragment_to_TTutorFragment"
                 app:destination="@id/TTutorFragment" />
+        <action
+                android:id="@+id/action_THome2Fragment_to_studentList2Fragment"
+                app:destination="@id/studentList2Fragment" />
     </fragment>
     <fragment
             android:id="@+id/TGiftGivenFragment"
@@ -471,4 +474,15 @@
             android:id="@+id/TTutorFragment"
             android:name="com.bk.ctsv.teacher.fragment.TTutorFragment"
             android:label="TTutorFragment" />
+    <fragment
+            android:id="@+id/studentList2Fragment"
+            android:name="com.bk.ctsv.modules_teacher.contactParent.StudentList2Fragment"
+            android:label="Sinh viên cần liên hệ" >
+        <action
+                android:id="@+id/action_studentList2Fragment_to_studentInfoFragment"
+                app:destination="@id/studentInfoFragment" />
+        <action
+                android:id="@+id/action_studentList2Fragment_to_TStudentNoteFragment"
+                app:destination="@id/TStudentNoteFragment" />
+    </fragment>
 </navigation>

@@ -1772,6 +1772,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_THome2Fragment_to_TTutorFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_THome2Fragment_to_listStudentFragment">
                               <value>
                                 <LayoutPositions />
@@ -2235,6 +2240,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="studentList2Fragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-544" />
+                            <option name="y" value="-1244" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

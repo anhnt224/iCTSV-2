@@ -1,5 +1,6 @@
 package com.bk.ctsv.di
 
+import com.bk.ctsv.modules_teacher.contactParent.StudentList2Fragment
 import com.bk.ctsv.teacher.fragment.THome2Fragment
 import com.bk.ctsv.teacher.fragment.THomeFragment
 import com.bk.ctsv.teacher.fragment.TListNotificationsFragment
@@ -141,4 +142,7 @@ abstract class TListFragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeRTutorFragment(): TTutorFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeStudentList2(): StudentList2Fragment
 }
