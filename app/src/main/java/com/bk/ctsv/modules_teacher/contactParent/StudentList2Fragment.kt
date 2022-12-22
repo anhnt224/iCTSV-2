@@ -231,17 +231,13 @@ class StudentList2Fragment : Fragment(), Injectable, Student2AdapterListener {
     }
 
     private fun sendSMS(phoneNumber: String, urlToken: String, student: Student) {
-        if (!hasSendSMSPermission()) {
-            requestSMSPermission()
-            return
-        }
         val content =
             "Tôi là giáo viên chủ nhiệm của sinh viên ${student.name}." +
                     " Tôi gửi phụ huynh thông tin tình hình học tập và rèn luyện của sinh viên." +
                     " Để xem chi tiết xin mời phụ huynh truy cập vào link sau đây: ${getStudentInfoUrl(student, urlToken)}"
         Log.d("_AC", content)
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("sms:$phoneNumber")
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse("smsto:$phoneNumber")
             putExtra("sms_body", content)
         }
         startActivity(intent)
