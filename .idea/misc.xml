@@ -177,6 +177,7 @@
         <entry key="app/src/main/res/layout/fragment_gift_receive.xml" value="0.1421875" />
         <entry key="app/src/main/res/layout/fragment_image_motel.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_list_motel_results.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_more_job.xml" value="0.10285714285714286" />
         <entry key="app/src/main/res/layout/fragment_motel_registration_complete.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_motel_registration_info.xml" value="0.37604166666666666" />

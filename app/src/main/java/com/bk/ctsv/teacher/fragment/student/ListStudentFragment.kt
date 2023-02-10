@@ -23,16 +23,20 @@ import com.bk.ctsv.teacher.adapters.OnItemStudentButtonClickLister
 import com.bk.ctsv.teacher.adapters.StudentAdapter
 import com.bk.ctsv.teacher.viewmodel.student.ListStudentViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import javax.inject.Inject
 
 @SuppressLint("SetTextI18n")
 class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickLister {
 
-    @Inject lateinit var factory: ViewModelFactory
+    @Inject
+    lateinit var factory: ViewModelFactory
     private lateinit var viewModel: ListStudentViewModel
     private lateinit var binding: ListStudentFragmentBinding
     private lateinit var studentAdapter: StudentAdapter
-    private var semesters: Array<String> = arrayOf("2019-1", "2019-2", "2020-1", "2020-2", "2021-1", "2021-2")
+    private var semesters: Array<String> =
+        arrayOf("2020-1", "2020-2", "2021-1", "2021-2", "2022-1", "2022-2")
     private var semesterSelected: String = "2022-1"
     private var classSelected: String = ""
     private var allClass = "Tất cả"
@@ -42,6 +46,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     private var filterTypes = FilterType.values()
     private var selectedFilterType = FilterType.ALL
     private var isGetStudentsFirst = false
+    private val remoteConfig = FirebaseRemoteConfig.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +54,8 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     ): View {
         setUpViewModel()
         setHasOptionsMenu(true)
-        binding = DataBindingUtil.inflate(inflater, R.layout.list_student_fragment, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.list_student_fragment, container, false)
 
         studentAdapter = StudentAdapter(listOf(), this)
         binding.recyclerView.apply {
@@ -80,30 +86,33 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isGetStudentsFirst = true
+
+        semesters = remoteConfig.getString("semesters").split(",").toTypedArray()
+        semesterSelected = remoteConfig.getString("current_semester")
     }
 
-    private fun setUpViewModel(){
+    private fun setUpViewModel() {
         viewModel = ViewModelProvider(this, factory).get(ListStudentViewModel::class.java)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun subscribeUI(){
-        with(viewModel){
-            students.observe(viewLifecycleOwner){
+    private fun subscribeUI() {
+        with(viewModel) {
+            students.observe(viewLifecycleOwner) {
                 binding.status = it.status
-                if(checkResource(it) && it.data != null){
+                if (checkResource(it) && it.data != null) {
                     studentAdapter.students = it.data
                     this@ListStudentFragment.students = it.data
                     studentAdapter.notifyDataSetChanged()
                 }
             }
 
-            classes.observe(viewLifecycleOwner){
+            classes.observe(viewLifecycleOwner) {
                 binding.status = it.status
-                if(checkResource(it) && it.data != null){
+                if (checkResource(it) && it.data != null) {
                     listClasses = it.data.toTypedArray()
                     listClasses = listClasses.plus(allClass)
-                    if(listClasses.isNotEmpty() && isGetStudentsFirst){
+                    if (listClasses.isNotEmpty() && isGetStudentsFirst) {
                         isGetStudentsFirst = false
                         classSelected = listClasses.first()
                         binding.btClass.text = classSelected
@@ -112,13 +121,13 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
                 }
             }
 
-            getFilterType().observe(viewLifecycleOwner){
+            getFilterType().observe(viewLifecycleOwner) {
                 selectedFilterType = it
                 studentAdapter.students = filterListStudent(this@ListStudentFragment.students, it)
                 studentAdapter.notifyDataSetChanged()
             }
 
-            parameter.observe(viewLifecycleOwner){
+            parameter.observe(viewLifecycleOwner) {
                 binding.btClass.text = it.className
                 binding.btSemester.text = "Kì ${it.semester}"
             }
@@ -126,20 +135,20 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     }
 
     @SuppressLint("SetTextI18n")
-    private fun chooseSemester(){
+    private fun chooseSemester() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chọn kì học")
-            .setItems(semesters) {_, i ->
+            .setItems(semesters) { _, i ->
                 semesterSelected = semesters[i]
                 viewModel.setParameter(semesterSelected, classSelected, "")
                 binding.btSemester.text = "Kì $semesterSelected"
             }.show()
     }
 
-    private fun chooseClass(){
+    private fun chooseClass() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chọn lớp")
-            .setItems(listClasses) {_, i ->
+            .setItems(listClasses) { _, i ->
                 classSelected = listClasses[i]
                 viewModel.setParameter(semesterSelected, classSelected, "")
                 binding.btClass.text = classSelected
@@ -151,15 +160,27 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
      */
 
     override fun onButtonActivityClick(student: Student) {
-        Navigation.findNavController(requireView()).navigate(ListStudentFragmentDirections.actionListStudentFragmentToListActivitiesOfStudentFragment(student))
+        Navigation.findNavController(requireView()).navigate(
+            ListStudentFragmentDirections.actionListStudentFragmentToListActivitiesOfStudentFragment(
+                student
+            )
+        )
     }
 
     override fun onButtonInfoClick(studentID: String) {
-        Navigation.findNavController(requireView()).navigate(ListStudentFragmentDirections.actionListStudentFragmentToStudentInfoFragment(studentID))
+        Navigation.findNavController(requireView()).navigate(
+            ListStudentFragmentDirections.actionListStudentFragmentToStudentInfoFragment(studentID)
+        )
     }
 
     override fun onButtonMarkClick(studentID: String, studentName: String) {
-        Navigation.findNavController(requireView()).navigate(ListStudentFragmentDirections.actionListStudentFragmentToTeacherMarkFragment(studentID, studentName, semesterSelected))
+        Navigation.findNavController(requireView()).navigate(
+            ListStudentFragmentDirections.actionListStudentFragmentToTeacherMarkFragment(
+                studentID,
+                studentName,
+                semesterSelected
+            )
+        )
     }
 
     /**
@@ -173,7 +194,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
         searchView = menu.findItem(R.id.search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchText: String): Boolean {
-                if(classSelected == allClass){
+                if (classSelected == allClass) {
                     viewModel.setParameter(semesterSelected, classSelected, searchText)
                 }
                 return true
@@ -181,7 +202,7 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
 
             @SuppressLint("NotifyDataSetChanged")
             override fun onQueryTextChange(searchText: String): Boolean {
-                if(classSelected == allClass){
+                if (classSelected == allClass) {
                     return true
                 }
 
@@ -200,8 +221,8 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
-            R.id.filter ->{
+        return when (item.itemId) {
+            R.id.filter -> {
                 showFilterTypeDialog()
                 true
             }
@@ -231,33 +252,33 @@ class ListStudentFragment : Fragment(), Injectable, OnItemStudentButtonClickList
                 }
             }
         }
-        builder.setPositiveButton("OK"){ dialog, _ ->
+        builder.setPositiveButton("OK") { dialog, _ ->
             dialog.dismiss()
         }
-        builder.setNegativeButton("Hủy"){ dialog, _ ->
+        builder.setNegativeButton("Hủy") { dialog, _ ->
             dialog.dismiss()
         }
         val dialog = builder.create()
         dialog.show()
     }
 
-    private fun filterListStudent(list: List<Student>, typeFilter: FilterType): List<Student>{
+    private fun filterListStudent(list: List<Student>, typeFilter: FilterType): List<Student> {
         var listStudentFiltered = listOf<Student>()
-        when(typeFilter){
-            FilterType.ALL ->{
+        when (typeFilter) {
+            FilterType.ALL -> {
                 listStudentFiltered = list
             }
-            FilterType.SCORED ->{
+            FilterType.SCORED -> {
                 listStudentFiltered = list.filter {
                     it.isScored()
                 }
             }
-            FilterType.NOT_SCORED_YET ->{
+            FilterType.NOT_SCORED_YET -> {
                 listStudentFiltered = list.filter {
                     it.isNotScoredYet()
                 }
             }
-            FilterType.DIFFERENCE_SCORED ->{
+            FilterType.DIFFERENCE_SCORED -> {
                 listStudentFiltered = list.filter {
                     it.isDifferenceScored()
                 }

@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.bk.ctsv.databinding.ActivityMainBinding
@@ -21,12 +22,14 @@ import com.bk.ctsv.models.entity.Version
 import com.bk.ctsv.ui.fragments.DrawerLocker
 import com.bk.ctsv.ui.fragments.Home2FragmentDirections
 import com.bk.ctsv.ui.fragments.HomeFragmentDirections
+import com.bk.ctsv.ui.fragments.activity.ListActivityFragmentDirections
 import com.bk.ctsv.ui.fragments.help.HelpFragmentDirections
 import com.bk.ctsv.ui.fragments.user.AccountFragmentDirections
 import com.bk.ctsv.ui.fragments.user.MessageListFragmentDirections
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.gson.GsonBuilder
 import com.google.zxing.integration.android.IntentIntegrator
@@ -192,56 +195,104 @@ class MainActivity : AppCompatActivity(), DrawerLocker, HasSupportFragmentInject
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents != null) {
-                try {
-                    val aID = result.contents.toInt()
-                    super.onPostResume()
-                    when (navController.currentDestination?.id) {
-                        R.id.home2Fragment -> {
-                            navController.navigate(
-                                Home2FragmentDirections.actionHome2FragmentToActivityDetailByUserUnitFragment(
-                                    aID
-                                )
-                            )
-                        }
-                        R.id.homeFragment -> {
-                            navController.navigate(
-                                HomeFragmentDirections.actionHomeFragmentToActivityDetailByUserUnitFragment(
-                                    aID
-                                )
-                            )
-                        }
-
-                        R.id.accountFragment -> {
-                            navController.navigate(
-                                AccountFragmentDirections.actionAccountFragmentToActivityDetailByUserUnitFragment(
-                                    aID
-                                )
-                            )
-                        }
-
-                        R.id.messageListFragment -> {
-                            navController.navigate(
-                                MessageListFragmentDirections.actionMessageListFragmentToActivityDetailByUserUnitFragment(
-                                    aID
-                                )
-                            )
-                        }
-
-                        R.id.helpFragment -> {
-                            navController.navigate(
-                                HelpFragmentDirections.actionHelpFragmentToActivityDetailByUserUnitFragment(
-                                    aID
-                                )
-                            )
-                        }
-                    }
-                } catch (e: Exception) {
-                    showToast("Hoạt động này không tồn tại")
-                }
+                handleQrCode(result.contents)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    private fun handleQrCode(qrValue: String) {
+        if (qrValue.contains("https://ctsv.hust.edu.vn/") && qrValue.contains("/card/")){
+            val arr = qrValue.split("/")
+            val studentId = arr.firstOrNull {
+                it.length == 8 && it.dropLast(6) == "20"
+            }
+            if (studentId == null) {
+                showToast("Mã QR không hợp lệ")
+            }else if (studentId != sharedPrefsHelper.getUserName()){
+                showToast("Bạn không thể xem thông tin của người khác")
+            }else{
+                showStudentInfoDialog(studentId)
+            }
+        }else{
+            showActivityInfo(qrValue)
+        }
+    }
+
+    private fun showActivityInfo(qrValue: String){
+        try {
+            val aID = qrValue.toInt()
+            super.onPostResume()
+            when (navController.currentDestination?.id) {
+                R.id.home2Fragment -> {
+                    navController.navigate(
+                        Home2FragmentDirections.actionHome2FragmentToActivityDetailByUserUnitFragment(
+                            aID
+                        )
+                    )
+                }
+                R.id.homeFragment -> {
+                    navController.navigate(
+                        HomeFragmentDirections.actionHomeFragmentToActivityDetailByUserUnitFragment(
+                            aID
+                        )
+                    )
+                }
+
+                R.id.accountFragment -> {
+                    navController.navigate(
+                        AccountFragmentDirections.actionAccountFragmentToActivityDetailByUserUnitFragment(
+                            aID
+                        )
+                    )
+                }
+
+                R.id.messageListFragment -> {
+                    navController.navigate(
+                        MessageListFragmentDirections.actionMessageListFragmentToActivityDetailByUserUnitFragment(
+                            aID
+                        )
+                    )
+                }
+
+                R.id.helpFragment -> {
+                    navController.navigate(
+                        HelpFragmentDirections.actionHelpFragmentToActivityDetailByUserUnitFragment(
+                            aID
+                        )
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            showToast("Hoạt động này không tồn tại")
+        }
+    }
+
+    private fun showStudentInfoDialog(studentId: String){
+        MaterialAlertDialogBuilder(this)
+            .setMessage("Bạn có muốn xem phiếu thông tin tình hình học tập mà giáo viên gửi về cho phụ huynh không?!")
+            .setTitle("Xem thông tin kết quả học tập")
+            .setPositiveButton("Xem thông tin"){_, _ ->
+                val token = sharedPrefsHelper.getToken()
+                showStudentInfo(studentId, token)
+            }.setNegativeButton("Đóng", null)
+            .show()
+    }
+
+    private fun showStudentInfo(studentId: String, urlToken: String){
+        val url = getStudentInfoUrl(studentId, urlToken)
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+        if (browserIntent.resolveActivity(this.packageManager) != null) {
+            startActivity(browserIntent)
+        }
+    }
+
+    private fun getStudentInfoUrl(studentId: String, urlToken: String): String {
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        val baseUrl = remoteConfig.getString("student_info_url")
+        return "$baseUrl$studentId/$urlToken"
     }
 }
 

@@ -103,4 +103,19 @@
         <value>true</value>
     </entry>
 
+    <entry>
+        <key>student_info_url</key>
+        <value>https://ctsv.hust.edu.vn/#/ph/</value>
+    </entry>
+
+    <entry>
+        <key>semesters</key>
+        <value>2019-1,2019-2,2020-1,2020-2,2021-1,2021-2,2022-1</value>
+    </entry>
+
+    <entry>
+        <key>current_semester</key>
+        <value>2022-1</value>
+    </entry>
+
 </defaultsMap>

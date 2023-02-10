@@ -42,14 +42,13 @@ class ActivityDetailByUserUnitFragment : androidx.fragment.app.Fragment() , Inje
     private var binding by autoCleared<FragmentActivityDetailByUserUnitBinding>()
     private lateinit var mViewmodel: ActivityDetailByUserUnitViewModel
     private var aId = 0
-    private var mActivity = Activity()
     private var mCriterias: List<Criteria> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        aId = ActivityDetailByUserUnitFragmentArgs.fromBundle(arguments!!).aId
+    ): View {
+        aId = ActivityDetailByUserUnitFragmentArgs.fromBundle(requireArguments()).aId
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_activity_detail_by_user_unit, container, false)
         setupViewModel()
@@ -160,7 +159,7 @@ class ActivityDetailByUserUnitFragment : androidx.fragment.app.Fragment() , Inje
 
 
     private fun showApproveActivityDialog() {
-        val builder = AlertDialog.Builder(activity!!)
+        val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Bạn có muốn duyệt hoạt động không?")
         builder.setPositiveButton("Có"){dialog, which ->
 
@@ -199,7 +198,7 @@ class ActivityDetailByUserUnitFragment : androidx.fragment.app.Fragment() , Inje
         )
         cartRecycler.layoutManager = layoutManager
         cartRecycler.adapter = cartAdapter
-        val dialog = BottomSheetDialog(activity!!)
+        val dialog = BottomSheetDialog(requireActivity())
         dialog.setContentView(view)
         dialog.show()
     }
@@ -207,14 +206,14 @@ class ActivityDetailByUserUnitFragment : androidx.fragment.app.Fragment() , Inje
     override fun onResume() {
         super.onResume()
         if (activity is MainActivity){
-            activity!!.navigation.visibility = View.GONE
+            requireActivity().navigation.visibility = View.GONE
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                activity!!.onBackPressed()
+                requireActivity().onBackPressed()
                 true
             }
             R.id.txtSaveActivity ->{

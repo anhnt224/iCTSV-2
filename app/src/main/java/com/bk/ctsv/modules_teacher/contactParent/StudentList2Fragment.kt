@@ -27,6 +27,7 @@ import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.models.entity.FilterType
 import com.bk.ctsv.models.entity.Student
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import javax.inject.Inject
 
 private const val REQUEST_SEND_SMS = 1001
@@ -244,24 +245,9 @@ class StudentList2Fragment : Fragment(), Injectable, Student2AdapterListener {
     }
 
     private fun getStudentInfoUrl(student: Student, urlToken: String): String {
-        return "https://ctsv.hust.edu.vn/#/ph/${student.id}/$urlToken"
-    }
-
-    private fun hasSendSMSPermission(): Boolean {
-        val result = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requireContext().checkSelfPermission(android.Manifest.permission.SEND_SMS)
-        } else {
-            requireContext().checkCallingOrSelfPermission(android.Manifest.permission.SEND_SMS)
-        }
-        return result == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun requestSMSPermission() {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(android.Manifest.permission.SEND_SMS),
-            REQUEST_SEND_SMS
-        )
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        val baseUrl = remoteConfig.getString("student_info_url")
+        return "$baseUrl${student.id}/$urlToken"
     }
 
     override fun onRequestPermissionsResult(
