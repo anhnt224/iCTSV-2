@@ -2,9 +2,12 @@ package com.bk.ctsv.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,12 +32,18 @@ import com.bk.ctsv.ui.adapter.HomeItem2Adapter
 import com.bk.ctsv.ui.adapter.HomeItem3Adapter
 import com.bk.ctsv.ui.adapter.HomeItemAdapter
 import com.bk.ctsv.ui.adapter.activity.EventAdapter
+import com.bk.ctsv.utilities.runOnIoThread
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
-import java.lang.Exception
+import okhttp3.*
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.net.URL
 import javax.inject.Inject
+import kotlin.Exception
 
 class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     HomeItemAdapter.OnItemClickListener, HomeItem2Adapter.OnItemClickListener,
@@ -99,6 +108,7 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         }
         viewModel.getListSemester()
         setUpRecyclerView(binding)
+        showStudentAvatar()
         subscribeUi()
         return binding.root
     }
@@ -135,7 +145,6 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             adapter = homeAdapter3
             layoutManager = GridLayoutManager(context, 3)
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -294,5 +303,28 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             4 -> navigateGivenGift()
             5 -> navigateToMotelRegistrationList()
         }
+    }
+
+    private fun showStudentAvatar() {
+        val userName = sharedPrefsHelper.getUserName()
+        val url =
+            URL("https://bkapis.hust.edu.vn/api/getimagebystudentid?mssv=$userName&mssv=$userName")
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url(url)
+            .build()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body()?.string()
+                requireActivity().runOnUiThread {
+                    val decodedString = Base64.decode(responseBody?.replace("\"", ""), Base64.DEFAULT)
+                    val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                    binding.imgAvatar.setImageBitmap(decodedByte)
+                }
+            }
+        })
     }
 }
