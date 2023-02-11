@@ -70,16 +70,27 @@
                                     android:textSize="12sp" />
                         </LinearLayout>
 
-                        <ImageView
+                        <androidx.cardview.widget.CardView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_marginEnd="12dp"
                                 android:layout_marginRight="12dp"
-                                android:src="@drawable/ic_student"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/mainBackground"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:ignore="ContentDescription" />
+                                app:layout_constraintTop_toTopOf="parent">
+                            <ImageView
+                                    android:background="@color/mainBackground"
+                                    android:id="@+id/imgAvatar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_student"
+                                    tools:ignore="ContentDescription" />
+                        </androidx.cardview.widget.CardView>
+
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
