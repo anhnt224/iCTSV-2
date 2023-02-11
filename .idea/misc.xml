@@ -204,7 +204,7 @@
         <entry key="app/src/main/res/layout/gift_fragment.xml" value="0.2495697074010327" />
         <entry key="app/src/main/res/layout/gift_given_fragment.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/gift_info_fragment.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/home2_fragment.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/home2_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_empty_data.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/layout_loading.xml" value="0.1408308004052685" />
@@ -247,6 +247,7 @@
         <entry key="app/src/main/res/layout/motel_registration_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/pick_location_fragment.xml" value="0.12259371833839919" />
         <entry key="app/src/main/res/layout/privacy_dialog.xml" value="0.38722826086956524" />
+        <entry key="app/src/main/res/layout/qr_student_fragment.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/receiver_address_fragment.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/regist_form_fragment.xml" value="0.12259371833839919" />
         <entry key="app/src/main/res/layout/regist_gift_fragment.xml" value="0.33" />
