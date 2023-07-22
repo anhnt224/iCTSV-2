@@ -51,7 +51,8 @@
                         android:id="@+id/gradingBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/grading"/>
+                        android:text="Chấm điểm"
+                        tools:ignore="HardcodedText" />
             </LinearLayout>
         </LinearLayout>
         <include

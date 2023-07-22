@@ -268,7 +268,7 @@ class GradingAutoFragment : Fragment(), Injectable {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chấm điểm rèn luyện thành công")
             .setPositiveButton("Đóng"){_, _ ->
-                val action = GradingAutoFragmentDirections.actionGradingAutoFragmentToCriteriaFragment(semester, semesters)
+                val action = GradingAutoFragmentDirections.actionGradingAutoFragmentToCriteriaFragment2(semester, semesters)
                 Navigation.findNavController(requireView()).navigate(action)
             }
             .setCancelable(false )

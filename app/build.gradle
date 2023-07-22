@@ -7,7 +7,7 @@ apply plugin: 'com.google.gms.google-services'
 // Apply the Crashlytics Gradle plugin
 apply plugin: 'com.google.firebase.crashlytics'
 
-def msalVersion = "2.+"
+def msalVersion = "3.0+"
 if (project.hasProperty("distMsalVersion")) {
     msalVersion = distMsalVersion
 }
@@ -19,8 +19,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 31
         multiDexEnabled true
-        versionCode 122
-        versionName "3.8.2"
+        versionCode 123
+        versionName "3.8.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -120,7 +120,7 @@ dependencies {
 
     kapt 'androidx.annotation:annotation:1.0.0-rc01'
 
-    implementation 'com.github.instacart.truetime-android:library-extension-rx:master-SNAPSHOT'
+    implementation 'com.github.instacart.truetime-android:library-extension-rx:3.5'
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
     //
@@ -142,6 +142,7 @@ dependencies {
         // Downloads and Builds MSAL from maven central.
         implementation "com.microsoft.identity.client:msal:${msalVersion}"
     }
+    implementation "com.microsoft.device.display:display-mask:0.3.0"
 
     implementation 'pub.devrel:easypermissions:3.0.0'
 

@@ -238,8 +238,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1069" />
-                            <option name="y" value="569" />
+                            <option name="x" value="1081" />
+                            <option name="y" value="574" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -253,15 +253,6 @@
                             <option name="x" value="839" />
                             <option name="y" value="569" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_criteriaFragment_to_criteriaActivitiesFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -434,8 +425,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1299" />
-                            <option name="y" value="569" />
+                            <option name="x" value="1311" />
+                            <option name="y" value="580" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -806,6 +797,15 @@
                             <option name="x" value="534" />
                             <option name="y" value="3726" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_listMotelResultsFragment_to_motelInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

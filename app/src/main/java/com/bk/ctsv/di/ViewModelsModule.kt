@@ -23,6 +23,8 @@ import com.bk.ctsv.teacher.viewmodel.motel.*
 import com.bk.ctsv.teacher.viewmodel.scholarShip.TListScholarShipsViewModel
 import com.bk.ctsv.teacher.viewmodel.student.*
 import com.bk.ctsv.ui.fragments.Home2ViewModel
+import com.bk.ctsv.ui.fragments.criteria.CriteriaActivitiesViewModel
+import com.bk.ctsv.ui.fragments.criteria.GradingAutoViewModel
 import com.bk.ctsv.ui.viewmodels.gift.GiftReceiveViewModel
 import com.bk.ctsv.ui.viewmodels.job.MoreJobViewModel
 import com.bk.ctsv.ui.viewmodels.gift.ReceiverAddressViewModel
@@ -562,4 +564,15 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(StudentList2ViewModel::class)
     abstract fun contributeStudentList2ViewModel(viewModel: StudentList2ViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CriteriaActivitiesViewModel::class)
+    abstract fun contributeCriteriaActivitiesVM(viewModel: CriteriaActivitiesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GradingAutoViewModel::class)
+    abstract fun contributeGradingAutoVM(viewModel: GradingAutoViewModel): ViewModel
+
 }
