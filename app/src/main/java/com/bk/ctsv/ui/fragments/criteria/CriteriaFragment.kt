@@ -9,8 +9,10 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bk.ctsv.R
+import com.bk.ctsv.common.Status
 import com.bk.ctsv.databinding.CriteriaFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
@@ -28,8 +30,10 @@ import kotlinx.android.synthetic.main.criteria_fragment.*
 import javax.inject.Inject
 
 @SuppressLint("SetTextI18n")
-class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClickListener<CriteriaActivityItem>{
+class CriteriaFragment : Fragment(), Injectable, OnCriteriaItemClick,
+    OnItemClickListener<CriteriaActivityItem> {
     private lateinit var viewModel: CriteriaViewModel
+
     @Inject
     lateinit var factory: ViewModelFactory
     private lateinit var criteriaGroupAdapter: CriteriaGroupAdapter
@@ -45,6 +49,7 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
         savedInstanceState: Bundle?
     ): View {
         setUpViewModel()
+        setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.criteria_fragment, container, false)
         criteriaGroupAdapter = CriteriaGroupAdapter(listOf(), this)
         criteriaActivityAdapter = CriteriaActivityAdapter(arrayListOf(), this)
@@ -70,8 +75,8 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
             }
 
             buttonNext.setOnClickListener {
-                if(index < criteriaTypes.size - 1){
-                    index ++
+                if (index < criteriaTypes.size - 1) {
+                    index++
                     buttonPrev.isEnabled = true
                     buttonNext.isEnabled = index < criteriaTypes.size - 1
                     criteriaType = criteriaTypes[index]
@@ -80,8 +85,8 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
             }
 
             buttonPrev.setOnClickListener {
-                if (index > 0){
-                    index --
+                if (index > 0) {
+                    index--
                     buttonNext.isEnabled = true
                     buttonPrev.isEnabled = index > 0
                     criteriaType = criteriaTypes[index]
@@ -101,17 +106,41 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
         return binding.root
     }
 
-    private fun setUpViewModel(){
+    private fun setUpViewModel() {
         viewModel = ViewModelProvider(this, factory).get(CriteriaViewModel::class.java)
     }
 
+    //    Options Menu
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_criteria_fragment, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.calculate -> {
+                val semester =  viewModel.getSemester().value!!
+                val action =
+                    CriteriaFragmentDirections.actionCriteriaFragmentToCriteriaActivitiesFragment(
+                       semester, criteriaTypes.toTypedArray(), semesters)
+                Navigation.findNavController(requireView()).navigate(action)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
-    private fun subscribeUI(){
-        with(viewModel){
+    private fun subscribeUI() {
+        with(viewModel) {
             criteriaTypes.observe(viewLifecycleOwner, Observer {
+                setHasOptionsMenu(it.status == Status.SUCCESS_NETWORK)
                 binding.status = it.status
-                if(checkResource(it)){
-                    if(!it.data.isNullOrEmpty()){
+                if (checkResource(it)) {
+                    if (!it.data.isNullOrEmpty()) {
                         this@CriteriaFragment.criteriaTypes = it.data
                         buttonNext.isEnabled = true
                         binding.criteriaType = this@CriteriaFragment.criteriaTypes[index]
@@ -119,7 +148,7 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
 
                         var sumSPoint = 0
                         var sumTPoint = 0
-                        it.data.forEach {criteriaType ->
+                        it.data.forEach { criteriaType ->
                             sumSPoint += criteriaType.sPoint
                             sumTPoint += criteriaType.tPoint
                         }
@@ -131,14 +160,16 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
             })
 
             activities.observe(viewLifecycleOwner, Observer {
-                if(checkResource(it)){
+                if (checkResource(it)) {
                     binding.status = it.status
-                    if(!it.data.isNullOrEmpty()){
-                        it.data.forEach {userCriteriaActivity ->
-                            if(criteriaActivityAdapter.criteriaActivityItems.none { criteriaActivityItem ->
+                    if (!it.data.isNullOrEmpty()) {
+                        it.data.forEach { userCriteriaActivity ->
+                            if (criteriaActivityAdapter.criteriaActivityItems.none { criteriaActivityItem ->
                                     criteriaActivityItem.criteriaActivity.aId == userCriteriaActivity.aId
-                                } && !isActivityInvalid(userCriteriaActivity)){
-                                criteriaActivityAdapter.criteriaActivityItems.add(CriteriaActivityItem(userCriteriaActivity, false))
+                                } && !isActivityInvalid(userCriteriaActivity)) {
+                                criteriaActivityAdapter.criteriaActivityItems.add(
+                                    CriteriaActivityItem(userCriteriaActivity, false)
+                                )
                             }
                         }
                         criteriaActivityAdapter.notifyDataSetChanged()
@@ -148,10 +179,10 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
 
             markCriteriaUser.observe(viewLifecycleOwner, Observer {
                 binding.status = it.status
-                if(checkResource(it)){
+                if (checkResource(it)) {
                     showToast("Lưu minh chứng thành công")
                     buttonSave.visibility = View.GONE
-                }else{
+                } else {
                     buttonSave.visibility = View.VISIBLE
                 }
             })
@@ -159,21 +190,21 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
     }
 
     @SuppressLint("SetTextI18n")
-    private fun pickSemester(){
+    private fun pickSemester() {
         val semesterStrs = semesters.map {
             it.name
         }.toTypedArray()
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Chọn kì học")
-            .setItems(semesterStrs){ _, which ->
+            .setItems(semesterStrs) { _, which ->
                 binding.buttonSemester.text = "Kì: ${semesterStrs[which]}"
                 viewModel.setSemester(semesters[which])
-            }.setNegativeButton("Huỷ"){_,_ ->
+            }.setNegativeButton("Huỷ") { _, _ ->
 
             }.show()
     }
 
-    private fun updateData(criteriaType: CriteriaType){
+    private fun updateData(criteriaType: CriteriaType) {
         criteriaGroupAdapter.criteriaGroups = criteriaType.criteriaGroups
         criteriaGroupAdapter.notifyDataSetChanged()
     }
@@ -197,27 +228,30 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
         et.textSize = 14f
         et.isSingleLine = true
         et.setText(userCriteriaDetail.description)
-        val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         lp.setMargins(16, 0, 16, 0)
         et.layoutParams = lp
         dialog.setView(et)
-        dialog.setPositiveButton("Xác nhận"){_, _ ->
+        dialog.setPositiveButton("Xác nhận") { _, _ ->
             userCriteriaDetail.description = et.text.toString()
             criteriaGroupAdapter.notifyDataSetChanged()
             userCriteriaDetail.updateSPoint()
             updateStudentPoint()
-        }.setNegativeButton("Huỷ"){_,_ ->
+        }.setNegativeButton("Huỷ") { _, _ ->
 
         }
         dialog.show()
     }
 
     override fun onClick(value: CriteriaActivityItem) {
-        if(value.checked){
+        if (value.checked) {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Xoá hoạt động minh chứng")
                 .setMessage("Bạn muốn xoá hoạt động minh chứng này khỏi tiêu chí: ${userCriteriaDetail.name}")
-                .setPositiveButton("Xoá"){_,_ ->
+                .setPositiveButton("Xoá") { _, _ ->
                     value.checked = false
                     userCriteriaDetail.userCriteriaActivities.remove(value.criteriaActivity)
                     userCriteriaDetail.updateSPoint()
@@ -227,7 +261,7 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
                 }.setNegativeButton("Huỷ") { _, _ ->
 
                 }.show()
-        }else{
+        } else {
             value.checked = true
             userCriteriaDetail.userCriteriaActivities.add(value.criteriaActivity)
             userCriteriaDetail.sPoint = userCriteriaDetail.maxPoint
@@ -237,10 +271,10 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
         }
     }
 
-    private fun getSumSPoint():Int{
+    private fun getSumSPoint(): Int {
         var sumSPoint = 0
-        criteriaTypes.forEach {criteriaType ->
-            criteriaType.criteriaGroups.forEach {criteriaGroup ->
+        criteriaTypes.forEach { criteriaType ->
+            criteriaType.criteriaGroups.forEach { criteriaGroup ->
                 criteriaGroup.userCriteriaDetails.forEach {
                     sumSPoint += it.sPoint
                 }
@@ -250,19 +284,20 @@ class CriteriaFragment : Fragment(),Injectable, OnCriteriaItemClick , OnItemClic
     }
 
     @SuppressLint("SetTextI18n")
-    private fun updateStudentPoint(){
+    private fun updateStudentPoint() {
         val sumSPoint = getSumSPoint()
         binding.apply {
             buttonSave.visibility = View.VISIBLE
             buttonSave.text = "Lưu, $sumSPoint điểm"
             textSumSPoint.text = "SV chấm: $sumSPoint"
-            textCriteriaTypePoint.text = "SV: ${criteriaTypes[index].getStudentPoint()}/${criteriaTypes[index].maxPoint}"
+            textCriteriaTypePoint.text =
+                "SV: ${criteriaTypes[index].getStudentPoint()}/${criteriaTypes[index].maxPoint}"
         }
     }
 
-    private fun isActivityInvalid(activity: UserCriteriaActivity): Boolean{
+    private fun isActivityInvalid(activity: UserCriteriaActivity): Boolean {
         criteriaTypes.forEach {
-            if (it.isActivityInvalid(activity)){
+            if (it.isActivityInvalid(activity)) {
                 return true
             }
         }

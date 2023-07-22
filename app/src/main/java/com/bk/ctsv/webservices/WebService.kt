@@ -530,6 +530,14 @@ interface WebService {
     ):LiveData<ApiResponse<GetCriteriaReportResp>>
 
     @FormUrlEncoded
+    @POST("Activitie/GetActivityBySemester")
+    fun getCriteriaActivities(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") tokenCode: String,
+        @Field("Semester") semester: String
+    ):LiveData<ApiResponse<GetCriteriaActivitiesResp>>
+
+    @FormUrlEncoded
     @POST("Criteria/GetCriteriaTypeDetails")
     fun getListCriteriaTypes(
         @Field("UserName") userName: String,
@@ -537,6 +545,8 @@ interface WebService {
         @Field("UserCode") userCode: String,
         @Field("Semester") semester: String
     ): LiveData<ApiResponse<GetListCriteriaTypesResp>>
+
+
 
     @FormUrlEncoded
     @POST("Activity/GetActivityByCId")

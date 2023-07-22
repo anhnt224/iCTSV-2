@@ -21,8 +21,7 @@ import com.bk.ctsv.ui.fragments.Home2Fragment
 import com.bk.ctsv.ui.fragments.HomeFragment
 import com.bk.ctsv.ui.fragments.TutorFragment
 import com.bk.ctsv.ui.fragments.activity.*
-import com.bk.ctsv.ui.fragments.criteria.CriteriaFragment
-import com.bk.ctsv.ui.fragments.criteria.TrainingPointFragment
+import com.bk.ctsv.ui.fragments.criteria.*
 import com.bk.ctsv.ui.fragments.form.*
 import com.bk.ctsv.ui.fragments.gift.*
 import com.bk.ctsv.ui.fragments.job.*
@@ -201,4 +200,10 @@ abstract class MainListFragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTutorFragment(): TutorFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCriteriaActivities(): CriteriaActivitiesFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGradingAuto(): GradingAutoFragment
 }

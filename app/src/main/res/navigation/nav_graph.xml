@@ -314,6 +314,9 @@
         <argument
                 android:name="semesters"
                 app:argType="com.bk.ctsv.models.entity.Semester[]" />
+        <action
+                android:id="@+id/action_criteriaFragment_to_criteriaActivitiesFragment"
+                app:destination="@id/criteriaActivitiesFragment" />
     </fragment>
     <fragment
             android:id="@+id/editFormFragment"
@@ -605,4 +608,47 @@
             android:id="@+id/tutorFragment"
             android:name="com.bk.ctsv.ui.fragments.TutorFragment"
             android:label="TutorFragment" />
+    <fragment
+            android:id="@+id/criteriaActivitiesFragment"
+            android:name="com.bk.ctsv.ui.fragments.criteria.CriteriaActivitiesFragment"
+            android:label="Tự động chấm điểm"
+            tools:layout="@layout/fragment_criteria_activities">
+        <action
+                android:id="@+id/action_criteriaActivitiesFragment_to_gradingAutoFragment"
+                app:destination="@id/gradingAutoFragment" />
+        <argument
+                android:name="semester"
+                app:argType="com.bk.ctsv.models.entity.Semester" />
+        <argument
+                android:name="criteriaTypes"
+                app:argType="com.bk.ctsv.models.entity.CriteriaType[]" />
+        <argument
+                android:name="semesters"
+                app:argType="com.bk.ctsv.models.entity.Semester[]" />
+    </fragment>
+    <fragment
+            android:id="@+id/gradingAutoFragment"
+            android:name="com.bk.ctsv.ui.fragments.criteria.GradingAutoFragment"
+            android:label="Tự động chấm điểm"
+            tools:layout="@layout/fragment_grading_auto">
+        <argument
+                android:name="criteriaTypes"
+                app:argType="com.bk.ctsv.models.entity.CriteriaType[]" />
+        <argument
+                android:name="semester"
+                app:argType="com.bk.ctsv.models.entity.Semester" />
+        <argument
+                android:name="activities"
+                app:argType="com.bk.ctsv.models.entity.UserCriteriaActivity[]" />
+        <argument android:name="aRawString"
+                app:argType="string[]" />
+        <action
+                android:id="@+id/action_gradingAutoFragment_to_criteriaFragment"
+                app:destination="@id/criteriaFragment"
+                app:popUpTo="@id/criteriaFragment"
+                app:popUpToInclusive="true" />
+        <argument
+                android:name="semesters"
+                app:argType="com.bk.ctsv.models.entity.Semester[]" />
+    </fragment>
 </navigation>

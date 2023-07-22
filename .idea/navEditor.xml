@@ -233,6 +233,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="criteriaActivitiesFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1069" />
+                            <option name="y" value="569" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="criteriaFragment">
                     <value>
                       <LayoutPositions>
@@ -241,6 +253,15 @@
                             <option name="x" value="839" />
                             <option name="y" value="569" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_criteriaFragment_to_criteriaActivitiesFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -408,6 +429,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="gradingAutoFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1299" />
+                            <option name="y" value="569" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="helpFragment">
                     <value>
                       <LayoutPositions>
@@ -511,6 +544,11 @@
                               </value>
                             </entry>
                             <entry key="action_home2Fragment_to_trainingPointFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_home2Fragment_to_tutorFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

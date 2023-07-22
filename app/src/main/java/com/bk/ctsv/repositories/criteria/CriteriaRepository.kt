@@ -31,6 +31,7 @@ class CriteriaRepository @Inject constructor(
     private var criteriaTypes = MediatorLiveData<List<CriteriaType>>()
     private var activities = MediatorLiveData<List<UserCriteriaActivity>>()
     private var markCriteriaUser = MediatorLiveData<MyCTSVCap>()
+    private var criteriaActivities = MediatorLiveData<List<Activity>>()
 
     init {
         userDetail.value = UserDetail(listOf())
@@ -39,6 +40,7 @@ class CriteriaRepository @Inject constructor(
         criteriaTypes.value = listOf()
         activities.value = listOf()
         markCriteriaUser.value = MyCTSVCap()
+        criteriaActivities.value = listOf()
     }
 
 
@@ -165,6 +167,29 @@ class CriteriaRepository @Inject constructor(
             override fun createCall(): LiveData<ApiResponse<MyCTSVCap>> {
                 val markCriteriaUserReq = MarkCriteriaUserReq(sharedPrefsHelper.getUserName(), sharedPrefsHelper.getUserName(), sharedPrefsHelper.getToken(), semester, criteriaTypes)
                 return webservice.markCriteriaUser(markCriteriaUserReq)
+            }
+
+        }.asLiveData()
+    }
+
+    fun getCriteriaActivities(semester: String, shouldFetch: Boolean = true): LiveData<Resource<List<Activity>>> {
+        return object : NetworkBoundResource<List<Activity> ,GetCriteriaActivitiesResp>(appExecutors){
+            override fun saveCallResult(item: GetCriteriaActivitiesResp) {
+                Thread{
+                    criteriaActivities.postValue(item.activities)
+                }.start()
+            }
+
+            override fun shouldFetch(data: List<Activity>?): Boolean {
+                return data == null || shouldFetch
+            }
+
+            override fun loadFromDb(): LiveData<List<Activity>> {
+                return criteriaActivities
+            }
+
+            override fun createCall(): LiveData<ApiResponse<GetCriteriaActivitiesResp>> {
+                return webservice.getCriteriaActivities(sharedPrefsHelper.getUserName(), sharedPrefsHelper.getToken(), semester)
             }
 
         }.asLiveData()

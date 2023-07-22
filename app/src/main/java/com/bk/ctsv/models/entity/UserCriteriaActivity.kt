@@ -1,5 +1,7 @@
 package com.bk.ctsv.models.entity
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -29,4 +31,48 @@ class UserCriteriaActivity(
     var name: String = ""
 
 
-)
+): Parcelable {
+    // Constructor for Parcelable implementation
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readSerializable() as? Date,
+        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readSerializable() as? Date,
+        parcel.readSerializable() as? Date,
+        parcel.readString() ?: ""
+    )
+
+    constructor(activity: Activity): this(aId = activity.id, name = activity.name ?: "")
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    // Override writeToParcel to write object data to the Parcel
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(ucaId)
+        parcel.writeInt(cId)
+        parcel.writeInt(aId)
+        parcel.writeSerializable(createDate)
+        parcel.writeString(createUser)
+        parcel.writeValue(ucaStatus)
+        parcel.writeSerializable(startTime)
+        parcel.writeSerializable(finishTime)
+        parcel.writeString(name)
+    }
+
+    // Implementing Parcelable.Creator for creating the object from the Parcel
+    companion object CREATOR : Parcelable.Creator<UserCriteriaActivity> {
+        override fun createFromParcel(parcel: Parcel): UserCriteriaActivity {
+            return UserCriteriaActivity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<UserCriteriaActivity?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+}
