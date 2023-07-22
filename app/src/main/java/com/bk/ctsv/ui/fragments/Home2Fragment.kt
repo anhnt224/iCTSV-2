@@ -2,9 +2,12 @@ package com.bk.ctsv.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +23,7 @@ import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.di.ViewModelFactory
 import com.bk.ctsv.extension.checkLocationPermission
 import com.bk.ctsv.extension.checkResource
+import com.bk.ctsv.extension.showToast
 import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.Activity
 import com.bk.ctsv.models.entity.HomeItem
@@ -28,19 +32,28 @@ import com.bk.ctsv.ui.adapter.HomeItem2Adapter
 import com.bk.ctsv.ui.adapter.HomeItem3Adapter
 import com.bk.ctsv.ui.adapter.HomeItemAdapter
 import com.bk.ctsv.ui.adapter.activity.EventAdapter
+import com.bk.ctsv.utilities.runOnIoThread
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
-import java.lang.Exception
+import okhttp3.*
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.net.URL
 import javax.inject.Inject
+import kotlin.Exception
 
 class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     HomeItemAdapter.OnItemClickListener, HomeItem2Adapter.OnItemClickListener,
     HomeItem3Adapter.OnItemClickListener {
 
     private lateinit var viewModel: Home2ViewModel
+
     @Inject
     lateinit var factory: ViewModelFactory
+
     @Inject
     lateinit var sharedPrefsHelper: SharedPrefsHelper
     private lateinit var binding: Home2FragmentBinding
@@ -60,7 +73,7 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     )
     private var homeItems2 = arrayListOf(
         HomeItem("Việc làm", R.drawable.ic_job),
-        HomeItem("Việc làm thêm", R.drawable.ic_job_more),
+        HomeItem("Việc làm thêm", R.drawable.ic_time_end_money),
         HomeItem("Gia sư", R.drawable.ic_tutor)
     )
 
@@ -69,7 +82,8 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         HomeItem("Sổ địa chỉ", R.drawable.ic_home_location),
         HomeItem("Nhà trọ", R.drawable.ic_motel),
         HomeItem("Quà tặng", R.drawable.ic_gift),
-        HomeItem("Cho/tặng quà", R.drawable.ic_receive_gift)
+        HomeItem("Cho/tặng quà", R.drawable.ic_receive_gift),
+        HomeItem("Đăng kí tìm trọ", R.drawable.home_icon_search_motel)
     )
 
 
@@ -94,15 +108,16 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
         }
         viewModel.getListSemester()
         setUpRecyclerView(binding)
+        showStudentAvatar()
         subscribeUi()
         return binding.root
     }
 
-    private fun setUpViewModel(){
+    private fun setUpViewModel() {
         viewModel = ViewModelProvider(this, factory).get(Home2ViewModel::class.java)
     }
 
-    private fun setUpRecyclerView(binding: Home2FragmentBinding){
+    private fun setUpRecyclerView(binding: Home2FragmentBinding) {
         eventAdapter = EventAdapter(listOf(), requireActivity(), this)
         binding.recyclerView.apply {
             adapter = eventAdapter
@@ -130,28 +145,27 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             adapter = homeAdapter3
             layoutManager = GridLayoutManager(context, 3)
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun subscribeUi(){
-        with(viewModel){
-            activities.observe(viewLifecycleOwner){
+    private fun subscribeUi() {
+        with(viewModel) {
+            activities.observe(viewLifecycleOwner) {
                 binding.getActivityStatus = it.status
-                if (checkResource(it)){
-                    eventAdapter.activities = it.data?: listOf()
+                if (checkResource(it)) {
+                    eventAdapter.activities = it.data ?: listOf()
                     eventAdapter.notifyDataSetChanged()
                 }
             }
-            semesters.observe(viewLifecycleOwner){
-                if (it.isSuccess()){
-                    this@Home2Fragment.semesters = it.data?: listOf()
+            semesters.observe(viewLifecycleOwner) {
+                if (it.isSuccess()) {
+                    this@Home2Fragment.semesters = it.data ?: listOf()
                 }
             }
         }
     }
 
-    private fun chooseSemester(){
+    private fun chooseSemester() {
         val semesterStr = semesters.map {
             it.name
         }
@@ -160,92 +174,105 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
             .setItems(semesterStr.toTypedArray()) { _, which ->
                 navigateToMarkFragment(semesters[which], semesters)
             }
-            .setNegativeButton("Hủy"){_, _ ->
+            .setNegativeButton("Hủy") { _, _ ->
 
             }.show()
     }
 
-    private fun navigateToMarkFragment(semester: Semester, semesters: List<Semester>){
+    private fun navigateToMarkFragment(semester: Semester, semesters: List<Semester>) {
         val action = Home2FragmentDirections.actionHome2FragmentToCriteriaFragment(
             semester, semesters.toTypedArray()
         )
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToSearchMotelFragment(){
+    private fun navigateToSearchMotelFragment() {
         val action = Home2FragmentDirections.actionHome2FragmentToSearchMotelFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
-    private fun navigateToCriteriaFragment(){
+
+    private fun navigateToCriteriaFragment() {
         val action = Home2FragmentDirections.actionHome2FragmentToTrainingPointFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToActivityFragment(){
+    private fun navigateToActivityFragment() {
         val action = Home2FragmentDirections.actionHome2FragmentToListActivityFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToListFormFragment(){
+    private fun navigateToListFormFragment() {
         val action = Home2FragmentDirections.actionHome2FragmentToListFormsFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToListJobsFragment(){
+    private fun navigateToListJobsFragment() {
         val action = Home2FragmentDirections.actionHome2FragmentToListJobsFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToListScholarShips(){
+    private fun navigateToListScholarShips() {
         val action = Home2FragmentDirections.actionHome2FragmentToListScholarShipsFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToListAddressFragment(){
+    private fun navigateToListAddressFragment() {
         val action = Home2FragmentDirections.actionHome2FragmentToListAddressFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToRunDashboard(){
+    private fun navigateToRunDashboard() {
         val action = Home2FragmentDirections.actionHome2FragmentToRunDashboardFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToGift(){
+    private fun navigateToGift() {
         val action = Home2FragmentDirections.actionHome2FragmentToGiftFragment(true)
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateGivenGift(){
+    private fun navigateGivenGift() {
         val action = Home2FragmentDirections.actionHome2FragmentToGiftGivenFragment(true)
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToPartTime(){
+    private fun navigateToPartTime() {
         val action = Home2FragmentDirections.actionHome2FragmentToMoreJobFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun navigateToTutorFragment(){
+    private fun navigateToTutorFragment() {
         val action = Home2FragmentDirections.actionHome2FragmentToTutorFragment()
         Navigation.findNavController(requireView()).navigate(action)
     }
 
-    private fun openLink(link: String){
+    private fun navigateToMotelRegistrationList() {
+        val searchMotelEnabled = remoteConfig.getValue("search_motel_feature_enabled").asBoolean()
+        if (searchMotelEnabled) {
+            val action =
+                Home2FragmentDirections.actionHome2FragmentToMotelRegistrationListFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        } else {
+            showToast("Tính năng này sẽ được phát hành trong thời gian tới")
+        }
+    }
+
+    private fun openLink(link: String) {
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
             startActivity(intent)
-        }catch (e: Exception){
+        } catch (e: Exception) {
         }
     }
 
     override fun onItemClick(activity: Activity) {
-        val action = Home2FragmentDirections.actionHome2FragmentToActivityDetailByUserUnitFragment(activity.id)
+        val action =
+            Home2FragmentDirections.actionHome2FragmentToActivityDetailByUserUnitFragment(activity.id)
         Navigation.findNavController(requireView()).navigate(action)
     }
 
     override fun onClick1(position: Int) {
-        when (position){
+        when (position) {
             0 -> chooseSemester()
             1 -> navigateToCriteriaFragment()
             2 -> navigateToActivityFragment()
@@ -256,7 +283,7 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     }
 
     override fun onClick2(position: Int) {
-        when (position){
+        when (position) {
             0 -> navigateToListJobsFragment()
             1 -> navigateToPartTime()
             2 -> navigateToTutorFragment()
@@ -264,16 +291,46 @@ class Home2Fragment : Fragment(), Injectable, EventAdapter.OnItemClickListener,
     }
 
     override fun onClick3(position: Int) {
-        when (position){
+        when (position) {
             0 -> navigateToRunDashboard()
             1 -> navigateToListAddressFragment()
             2 -> {
-                if (checkLocationPermission()){
+                if (checkLocationPermission()) {
                     navigateToSearchMotelFragment()
                 }
             }
             3 -> navigateToGift()
             4 -> navigateGivenGift()
+            5 -> navigateToMotelRegistrationList()
         }
+    }
+
+    private fun showStudentAvatar() {
+        val userName = sharedPrefsHelper.getUserName()
+        val url =
+            URL("https://bkapis.hust.edu.vn/api/getimagebystudentid?mssv=$userName&mssv=$userName")
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url(url)
+            .build()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body()?.string()
+                requireActivity().runOnUiThread {
+                    try {
+                        val decodedString =
+                            Base64.decode(responseBody?.replace("\"", ""), Base64.DEFAULT)
+                        val decodedByte =
+                            BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                        binding.imgAvatar.setImageBitmap(decodedByte)
+                    } catch (e: Exception) {
+
+                    }
+                }
+            }
+        })
     }
 }

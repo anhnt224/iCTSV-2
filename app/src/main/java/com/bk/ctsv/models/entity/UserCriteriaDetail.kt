@@ -95,7 +95,7 @@ class UserCriteriaDetail (
         return "Minh chứng hoạt động"
     }
 
-    fun getProofText(): String{
+    fun getProofStr(): String{
         if(description == ""){
             return "Khác(SV tự khai)"
         }

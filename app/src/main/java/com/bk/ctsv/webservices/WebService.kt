@@ -20,6 +20,10 @@ import com.bk.ctsv.models.res.teacher.GetListStudentResp
 import com.bk.ctsv.models.res.teacher.GetStudentInfoResp
 import com.bk.ctsv.models.res.timetable.GetTimeTableResp
 import com.bk.ctsv.models.res.user.*
+import com.bk.ctsv.modules.searchMotel.model.GetMotelResultsResp
+import com.bk.ctsv.modules.searchMotel.model.MotelRegistrationListResp
+import com.bk.ctsv.modules.searchMotel.model.RegisterMotelReq
+import com.bk.ctsv.modules_teacher.contactParent.GetStudentInfoTokenResp
 import com.google.android.gms.common.api.Api
 import com.google.gson.JsonObject
 import okhttp3.MultipartBody
@@ -757,6 +761,43 @@ interface WebService {
         @Query("y") y: Double
     ):Call<GetPlaceNameAutoByMapRes>
 
+    // ----- MOTEL REGISTRATION -----
+    @FormUrlEncoded
+    @POST("StudentMotel/GetMotelRegisterLst")
+    fun getMotelRegistrationList(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") token: String,
+        @Field("TimeStart") startTime: String,
+        @Field("TimeEnd") endTime: String
+    ): LiveData<ApiResponse<MotelRegistrationListResp>>
 
+    @POST("StudentMotel/CreateMotelRegister")
+    fun registerMotel(
+        @Body registerMotelReq: RegisterMotelReq
+    ): LiveData<ApiResponse<MyCTSVCap>>
+
+    @FormUrlEncoded
+    @POST("StudentMotel/DelMotelRegister")
+    fun deleteMotelRegistration(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") token: String,
+        @Field("DocID") docID: Int
+    ): LiveData<ApiResponse<MyCTSVCap>>
+
+    @FormUrlEncoded
+    @POST("StudentMotel/GetMotelSuggestByRID")
+    fun getListMotelResults(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") token: String,
+        @Field("RegisterID") registerID: Int
+    ): LiveData<ApiResponse<GetMotelResultsResp>>
+
+    @FormUrlEncoded
+    @POST("StudentLink/SentSMSStudentLink")
+    fun getStudentInfoUrlToken(
+        @Field("UserName") userName: String,
+        @Field("TokenCode") token: String,
+        @Field("UserCode") userCode: String
+    ): LiveData<ApiResponse<GetStudentInfoTokenResp>>
 
 }

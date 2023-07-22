@@ -155,7 +155,7 @@
                                     android:layout_height="match_parent"
                                     android:background="@color/zxing_possible_result_points"
                                     android:gravity="center"
-                                    android:text="@{gift.getUStatus().title}"
+                                    android:text="@{gift.getUStatus2().title}"
                                     android:textSize="12sp" />
                         </androidx.cardview.widget.CardView>
 

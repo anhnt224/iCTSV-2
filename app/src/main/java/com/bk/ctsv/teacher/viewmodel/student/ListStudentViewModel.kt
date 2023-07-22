@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.bk.ctsv.common.Resource
 import com.bk.ctsv.models.entity.FilterType
 import com.bk.ctsv.models.entity.Student
+import com.bk.ctsv.models.entity.StudentInfo
 import com.bk.ctsv.repositories.TeacherRepository
 import javax.inject.Inject
 
@@ -26,7 +27,6 @@ class ListStudentViewModel @Inject constructor(
                 teacherRepository.getListStudent(parameter.semester, parameter.className)
             }
         }
-
     fun getFilterType() = filterType
     fun setFilterType(type: FilterType){
         filterType.value = type
@@ -47,6 +47,5 @@ class ListStudentViewModel @Inject constructor(
         classes.addSource(liveDataGetListClass){
             classes.value = it
         }
-
     }
 }

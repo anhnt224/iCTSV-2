@@ -80,7 +80,7 @@
                     android:id="@+id/textStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text='@{scholarShip.getStatus()}'
+                    android:text='@{scholarShip.getStatusStr()}'
                     android:textColor="@color/textColorPrimaryLight"
                     android:textSize="14sp" />
         </LinearLayout>

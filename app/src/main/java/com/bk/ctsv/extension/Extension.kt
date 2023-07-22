@@ -36,6 +36,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
+import java.text.NumberFormat
 
 
 import java.text.SimpleDateFormat
@@ -135,6 +136,12 @@ fun Context.hideKeyboard(view: View) {
 
 @SuppressLint("SimpleDateFormat")
 fun Date.toTimeQueryStr() : String{
+    val dateFormat = SimpleDateFormat(DATE_FORMAT_PATTERN)
+    return dateFormat.format(time)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun Date.getTimeQuery() : String{
     val dateFormat = SimpleDateFormat(DATE_FORMAT_PATTERN)
     return dateFormat.format(time)
 }
@@ -465,4 +472,14 @@ fun Fragment.openLink(link: String){
     }catch (e: Exception){
         showToast(e.message.toString())
     }
+}
+
+fun Double.toCurrency(): String {
+    val format = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+    return format.format(this)
+}
+
+fun Int.toCurrency(): String {
+    val format = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+    return format.format(this)
 }

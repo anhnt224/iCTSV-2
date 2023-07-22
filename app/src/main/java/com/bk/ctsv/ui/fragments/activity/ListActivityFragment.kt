@@ -2,6 +2,8 @@ package com.bk.ctsv.ui.fragments.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -21,20 +23,19 @@ import com.bk.ctsv.databinding.ListActivityFragmentBinding
 import com.bk.ctsv.di.Injectable
 import com.bk.ctsv.extension.checkResource
 import com.bk.ctsv.extension.showToast
+import com.bk.ctsv.helper.SharedPrefsHelper
 import com.bk.ctsv.models.entity.Activity
+import com.bk.ctsv.models.entity.Student
 import com.bk.ctsv.ui.adapter.activity.ActivityAdapter
 import com.bk.ctsv.ui.viewmodels.activity.ListActivityViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.zxing.integration.android.IntentIntegrator
 import javax.inject.Inject
 
 
 class ListActivityFragment : Fragment(), ActivityAdapter.OnItemClickListener, Injectable {
-
-    companion object {
-        fun newInstance() = ListActivityFragment()
-    }
-
     private lateinit var viewModel: ListActivityViewModel
     private lateinit var binding: ListActivityFragmentBinding
     private lateinit var activityAdapter: ActivityAdapter
@@ -43,11 +44,12 @@ class ListActivityFragment : Fragment(), ActivityAdapter.OnItemClickListener, In
     private var type: ListActivityViewModel.Type? = null
     private var activities: ArrayList<Activity> = arrayListOf()
     private lateinit var searchView: SearchView
+    @Inject lateinit var sharedPrefHelper: SharedPrefsHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setUpViewModel()
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.list_activity_fragment, container, false)
@@ -69,6 +71,7 @@ class ListActivityFragment : Fragment(), ActivityAdapter.OnItemClickListener, In
 
                 }
 
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     activityAdapter.submitList(null)
                     activityAdapter.notifyDataSetChanged()
@@ -101,6 +104,7 @@ class ListActivityFragment : Fragment(), ActivityAdapter.OnItemClickListener, In
         viewModel = ViewModelProvider(this, viewModelFactory).get(ListActivityViewModel::class.java)
     }
     
+    @SuppressLint("NotifyDataSetChanged")
     private fun subscribeUI(){
         with(viewModel){
             activities.observe(viewLifecycleOwner){resource ->
@@ -132,6 +136,7 @@ class ListActivityFragment : Fragment(), ActivityAdapter.OnItemClickListener, In
         (activity as MainActivity).supportActionBar?.title = "Danh sách hoạt động"
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_list_activity, menu)
@@ -175,7 +180,7 @@ class ListActivityFragment : Fragment(), ActivityAdapter.OnItemClickListener, In
     }
 
     override fun onItemClick(activity: Activity) {
-        Navigation.findNavController(view!!).
+        Navigation.findNavController(requireView()).
         navigate(ListActivityFragmentDirections.actionListActivityFragmentToActivityDetailByUserUnitFragment(activity.id))
     }
 
@@ -184,7 +189,7 @@ class ListActivityFragment : Fragment(), ActivityAdapter.OnItemClickListener, In
         IntentIntegrator.forSupportFragment(this).apply {
             setBeepEnabled(true)
             setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES)
-            setPrompt("Quét mã QR hoạt động")
+            setPrompt("Quét mã QR hoạt động, thẻ sinh viên")
             setCameraId(0)
             setOrientationLocked(true)
             initiateScan()
@@ -196,17 +201,61 @@ class ListActivityFragment : Fragment(), ActivityAdapter.OnItemClickListener, In
         Log.d("_SCAN", "QR")
         if (result != null) {
             if (result.contents != null){
-                try {
-                    val aID = result.contents.toInt()
-                    Navigation.findNavController(view!!).
-                    navigate(ListActivityFragmentDirections.actionListActivityFragmentToActivityDetailByUserUnitFragment(aID))
-                }catch (e: Exception){
-                    showToast("Hoạt động này không tồn tại")
-                }
+                handleQrCode(result.contents)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    private fun handleQrCode(qrValue: String) {
+        if (qrValue.contains("https://ctsv.hust.edu.vn/") && qrValue.contains("/card/")){
+            val arr = qrValue.split("/")
+            val studentId = arr.firstOrNull {
+                it.length == 8 && it.dropLast(6) == "20"
+            }
+            if (studentId == null) {
+                showToast("Mã QR không hợp lệ")
+            }else if (studentId != sharedPrefHelper.getUserName()){
+                showToast("Bạn không thể xem thông tin của người khác")
+            }else{
+                showStudentInfoDialog(studentId)
+            }
+        }else{
+            try {
+                val aID = qrValue.toInt()
+                Navigation.findNavController(requireView()).
+                navigate(ListActivityFragmentDirections.actionListActivityFragmentToActivityDetailByUserUnitFragment(aID))
+            }catch (e: Exception){
+                showToast("Hoạt động này không tồn tại")
+            }
+        }
+    }
+
+    private fun showStudentInfoDialog(studentId: String){
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage("Bạn có muốn xem phiếu thông tin tình hình học tập mà giáo viên gửi về cho phụ huynh không?!")
+            .setTitle("Xem thông tin kết quả học tập")
+            .setPositiveButton("Xem thông tin"){_, _ ->
+                val token = sharedPrefHelper.getToken()
+                showStudentInfo(studentId, token)
+            }.setNegativeButton("Đóng", null)
+            .show()
+    }
+
+    private fun showStudentInfo(studentId: String, urlToken: String){
+        val url = getStudentInfoUrl(studentId, urlToken)
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+        if (browserIntent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(browserIntent)
+        }
+    }
+
+    private fun getStudentInfoUrl(studentId: String, urlToken: String): String {
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        val baseUrl = remoteConfig.getString("student_info_url")
+        return "$baseUrl$studentId/$urlToken"
     }
 
 }

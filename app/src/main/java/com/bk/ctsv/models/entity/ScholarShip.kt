@@ -62,11 +62,11 @@ class ScholarShip (
         return expired == 1
     }
 
-    fun getQuantity(): String{
+    fun getQuantityStr(): String{
         return "$quantity"
     }
 
-    fun getStatus(): String {
+    fun getStatusStr(): String {
         return when(statusApply){
             1 -> "Mới đăng kí"
             2 -> "Đang xét duyệt"

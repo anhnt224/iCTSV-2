@@ -1,26 +1,26 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 // Apply the Crashlytics Gradle plugin
 apply plugin: 'com.google.firebase.crashlytics'
 
-def msalVersion = "3.0.+"
+def msalVersion = "2.+"
 if (project.hasProperty("distMsalVersion")) {
     msalVersion = distMsalVersion
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 32
     defaultConfig {
         applicationId "com.bk.ctsv"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
         multiDexEnabled true
-        versionCode 113
-        versionName "3.6.8"
+        versionCode 122
+        versionName "3.8.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -77,7 +77,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "android.arch.navigation:navigation-fragment:$nav_version" // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui:$nav_version"
-    implementation "android.arch.work:work-runtime-ktx:$work_version"
+//    implementation "android.arch.work:work-runtime-ktx:$work_version"
     implementation "androidx.paging:paging-runtime:$paging_version"
 
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
@@ -120,7 +120,7 @@ dependencies {
 
     kapt 'androidx.annotation:annotation:1.0.0-rc01'
 
-    implementation 'com.github.instacart.truetime-android:library-extension-rx:3.5'
+    implementation 'com.github.instacart.truetime-android:library-extension-rx:master-SNAPSHOT'
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
     //
@@ -142,7 +142,6 @@ dependencies {
         // Downloads and Builds MSAL from maven central.
         implementation "com.microsoft.identity.client:msal:${msalVersion}"
     }
-    implementation "com.microsoft.device.display:display-mask:0.3.0"
 
     implementation 'pub.devrel:easypermissions:3.0.0'
 
@@ -158,5 +157,7 @@ dependencies {
 
     //Banner
     implementation 'io.github.youth5201314:banner:2.2.2'
+
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 
 }

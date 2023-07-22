@@ -84,10 +84,38 @@
     </entry>
 
     <entry>
+        <key>motel_types</key>
+        <value>Nhà trọ chung chủ|Nhà trọ không chung chủ|Chung cư mini|Nhà nguyên căn</value>
+    </entry>
+
+    <entry>
+        <key>motel_user_requests</key>
+        <value>Có điều hoà|Có máy giặt|Có chỗ nấu ăn|Có ban công</value>
+    </entry>
+
+    <entry>
+        <key>motel_pending_message</key>
+        <value>Yêu cầu của bạn đã được chấp nhận, chúng tôi đã gửi một thông báo qua email cho bạn. Vui lòng kiểm tra email và làm theo hướng dẫn.</value>
+    </entry>
+
+    <entry>
+        <key>search_motel_feature_enabled</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>student_info_url</key>
+        <value>https://ctsv.hust.edu.vn/#/ph/</value>
+    </entry>
+
+    <entry>
         <key>semesters</key>
-        <value>
-            2019-1,2019-2,2020-1,2020-2,2021-1,2021-2,2022-1
-        </value>
+        <value>2019-1,2019-2,2020-1,2020-2,2021-1,2021-2,2022-1</value>
+    </entry>
+
+    <entry>
+        <key>current_semester</key>
+        <value>2022-1</value>
     </entry>
 
 </defaultsMap>

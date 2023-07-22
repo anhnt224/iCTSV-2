@@ -17,11 +17,13 @@
 package com.bk.ctsv.di
 
 
+import com.bk.ctsv.modules.searchMotel.fragments.*
 import com.bk.ctsv.ui.fragments.Home2Fragment
 import com.bk.ctsv.ui.fragments.HomeFragment
 import com.bk.ctsv.ui.fragments.TutorFragment
 import com.bk.ctsv.ui.fragments.activity.*
-import com.bk.ctsv.ui.fragments.criteria.*
+import com.bk.ctsv.ui.fragments.criteria.CriteriaFragment
+import com.bk.ctsv.ui.fragments.criteria.TrainingPointFragment
 import com.bk.ctsv.ui.fragments.form.*
 import com.bk.ctsv.ui.fragments.gift.*
 import com.bk.ctsv.ui.fragments.job.*
@@ -202,8 +204,23 @@ abstract class MainListFragmentBuildersModule {
     abstract fun contributeTutorFragment(): TutorFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeCriteriaActivities(): CriteriaActivitiesFragment
+    abstract fun contributeMotelRegistrationComplete(): MotelRegistrationCompleteFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeGradingAuto(): GradingAutoFragment
+    abstract fun contributeMotelRegistrationInfo(): MotelRegistrationInfoFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMotelRegistrationList(): MotelRegistrationListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMotelRegistrationProcessing(): MotelRegistrationProcessingFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeRegisterToFindMotel(): RegisterToFindMotelFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePickMotelLocation(): PickMotelLocationFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeListMotelResult(): ListMotelResultsFragment
 }

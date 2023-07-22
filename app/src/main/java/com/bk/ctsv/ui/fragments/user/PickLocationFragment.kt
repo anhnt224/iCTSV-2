@@ -37,7 +37,7 @@ class PickLocationFragment : Fragment(), OnMapReadyCallback {
     ): View {
         viewModel = ViewModelProviders.of(this).get(PickLocationViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.pick_location_fragment, container, false)
-        binding.mapView.getMapAsync(this)
+
         binding.apply {
             mapView.onCreate(savedInstanceState)
             mapView.onResume()
@@ -46,6 +46,11 @@ class PickLocationFragment : Fragment(), OnMapReadyCallback {
             fillLocationInfo(AddNewAddressFragment.newLatLng!!)
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.mapView.getMapAsync(this)
     }
 
 

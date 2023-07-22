@@ -1,7 +1,10 @@
 package com.bk.ctsv.di
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bk.ctsv.modules.searchMotel.viewModels.*
+import com.bk.ctsv.modules_teacher.contactParent.StudentList2ViewModel
 import com.bk.ctsv.teacher.viewmodel.gift.TGiftInfoViewModel
 import com.bk.ctsv.teacher.viewmodel.THome2ViewModel
 import com.bk.ctsv.teacher.viewmodel.THomeViewModel
@@ -20,9 +23,6 @@ import com.bk.ctsv.teacher.viewmodel.motel.*
 import com.bk.ctsv.teacher.viewmodel.scholarShip.TListScholarShipsViewModel
 import com.bk.ctsv.teacher.viewmodel.student.*
 import com.bk.ctsv.ui.fragments.Home2ViewModel
-import com.bk.ctsv.ui.fragments.criteria.CriteriaActivitiesFragment
-import com.bk.ctsv.ui.fragments.criteria.CriteriaActivitiesViewModel
-import com.bk.ctsv.ui.fragments.criteria.GradingAutoViewModel
 import com.bk.ctsv.ui.viewmodels.gift.GiftReceiveViewModel
 import com.bk.ctsv.ui.viewmodels.job.MoreJobViewModel
 import com.bk.ctsv.ui.viewmodels.gift.ReceiverAddressViewModel
@@ -148,17 +148,17 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ScholarShipDetailViewModel ::class)
+    @ViewModelKey(ScholarShipDetailViewModel::class)
     abstract fun bindScholarShipDetailViewModel(viewModel: ScholarShipDetailViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(ListJobsViewModel ::class)
+    @ViewModelKey(ListJobsViewModel::class)
     abstract fun bindListJobsViewModel(viewModel: ListJobsViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(JobDetailViewModel ::class)
+    @ViewModelKey(JobDetailViewModel::class)
     abstract fun bindJobDetailViewModel(viewModel: JobDetailViewModel): ViewModel
 
     @Binds
@@ -525,12 +525,41 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CriteriaActivitiesViewModel::class)
-    abstract fun contributeCriteriaActivitiesVM(viewModel: CriteriaActivitiesViewModel): ViewModel
+    @ViewModelKey(MotelRegistrationListViewModel::class)
+    abstract fun contributeMotelRegistrationList(viewModel: MotelRegistrationListViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(GradingAutoViewModel::class)
-    abstract fun contributeGradingAutoVM(viewModel: GradingAutoViewModel): ViewModel
+    @ViewModelKey(MotelRegistrationInfoViewModel::class)
+    abstract fun contributeMotelRegistrationInfo(viewModel: MotelRegistrationInfoViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(MotelRegistrationProcessingViewModel::class)
+    abstract fun contributeMotelRegistrationProcessing(viewModel: MotelRegistrationProcessingViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MotelRegistrationCompleteViewModel::class)
+    abstract fun contributeMotelRegistrationComplete(viewModel: MotelRegistrationCompleteViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterToFindMotelViewModel::class)
+    abstract fun contributeRegisterToFindMotel(viewMotel: RegisterToFindMotelViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PickMotelLocationViewModel::class)
+    abstract fun contributePickMotelLocation(viewModel: PickMotelLocationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ListMotelResultsViewModel::class)
+    abstract fun contributeListMotelResultsViewMotel(viewModel: ListMotelResultsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StudentList2ViewModel::class)
+    abstract fun contributeStudentList2ViewModel(viewModel: StudentList2ViewModel): ViewModel
 }

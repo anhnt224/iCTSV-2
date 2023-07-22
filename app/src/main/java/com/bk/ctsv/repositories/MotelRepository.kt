@@ -30,7 +30,7 @@ class MotelRepository @Inject constructor(
 ) {
     private val motelList = MutableLiveData<List<Motel>>()
     private val motelImageList = MutableLiveData<List<ImageMotel2>>()
-    private var ctsvCapLiveData  = MediatorLiveData<MyCTSVCap>()
+    private var ctsvCapLiveData = MediatorLiveData<MyCTSVCap>()
 
     init {
         ctsvCapLiveData.value = MyCTSVCap()
@@ -43,10 +43,10 @@ class MotelRepository @Inject constructor(
         longitude: Double,
         distance: Int,
         shouldFetch: Boolean = true
-    ): LiveData<Resource<List<Motel>>>{
-        return object : NetworkBoundResource<List<Motel>, CTSVSearchStudentMotelRes>(appExecutors){
+    ): LiveData<Resource<List<Motel>>> {
+        return object : NetworkBoundResource<List<Motel>, CTSVSearchStudentMotelRes>(appExecutors) {
             override fun saveCallResult(item: CTSVSearchStudentMotelRes) {
-                Thread{motelList.postValue(item.studentMotelList) }.start()
+                Thread { motelList.postValue(item.studentMotelList) }.start()
                 /* Log.v("_MotelRepository", "Motel List: ${motelList.value}")
                  Log.v("_MotelRepository", "Item Motel: ${item.studentMotelList}")*/
             }
@@ -100,52 +100,52 @@ class MotelRepository @Inject constructor(
         }.asLiveData()
     }
 
-            fun insertImage(image: ImageMotel) {
-                runOnIoThread {
-                    imageMotelDao.insertImageMotel(image)
-                }
-            }
-
-            fun getAllImageMotel(idMotel: Int): LiveData<List<ImageMotel>> {
-                return imageMotelDao.getAllImageMotel(idMotel)
-            }
-
-            fun getImageMotelByID(idMotel: Int, type: Int): LiveData<ImageMotel> {
-                return imageMotelDao.getImageMotel(idMotel, type)
-            }
-
-            fun deleteImageMotel(image: ImageMotel) {
-                runOnIoThread {
-                    imageMotelDao.deleteImageMotel(image)
-                }
-            }
-
-            fun deleteImageMotel(
-                userName: String,
-                token: String,
-                motelID: Int,
-                type: Int,
-                shouldFetch: Boolean = true
-            ): LiveData<Resource<MyCTSVCap>> {
-                ctsvCapLiveData.value = MyCTSVCap()
-                return object : NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors) {
-                    override fun saveCallResult(item: MyCTSVCap) {
-                        Thread { ctsvCapLiveData.postValue(item) }.start()
-                    }
-
-                    override fun shouldFetch(data: MyCTSVCap?): Boolean {
-                        return data == null || shouldFetch
-                    }
-
-                    override fun loadFromDb(): LiveData<MyCTSVCap> {
-                        return ctsvCapLiveData
-                    }
-
-                    override fun createCall(): LiveData<ApiResponse<MyCTSVCap>> {
-                        return giftWebService.delImageMotel(userName, token, motelID, type)
-                    }
-
-                }.asLiveData()
-            }
-
+    fun insertImage(image: ImageMotel) {
+        runOnIoThread {
+            imageMotelDao.insertImageMotel(image)
+        }
     }
+
+    fun getAllImageMotel(idMotel: Int): LiveData<List<ImageMotel>> {
+        return imageMotelDao.getAllImageMotel(idMotel)
+    }
+
+    fun getImageMotelByID(idMotel: Int, type: Int): LiveData<ImageMotel> {
+        return imageMotelDao.getImageMotel(idMotel, type)
+    }
+
+    fun deleteImageMotel(image: ImageMotel) {
+        runOnIoThread {
+            imageMotelDao.deleteImageMotel(image)
+        }
+    }
+
+    fun deleteImageMotel(
+        userName: String,
+        token: String,
+        motelID: Int,
+        type: Int,
+        shouldFetch: Boolean = true
+    ): LiveData<Resource<MyCTSVCap>> {
+        ctsvCapLiveData.value = MyCTSVCap()
+        return object : NetworkBoundResource<MyCTSVCap, MyCTSVCap>(appExecutors) {
+            override fun saveCallResult(item: MyCTSVCap) {
+                Thread { ctsvCapLiveData.postValue(item) }.start()
+            }
+
+            override fun shouldFetch(data: MyCTSVCap?): Boolean {
+                return data == null || shouldFetch
+            }
+
+            override fun loadFromDb(): LiveData<MyCTSVCap> {
+                return ctsvCapLiveData
+            }
+
+            override fun createCall(): LiveData<ApiResponse<MyCTSVCap>> {
+                return giftWebService.delImageMotel(userName, token, motelID, type)
+            }
+
+        }.asLiveData()
+    }
+
+}
